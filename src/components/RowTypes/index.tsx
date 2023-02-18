@@ -1,4 +1,4 @@
-import { Type } from "src/utils/pokemon";
+import { Type } from "src/common/utils/pokemon";
 
 import BadgeType from "src/components/BadgeType";
 

@@ -5,7 +5,7 @@ import {
     Title,
     Description,
     AboutImage
-} from "./styles";
+} from "src/common/styles/pages/about";
 
 const About: React.FC = (): JSX.Element => {
     return (

@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 
 import Image from 'next/image';
 
-import { API_URL } from "src/utils/api";
-import { Pokemon, formatPokemonName } from "src/utils/pokemon";
+import { API_URL } from "src/common/utils/api";
+import { Pokemon, formatPokemonName } from "src/common/utils/pokemon";
 
 import PokemonNumber from "src/components/PokemonNumber";
 import RowTypes from "src/components/RowTypes";

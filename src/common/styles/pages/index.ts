@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import media from "src/utils/mediaQueries";
+import media from "src/common/utils/mediaQueries";
 
 export const TitleDiv = styled.nav`
     display: flex;

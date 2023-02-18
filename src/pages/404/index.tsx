@@ -6,7 +6,7 @@ import {
     TextNotFound,
     TextNotHere,
     PsyduckImage
-} from "./styles";
+} from "src/common/styles/pages/404";
 
 const PageNotFound: React.FC = (): JSX.Element => {
     return (

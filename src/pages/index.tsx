@@ -2,8 +2,8 @@ import { useState, useRef, useCallback } from 'react';
 
 import Head from 'next/head';
 
-import { API_URL } from "src/utils/api";
-import { Pokemon } from "src/utils/pokemon";
+import { API_URL } from "src/common/utils/api";
+import { Pokemon } from "src/common/utils/pokemon";
 
 import Card from "src/components/Card";
 
@@ -17,7 +17,7 @@ import {
     PokemonList,
     BottomButton,
     SearchError
-} from "src/styles/index";
+} from "src/common/styles/pages/index";
 
 const LIMIT = 12; 
 

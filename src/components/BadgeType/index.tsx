@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { getColorsByPokemonType } from "src/utils/colorTypes";
+import { getColorsByPokemonType } from "src/common/utils/colorTypes";
 
 import { Wrapper, Type } from "./styles";
 

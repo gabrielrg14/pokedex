@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import { API_URL } from "src/utils/api";
-import { Pokemon as PokemonInterface, formatPokemonName } from "src/utils/pokemon";
-import { getColorsByPokemonType } from "src/utils/colorTypes";
+import { API_URL } from "src/common/utils/api";
+import { Pokemon as PokemonInterface, formatPokemonName } from "src/common/utils/pokemon";
+import { getColorsByPokemonType } from "src/common/utils/colorTypes";
 
 import Loading from "src/components/Loading";
 import PokemonNumber from "src/components/PokemonNumber";
@@ -23,7 +23,7 @@ import {
     PokemonStats,
     DivStats,
     Stat
-} from "./styles";
+} from "src/common/styles/pages/pokemon";
 
 interface Context {
     params: {
