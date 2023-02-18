@@ -1,7 +1,15 @@
 {
   "name": "pokedex",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "Pokédex powered by PokéAPI made in Next.js",
+  "keywords": [
+    "pokédex",
+    "pokéAPI",
+    "nextjs",
+    "frontend"
+  ],
+  "author": "Gabriel Rapucci Gonzalez <gabrielrapuccigonzalez14@hotmail.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,15 +17,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "eslint": "^8.32.0",
+    "eslint-config-next": "^13.1.2",
+    "next": "^13.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6",
+    "styled-icons": "^10.47.0",
+    "styled-media-query": "^2.1.2"
+  },
+  "devDependencies": {
     "@next/font": "13.1.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
-    "eslint": "8.32.0",
-    "eslint-config-next": "13.1.2",
-    "next": "13.1.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.4"
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-styled-components": "^2.0.7",
+    "typescript": "^4.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabrielrg14/pokédex"
+  },
+  "bugs": {
+    "url": "https://github.com/gabrielrg14/pokédex/issues"
   }
 }
