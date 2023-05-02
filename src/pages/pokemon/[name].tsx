@@ -8,6 +8,7 @@ import { getColorsByPokemonType } from "src/common/utils/colorTypes";
 import Loading from "src/components/Loading";
 import PokemonNumber from "src/components/PokemonNumber";
 import RowTypes from "src/components/RowTypes";
+import StatBar from "src/components/StatBar";
 
 import { 
     Container,
@@ -21,8 +22,8 @@ import {
     DivData,
     DataTitle,
     PokemonStats,
-    DivStats,
-    Stat
+    Stat,
+    StatInfo
 } from "src/common/styles/pages/pokemon";
 
 interface Context {
@@ -105,7 +106,9 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
                 style={{ background: backgroundStyle }}>
                 <PokemonCard>
                     <PokemonTitle>
-                        <PokemonName>{formatPokemonName(pokemon?.name)}</PokemonName>
+                        <PokemonName>
+                            {formatPokemonName(pokemon?.name)}
+                        </PokemonName>
                         <SpanNumber>
                             <PokemonNumber number={pokemon?.id} />
                         </SpanNumber>
@@ -136,21 +139,25 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
                         <DivData>
                             <DataTitle>Abilities</DataTitle>
                             {abilitiesFiltered.map((ability, index) => (
-                                <p key={index}>{ability}</p>
+                                <p key={index}>{ability.replace("-", " ")}</p>
                             ))}
                         </DivData>
                     </PokemonData>
 
                     <PokemonStats>
-                        <DivStats>
-                            <DataTitle>Stats</DataTitle>
-                            {pokemon?.stats.map((item, index) => (
-                                <Stat key={index}>
+                        <DataTitle>Stats</DataTitle>
+                        {pokemon?.stats.map((item, index) => (
+                            <Stat key={index}>
+                                <StatInfo>
                                     <span>{item.stat.name.replace("special-", "Sp. ")}</span>
                                     <span>{item.base_stat}</span>
-                                </Stat>
-                            ))}
-                        </DivStats>
+                                </StatInfo>
+                                <StatBar 
+                                    type={pokemon?.types[0].type.name} 
+                                    stat={item.stat.name} baseStat={item.base_stat} 
+                                />
+                            </Stat>
+                        ))}
                     </PokemonStats>
                 </PokemonCard>
             </Container>

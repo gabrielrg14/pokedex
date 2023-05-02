@@ -33,7 +33,6 @@ export const PokemonTitle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.2rem;
 `;
 
 export const PokemonName = styled.h1`
@@ -42,11 +41,7 @@ export const PokemonName = styled.h1`
     text-align: center;
 `;
 
-export const SpanNumber = styled.span`
-    span {
-        font-size: 1.1rem;
-    }
-`;
+export const SpanNumber = styled.span``;
 
 export const DivImage = styled.div`
     text-align: center;
@@ -77,26 +72,36 @@ export const DivData = styled.div`
 
 export const DataTitle = styled.h4`
     font-size: 1rem;
-    margin-bottom: 0.1rem;
-`;
-
-export const PokemonStats = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 0.3rem;
     text-align: center;
 `;
-
-export const DivStats = styled.div`
+    
+export const PokemonStats = styled.div`
     padding: 0 1rem;
     margin: 1rem 0 0;
     text-transform: capitalize;
 `;
 
-export const Stat = styled.p`
+export const Stat = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.2rem;
+
+    ${media.lessThan("mobile")`
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0.2rem;
+        margin: 0 0 1rem;
+    `}
+`;
+
+export const StatInfo = styled.span`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    padding: 0.2rem 0 0;
+    gap: 0.5rem;
+    width: 100%;
 `;
