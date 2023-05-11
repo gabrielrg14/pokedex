@@ -115,7 +115,7 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
                     </PokemonTitle>
                     
                     <DivImage>
-                        {pokemon?.sprites?.other['official-artwork'] &&
+                        {pokemon?.sprites?.other['official-artwork']?.front_default &&
                             <PokemonImage
                                 src={pokemon?.sprites.other['official-artwork'].front_default} 
                                 width={256} height={256} 

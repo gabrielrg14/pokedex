@@ -11,6 +11,7 @@ export const CardLink = styled(Link)`
     background-color: #FFF;
     border-radius: 12px;
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
+    border: 1px solid #CCC;
     cursor: pointer;
     transition: all 0.3s;
     animation: fade-in 0.5s;
@@ -24,7 +25,9 @@ export const CardLink = styled(Link)`
 
 export const PokemonInfos = styled.div`
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 0.2rem;
     margin: 0.5rem auto;
 `;

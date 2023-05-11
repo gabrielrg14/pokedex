@@ -30,13 +30,16 @@ const Card: React.FC<CardProps> = ({ pokemon }): JSX.Element => {
 
     return (
         <CardLink href={`/pokemon/${pokemonData?.name}`}>
-            {pokemonData?.sprites &&
-                <Image src={pokemonData?.sprites.other['official-artwork'].front_default} width={156} height={156} alt={pokemon.name} />
+            {pokemonData?.sprites?.other['official-artwork']?.front_default &&
+                <Image src={pokemonData?.sprites.other['official-artwork'].front_default} 
+                    width={156} height={156} 
+                    alt={pokemon.name} 
+                />
             }
 
             <PokemonInfos>
-                <PokemonName>{formatPokemonName(pokemon.name)}</PokemonName>
                 <PokemonNumber number={pokemonData?.id} />
+                <PokemonName>{formatPokemonName(pokemon.name)}</PokemonName>
             </PokemonInfos>
 
             <RowTypes types={pokemonData?.types}/>
