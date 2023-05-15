@@ -3,7 +3,8 @@ export interface Sprites {
     front_shiny: string
     other: {
         "official-artwork": {
-            front_default: string
+            front_default: string,
+            front_shiny: string
         }
     }
 }

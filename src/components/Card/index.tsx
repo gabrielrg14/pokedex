@@ -1,9 +1,10 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 
 import Image from 'next/image';
 
 import { API_URL } from "src/common/utils/api";
 import { Pokemon, formatPokemonName } from "src/common/utils/pokemon";
+import { SpriteContext } from "src/common/contexts/sprite";
 
 import PokemonNumber from "src/components/PokemonNumber";
 import RowTypes from "src/components/RowTypes";
@@ -28,10 +29,12 @@ const Card: React.FC<CardProps> = ({ pokemon }): JSX.Element => {
         getPokemonData()
     }, [getPokemonData])
 
+    const { sprite } = useContext(SpriteContext);
+
     return (
         <CardLink href={`/pokemon/${pokemonData?.name}`}>
-            {pokemonData?.sprites?.other['official-artwork']?.front_default &&
-                <Image src={pokemonData?.sprites.other['official-artwork'].front_default} 
+            {pokemonData?.sprites?.other['official-artwork']?.[sprite] &&
+                <Image src={pokemonData?.sprites.other['official-artwork'][sprite]} 
                     width={156} height={156} 
                     alt={pokemon.name} 
                 />

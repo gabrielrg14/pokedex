@@ -1,8 +1,11 @@
+import { useContext } from 'react';
+
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { API_URL } from "src/common/utils/api";
 import { Pokemon as PokemonInterface, formatPokemonName } from "src/common/utils/pokemon";
+import { SpriteContext } from "src/common/contexts/sprite";
 import { getColorsByPokemonType } from "src/common/utils/colorTypes";
 
 import Loading from "src/components/Loading";
@@ -75,6 +78,8 @@ export const getStaticProps = async(context: Context) => {
 
 const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
 
+    const { sprite } = useContext(SpriteContext)
+
     const router = useRouter()
 
     if(router && router.isFallback) {
@@ -115,9 +120,9 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
                     </PokemonTitle>
                     
                     <DivImage>
-                        {pokemon?.sprites?.other['official-artwork']?.front_default &&
+                        {pokemon?.sprites?.other['official-artwork']?.[sprite] &&
                             <PokemonImage
-                                src={pokemon?.sprites.other['official-artwork'].front_default} 
+                                src={pokemon?.sprites.other['official-artwork'][sprite]} 
                                 width={256} height={256} 
                                 alt={pokemon?.name} 
                                 priority

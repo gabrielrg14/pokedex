@@ -1,8 +1,16 @@
+import { useContext } from 'react';
+
 import Image from 'next/image';
 
-import { Navbar, Logo, NavLink } from "./styles";
+import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles"
+import { SpriteContext } from "src/common/contexts/sprite";
+
+import { Navbar, Logo, NavList, NavLink, ShinyIcon } from "./styles";
 
 const Header: React.FC = (): JSX.Element => {
+
+    const { sprite, toggleSprite } = useContext(SpriteContext);
+
     return (
         <header>
             <Navbar>
@@ -12,13 +20,18 @@ const Header: React.FC = (): JSX.Element => {
                     </NavLink>
                 </Logo>
 
-                <ul>
+                <NavList>
+                    <li>
+                        <ShinyIcon onClick={() => toggleSprite(sprite === "front_default" ? "front_shiny" : "front_default")}>
+                            <Sparkles className={sprite === "front_shiny" ? "shiny" : ""} />
+                        </ShinyIcon>
+                    </li>
                     <li>
                         <NavLink href="/about">
                             About
                         </NavLink>
                     </li>
-                </ul>
+                </NavList>
             </Navbar>
         </header>
     )

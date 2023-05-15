@@ -18,10 +18,6 @@ const GlobalStyle = createGlobalStyle`
         list-style: none;
     }
 
-    .main-container {
-        min-height: 80vh;
-    }
-
     img {
         max-width: 100%;
     }

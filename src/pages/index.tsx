@@ -59,12 +59,11 @@ export const getStaticProps = async() => {
 
 const Home: React.FC<HomeProps> = ({ pokemons, types }): JSX.Element => {
 
+    const prevSearchRef = useRef("");
     const [search, setSearch] = useState("");
     const [typeSelected, setTypeSelected] = useState("all");
     const [pokemonList, setPokemonList] = useState(pokemons);
     const [pokemonLimit, setPokemonLimit] = useState(LIMIT);
-
-    const prevSearchRef = useRef("");
 
     const loadPokemons = useCallback(async (query: string | null, type: string | null = null) => {
         if(query === "" || type === "all") {
