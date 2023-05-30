@@ -37,6 +37,7 @@ const Card: React.FC<CardProps> = ({ pokemon }): JSX.Element => {
                 <Image src={pokemonData?.sprites.other['official-artwork'][sprite]} 
                     width={156} height={156} 
                     alt={pokemon.name} 
+                    unoptimized
                 />
             }
 
