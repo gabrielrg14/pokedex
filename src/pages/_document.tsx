@@ -35,6 +35,7 @@ class MyDocument extends Document {
                     <link rel="icon" href="/favicon.ico" />
                     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
                     <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet" />
+                    <meta name="google-site-verification" content="11r8K6MLmUAgq8eTWLXk49GhEiZuybZx1h8kIyO6PX8" />
                     <meta name="google" content="notranslate" />
                     <meta name="theme-color" content="#FBC418" />
                     <meta name="keywords" 
