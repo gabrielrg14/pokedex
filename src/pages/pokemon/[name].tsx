@@ -40,7 +40,7 @@ interface PokemonProps {
 }
 
 export const getStaticPaths = async() => {
-    const res = await fetch(`${API_URL}/pokemon?limit=151`) // Pré-render only Pokémons of first generation
+    const res = await fetch(`${API_URL}/pokemon?limit=12`) // Pré-render only 12 Pokémons
     const data = await res.json()
 
     const paths = data.results.map((pokemon: PokemonInterface) => {
