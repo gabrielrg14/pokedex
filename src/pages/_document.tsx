@@ -32,10 +32,13 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <link rel="icon" href="/favicon.ico" />
+                    <link rel="shortcut icon" href="/favicon.ico" />
+                    <link rel="apple-touch-icon" href="images/icon/icon-512.png" />
+                    <link rel="manifest" href="/manifest.json" />
                     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
                     <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet" />
                     <meta name="google-site-verification" content="11r8K6MLmUAgq8eTWLXk49GhEiZuybZx1h8kIyO6PX8" />
+                    <meta name="robots" content="index" />
                     <meta name="google" content="notranslate" />
                     <meta name="theme-color" content="#FBC418" />
                     <meta name="keywords" 

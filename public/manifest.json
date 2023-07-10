@@ -1,0 +1,23 @@
+{
+    "name": "Pokédex",
+    "short_name": "Pokédex",
+    "icons": [
+        {
+            "src": "/images/icon/icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/images/icon/icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "any maskable"
+        }
+    ],
+    "background_color": "#3E6CBD",
+    "description": "Pokédex project that consumes PokéAPI to display all information of all existing Pokémon.",
+    "display": "fullscreen",
+    "start_url": "/",
+    "theme_color": "#FBC418"
+}

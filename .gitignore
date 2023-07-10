@@ -29,6 +29,10 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# sw stuff
+public/sw.js
+public/workbox-*.js
+
 # vercel
 .vercel
 
