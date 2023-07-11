@@ -70,7 +70,7 @@ export const DivData = styled.div`
     text-transform: capitalize;
 `;
 
-export const DataTitle = styled.h4`
+export const DataTitle = styled.h2`
     font-size: 1rem;
     margin-bottom: 0.3rem;
     text-align: center;

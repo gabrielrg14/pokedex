@@ -32,7 +32,7 @@ export const PokemonInfos = styled.div`
     margin: 0.5rem auto;
 `;
 
-export const PokemonName = styled.h3`
+export const PokemonName = styled.h2`
     text-transform: capitalize;
     font-size: 1.3rem;
     margin: 0;

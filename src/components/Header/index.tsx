@@ -16,7 +16,7 @@ const Header: React.FC = (): JSX.Element => {
             <Navbar>
                 <Logo>
                     <NavLink href="/">
-                        <Image src="/images/pokedex.png" width={150} height={60} alt="Pokédex logo" />
+                        <Image src="/images/pokedex.png" width={160} height={60} alt="Pokédex logo" />
                     </NavLink>
                 </Logo>
 
