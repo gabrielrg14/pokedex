@@ -2,7 +2,7 @@
   "name": "pokedex",
   "version": "1.0.0",
   "private": true,
-  "description": "Pokédex powered by PokéAPI made in Next.js",
+  "description": "Pokédex powered by PokéAPI",
   "keywords": [
     "pokédex",
     "pokéAPI",
@@ -22,6 +22,7 @@
     "eslint-config-next": "^13.1.2",
     "next": "^13.1.2",
     "next-pwa": "^5.6.0",
+    "next-seo": "^6.1.0",
     "next-sitemap": "^4.1.8",
     "nextjs-progressbar": "^0.0.16",
     "react": "^18.2.0",

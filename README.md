@@ -1,8 +1,8 @@
 # Pokédex 
 
-> Pokédex project that consumes PokéAPI to display all information of all existing Pokémon.
+> Pokédex project that consumes the PokéAPI to display information of all existing Pokémon.
 
-**Technologies, libs and frameworks used and studied to carry out this project** <br>
+**Technologies, libs and frameworks used and studied to carry out this project:** <br>
 
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)

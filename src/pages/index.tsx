@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
+
 import Image from 'next/image';
 
 import { API_URL } from "src/common/utils/api";
@@ -102,11 +103,14 @@ const Home: React.FC<HomeProps> = ({ pokemons, types }): JSX.Element => {
 
     return (
         <>
-            <Head>
-                <title>Pokédex</title>
-                <meta name="keywords" content="Pokédex, Pokémon, PokéAPI, Listing, Search, Selection" />
-                <meta name="description" content="Pokémon listing with search field and type for selection" />
-            </Head>
+            <NextSeo
+                title="Pokédex"
+                description="Pokédex project that consumes the PokéAPI to display information of all existing Pokémon."
+                additionalMetaTags={[{
+                    name: "keywords",
+                    content: "Pokédex, Pokémon, PokéAPI, Project, Frontend, React, Next"
+                }]}
+            />
 
             <TitleDiv>
                 <Title>Choose your Pokémon</Title>

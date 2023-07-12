@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+
+import { NextSeo } from 'next-seo';
 
 import { API_URL } from "src/common/utils/api";
 import { Pokemon as PokemonInterface, formatPokemonName } from "src/common/utils/pokemon";
@@ -101,11 +101,14 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
 
     return (
         <>
-            <Head>
-                <title>{`${formatPokemonName(pokemon?.name)} | Pokédex`}</title>
-                <meta name="keywords" content={`${formatPokemonName(pokemon?.name)}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Types, Height, Weight, Abilities, Stats`} />
-                <meta name="description" content={`Pokédex data for the Pokémon ${pokemon?.name}`} />
-            </Head>
+            <NextSeo
+                title={`${formatPokemonName(pokemon?.name)} | Pokédex`}
+                description={`Data found in the Pokédex for ${formatPokemonName(pokemon?.name)}.`}
+                additionalMetaTags={[{
+                    name: "keywords",
+                    content: `${formatPokemonName(pokemon?.name)}, ${formatPokemonName(pokemon?.name)}#${pokemon?.id}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
+                }]}
+            />
 
             <Container
                 style={{ background: backgroundStyle }}>
