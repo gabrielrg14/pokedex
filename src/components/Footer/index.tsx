@@ -1,13 +1,13 @@
-import { FooterTag, SpanText, ApiLink } from "./styles";
+import * as S from "./styles";
 
-const Footer: React.FC = (): JSX.Element => {
+const Footer = () => {
     return (
-        <FooterTag>
-            <SpanText>
+        <S.FooterTag>
+            <S.SpanText>
                 {new Date().getFullYear()} &copy;
-                Powered by <ApiLink href="https://pokeapi.co/" target="_blank">PokéAPI</ApiLink>
-            </SpanText>
-        </FooterTag>
+                Powered by <S.ApiLink href="https://pokeapi.co/" target="_blank">PokéAPI</S.ApiLink>
+            </S.SpanText>
+        </S.FooterTag>
     )
 }
 

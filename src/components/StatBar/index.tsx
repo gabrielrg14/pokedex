@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { getColorsByPokemonType } from "src/common/utils/colorTypes";
+import * as S from "./styles";
 
-import { ParentBar, ChildBar } from "./styles";
+import { getColorsByPokemonType } from "common/utils/colorTypes";
 
-interface StatBarProps {
-    type: string,
-    stat: string,
+type StatBarProps = {
+    type: string
+    stat: string
     baseStat: number
 }
 
@@ -24,8 +24,7 @@ const MAX_BASE_STAT: baseStats = {
     "speed": 200
 }
 
-const StatBar: React.FC<StatBarProps> = ({ type, stat, baseStat }): JSX.Element => {
-
+const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
     const [completed, setCompleted] = useState(0);
 
     useEffect(() => {
@@ -33,9 +32,9 @@ const StatBar: React.FC<StatBarProps> = ({ type, stat, baseStat }): JSX.Element 
     }, [baseStat, stat]);
 
     return (
-        <ParentBar>
-            <ChildBar bgColor={getColorsByPokemonType(type).backgroundColor} completed={completed} />
-        </ParentBar>
+        <S.ParentBar>
+            <S.ChildBar bgColor={getColorsByPokemonType(type).backgroundColor} completed={completed} />
+        </S.ParentBar>
     )
 }
 

@@ -1,22 +1,19 @@
-import { useState, useCallback, useEffect, useContext } from 'react';
+import { useState, useCallback, useEffect, useContext } from "react";
 
+import * as S from "./styles";
 import Image from 'next/image';
+import PokemonNumber from "components/PokemonNumber";
+import RowTypes from "components/RowTypes";
 
-import { API_URL } from "src/common/utils/api";
-import { Pokemon, formatPokemonName } from "src/common/utils/pokemon";
-import { SpriteContext } from "src/common/contexts/sprite";
+import { API_URL } from "common/utils/api";
+import { Pokemon, formatPokemonName } from "common/utils/pokemon";
+import { SpriteContext } from "common/contexts/sprite";
 
-import PokemonNumber from "src/components/PokemonNumber";
-import RowTypes from "src/components/RowTypes";
-
-import { CardLink, PokemonInfos, PokemonName } from "./styles";
-
-interface CardProps {
+type CardProps = {
     pokemon: Pokemon
 }
 
-const Card: React.FC<CardProps> = ({ pokemon }): JSX.Element => {
-    
+const Card = ({ pokemon }: CardProps) => {
     const [pokemonData, setPokemonData] = useState<Pokemon>();
 
     const getPokemonData = useCallback(async () => {
@@ -32,7 +29,7 @@ const Card: React.FC<CardProps> = ({ pokemon }): JSX.Element => {
     const { sprite } = useContext(SpriteContext);
 
     return (
-        <CardLink href={`/pokemon/${pokemonData?.name}`}>
+        <S.CardLink href={`/pokemon/${pokemonData?.name}`}>
             {pokemonData?.sprites?.other['official-artwork']?.[sprite] &&
                 <Image src={pokemonData?.sprites.other['official-artwork'][sprite]} 
                     width={156} height={156} 
@@ -42,13 +39,13 @@ const Card: React.FC<CardProps> = ({ pokemon }): JSX.Element => {
                 />
             }
 
-            <PokemonInfos>
+            <S.PokemonInfos>
                 <PokemonNumber number={pokemonData?.id} />
-                <PokemonName>{formatPokemonName(pokemon.name)}</PokemonName>
-            </PokemonInfos>
+                <S.PokemonName>{formatPokemonName(pokemon.name)}</S.PokemonName>
+            </S.PokemonInfos>
 
             <RowTypes types={pokemonData?.types}/>
-        </CardLink>
+        </S.CardLink>
     )
 }
 

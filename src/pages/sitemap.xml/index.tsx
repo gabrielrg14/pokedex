@@ -1,10 +1,10 @@
-import { GetServerSideProps } from 'next'
-import { getServerSideSitemapLegacy, ISitemapField } from 'next-sitemap'
+import { GetServerSideProps } from 'next';
+import { getServerSideSitemapLegacy, ISitemapField } from 'next-sitemap';
 
-import { API_URL } from "src/common/utils/api";
+import { API_URL } from "common/utils/api";
 
 type PokemonResult = {
-    name: string,
+    name: string
     url: string
 }
 
@@ -41,4 +41,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 // Default export to prevent next.js errors
-export default function Sitemap() {}
+export default function Sitemap() {};

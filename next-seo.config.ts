@@ -1,4 +1,4 @@
-import { DefaultSeoProps } from 'next-seo'
+import { DefaultSeoProps } from 'next-seo';
 
 const siteUrl = process.env.SITE_URL || "https://pokedex-gabrielrg.vercel.app/"
 
@@ -36,4 +36,4 @@ const config: DefaultSeoProps = {
     }
 }
 
-export default config
+export default config;

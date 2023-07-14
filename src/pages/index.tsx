@@ -1,48 +1,17 @@
-import { useState, useRef, useCallback } from 'react';
+import { GetStaticProps } from 'next';
+import { useState, useRef, useCallback } from "react";
 
-import { NextSeo } from 'next-seo';
+import HomeTemplate, { LIMIT, Type } from "templates/Home";
 
-import Image from 'next/image';
+import { API_URL } from "common/utils/api";
+import { Pokemon } from "common/utils/pokemon";
 
-import { API_URL } from "src/common/utils/api";
-import { Pokemon } from "src/common/utils/pokemon";
-import { getColorsByPokemonType } from "src/common/utils/colorTypes";
-
-import Card from "src/components/Card";
-
-import { 
-    TitleDiv,
-    Title,
-    Container,
-    TopArea,
-    SearchInput,
-    SearchButton,
-    BottomArea,
-    TypeList,
-    TypeItem,
-    Type,
-    PokemonList,
-    PokemonCount,
-    Counter,
-    PokemonCards,
-    SearchError,
-    TextNotFound,
-    ButtonLoad
-} from "src/common/styles/pages/index";
-
-const LIMIT = 12; 
-
-interface Type {
-    name: string,
-    url: string
-}
-
-interface HomeProps {
-    pokemons: Pokemon[],
+type HomeProps = {
+    pokemons: Pokemon[]
     types: Type[]
 }
 
-export const getStaticProps = async() => {
+export const getStaticProps: GetStaticProps = async () => {
     const fetchPokemons = await fetch(`${API_URL}/pokemon?limit=${LIMIT}`)
     const pokemons = await fetchPokemons.json()
 
@@ -58,7 +27,7 @@ export const getStaticProps = async() => {
     }
 }
 
-const Home: React.FC<HomeProps> = ({ pokemons, types }): JSX.Element => {
+const Home = ({ pokemons, types }: HomeProps) => {
 
     const prevSearchRef = useRef("");
     const [search, setSearch] = useState("");
@@ -102,105 +71,19 @@ const Home: React.FC<HomeProps> = ({ pokemons, types }): JSX.Element => {
     const typesFiltered = types.filter(type => !typesToRemove.includes(type.name))
 
     return (
-        <>
-            <NextSeo
-                title="Pokédex"
-                description="Pokédex project that consumes the PokéAPI to display information of all existing Pokémon."
-                additionalMetaTags={[{
-                    name: "keywords",
-                    content: "Pokédex, Pokémon, PokéAPI, Project, Frontend, React, Next"
-                }]}
-            />
-
-            <TitleDiv>
-                <Title>Choose your Pokémon</Title>
-            </TitleDiv>
-            
-            <Container>
-                <TopArea>
-                    <SearchInput 
-                        type="text"
-                        spellCheck={false}
-                        placeholder="Search by name or number"
-                        value={search} 
-                        onChange={e => setSearch(e.target.value)}
-                        onKeyDown={e => e.key === "Enter" ? searchPokemon(search) : null} />
-
-                    <SearchButton 
-                        type="button" 
-                        onClick={() => searchPokemon(search)}
-                        disabled={search === ""}
-                    >
-                        🔍
-                    </SearchButton>
-                </TopArea>
-
-                <PokemonCount>
-                    <Image src={`/images/types/${typeSelected}.svg`} 
-                        width={32} height={32} 
-                        alt={`Type ${typeSelected}`} 
-                    />
-                    <Counter>{pokemonList?.length}</Counter>
-                </PokemonCount>
-
-                {pokemonList?.length > 0 &&
-                    <BottomArea>
-                        <TypeList>
-                            {typesFiltered?.map((type, index) => (
-                                <li key={index}>
-                                    <TypeItem className={typeSelected === type.name ? "selected" : ""}
-                                        onClick={() => {
-                                            window.scrollTo({ top: 125, behavior: "smooth" })
-                                            setTypeSelected(type.name)
-                                            loadPokemons(null, type.name)
-                                        }}
-                                    >
-                                        <Image src={`/images/types/${type.name}.svg`} 
-                                            width={24} height={24} 
-                                            alt={`Type ${type.name}`} 
-                                        />
-                                        <Type typeColor={getColorsByPokemonType(type.name).backgroundColor}>
-                                            {type.name}
-                                        </Type>
-                                    </TypeItem>
-                                </li>
-                            ))}
-                        </TypeList>
-
-                        <PokemonList>
-                            <PokemonCards>
-                                {pokemonList?.map((pokemon, index) => (
-                                    <Card key={index} pokemon={pokemon} />
-                                ))}
-                            </PokemonCards>
-
-                            {(typeSelected === "all" && pokemonList?.length >= LIMIT) && (
-                                <ButtonLoad className="btn-default"
-                                    onClick={() => loadPokemons(null)}
-                                >
-                                    Load more Pokémon
-                                </ButtonLoad>
-                            )}
-                        </PokemonList>
-                    </BottomArea>
-                }
-
-                {pokemonList?.length === 0 &&
-                    <SearchError>
-                        <TextNotFound>
-                            Pokémon <strong>{'"'}{prevSearchRef.current}{'"'}</strong> not found! <br />
-                            <small>Try again by searching for your full name or your Pokédex number.</small>
-                        </TextNotFound>
-
-                        <ButtonLoad className="btn-default"
-                            onClick={() => searchPokemon("")}
-                        >
-                            Back to list
-                        </ButtonLoad>
-                    </SearchError>
-                }
-            </Container>
-        </>
+        <HomeTemplate
+            state={{
+                prevSearchRef,
+                search,
+                setSearch,
+                typeSelected,
+                setTypeSelected
+            }}
+            pokemons={pokemonList}
+            types={typesFiltered}
+            searchPokemon={searchPokemon}
+            loadPokemons={loadPokemons}
+        />
     )
 }
 

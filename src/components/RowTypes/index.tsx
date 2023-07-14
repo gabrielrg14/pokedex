@@ -1,22 +1,21 @@
-import { Type } from "src/common/utils/pokemon";
+import * as S from "./styles";
+import BadgeType from "components/BadgeType";
 
-import BadgeType from "src/components/BadgeType";
+import { Type } from "common/utils/pokemon";
 
-import { Wrapper } from "./styles";
-
-interface RowTypesProps {
+type RowTypesProps = {
     types: Type[] | undefined
 }
 
-const RowTypes: React.FC<RowTypesProps> = ({ types }): JSX.Element => {
+const RowTypes = ({ types }: RowTypesProps) => {
     return (
-        <Wrapper>
+        <S.Wrapper>
             {types?.map((item, index) => (
                 <div key={index}>
                     <BadgeType type={item.type.name} />
                 </div>
             ))}
-        </Wrapper>
+        </S.Wrapper>
     )
 }
 

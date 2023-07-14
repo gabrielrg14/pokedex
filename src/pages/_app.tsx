@@ -3,14 +3,14 @@ import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import SEO from "../../next-seo.config";
 
-import GoogleAnalytics from "src/components/Analytics";
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import GoogleAnalytics from "components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 
-import GlobalStyle from "src/common/styles/global";
-import Layout from "src/components/Layout/Layout";
-import NextNProgress from 'nextjs-progressbar'
+import GlobalStyle from "styles/global";
+import Layout from "components/Layout/Layout";
+import NextNProgress from 'nextjs-progressbar';
 
-const App: React.FC<AppProps> = ({ Component, pageProps }): JSX.Element => {
+const App = ({ Component, pageProps }: AppProps) => {
     return (
         <>
             <DefaultSeo {...SEO} />

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import media from "src/common/utils/mediaQueries";
+import media from "common/utils/mediaQueries";
 
-interface TypeProps {
+type TypeProps = {
     typeColor: string
 }
 

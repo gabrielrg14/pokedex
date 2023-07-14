@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import media from "src/common/utils/mediaQueries";
-
 import Image from 'next/image';
+import media from "common/utils/mediaQueries";
 
 export const Container = styled.div`
     display: flex;

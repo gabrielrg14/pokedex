@@ -1,38 +1,36 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 
+import * as S from "./styles";
 import Image from 'next/image';
+import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles";
 
-import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles"
-import { SpriteContext } from "src/common/contexts/sprite";
+import { SpriteContext } from "common/contexts/sprite";
 
-import { Navbar, Logo, NavList, NavLink, ShinyIcon } from "./styles";
-
-const Header: React.FC = (): JSX.Element => {
-
+const Header = () => {
     const { sprite, toggleSprite } = useContext(SpriteContext);
 
     return (
         <header>
-            <Navbar>
-                <Logo>
-                    <NavLink href="/">
+            <S.Navbar>
+                <S.Logo>
+                    <S.NavLink href="/">
                         <Image src="/images/pokedex.png" width={160} height={60} alt="Pokédex logo" />
-                    </NavLink>
-                </Logo>
+                    </S.NavLink>
+                </S.Logo>
 
-                <NavList>
+                <S.NavList>
                     <li>
-                        <ShinyIcon onClick={() => toggleSprite(sprite === "front_default" ? "front_shiny" : "front_default")}>
+                        <S.ShinyIcon onClick={() => toggleSprite(sprite === "front_default" ? "front_shiny" : "front_default")}>
                             <Sparkles className={sprite === "front_shiny" ? "shiny" : ""} />
-                        </ShinyIcon>
+                        </S.ShinyIcon>
                     </li>
                     <li>
-                        <NavLink href="/about">
+                        <S.NavLink href="/about">
                             About
-                        </NavLink>
+                        </S.NavLink>
                     </li>
-                </NavList>
-            </Navbar>
+                </S.NavList>
+            </S.Navbar>
         </header>
     )
 }

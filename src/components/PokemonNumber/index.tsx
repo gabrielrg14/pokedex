@@ -1,11 +1,10 @@
-import { SpanNumber } from "./styles";
+import * as S from "./styles";
 
-interface PokemonNumberProps {
+type PokemonNumberProps = {
     number: number | null | undefined
 }
 
-const PokemonNumber: React.FC<PokemonNumberProps> = ({ number }): JSX.Element => {
-
+const PokemonNumber = ({ number }: PokemonNumberProps) => {
     function formatPokemonNumber(number: number | null | undefined, quantity: number): string {
         let numberWithZeros = String(number);
         let counter = numberWithZeros.length;
@@ -19,9 +18,9 @@ const PokemonNumber: React.FC<PokemonNumberProps> = ({ number }): JSX.Element =>
     }
 
     return (
-        <SpanNumber>
+        <S.SpanNumber>
             #{formatPokemonNumber(number, String(number).length >= 5 ? 5 : 4)}
-        </SpanNumber>
+        </S.SpanNumber>
     )
 }
 

@@ -1,20 +1,18 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 
-import { Sprite, SpriteContext } from "src/common/contexts/sprite";
+import * as S from "./styles";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
-import Header from "src/components/Header";
-import Footer from "src/components/Footer";
-
-import { Main } from "./styles";
+import { Sprite, SpriteContext } from "common/contexts/sprite";
 
 const STORAGE_KEY = "pokemon_sprite";
 
-interface LayoutProps {
+type LayoutProps = {
     children: React.ReactNode
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }): JSX.Element => {
-
+const Layout = ({ children }: LayoutProps) => {
     const [sprite, setSprite] = useState("front_default" as Sprite);
 
     const toggleSprite = useCallback((sprite: Sprite) => {
@@ -30,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children }): JSX.Element => {
     return (
         <SpriteContext.Provider value={{ sprite, toggleSprite }}>
             <Header />
-            <Main>{children}</Main>
+            <S.Main>{children}</S.Main>
             <Footer />
         </SpriteContext.Provider>
     )

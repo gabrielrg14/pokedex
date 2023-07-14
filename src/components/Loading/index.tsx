@@ -1,13 +1,12 @@
+import * as S from "./styles";
 import Image from 'next/image';
 
-import { Wrapper } from "./styles";
-
-const Loading: React.FC = (): JSX.Element => {
+const Loading = () => {
     return (
-        <Wrapper>
+        <S.Wrapper>
             <Image src={"/images/loading.gif"} width={300} height={200} alt="Pikachu loading" priority />
             <h3>Loading...</h3>
-        </Wrapper>
+        </S.Wrapper>
     )
 }
 

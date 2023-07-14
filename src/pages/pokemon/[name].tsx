@@ -1,49 +1,20 @@
-import { useContext } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useContext } from "react";
 import { useRouter } from 'next/router';
 
-import { NextSeo } from 'next-seo';
+import PokemonTemplate from "templates/Pokemon";
+import Loading from "components/Loading";
 
-import { API_URL } from "src/common/utils/api";
-import { Pokemon as PokemonInterface, formatPokemonName } from "src/common/utils/pokemon";
-import { SpriteContext } from "src/common/contexts/sprite";
-import { getColorsByPokemonType } from "src/common/utils/colorTypes";
+import { API_URL } from "common/utils/api";
+import { Pokemon } from "common/utils/pokemon";
+import { SpriteContext } from "common/contexts/sprite";
+import { getColorsByPokemonType } from "common/utils/colorTypes";
 
-import Loading from "src/components/Loading";
-import PokemonNumber from "src/components/PokemonNumber";
-import RowTypes from "src/components/RowTypes";
-import StatBar from "src/components/StatBar";
-
-import { 
-    Container,
-    PokemonCard,
-    PokemonTitle,
-    PokemonName,
-    SpanNumber,
-    DivImage,
-    PokemonImage,
-    PokemonData,
-    DivData,
-    DataTitle,
-    PokemonStats,
-    Stat,
-    StatInfo
-} from "src/common/styles/pages/pokemon";
-
-interface Context {
-    params: {
-        name: string
-    }
-}
-
-interface PokemonProps {
-    pokemon: PokemonInterface
-}
-
-export const getStaticPaths = async() => {
+export const getStaticPaths: GetStaticPaths = async () => {
     const res = await fetch(`${API_URL}/pokemon?limit=12`) // Pré-render only 12 Pokémons
-    const data = await res.json()
+    const pokemons = await res.json()
 
-    const paths = data.results.map((pokemon: PokemonInterface) => {
+    const paths = pokemons.results.map((pokemon: Pokemon) => {
         return {
             params: { name: pokemon.name }
         }
@@ -55,122 +26,51 @@ export const getStaticPaths = async() => {
     }
 }
 
-export const getStaticProps = async(context: Context) => {
-    const name = context.params.name
-    const res = await fetch(`${API_URL}/pokemon/${name}`)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const res = await fetch(`${API_URL}/pokemon/${params?.name}`)
+    const pokemon = await res.json()
 
-    let data = null;
-    let notFound = false;
-
-    try {
-        data = await res.json()
-    } catch(err) {
-        notFound = true;
-    }
+    if (!pokemon) return { notFound: true }
 
     return {
-        notFound,
+        revalidate: 60,
         props: { 
-            pokemon: data,
+            pokemon
         }
     }
 }
 
-const Pokemon: React.FC<PokemonProps> = ({ pokemon }): JSX.Element => {
+type PokemonPageProps = {
+    pokemon: Pokemon
+}
 
+const PokemonPage = ({ pokemon }: PokemonPageProps) => {
     const { sprite } = useContext(SpriteContext)
 
     const router = useRouter()
+    if(router && router.isFallback) return <Loading />
 
-    if(router && router.isFallback) {
-        return <Loading />;
-    }
-
-    let backgroundStyle = getColorsByPokemonType(pokemon?.types[0].type.name).background;
-    if(pokemon?.types.length === 2) { // Pokémon with 2 types
-        backgroundStyle = `linear-gradient(
+    let background = getColorsByPokemonType(pokemon.types[0].type.name).background;
+    if(pokemon.types.length >= 2) { // Pokémon with 2 or more types
+        background = `linear-gradient(
             to right,
-            ${getColorsByPokemonType(pokemon?.types[0].type.name).backgroundColor} 50%,
-            ${getColorsByPokemonType(pokemon?.types[1].type.name).backgroundColor} 50%
+            ${getColorsByPokemonType(pokemon.types[0].type.name).backgroundColor} 50%,
+            ${getColorsByPokemonType(pokemon.types[1].type.name).backgroundColor} 50%
         )`;
     }
 
     // Removes abilities that have the same name
-    const abilitiesName = pokemon?.abilities.map(item => item.ability.name)
-    const abilitiesFiltered = abilitiesName.filter((item, index) => abilitiesName.indexOf(item) === index)
+    const abilities = pokemon.abilities.map(item => item.ability.name)
+    const filtered = abilities.filter((item, index) => abilities.indexOf(item) === index)
+    pokemon.abilities = pokemon.abilities.filter((item, index) => filtered.indexOf(item.ability.name) === index)
 
     return (
-        <>
-            <NextSeo
-                title={`${formatPokemonName(pokemon?.name)} | Pokédex`}
-                description={`Data found in the Pokédex for ${formatPokemonName(pokemon?.name)}.`}
-                additionalMetaTags={[{
-                    name: "keywords",
-                    content: `${formatPokemonName(pokemon?.name)}, ${formatPokemonName(pokemon?.name)}#${pokemon?.id}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
-                }]}
-            />
-
-            <Container
-                style={{ background: backgroundStyle }}>
-                <PokemonCard>
-                    <PokemonTitle>
-                        <PokemonName>
-                            {formatPokemonName(pokemon?.name)}
-                        </PokemonName>
-                        <SpanNumber>
-                            <PokemonNumber number={pokemon?.id} />
-                        </SpanNumber>
-                    </PokemonTitle>
-                    
-                    <DivImage>
-                        {pokemon?.sprites?.other['official-artwork']?.[sprite] &&
-                            <PokemonImage
-                                src={pokemon?.sprites.other['official-artwork'][sprite]} 
-                                width={256} height={256} 
-                                alt={pokemon?.name} 
-                                priority
-                            />
-                        }
-                    </DivImage>
-
-                    <RowTypes types={pokemon?.types}/>
-
-                    <PokemonData>
-                        <DivData>
-                            <DataTitle>Height</DataTitle>
-                            <p>{pokemon?.height / 10}m</p>
-                        </DivData>
-                        <DivData>
-                            <DataTitle>Weight</DataTitle>
-                            <p>{pokemon?.weight / 10}kg</p>
-                        </DivData>
-                        <DivData>
-                            <DataTitle>Abilities</DataTitle>
-                            {abilitiesFiltered.map((ability, index) => (
-                                <p key={index}>{ability.replace("-", " ")}</p>
-                            ))}
-                        </DivData>
-                    </PokemonData>
-
-                    <PokemonStats>
-                        <DataTitle>Stats</DataTitle>
-                        {pokemon?.stats.map((item, index) => (
-                            <Stat key={index}>
-                                <StatInfo>
-                                    <span>{item.stat.name.replace("special-", "Sp. ")}</span>
-                                    <span>{item.base_stat}</span>
-                                </StatInfo>
-                                <StatBar 
-                                    type={pokemon?.types[0].type.name} 
-                                    stat={item.stat.name} baseStat={item.base_stat} 
-                                />
-                            </Stat>
-                        ))}
-                    </PokemonStats>
-                </PokemonCard>
-            </Container>
-        </>
+        <PokemonTemplate
+            pokemon={pokemon}
+            background={background}
+            sprite={sprite}
+        />
     )
 }
 
-export default Pokemon;
+export default PokemonPage;

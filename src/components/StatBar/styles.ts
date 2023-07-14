@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-interface ChildBarProps {
-    completed: number,
+type ChildBarProps = {
+    completed: number
     bgColor: string
 }
 

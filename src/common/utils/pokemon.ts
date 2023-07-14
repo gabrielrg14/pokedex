@@ -1,5 +1,5 @@
 export interface Sprites {
-    front_default: string,
+    front_default: string
     front_shiny: string
     other: {
         "official-artwork": {
@@ -11,35 +11,35 @@ export interface Sprites {
 
 export interface Type {
     type: {
-        name: string,
+        name: string
         url: string
     }
 }
 
 export interface Ability {
     ability: {
-        name: string,
+        name: string
         url: string
     }
 }
 
 export interface Stat {
-    base_stat: number,
+    base_stat: number
     stat: {
-        name: string,
+        name: string
         url: string
     }
 }
 
 export interface Pokemon {
-    id: number | null,
-    name: string,
-    url: string,
-    sprites: Sprites,
-    height: number,
-    weight: number,
-    types: Type[],
-    abilities: Ability[],
+    id: number | null
+    name: string
+    url: string
+    sprites: Sprites
+    height: number
+    weight: number
+    types: Type[]
+    abilities: Ability[]
     stats: Stat[]
 }
 

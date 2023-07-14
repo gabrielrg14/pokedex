@@ -1,9 +1,9 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export type Sprite = "front_default" | "front_shiny";
 
-interface SpriteData {
-    sprite: Sprite,
+type SpriteData = {
+    sprite: Sprite
     toggleSprite: (sprite: Sprite) => void
 }
 
