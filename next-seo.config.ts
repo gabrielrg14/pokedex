@@ -4,7 +4,6 @@ const siteUrl = process.env.SITE_URL || "https://pokedex-gabrielrg.vercel.app/"
 
 const config: DefaultSeoProps = {
     defaultTitle: "Pokédex",
-    canonical: siteUrl,
     themeColor: "#FBC418",
     additionalLinkTags: [{
         rel: "icon",
