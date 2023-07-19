@@ -3,7 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://pokedex-gabrielrg.vercel.app/
+Host: https://pokedex-gabrielrg.vercel.app
 
 # Sitemaps
 Sitemap: https://pokedex-gabrielrg.vercel.app/sitemap.xml
+Sitemap: https://pokedex-gabrielrg.vercel.app/server-sitemap.xml

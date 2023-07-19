@@ -1,5 +1,4 @@
-import { GetServerSideProps } from 'next';
-import { getServerSideSitemapLegacy, ISitemapField } from 'next-sitemap';
+import { getServerSideSitemap, ISitemapField } from 'next-sitemap'
 
 import { API_URL } from "common/utils/api";
 
@@ -12,14 +11,14 @@ type Results = {
     results: PokemonResult[]
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const resp = await fetch(`${API_URL}/pokemon?limit=100000&offset=0`)
-    const { results }: Results = await resp.json()
-
+export async function GET() {
     const locBase = "https://pokedex-gabrielrg.vercel.app"
     const lastmod = new Date().toISOString()
     const changefreq = "daily"
     const priority = 0.7
+
+    const resp = await fetch(`${API_URL}/pokemon?limit=100000&offset=0`)
+    const { results }: Results = await resp.json()
 
     const fields: ISitemapField[] = results.map(({ name }) => ({
         loc: `${locBase}/pokemon/${name}`,
@@ -37,8 +36,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         },
     )
 
-    return getServerSideSitemapLegacy(ctx, fields)
+    return getServerSideSitemap(fields)
 }
-
-// Default export to prevent next.js errors
-export default function Sitemap() {};
