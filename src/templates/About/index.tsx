@@ -12,6 +12,7 @@ const AboutTemplate = () => {
                     name: "keywords",
                     content: "About, Pokédex, Pokémon, Technology, Updates, Improvements"
                 }]}
+                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/about`}
             />
 
             <S.Wrapper>

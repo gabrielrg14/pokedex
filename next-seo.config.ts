@@ -1,7 +1,5 @@
 import { DefaultSeoProps } from 'next-seo';
 
-const siteUrl = process.env.SITE_URL || "https://pokedex-gabrielrg.vercel.app/"
-
 const config: DefaultSeoProps = {
     defaultTitle: "Pokédex",
     themeColor: "#FBC418",
@@ -30,7 +28,7 @@ const config: DefaultSeoProps = {
     openGraph: {
         type: "website",
         locale: "en",
-        url: siteUrl,
+        url: process.env.NEXT_PUBLIC_SITE_URL,
         siteName: "Pokédex"
     }
 }

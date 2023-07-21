@@ -24,6 +24,7 @@ const PokemonTemplate = ({ pokemon, background, sprite }: PokemonTemplateProps) 
                     name: "keywords",
                     content: `${formatPokemonName(pokemon?.name)}, ${formatPokemonName(pokemon?.name)}#${pokemon?.id}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
                 }]}
+                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemon?.name}`}
             />
 
             <S.Container style={{ background }}>

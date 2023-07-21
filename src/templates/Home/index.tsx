@@ -40,6 +40,7 @@ const HomeTemplate = ({ state, pokemons, types, searchPokemon, loadPokemons }: H
                     name: "keywords",
                     content: "Pokédex, Pokémon, PokéAPI, Project, Frontend, React, Next"
                 }]}
+                canonical={process.env.NEXT_PUBLIC_SITE_URL}
             />
 
             <S.TitleDiv>
