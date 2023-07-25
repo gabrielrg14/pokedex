@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import Link from 'next/link';
-import { StyledIconBase } from "@styled-icons/styled-icon";
-import media from "common/utils/mediaQueries";
+import styled from "styled-components"
+import Link from "next/link"
+import { StyledIconBase } from "@styled-icons/styled-icon"
+import media from "common/utils/mediaQueries"
 
 export const Navbar = styled.nav`
     display: flex;
@@ -13,55 +13,60 @@ export const Navbar = styled.nav`
     padding: 1.5rem 10%;
     font-size: 1.1rem;
     background-color: #212121;
-    color: #FFF;
+    color: #fff;
     border-bottom: 4px solid #111;
 
     ${media.lessThan("smallMobile")`
         flex-direction: column;
         padding: 1rem 10%;
     `}
-`;
+`
 
 export const Logo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-`;
+`
 
 export const NavList = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-`;
+`
 
 export const NavLink = styled(Link)`
     line-height: 1.5;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    color: #FFF;
+    color: #fff;
     text-decoration: none;
-    transition: .4s;
+    transition: 0.4s;
     border-bottom: 2px solid transparent;
-    
+
     :hover {
-        border-color: #FBC418;
+        border-color: #fbc418;
     }
-`;
+`
 
 export const ShinyIcon = styled.div`
     ${StyledIconBase} {
         cursor: pointer;
-        color: #FFF;
+        color: #fff;
         width: 24px;
 
         &.shiny {
-            color: #FBC418;
+            color: #fbc418;
         }
 
         /* https://codepen.io/amit_merchant/pen/wvxGjpG */
-        mask-image: linear-gradient(45deg, #000 25%, rgba(0,0,0,.2) 50%, #000 75%);
+        mask-image: linear-gradient(
+            45deg,
+            #000 25%,
+            rgba(0, 0, 0, 0.2) 50%,
+            #000 75%
+        );
         mask-size: 800%;
         mask-position: 0;
 
@@ -71,4 +76,4 @@ export const ShinyIcon = styled.div`
             opacity: 1;
         }
     }
-`;
+`

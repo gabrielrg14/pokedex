@@ -1,18 +1,24 @@
-import Document, { DocumentContext , Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from "styled-components";
+import Document, {
+    DocumentContext,
+    Html,
+    Head,
+    Main,
+    NextScript
+} from "next/document"
+import { ServerStyleSheet } from "styled-components"
 
 class MyDocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
         const sheet = new ServerStyleSheet()
         const originalRenderPage = ctx.renderPage
-    
+
         try {
             ctx.renderPage = () =>
                 originalRenderPage({
                     enhanceApp: (App) => (props) =>
-                    sheet.collectStyles(<App {...props} />),
+                        sheet.collectStyles(<App {...props} />)
                 })
-    
+
             const initialProps = await Document.getInitialProps(ctx)
             return {
                 ...initialProps,
@@ -21,7 +27,7 @@ class MyDocument extends Document {
                         {initialProps.styles}
                         {sheet.getStyleElement()}
                     </>
-                ),
+                )
             }
         } finally {
             sheet.seal()
@@ -32,22 +38,22 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <link 
-                        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" 
-                        rel="stylesheet" 
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+                        rel="stylesheet"
                     />
-                    <link 
-                        href="https://fonts.cdnfonts.com/css/pokemon-solid" 
-                        rel="stylesheet" 
+                    <link
+                        href="https://fonts.cdnfonts.com/css/pokemon-solid"
+                        rel="stylesheet"
                     />
                 </Head>
                 <body>
-					<Main />
-					<NextScript />
-				</body>
+                    <Main />
+                    <NextScript />
+                </body>
             </Html>
         )
     }
 }
 
-export default MyDocument;
+export default MyDocument

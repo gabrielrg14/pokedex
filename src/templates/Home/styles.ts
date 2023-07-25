@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import media from "common/utils/mediaQueries";
+import styled from "styled-components"
+import media from "common/utils/mediaQueries"
 
 type TypeProps = {
     typeColor: string
@@ -18,23 +18,23 @@ export const TitleDiv = styled.nav`
     ${media.lessThan("smallMobile")`
         padding: 1rem;
     `}
-`;
+`
 
 export const Title = styled.h1`
-    font-family: 'Pokemon Solid', sans-serif;
+    font-family: "Pokemon Solid", sans-serif;
     letter-spacing: 0.2rem;
     line-height: 1.5;
     text-align: center;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #FBC418;
-    text-shadow: 3px 3px 3px #3E6CBD;
+    color: #fbc418;
+    text-shadow: 3px 3px 3px #3e6cbd;
     animation: fade-in 0.5s;
 
     ${media.lessThan("smallMobile")`
         font-size: 2rem;
     `}
-`;
+`
 
 export const Container = styled.div`
     padding: 0px 20%;
@@ -44,7 +44,7 @@ export const Container = styled.div`
     ${media.lessThan("desktop")`
         padding: 0px 10%;
     `}
-`;
+`
 
 export const TopArea = styled.div`
     display: flex;
@@ -53,23 +53,23 @@ export const TopArea = styled.div`
     align-items: center;
     border-radius: 120px;
     gap: 1rem;
-`;
+`
 
 export const SearchInput = styled.input`
     flex: 1;
     max-width: fit-content;
     padding: 10px 20px;
     background-color: rgb(183 189 193 / 30%);
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-radius: 122px;
     font-size: 1rem;
-    color: #7A7D80;
+    color: #7a7d80;
     outline: none;
-`;
+`
 
 export const SearchButton = styled.button`
     background-color: rgb(183 189 193 / 30%);
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 50%;
     transition: background-color 0.3s;
@@ -79,7 +79,7 @@ export const SearchButton = styled.button`
         cursor: pointer;
         background-color: rgb(183 189 193 / 60%);
     }
-`;
+`
 
 export const PokemonCount = styled.div`
     display: flex;
@@ -87,17 +87,17 @@ export const PokemonCount = styled.div`
     align-items: baseline;
     gap: 0.5rem;
     margin: 1.5rem 0;
-`;
+`
 
 export const Counter = styled.span`
-    font-family: 'Pokemon Solid', sans-serif;
+    font-family: "Pokemon Solid", sans-serif;
     letter-spacing: 0.5rem;
     line-height: 0;
     font-size: 2rem;
-    color: #FBC418;
-    text-shadow: 2px 2px 1px #3E6CBD;
+    color: #fbc418;
+    text-shadow: 2px 2px 1px #3e6cbd;
     align-self: baseline;
-`;
+`
 
 export const BottomArea = styled.div`
     display: flex;
@@ -109,15 +109,15 @@ export const BottomArea = styled.div`
     ${media.lessThan("tablet")`
         flex-direction: column;
     `}
-`;
+`
 
 export const TypeList = styled.ul`
     flex: 1;
     height: fit-content;
     max-width: fit-content;
-    background-color: #FFF;
+    background-color: #fff;
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-radius: 12px;
     padding: 0 5rem 0 1.5rem;
 
@@ -132,7 +132,7 @@ export const TypeList = styled.ul`
             height: 10px;
             width: 10px;
         }
-    
+
         ::-webkit-scrollbar-thumb,
         ::-webkit-scrollbar-thumb:horizontal {
             height: 25%;
@@ -141,7 +141,7 @@ export const TypeList = styled.ul`
             border: 2px solid #FFF;
         }
     `}
-`;
+`
 
 export const TypeItem = styled.button`
     display: flex;
@@ -164,18 +164,18 @@ export const TypeItem = styled.button`
     ${media.lessThan("tablet")`
         margin: 1rem 0;
     `}
-`;
+`
 
 export const Type = styled.span<TypeProps>`
-    color: ${props => props.typeColor};
+    color: ${(props) => props.typeColor};
     text-transform: capitalize;
     font-size: 1rem;
-`;
+`
 
 export const PokemonList = styled.div`
     flex: 1;
     text-align: center;
-`;
+`
 
 export const PokemonCards = styled.div`
     display: grid;
@@ -189,16 +189,16 @@ export const PokemonCards = styled.div`
     ${media.lessThan("mobile")`
         grid-template-columns: repeat(1, 1fr);
     `}
-`;
+`
 
 export const SearchError = styled.div`
     text-align: center;
-`;
+`
 
 export const TextNotFound = styled.p`
     font-size: 1.1rem;
-`;
+`
 
 export const ButtonLoad = styled.button`
     margin-top: 1.5rem;
-`;
+`

@@ -1,4 +1,4 @@
-# Pokédex 
+# Pokédex
 
 > Pokédex project that consumes the PokéAPI to display information of all existing Pokémon.
 

@@ -3,7 +3,7 @@ export interface Sprites {
     front_shiny: string
     other: {
         "official-artwork": {
-            front_default: string,
+            front_default: string
             front_shiny: string
         }
     }
@@ -45,9 +45,10 @@ export interface Pokemon {
 
 export const formatPokemonName = (pokemonName: string) => {
     // Removes hyphen from pokémon name and puts a blank in its place
-    const name = pokemonName.replace(/\-/g, " ")
-    // Capitalize the first letter of each word that makes up the pokémon's name
-    .replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const name = pokemonName
+        .replace(/-/g, " ")
+        // Capitalize the first letter of each word that makes up the pokémon's name
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
 
-    return name;
+    return name
 }

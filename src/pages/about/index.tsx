@@ -1,7 +1,7 @@
-import AboutTemplate from "templates/About";
+import AboutTemplate from "templates/About"
 
 const About = () => {
     return <AboutTemplate />
 }
 
-export default About;
+export default About

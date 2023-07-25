@@ -1,7 +1,7 @@
-import { NextSeo } from 'next-seo';
+import { NextSeo } from "next-seo"
 
-import * as S from "./styles";
-import Link from 'next/link';
+import * as S from "./styles"
+import Link from "next/link"
 
 const PageNotFoundTemplate = () => {
     return (
@@ -10,8 +10,18 @@ const PageNotFoundTemplate = () => {
 
             <S.Wrapper>
                 <S.TextNotFound>Page or Pokémon not found!</S.TextNotFound>
-                <S.TextNotHere>Unfortunately the page you are looking for is not here.</S.TextNotHere>
-                <S.PsyduckImage src="/images/psyduck.png" width={350} height={200} alt="Psyduck confused" priority />
+
+                <S.TextNotHere>
+                    Unfortunately the page you are looking for is not here.
+                </S.TextNotHere>
+
+                <S.PsyduckImage
+                    src="/images/psyduck.png"
+                    width={350}
+                    height={200}
+                    alt="Psyduck confused"
+                    priority
+                />
 
                 <Link href="/">
                     <div className="btn-default">Go to Home</div>
@@ -21,4 +31,4 @@ const PageNotFoundTemplate = () => {
     )
 }
 
-export default PageNotFoundTemplate;
+export default PageNotFoundTemplate

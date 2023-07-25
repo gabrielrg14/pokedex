@@ -1,6 +1,6 @@
-import { createContext } from "react";
+import { createContext } from "react"
 
-export type Sprite = "front_default" | "front_shiny";
+export type Sprite = "front_default" | "front_shiny"
 
 type SpriteData = {
     sprite: Sprite

@@ -1,14 +1,14 @@
-import type { AppProps } from 'next/app';
+import type { AppProps } from "next/app"
 
-import { DefaultSeo } from 'next-seo';
-import SEO from "../../next-seo.config";
+import { DefaultSeo } from "next-seo"
+import SEO from "../../next-seo.config"
 
-import GoogleAnalytics from "components/Analytics";
-import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import GoogleAnalytics from "components/Analytics"
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import GlobalStyle from "styles/global";
-import Layout from "components/Layout/Layout";
-import NextNProgress from 'nextjs-progressbar';
+import GlobalStyle from "styles/global"
+import Layout from "components/Layout/Layout"
+import NextNProgress from "nextjs-progressbar"
 
 const App = ({ Component, pageProps }: AppProps) => {
     return (
@@ -29,4 +29,4 @@ const App = ({ Component, pageProps }: AppProps) => {
     )
 }
 
-export default App;
+export default App

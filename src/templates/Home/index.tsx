@@ -1,15 +1,15 @@
-import { MutableRefObject, SetStateAction } from "react";
+import { MutableRefObject, SetStateAction } from "react"
 
-import { NextSeo } from 'next-seo';
+import { NextSeo } from "next-seo"
 
-import * as S from "templates/Home/styles";
-import Image from 'next/image';
-import Card from "components/Card";
+import * as S from "templates/Home/styles"
+import Image from "next/image"
+import Card from "components/Card"
 
-import { Pokemon } from "common/utils/pokemon";
-import { getColorsByPokemonType } from "common/utils/colorTypes";
+import { Pokemon } from "common/utils/pokemon"
+import { getColorsByPokemonType } from "common/utils/colorTypes"
 
-export const LIMIT = 12;
+export const LIMIT = 12
 
 export interface Type {
     name: string
@@ -18,10 +18,10 @@ export interface Type {
 
 type HomeTemplateProps = {
     state: {
-        prevSearchRef: MutableRefObject<string>,
-        search: string,
-        setSearch: (value: SetStateAction<string>) => void,
-        typeSelected: string,
+        prevSearchRef: MutableRefObject<string>
+        search: string
+        setSearch: (value: SetStateAction<string>) => void
+        typeSelected: string
         setTypeSelected: (value: SetStateAction<string>) => void
     }
     pokemons: Pokemon[]
@@ -30,35 +30,49 @@ type HomeTemplateProps = {
     loadPokemons: (query: string | null, type?: string | null) => Promise<void>
 }
 
-const HomeTemplate = ({ state, pokemons, types, searchPokemon, loadPokemons }: HomeTemplateProps) => {
+const HomeTemplate = ({
+    state,
+    pokemons,
+    types,
+    searchPokemon,
+    loadPokemons
+}: HomeTemplateProps) => {
     return (
         <>
             <NextSeo
                 title="Pokédex"
                 description="Pokédex project that consumes the PokéAPI to display information of all existing Pokémon."
-                additionalMetaTags={[{
-                    name: "keywords",
-                    content: "Pokédex, Pokémon, PokéAPI, Project, Frontend, React, Next"
-                }]}
-                canonical={process.env.NEXT_PUBLIC_SITE_URL}
+                additionalMetaTags={[
+                    {
+                        name: "keywords",
+                        content:
+                            "Pokédex, Pokémon, PokéAPI, Project, Frontend, React, Next"
+                    }
+                ]}
+                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/`}
             />
 
             <S.TitleDiv>
                 <S.Title>Choose your Pokémon</S.Title>
             </S.TitleDiv>
-            
+
             <S.Container>
                 <S.TopArea>
-                    <S.SearchInput 
+                    <S.SearchInput
                         type="text"
                         spellCheck={false}
                         placeholder="Search by name or number"
-                        value={state.search} 
-                        onChange={e => state.setSearch(e.target.value)}
-                        onKeyDown={e => e.key === "Enter" ? searchPokemon(state.search) : null} />
+                        value={state.search}
+                        onChange={(e) => state.setSearch(e.target.value)}
+                        onKeyDown={(e) =>
+                            e.key === "Enter"
+                                ? searchPokemon(state.search)
+                                : null
+                        }
+                    />
 
-                    <S.SearchButton 
-                        type="button" 
+                    <S.SearchButton
+                        type="button"
                         onClick={() => searchPokemon(state.search)}
                         disabled={state.search === ""}
                     >
@@ -67,30 +81,48 @@ const HomeTemplate = ({ state, pokemons, types, searchPokemon, loadPokemons }: H
                 </S.TopArea>
 
                 <S.PokemonCount>
-                    <Image src={`/images/types/${state.typeSelected}.svg`} 
-                        width={32} height={32} 
-                        alt={`Type ${state.typeSelected}`} 
+                    <Image
+                        src={`/images/types/${state.typeSelected}.svg`}
+                        width={32}
+                        height={32}
+                        alt={`Type ${state.typeSelected}`}
                     />
                     <S.Counter>{pokemons.length}</S.Counter>
                 </S.PokemonCount>
 
-                {pokemons.length > 0 &&
+                {pokemons.length > 0 && (
                     <S.BottomArea>
                         <S.TypeList>
                             {types.map((type, index) => (
                                 <li key={index}>
-                                    <S.TypeItem className={state.typeSelected === type.name ? "selected" : ""}
+                                    <S.TypeItem
+                                        className={
+                                            state.typeSelected === type.name
+                                                ? "selected"
+                                                : ""
+                                        }
                                         onClick={() => {
-                                            window.scrollTo({ top: 125, behavior: "smooth" })
+                                            window.scrollTo({
+                                                top: 125,
+                                                behavior: "smooth"
+                                            })
                                             state.setTypeSelected(type.name)
                                             loadPokemons(null, type.name)
                                         }}
                                     >
-                                        <Image src={`/images/types/${type.name}.svg`} 
-                                            width={24} height={24} 
-                                            alt={`Type ${type.name}`} 
+                                        <Image
+                                            src={`/images/types/${type.name}.svg`}
+                                            width={24}
+                                            height={24}
+                                            alt={`Type ${type.name}`}
                                         />
-                                        <S.Type typeColor={getColorsByPokemonType(type.name).backgroundColor}>
+                                        <S.Type
+                                            typeColor={
+                                                getColorsByPokemonType(
+                                                    type.name
+                                                ).backgroundColor
+                                            }
+                                        >
                                             {type.name}
                                         </S.Type>
                                     </S.TypeItem>
@@ -105,34 +137,46 @@ const HomeTemplate = ({ state, pokemons, types, searchPokemon, loadPokemons }: H
                                 ))}
                             </S.PokemonCards>
 
-                            {(state.typeSelected === "all" && pokemons.length >= LIMIT) && (
-                                <S.ButtonLoad className="btn-default"
-                                    onClick={() => loadPokemons(null)}
-                                >
-                                    Load more Pokémon
-                                </S.ButtonLoad>
-                            )}
+                            {state.typeSelected === "all" &&
+                                pokemons.length >= LIMIT && (
+                                    <S.ButtonLoad
+                                        className="btn-default"
+                                        onClick={() => loadPokemons(null)}
+                                    >
+                                        Load more Pokémon
+                                    </S.ButtonLoad>
+                                )}
                         </S.PokemonList>
                     </S.BottomArea>
-                }
+                )}
 
-                {pokemons.length === 0 &&
+                {pokemons.length === 0 && (
                     <S.SearchError>
                         <S.TextNotFound>
-                            Pokémon <strong>{'"'}{state.prevSearchRef.current}{'"'}</strong> not found! <br />
-                            <small>Try again by searching for your full name or your Pokédex number.</small>
+                            Pokémon{" "}
+                            <strong>
+                                {'"'}
+                                {state.prevSearchRef.current}
+                                {'"'}
+                            </strong>{" "}
+                            not found! <br />
+                            <small>
+                                Try again by searching for your full name or
+                                your Pokédex number.
+                            </small>
                         </S.TextNotFound>
 
-                        <S.ButtonLoad className="btn-default"
+                        <S.ButtonLoad
+                            className="btn-default"
                             onClick={() => searchPokemon("")}
                         >
                             Back to list
                         </S.ButtonLoad>
                     </S.SearchError>
-                }
+                )}
             </S.Container>
         </>
     )
 }
 
-export default HomeTemplate;
+export default HomeTemplate

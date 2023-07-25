@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Image from 'next/image';
-import media from "common/utils/mediaQueries";
+import styled from "styled-components"
+import Image from "next/image"
+import media from "common/utils/mediaQueries"
 
 export const Container = styled.div`
     display: flex;
@@ -8,12 +8,12 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     min-height: inherit;
-`;
+`
 
 export const PokemonCard = styled.div`
     margin: 1rem;
     padding: 1.5rem 5rem;
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
     border-radius: 12px;
     border: 2px solid #212121;
@@ -25,31 +25,31 @@ export const PokemonCard = styled.div`
     ${media.lessThan("smallMobile")`
         padding: 1rem 1rem;
     `}
-`;
+`
 
 export const PokemonTitle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-`;
+`
 
 export const PokemonName = styled.h1`
     font-size: 2rem;
     text-transform: capitalize;
     text-align: center;
-`;
+`
 
-export const SpanNumber = styled.span``;
+export const SpanNumber = styled.span``
 
 export const DivImage = styled.div`
     text-align: center;
-`;
+`
 
 export const PokemonImage = styled(Image)`
     width: auto;
     height: auto;
-`;
+`
 
 export const PokemonData = styled.div`
     display: flex;
@@ -57,7 +57,7 @@ export const PokemonData = styled.div`
     align-items: baseline;
     flex-wrap: wrap;
     text-align: center;
-`;
+`
 
 export const DivData = styled.div`
     display: flex;
@@ -67,19 +67,19 @@ export const DivData = styled.div`
     margin: 1rem 0 0;
     padding: 0 1rem;
     text-transform: capitalize;
-`;
+`
 
 export const DataTitle = styled.h2`
     font-size: 1rem;
     margin-bottom: 0.3rem;
     text-align: center;
-`;
-    
+`
+
 export const PokemonStats = styled.div`
     padding: 0 1rem;
     margin: 1rem 0 0;
     text-transform: capitalize;
-`;
+`
 
 export const Stat = styled.div`
     display: flex;
@@ -95,7 +95,7 @@ export const Stat = styled.div`
         gap: 0.2rem;
         margin: 0 0 1rem;
     `}
-`;
+`
 
 export const StatInfo = styled.span`
     display: flex;
@@ -103,4 +103,4 @@ export const StatInfo = styled.span`
     align-items: center;
     gap: 0.5rem;
     width: 100%;
-`;
+`

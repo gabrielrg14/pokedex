@@ -1,7 +1,7 @@
-import * as S from "./styles";
-import BadgeType from "components/BadgeType";
+import * as S from "./styles"
+import BadgeType from "components/BadgeType"
 
-import { Type } from "common/utils/pokemon";
+import { Type } from "common/utils/pokemon"
 
 type RowTypesProps = {
     types: Type[] | undefined
@@ -19,4 +19,4 @@ const RowTypes = ({ types }: RowTypesProps) => {
     )
 }
 
-export default RowTypes;
+export default RowTypes

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import * as S from "./styles";
+import * as S from "./styles"
 
-import { getColorsByPokemonType } from "common/utils/colorTypes";
+import { getColorsByPokemonType } from "common/utils/colorTypes"
 
 type StatBarProps = {
     type: string
@@ -16,26 +16,29 @@ type baseStats = {
 
 // data taken from the website: https://pokemondb.net/pokedex/all
 const MAX_BASE_STAT: baseStats = {
-    "hp": 255,
-    "attack": 190,
-    "defense": 250,
+    hp: 255,
+    attack: 190,
+    defense: 250,
     "special-attack": 194,
     "special-defense": 250,
-    "speed": 200
+    speed: 200
 }
 
 const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
-    const [completed, setCompleted] = useState(0);
+    const [completed, setCompleted] = useState(0)
 
     useEffect(() => {
-        setCompleted((baseStat * 100) / MAX_BASE_STAT[stat]);
-    }, [baseStat, stat]);
+        setCompleted((baseStat * 100) / MAX_BASE_STAT[stat])
+    }, [baseStat, stat])
 
     return (
         <S.ParentBar>
-            <S.ChildBar bgColor={getColorsByPokemonType(type).backgroundColor} completed={completed} />
+            <S.ChildBar
+                bgColor={getColorsByPokemonType(type).backgroundColor}
+                completed={completed}
+            />
         </S.ParentBar>
     )
 }
 
-export default StatBar;
+export default StatBar

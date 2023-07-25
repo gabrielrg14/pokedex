@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://pokedex.gabrielrapucci.com.br
+Host: https://pokedex.gabrielrapucci.com.br/
 
 # Sitemaps
 Sitemap: https://pokedex.gabrielrapucci.com.br/sitemap.xml
