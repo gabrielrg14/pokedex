@@ -13,7 +13,7 @@ const Header = () => {
         <header>
             <S.Navbar>
                 <S.Logo>
-                    <S.NavLink href="/">
+                    <S.NavLink href="/" aria-label="Go to Home">
                         <Image
                             src="/images/pokedex.png"
                             width={160}
@@ -42,7 +42,9 @@ const Header = () => {
                         </S.ShinyIcon>
                     </li>
                     <li>
-                        <S.NavLink href="/about">About</S.NavLink>
+                        <S.NavLink href="/about" aria-label="Go to About page">
+                            About
+                        </S.NavLink>
                     </li>
                 </S.NavList>
             </S.Navbar>

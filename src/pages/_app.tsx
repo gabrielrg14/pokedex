@@ -7,7 +7,7 @@ import GoogleAnalytics from "components/Analytics"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
 import GlobalStyle from "styles/global"
-import Layout from "components/Layout/Layout"
+import Layout from "components/Layout"
 import NextNProgress from "nextjs-progressbar"
 
 const App = ({ Component, pageProps }: AppProps) => {
