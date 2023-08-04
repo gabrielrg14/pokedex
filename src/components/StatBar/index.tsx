@@ -32,8 +32,9 @@ const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
     }, [baseStat, stat])
 
     return (
-        <S.ParentBar>
+        <S.ParentBar data-testid="parent-bar">
             <S.ChildBar
+                data-testid="child-bar"
                 bgColor={getColorsByPokemonType(type).backgroundColor}
                 completed={completed}
             />
