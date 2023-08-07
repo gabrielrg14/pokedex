@@ -9,6 +9,8 @@ const PokemonNumber = ({ number }: PokemonNumberProps) => {
         number: number | null | undefined,
         quantity: number
     ): string {
+        if (!number) return ""
+
         let numberWithZeros = String(number)
         let counter = numberWithZeros.length
 
@@ -17,12 +19,12 @@ const PokemonNumber = ({ number }: PokemonNumberProps) => {
             counter++
         }
 
-        return numberWithZeros
+        return `#${numberWithZeros}`
     }
 
     return (
         <S.SpanNumber>
-            #{formatPokemonNumber(number, String(number).length >= 5 ? 5 : 4)}
+            {formatPokemonNumber(number, String(number).length >= 5 ? 5 : 4)}
         </S.SpanNumber>
     )
 }

@@ -17,7 +17,7 @@ const Card = ({ pokemon }: CardProps) => {
     const [pokemonData, setPokemonData] = useState<Pokemon>()
 
     const getPokemonData = useCallback(async () => {
-        const res = await fetch(`${API_URL}/pokemon/${pokemon.name}`)
+        const res = await fetch(`${API_URL}/pokemon/${pokemon?.name}`)
         const data = await res.json()
         setPokemonData(data)
     }, [pokemon])

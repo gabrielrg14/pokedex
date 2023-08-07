@@ -32,7 +32,7 @@ export interface Stat {
 }
 
 export interface Pokemon {
-    id: number | null
+    id: number
     name: string
     url: string
     sprites: Sprites
