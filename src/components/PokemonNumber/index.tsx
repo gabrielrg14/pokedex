@@ -1,32 +1,25 @@
 import * as S from "./styles"
 
 type PokemonNumberProps = {
-    number: number | null | undefined
+    number?: number
 }
 
 const PokemonNumber = ({ number }: PokemonNumberProps) => {
-    function formatPokemonNumber(
-        number: number | null | undefined,
-        quantity: number
-    ): string {
-        if (!number) return ""
+    let pokemonNumber = ""
 
+    if (number) {
         let numberWithZeros = String(number)
-        let counter = numberWithZeros.length
+        let characterCounter = numberWithZeros.length
+        const numberOfZeros = characterCounter >= 5 ? 5 : 4
 
-        while (counter < quantity) {
+        while (characterCounter < numberOfZeros) {
             numberWithZeros = "0" + numberWithZeros
-            counter++
+            characterCounter++
         }
-
-        return `#${numberWithZeros}`
+        pokemonNumber = `#${numberWithZeros}`
     }
 
-    return (
-        <S.SpanNumber>
-            {formatPokemonNumber(number, String(number).length >= 5 ? 5 : 4)}
-        </S.SpanNumber>
-    )
+    return <S.SpanNumber>{pokemonNumber}</S.SpanNumber>
 }
 
 export default PokemonNumber

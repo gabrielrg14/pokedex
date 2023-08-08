@@ -29,10 +29,7 @@ const Card = ({ pokemon }: CardProps) => {
     const { sprite } = useContext(SpriteContext)
 
     return (
-        <S.CardLink
-            href={`/pokemon/${pokemonData?.name}`}
-            aria-label={pokemon.name}
-        >
+        <S.CardLink href={`/pokemon/${pokemon.name}`} aria-label={pokemon.name}>
             {pokemonData?.sprites?.other["official-artwork"]?.[sprite] && (
                 <Image
                     src={pokemonData?.sprites.other["official-artwork"][sprite]}

@@ -7,7 +7,7 @@ export const FooterTag = styled.footer`
     background-color: #212121;
     color: #fff;
     font-size: 0.9rem;
-    border-top: 4px solid #111;
+    border-top: 5px solid #111;
 `
 
 export const SpanText = styled.span`
