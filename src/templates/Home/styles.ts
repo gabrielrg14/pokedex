@@ -37,8 +37,8 @@ export const Title = styled.h1`
 `
 
 export const Container = styled.div`
-    padding: 0px 20%;
-    margin: 1.5rem auto;
+    padding: 1.5rem 20%;
+    margin: 0 auto;
     animation: fade-in 0.5s;
 
     ${media.lessThan("desktop")`

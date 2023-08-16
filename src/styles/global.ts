@@ -7,11 +7,15 @@ const GlobalStyle = createGlobalStyle`
         border: 0;
     }
 
+    html, body {
+        height: 100%;
+    }
+
     body {
         font-family: 'Roboto', Helvetica, sans-serif;
-        height: 100%;
         font-size: 16px;
         color: #212121;
+        background-color: #212121;
     }
 
     ol, ul, li {
@@ -40,7 +44,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1rem;
         padding: 0.75rem 1.25rem;
         border-radius: 5px;
-        color: #FFF;
+        color: #fff;
         background-color: #3E6CBD;
         border: 2px solid #FBC418;
         transition: all .3s ease;

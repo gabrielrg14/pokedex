@@ -4,7 +4,7 @@ import BadgeType from "components/BadgeType"
 import { Type } from "common/utils/pokemon"
 
 type RowTypesProps = {
-    types: Type[] | undefined
+    types?: Type[]
 }
 
 const RowTypes = ({ types }: RowTypesProps) => {
