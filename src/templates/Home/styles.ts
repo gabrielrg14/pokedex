@@ -42,7 +42,7 @@ export const Container = styled.div`
     animation: fade-in 0.5s;
 
     ${media.lessThan("desktop")`
-        padding: 0px 10%;
+        padding: 1.5rem 10%;
     `}
 `
 
