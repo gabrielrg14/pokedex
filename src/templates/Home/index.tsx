@@ -6,8 +6,8 @@ import * as S from "templates/Home/styles"
 import Image from "next/image"
 import Card from "components/Card"
 
-import { Pokemon } from "common/utils/pokemon"
-import { getColorsByPokemonType } from "common/utils/colorTypes"
+import { Pokemon } from "utils/pokemon"
+import { getColorsByPokemonType } from "utils/colorTypes"
 
 export const LIMIT = 12
 

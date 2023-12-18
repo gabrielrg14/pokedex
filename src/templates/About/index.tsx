@@ -23,9 +23,10 @@ const AboutTemplate = () => {
 
                 <S.Description>
                     This project was developed with the aim of putting into
-                    practice the knowledge acquired in Next.js, Styled
-                    Components and TypeScript, through a fun theme that is one
-                    of the creator&apos;s passions: Pokémon!
+                    practice the knowledge acquired in Next.js, TypeScript,
+                    Styled Components, Jest and React Testing Library, through a
+                    fun theme that is one of the creator&apos;s passions:
+                    Pokémon!
                 </S.Description>
 
                 <S.Description>

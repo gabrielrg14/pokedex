@@ -5,8 +5,8 @@ import PokemonNumber from "components/PokemonNumber"
 import RowTypes from "components/RowTypes"
 import StatBar from "components/StatBar"
 
-import { Pokemon, formatPokemonName } from "common/utils/pokemon"
-import { Sprite } from "common/contexts/sprite"
+import { Pokemon, formatPokemonName } from "utils/pokemon"
+import { Sprite } from "store"
 
 type PokemonTemplateProps = {
     pokemon: Pokemon

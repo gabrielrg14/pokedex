@@ -1,13 +1,11 @@
-import { useContext } from "react"
-
 import * as S from "./styles"
 import Image from "next/image"
 import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles"
 
-import { SpriteContext } from "common/contexts/sprite"
+import { useStore } from "store"
 
 const Header = () => {
-    const { sprite, toggleSprite } = useContext(SpriteContext)
+    const { sprite, toggleSprite } = useStore()
 
     return (
         <header>
@@ -25,15 +23,7 @@ const Header = () => {
 
                 <S.NavList>
                     <li>
-                        <S.ShinyIcon
-                            onClick={() =>
-                                toggleSprite(
-                                    sprite === "front_default"
-                                        ? "front_shiny"
-                                        : "front_default"
-                                )
-                            }
-                        >
+                        <S.ShinyIcon onClick={() => toggleSprite()}>
                             <Sparkles
                                 className={
                                     sprite === "front_shiny" ? "shiny" : ""

@@ -1,14 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { useContext } from "react"
 import { useRouter } from "next/router"
 
 import PokemonTemplate from "templates/Pokemon"
 import Loading from "components/Loading"
 
-import { API_URL } from "common/utils/api"
-import { Pokemon } from "common/utils/pokemon"
-import { SpriteContext } from "common/contexts/sprite"
-import { getColorsByPokemonType } from "common/utils/colorTypes"
+import { API_URL } from "utils/api"
+import { Pokemon } from "utils/pokemon"
+import { useStore } from "store"
+import { getColorsByPokemonType } from "utils/colorTypes"
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const res = await fetch(`${API_URL}/pokemon?limit=12`) // Pré-render only 12 Pokémons
@@ -45,7 +44,7 @@ type PokemonPageProps = {
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {
-    const { sprite } = useContext(SpriteContext)
+    const { sprite } = useStore()
 
     const router = useRouter()
     if (router && router.isFallback) return <Loading />

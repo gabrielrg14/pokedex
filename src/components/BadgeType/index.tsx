@@ -1,7 +1,7 @@
 import * as S from "./styles"
 import Image from "next/image"
 
-import { getColorsByPokemonType } from "common/utils/colorTypes"
+import { getColorsByPokemonType } from "utils/colorTypes"
 
 type BadgeTypeProps = {
     type: string

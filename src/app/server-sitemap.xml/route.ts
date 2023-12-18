@@ -1,6 +1,6 @@
 import { getServerSideSitemap, ISitemapField } from "next-sitemap"
 
-import { API_URL } from "common/utils/api"
+import { API_URL } from "utils/api"
 
 type PokemonResult = {
     name: string

@@ -3,8 +3,8 @@ import { useState, useRef, useCallback } from "react"
 
 import HomeTemplate, { LIMIT, Type } from "templates/Home"
 
-import { API_URL } from "common/utils/api"
-import { Pokemon } from "common/utils/pokemon"
+import { API_URL } from "utils/api"
+import { Pokemon } from "utils/pokemon"
 
 type HomeProps = {
     pokemons: Pokemon[]

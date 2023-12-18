@@ -1,13 +1,13 @@
-import { useState, useCallback, useEffect, useContext } from "react"
+import { useState, useCallback, useEffect } from "react"
 
 import * as S from "./styles"
 import Image from "next/image"
 import PokemonNumber from "components/PokemonNumber"
 import RowTypes from "components/RowTypes"
 
-import { API_URL } from "common/utils/api"
-import { Pokemon, formatPokemonName } from "common/utils/pokemon"
-import { SpriteContext } from "common/contexts/sprite"
+import { API_URL } from "utils/api"
+import { Pokemon, formatPokemonName } from "utils/pokemon"
+import { useStore } from "store"
 
 type CardProps = {
     pokemon: Pokemon
@@ -26,7 +26,7 @@ const Card = ({ pokemon }: CardProps) => {
         getPokemonData()
     }, [getPokemonData])
 
-    const { sprite } = useContext(SpriteContext)
+    const { sprite } = useStore()
 
     return (
         <S.CardLink href={`/pokemon/${pokemon.name}`} aria-label={pokemon.name}>

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Link from "next/link"
 import { StyledIconBase } from "@styled-icons/styled-icon"
-import media from "common/utils/mediaQueries"
+import media from "utils/mediaQueries"
 
 export const Navbar = styled.nav`
     display: flex;

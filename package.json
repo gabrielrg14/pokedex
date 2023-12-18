@@ -31,7 +31,8 @@
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6",
     "styled-icons": "^10.47.0",
-    "styled-media-query": "^2.1.2"
+    "styled-media-query": "^2.1.2",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.22.5",

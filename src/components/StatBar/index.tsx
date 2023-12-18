@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import * as S from "./styles"
 
-import { getColorsByPokemonType } from "common/utils/colorTypes"
+import { getColorsByPokemonType } from "utils/colorTypes"
 
 type StatBarProps = {
     type: string
