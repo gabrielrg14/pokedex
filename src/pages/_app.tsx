@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import type { AppProps } from "next/app"
 
 import { Sprite, STORAGE_KEY, useStore } from "store"
@@ -11,7 +12,6 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 import GlobalStyle from "styles/global"
 import Layout from "components/Layout"
 import NextNProgress from "nextjs-progressbar"
-import { useEffect } from "react"
 
 const App = ({ Component, pageProps }: AppProps) => {
     const { setSprite } = useStore()

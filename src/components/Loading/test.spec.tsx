@@ -9,7 +9,7 @@ describe("<Loading />", () => {
         const image = screen.getByRole("img", { name: /loading/i })
 
         expect(image).toBeInTheDocument()
-        expect(image).toHaveAccessibleName()
+        expect(image).toHaveAccessibleName(/pikachu loading/i)
         expect(
             screen.getByRole("heading", { name: /loading/i })
         ).toBeInTheDocument()

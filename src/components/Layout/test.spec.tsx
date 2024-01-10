@@ -10,7 +10,7 @@ describe("<Layout />", () => {
             </Layout>
         )
 
-        expect(screen.getByTestId("layout")).toBeInTheDocument()
+        expect(screen.getByTestId(/layout/i)).toBeInTheDocument()
         expect(screen.getByText(/test/i)).toBeInTheDocument()
     })
 })

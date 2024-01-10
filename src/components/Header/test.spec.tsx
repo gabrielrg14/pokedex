@@ -11,7 +11,7 @@ describe("<Header />", () => {
         expect(screen.getByRole("navigation")).toBeInTheDocument()
         expect(screen.getByRole("list")).toBeInTheDocument()
         expect(image).toBeInTheDocument()
-        expect(image).toHaveAccessibleName()
+        expect(image).toHaveAccessibleName(/pokédex logo/i)
     })
 
     it("should render Header links with the correct attributes", () => {
@@ -22,9 +22,9 @@ describe("<Header />", () => {
 
         expect(homeLink).toBeInTheDocument()
         expect(homeLink).toHaveAttribute("href", "/")
-        expect(homeLink).toHaveAccessibleName()
+        expect(homeLink).toHaveAccessibleName(/go to home/i)
         expect(aboutLink).toBeInTheDocument()
         expect(aboutLink).toHaveAttribute("href", "/about")
-        expect(aboutLink).toHaveAccessibleName()
+        expect(aboutLink).toHaveAccessibleName(/go to about page/i)
     })
 })

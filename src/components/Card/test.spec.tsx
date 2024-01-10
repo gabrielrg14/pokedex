@@ -24,6 +24,18 @@ const venusaur = {
 }
 
 describe("<Card />", () => {
+    it("should render the pokemon number, name and image", async () => {
+        render(<Card pokemon={venusaur} />)
+
+        expect(
+            await screen.findByRole("img", { name: /venusaur/i })
+        ).toBeInTheDocument()
+        expect(screen.getByText(/#0003/i)).toBeInTheDocument()
+        expect(
+            screen.getByRole("heading", { name: /venusaur/i })
+        ).toBeInTheDocument()
+    })
+
     it("should render venusaur Card with the link having the correct attributes and the header with your name", () => {
         render(<Card pokemon={venusaur} />)
 
@@ -31,9 +43,6 @@ describe("<Card />", () => {
 
         expect(link).toBeInTheDocument()
         expect(link).toHaveAttribute("href", "/pokemon/venusaur")
-        expect(link).toHaveAccessibleName()
-        expect(
-            screen.getByRole("heading", { name: /venusaur/i })
-        ).toBeInTheDocument()
+        expect(link).toHaveAccessibleName(/venusaur/i)
     })
 })

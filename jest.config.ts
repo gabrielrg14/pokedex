@@ -1,4 +1,4 @@
-/** @type {import('jest').Config} */
+import type { Config } from "jest"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nextJest = require("next/jest")
@@ -7,7 +7,7 @@ const createJestConfig = nextJest({
     dir: "./"
 })
 
-const customJestConfig = {
+const customJestConfig: Config = {
     testEnvironment: "jsdom",
     testPathIgnorePatterns: ["/node_modules/", "/.next/"],
     collectCoverage: false,
