@@ -1,13 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next"
+
+import { Pokemon } from "interfaces"
 import { useRouter } from "next/router"
-
-import PokemonTemplate from "templates/Pokemon"
-import Loading from "components/Loading"
-
-import { API_URL } from "utils/api"
-import { Pokemon } from "utils/pokemon"
+import { Loading } from "components"
+import { PokemonTemplate } from "templates"
+import { API_URL, getColorsByPokemonType } from "utils"
 import { useStore } from "store"
-import { getColorsByPokemonType } from "utils/colorTypes"
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const res = await fetch(`${API_URL}/pokemon?limit=12`) // Pré-render only 12 Pokémons

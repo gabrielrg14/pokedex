@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Link from "next/link"
 
-const PageNotFoundTemplate = () => {
+export const PageNotFoundTemplate = () => {
     return (
         <>
             <NextSeo title="404 | Page not found" />
@@ -30,5 +30,3 @@ const PageNotFoundTemplate = () => {
         </>
     )
 }
-
-export default PageNotFoundTemplate

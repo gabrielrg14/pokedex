@@ -1,6 +1,6 @@
 import Script from "next/script"
 
-const Analytics = () => {
+export const Analytics = () => {
     return (
         <>
             <Script
@@ -18,5 +18,3 @@ const Analytics = () => {
         </>
     )
 }
-
-export default Analytics

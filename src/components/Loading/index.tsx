@@ -1,7 +1,7 @@
 import * as S from "./styles"
 import Image from "next/image"
 
-const Loading = () => {
+export const Loading = () => {
     return (
         <S.Wrapper>
             <Image
@@ -15,5 +15,3 @@ const Loading = () => {
         </S.Wrapper>
     )
 }
-
-export default Loading

@@ -1,13 +1,12 @@
 import * as S from "./styles"
 import Image from "next/image"
-
-import { getColorsByPokemonType } from "utils/colorTypes"
+import { getColorsByPokemonType } from "utils"
 
 type BadgeTypeProps = {
     type: string
 }
 
-const BadgeType = ({ type }: BadgeTypeProps) => {
+export const BadgeType = ({ type }: BadgeTypeProps) => {
     return (
         <S.Wrapper>
             <Image
@@ -20,5 +19,3 @@ const BadgeType = ({ type }: BadgeTypeProps) => {
         </S.Wrapper>
     )
 }
-
-export default BadgeType

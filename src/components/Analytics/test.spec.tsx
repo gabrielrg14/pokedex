@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 
-import Analytics from "."
+import { Analytics } from "."
 
 describe("<Analytics />", () => {
     it("should contain the Google Analytics script tags", () => {

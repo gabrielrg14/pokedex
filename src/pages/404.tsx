@@ -1,4 +1,4 @@
-import PageNotFoundTemplate from "templates/404"
+import { PageNotFoundTemplate } from "templates"
 
 const PageNotFound = () => {
     return <PageNotFoundTemplate />

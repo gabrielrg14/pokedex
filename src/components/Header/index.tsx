@@ -1,10 +1,9 @@
 import * as S from "./styles"
 import Image from "next/image"
 import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles"
-
 import { useStore } from "store"
 
-const Header = () => {
+export const Header = () => {
     const { sprite, toggleSprite } = useStore()
 
     return (
@@ -41,5 +40,3 @@ const Header = () => {
         </header>
     )
 }
-
-export default Header

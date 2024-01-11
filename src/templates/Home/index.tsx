@@ -2,12 +2,11 @@ import { MutableRefObject, SetStateAction } from "react"
 
 import { NextSeo } from "next-seo"
 
-import * as S from "templates/Home/styles"
+import * as S from "./styles"
+import { Pokemon } from "interfaces"
 import Image from "next/image"
-import Card from "components/Card"
-
-import { Pokemon } from "utils/pokemon"
-import { getColorsByPokemonType } from "utils/colorTypes"
+import { Card } from "components"
+import { getColorsByPokemonType } from "utils"
 
 export const LIMIT = 12
 
@@ -30,7 +29,7 @@ type HomeTemplateProps = {
     loadPokemons: (query: string | null, type?: string | null) => Promise<void>
 }
 
-const HomeTemplate = ({
+export const HomeTemplate = ({
     state,
     pokemons,
     types,
@@ -178,5 +177,3 @@ const HomeTemplate = ({
         </>
     )
 }
-
-export default HomeTemplate

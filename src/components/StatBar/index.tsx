@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 
 import * as S from "./styles"
-
-import { getColorsByPokemonType } from "utils/colorTypes"
+import { getColorsByPokemonType } from "utils"
 
 type StatBarProps = {
     type: string
@@ -24,7 +23,7 @@ const MAX_BASE_STAT: baseStats = {
     speed: 200
 }
 
-const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
+export const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
     const [completed, setCompleted] = useState(0)
 
     useEffect(() => {
@@ -41,5 +40,3 @@ const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
         </S.ParentBar>
     )
 }
-
-export default StatBar

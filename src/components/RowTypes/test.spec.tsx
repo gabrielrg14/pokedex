@@ -1,20 +1,12 @@
 import { render, screen } from "@testing-library/react"
+import { typeMocks } from "test/mocks"
 
-import RowTypes from "."
-
-const typesMock = [
-    [{ type: { name: "electric", url: "" } }],
-    [
-        { type: { name: "fighting", url: "" } },
-        { type: { name: "poison", url: "" } }
-    ],
-    [{ type: { name: "ice", url: "" } }, { type: { name: "ground", url: "" } }]
-]
+import { RowTypes } from "."
 
 describe("<RowTypes />", () => {
     describe("when 1 type were passed", () => {
         it("should render the electric badge when passing only the electric type", () => {
-            render(<RowTypes types={typesMock[0]} />)
+            render(<RowTypes types={[{ type: typeMocks.electric }]} />)
 
             const imageElectric = screen.getByRole("img", {
                 name: /type electric/i
@@ -25,7 +17,7 @@ describe("<RowTypes />", () => {
         })
 
         it("should render the electric text with the correct styles when passing only the electric type", () => {
-            render(<RowTypes types={typesMock[0]} />)
+            render(<RowTypes types={[{ type: typeMocks.electric }]} />)
 
             const textElectric = screen.getByText(/electric/i)
 
@@ -38,7 +30,14 @@ describe("<RowTypes />", () => {
     })
     describe("when 2 types were passed", () => {
         it("should render the fighting and poison badges when passing the fighting and poison types", () => {
-            render(<RowTypes types={typesMock[1]} />)
+            render(
+                <RowTypes
+                    types={[
+                        { type: typeMocks.fighting },
+                        { type: typeMocks.poison }
+                    ]}
+                />
+            )
 
             const imageFighting = screen.getByRole("img", {
                 name: /type fighting/i
@@ -54,7 +53,14 @@ describe("<RowTypes />", () => {
         })
 
         it("should render the fighting and poison texts with the correct styles when passing the fighting and poison types", () => {
-            render(<RowTypes types={typesMock[1]} />)
+            render(
+                <RowTypes
+                    types={[
+                        { type: typeMocks.fighting },
+                        { type: typeMocks.poison }
+                    ]}
+                />
+            )
 
             const textFighting = screen.getByText(/fighting/i)
             const textPoison = screen.getByText(/poison/i)
@@ -72,7 +78,14 @@ describe("<RowTypes />", () => {
         })
 
         it("should render the ice and ground badges when passing the ice and ground types", () => {
-            render(<RowTypes types={typesMock[2]} />)
+            render(
+                <RowTypes
+                    types={[
+                        { type: typeMocks.ice },
+                        { type: typeMocks.ground }
+                    ]}
+                />
+            )
 
             const imageIce = screen.getByRole("img", {
                 name: /type ice/i
@@ -88,7 +101,14 @@ describe("<RowTypes />", () => {
         })
 
         it("should render the ice and ground texts with the correct styles when passing the ice and ground types", () => {
-            render(<RowTypes types={typesMock[2]} />)
+            render(
+                <RowTypes
+                    types={[
+                        { type: typeMocks.ice },
+                        { type: typeMocks.ground }
+                    ]}
+                />
+            )
 
             const textIce = screen.getByText(/ice/i)
             const textGround = screen.getByText(/ground/i)

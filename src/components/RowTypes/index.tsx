@@ -1,13 +1,12 @@
 import * as S from "./styles"
-import BadgeType from "components/BadgeType"
-
-import { Type } from "utils/pokemon"
+import { Type } from "interfaces"
+import { BadgeType } from "components"
 
 type RowTypesProps = {
     types?: Type[]
 }
 
-const RowTypes = ({ types }: RowTypesProps) => {
+export const RowTypes = ({ types }: RowTypesProps) => {
     return (
         <S.Wrapper>
             {types?.map((item, index) => (
@@ -18,5 +17,3 @@ const RowTypes = ({ types }: RowTypesProps) => {
         </S.Wrapper>
     )
 }
-
-export default RowTypes

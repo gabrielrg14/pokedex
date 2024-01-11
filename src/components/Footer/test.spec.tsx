@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 
-import Footer from "."
+import { Footer } from "."
 
 describe("<Footer />", () => {
     it("should render the powered by text and the link to the PokéAPI", () => {

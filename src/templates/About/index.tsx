@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
 
-const AboutTemplate = () => {
+export const AboutTemplate = () => {
     return (
         <>
             <NextSeo
@@ -46,5 +46,3 @@ const AboutTemplate = () => {
         </>
     )
 }
-
-export default AboutTemplate

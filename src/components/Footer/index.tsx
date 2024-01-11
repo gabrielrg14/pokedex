@@ -1,6 +1,6 @@
 import * as S from "./styles"
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <S.FooterTag>
             <S.SpanText>
@@ -16,5 +16,3 @@ const Footer = () => {
         </S.FooterTag>
     )
 }
-
-export default Footer

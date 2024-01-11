@@ -1,19 +1,17 @@
 import { useState, useCallback, useEffect } from "react"
 
 import * as S from "./styles"
+import { Pokemon } from "interfaces"
 import Image from "next/image"
-import PokemonNumber from "components/PokemonNumber"
-import RowTypes from "components/RowTypes"
-
-import { API_URL } from "utils/api"
-import { Pokemon, formatPokemonName } from "utils/pokemon"
+import { PokemonNumber, RowTypes } from "components"
+import { API_URL, formatPokemonName } from "utils"
 import { useStore } from "store"
 
 type CardProps = {
     pokemon: Pokemon
 }
 
-const Card = ({ pokemon }: CardProps) => {
+export const Card = ({ pokemon }: CardProps) => {
     const [pokemonData, setPokemonData] = useState<Pokemon>()
 
     const getPokemonData = useCallback(async () => {
@@ -50,5 +48,3 @@ const Card = ({ pokemon }: CardProps) => {
         </S.CardLink>
     )
 }
-
-export default Card

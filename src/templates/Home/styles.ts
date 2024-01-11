@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import media from "utils/mediaQueries"
+import { mediaQueries } from "utils"
 
 type TypeProps = {
     typeColor: string
@@ -15,7 +15,7 @@ export const TitleDiv = styled.nav`
     background-position: center;
     background-repeat: repeat-x;
 
-    ${media.lessThan("smallMobile")`
+    ${mediaQueries.lessThan("smallMobile")`
         padding: 1rem;
     `}
 `
@@ -31,7 +31,7 @@ export const Title = styled.h1`
     text-shadow: 3px 3px 3px #3e6cbd;
     animation: fade-in 0.5s;
 
-    ${media.lessThan("smallMobile")`
+    ${mediaQueries.lessThan("smallMobile")`
         font-size: 2rem;
     `}
 `
@@ -41,7 +41,7 @@ export const Container = styled.div`
     margin: 0 auto;
     animation: fade-in 0.5s;
 
-    ${media.lessThan("desktop")`
+    ${mediaQueries.lessThan("desktop")`
         padding: 1.5rem 10%;
     `}
 `
@@ -106,7 +106,7 @@ export const BottomArea = styled.div`
     align-items: stretch;
     gap: 1.5rem;
 
-    ${media.lessThan("tablet")`
+    ${mediaQueries.lessThan("tablet")`
         flex-direction: column;
     `}
 `
@@ -121,7 +121,7 @@ export const TypeList = styled.ul`
     border-radius: 12px;
     padding: 0 5rem 0 1.5rem;
 
-    ${media.lessThan("tablet")`
+    ${mediaQueries.lessThan("tablet")`
         max-height: 150px;
         max-width: 100%;
         overflow-y: auto;
@@ -161,7 +161,7 @@ export const TypeItem = styled.button`
         filter: grayscale(0%);
     }
 
-    ${media.lessThan("tablet")`
+    ${mediaQueries.lessThan("tablet")`
         margin: 1rem 0;
     `}
 `
@@ -182,11 +182,11 @@ export const PokemonCards = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1.5rem;
 
-    ${media.lessThan("desktop")`
+    ${mediaQueries.lessThan("desktop")`
         grid-template-columns: repeat(2, 1fr);
     `}
 
-    ${media.lessThan("mobile")`
+    ${mediaQueries.lessThan("mobile")`
         grid-template-columns: repeat(1, 1fr);
     `}
 `

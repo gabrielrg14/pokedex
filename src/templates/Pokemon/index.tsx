@@ -1,11 +1,9 @@
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import PokemonNumber from "components/PokemonNumber"
-import RowTypes from "components/RowTypes"
-import StatBar from "components/StatBar"
-
-import { Pokemon, formatPokemonName } from "utils/pokemon"
+import { Pokemon } from "interfaces"
+import { PokemonNumber, RowTypes, StatBar } from "components"
+import { formatPokemonName } from "utils"
 import { Sprite } from "store"
 
 type PokemonTemplateProps = {
@@ -14,7 +12,7 @@ type PokemonTemplateProps = {
     sprite: Sprite
 }
 
-const PokemonTemplate = ({
+export const PokemonTemplate = ({
     pokemon,
     background,
     sprite
@@ -115,5 +113,3 @@ const PokemonTemplate = ({
         </>
     )
 }
-
-export default PokemonTemplate

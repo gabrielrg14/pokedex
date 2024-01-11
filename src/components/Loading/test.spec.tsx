@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 
-import Loading from "."
+import { Loading } from "."
 
 describe("<Loading />", () => {
     it("should render the Loading with image and heading", () => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 
-import Header from "."
+import { Header } from "."
 
 describe("<Header />", () => {
     it("should render Header with navigation, list and pokédex image", () => {

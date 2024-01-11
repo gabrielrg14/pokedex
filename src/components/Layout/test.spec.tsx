@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 
-import Layout from "."
+import { Layout } from "."
 
 describe("<Layout />", () => {
     it("should render the layout with the passed children", () => {

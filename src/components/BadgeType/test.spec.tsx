@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react"
+import { typeMocks } from "test/mocks"
 
-import BadgeType from "."
+import { BadgeType } from "."
 
 describe("<BadgeType />", () => {
     it("should render the grass badge and text with the correct colors", () => {
-        render(<BadgeType type="grass" />)
+        render(<BadgeType type={typeMocks.grass.name} />)
 
         const image = screen.getByRole("img", { name: /type grass/i })
         const text = screen.getByText(/grass/i)
@@ -19,7 +20,7 @@ describe("<BadgeType />", () => {
     })
 
     it("should render the fire badge and text with the correct colors", () => {
-        render(<BadgeType type="fire" />)
+        render(<BadgeType type={typeMocks.fire.name} />)
 
         const image = screen.getByRole("img", { name: /type fire/i })
         const text = screen.getByText(/fire/i)
@@ -34,7 +35,7 @@ describe("<BadgeType />", () => {
     })
 
     it("should render the water badge and text with the correct colors", () => {
-        render(<BadgeType type="water" />)
+        render(<BadgeType type={typeMocks.water.name} />)
 
         const image = screen.getByRole("img", { name: /type water/i })
         const text = screen.getByText(/water/i)

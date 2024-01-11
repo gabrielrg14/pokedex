@@ -1,10 +1,9 @@
 import { GetStaticProps } from "next"
 import { useState, useRef, useCallback } from "react"
 
-import HomeTemplate, { LIMIT, Type } from "templates/Home"
-
-import { API_URL } from "utils/api"
-import { Pokemon } from "utils/pokemon"
+import { Pokemon } from "interfaces"
+import { HomeTemplate, LIMIT, Type } from "templates"
+import { API_URL } from "utils"
 
 type HomeProps = {
     pokemons: Pokemon[]

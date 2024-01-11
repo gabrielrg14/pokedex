@@ -128,8 +128,8 @@ export function getColorsByPokemonType(type: string) {
 
         default:
             return {
-                background: "linear-gradient(180deg, #9099A1 50%, #9099A1 50%)",
-                backgroundColor: "#9099A1",
+                background: "linear-gradient(180deg, #000 50%, #000 50%)",
+                backgroundColor: "#000",
                 color: "#FFF"
             }
     }

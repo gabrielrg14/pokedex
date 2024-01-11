@@ -1,31 +1,11 @@
 import { render, screen } from "@testing-library/react"
+import { pokemonMocks } from "test/mocks"
 
-import Card from "."
-
-const venusaur = {
-    id: 3,
-    name: "venusaur",
-    url: "",
-    sprites: {
-        front_default: "",
-        front_shiny: "",
-        other: {
-            "official-artwork": {
-                front_default: "",
-                front_shiny: ""
-            }
-        }
-    },
-    height: 20,
-    weight: 1000,
-    types: [],
-    abilities: [],
-    stats: []
-}
+import { Card } from "."
 
 describe("<Card />", () => {
     it("should render the pokemon number, name and image", async () => {
-        render(<Card pokemon={venusaur} />)
+        render(<Card pokemon={pokemonMocks.venusaur} />)
 
         expect(
             await screen.findByRole("img", { name: /venusaur/i })
@@ -37,7 +17,7 @@ describe("<Card />", () => {
     })
 
     it("should render venusaur Card with the link having the correct attributes and the header with your name", () => {
-        render(<Card pokemon={venusaur} />)
+        render(<Card pokemon={pokemonMocks.venusaur} />)
 
         const link = screen.getByRole("link", { name: /venusaur/i })
 
