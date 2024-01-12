@@ -1,23 +1,24 @@
 import { useState, useCallback, useEffect } from "react"
 
 import * as S from "./styles"
-import { Pokemon } from "interfaces"
 import Image from "next/image"
+import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
-import { API_URL, formatPokemonName } from "utils"
+import { PokedexService } from "services"
+import { formatPokemonName } from "utils"
 import { useStore } from "store"
 
 type CardProps = {
-    pokemon: Pokemon
+    pokemon: IPokemon
 }
 
 export const Card = ({ pokemon }: CardProps) => {
-    const [pokemonData, setPokemonData] = useState<Pokemon>()
+    const [pokemonData, setPokemonData] = useState<IPokemon>()
 
     const getPokemonData = useCallback(async () => {
-        const res = await fetch(`${API_URL}/pokemon/${pokemon?.name}`)
-        const data = await res.json()
-        setPokemonData(data)
+        await PokedexService.getPokemonByQuery(pokemon?.name).then((data) =>
+            setPokemonData(data)
+        )
     }, [pokemon])
 
     useEffect(() => {

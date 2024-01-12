@@ -1,17 +1,16 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 
-import { Pokemon } from "interfaces"
 import { useRouter } from "next/router"
+import { IPokemon } from "interfaces"
 import { Loading } from "components"
+import { PokedexService } from "services"
 import { PokemonTemplate } from "templates"
-import { API_URL, getColorsByPokemonType } from "utils"
+import { getColorsByPokemonType } from "utils"
 import { useStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await fetch(`${API_URL}/pokemon?limit=12`) // Pré-render only 12 Pokémons
-    const pokemons = await res.json()
-
-    const paths = pokemons.results.map((pokemon: Pokemon) => {
+    const pokemons = await PokedexService.getPokemonsWithPagination(12) // Pré-render only 12 Pokémons
+    const paths = pokemons.map((pokemon: IPokemon) => {
         return {
             params: { name: pokemon.name }
         }
@@ -24,21 +23,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const res = await fetch(`${API_URL}/pokemon/${params?.name}`)
-    const pokemon = await res.json()
+    const pokemon = await PokedexService.getPokemonByQuery(
+        params?.name as string
+    )
 
     if (!pokemon) return { notFound: true }
 
     return {
         revalidate: 60,
-        props: {
-            pokemon
-        }
+        props: { pokemon }
     }
 }
 
 type PokemonPageProps = {
-    pokemon: Pokemon
+    pokemon: IPokemon
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {

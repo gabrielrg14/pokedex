@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom"
 import "jest-styled-components"
-import 'whatwg-fetch'
+import "../src/test/server/setup-env"
 
 jest.mock("next/router", () => ({
     useRouter() {

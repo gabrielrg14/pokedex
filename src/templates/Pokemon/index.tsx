@@ -1,13 +1,13 @@
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import { Pokemon } from "interfaces"
+import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes, StatBar } from "components"
 import { formatPokemonName } from "utils"
 import { Sprite } from "store"
 
 type PokemonTemplateProps = {
-    pokemon: Pokemon
+    pokemon: IPokemon
     background: string
     sprite: Sprite
 }

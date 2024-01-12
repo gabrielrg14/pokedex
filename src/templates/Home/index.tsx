@@ -3,17 +3,12 @@ import { MutableRefObject, SetStateAction } from "react"
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import { Pokemon } from "interfaces"
 import Image from "next/image"
+import { IPokemon, IType } from "interfaces"
 import { Card } from "components"
 import { getColorsByPokemonType } from "utils"
 
 export const LIMIT = 12
-
-export interface Type {
-    name: string
-    url: string
-}
 
 type HomeTemplateProps = {
     state: {
@@ -23,8 +18,8 @@ type HomeTemplateProps = {
         typeSelected: string
         setTypeSelected: (value: SetStateAction<string>) => void
     }
-    pokemons: Pokemon[]
-    types: Type[]
+    pokemons: IPokemon[]
+    types: IType[]
     searchPokemon: (search: string) => void
     loadPokemons: (query: string | null, type?: string | null) => Promise<void>
 }

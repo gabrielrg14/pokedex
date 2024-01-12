@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Image from "next/image"
-import { mediaQueries } from "utils"
+import { mediaQueries as media } from "utils"
 
 export const Container = styled.div`
     display: flex;
@@ -18,11 +18,11 @@ export const PokemonCard = styled.div`
     border-radius: 12px;
     border: 2px solid #212121;
 
-    ${mediaQueries.lessThan("tablet")`
+    ${media.lessThan("tablet")`
         padding: 1.5rem 3rem;
     `}
 
-    ${mediaQueries.lessThan("smallMobile")`
+    ${media.lessThan("smallMobile")`
         padding: 1rem 1rem;
     `}
 `
@@ -89,7 +89,7 @@ export const Stat = styled.div`
     gap: 0.5rem;
     margin: 0 0 0.2rem;
 
-    ${mediaQueries.lessThan("mobile")`
+    ${media.lessThan("mobile")`
         flex-direction: column;
         flex-wrap: wrap;
         gap: 0.2rem;

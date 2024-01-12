@@ -1,9 +1,9 @@
 import * as S from "./styles"
-import { Type } from "interfaces"
+import { IPokemonType } from "interfaces"
 import { BadgeType } from "components"
 
 type RowTypesProps = {
-    types?: Type[]
+    types?: IPokemonType[]
 }
 
 export const RowTypes = ({ types }: RowTypesProps) => {

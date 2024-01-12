@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Link from "next/link"
 import { StyledIconBase } from "@styled-icons/styled-icon"
-import { mediaQueries } from "utils"
+import { mediaQueries as media } from "utils"
 
 export const Navbar = styled.nav`
     display: flex;
@@ -16,7 +16,7 @@ export const Navbar = styled.nav`
     color: #fff;
     border-bottom: 5px solid #111;
 
-    ${mediaQueries.lessThan("smallMobile")`
+    ${media.lessThan("smallMobile")`
         flex-direction: column;
         padding: 1rem 10%;
     `}

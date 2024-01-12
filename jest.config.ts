@@ -8,8 +8,11 @@ const createJestConfig = nextJest({
 })
 
 const customJestConfig: Config = {
-    testEnvironment: "jsdom",
+    testEnvironment: "<rootDir>/.jest/jsdom-extended.ts",
     testPathIgnorePatterns: ["/node_modules/", "/.next/"],
+    testEnvironmentOptions: {
+        customExportConditions: [""]
+    },
     collectCoverage: false,
     collectCoverageFrom: ["src/**/*.ts(x)"],
     moduleDirectories: ["node_modules", "src"],
