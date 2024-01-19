@@ -1,8 +1,7 @@
 import { create } from "zustand"
+import { STORAGE_KEY } from "common"
 
 export type Sprite = "front_default" | "front_shiny"
-
-export const STORAGE_KEY = "pokemon_sprite"
 
 type SpriteStore = {
     sprite: Sprite

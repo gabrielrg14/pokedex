@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import type { AppProps } from "next/app"
 
-import { Sprite, STORAGE_KEY, useStore } from "store"
-
 import { DefaultSeo } from "next-seo"
 import SEO from "../../next-seo.config"
 
+import { Sprite, useStore } from "store"
+import { STORAGE_KEY } from "common"
 import { GlobalStyle } from "styles"
 import { Analytics as GoogleAnalytics, Layout } from "components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
