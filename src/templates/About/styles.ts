@@ -1,16 +1,14 @@
 import styled from "styled-components"
 import Image from "next/image"
+import { Container } from "components"
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Container)`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     line-height: 1.2;
-    margin: auto;
-    padding: 0 1rem;
-    min-height: inherit;
 `
 
 export const Title = styled.h1`

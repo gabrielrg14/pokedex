@@ -12,8 +12,8 @@ export const CardLink = styled(Link)`
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
     border: 1px solid #ccc;
     cursor: pointer;
-    transition: all 0.3s;
-    animation: fade-in 0.5s;
+    transition: all 0.3s ease-in-out;
+    animation: fade-in 0.5s ease-in;
 
     :hover {
         -webkit-transform: translateY(1px);
@@ -32,6 +32,7 @@ export const PokemonInfos = styled.div`
 `
 
 export const PokemonName = styled.h2`
+    color: #212121;
     text-transform: capitalize;
     font-size: 1.3rem;
     margin: 0;

@@ -37,79 +37,81 @@ export const PokemonTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemon?.name}`}
             />
 
-            <S.Container style={{ background }}>
-                <S.PokemonCard>
-                    <S.PokemonTitle>
-                        <S.PokemonName>
-                            {formatPokemonName(pokemon?.name)}
-                        </S.PokemonName>
-                        <S.SpanNumber>
-                            <PokemonNumber number={pokemon?.id} />
-                        </S.SpanNumber>
-                    </S.PokemonTitle>
+            <S.Background style={{ background }}>
+                <S.Wrapper>
+                    <S.PokemonCard>
+                        <S.PokemonTitle>
+                            <S.PokemonName>
+                                {formatPokemonName(pokemon?.name)}
+                            </S.PokemonName>
+                            <S.Number>
+                                <PokemonNumber number={pokemon?.id} />
+                            </S.Number>
+                        </S.PokemonTitle>
 
-                    <S.DivImage>
-                        {pokemon?.sprites?.other["official-artwork"]?.[
-                            sprite
-                        ] && (
-                            <S.PokemonImage
-                                src={
-                                    pokemon?.sprites.other["official-artwork"][
-                                        sprite
-                                    ]
-                                }
-                                width={256}
-                                height={256}
-                                alt={pokemon?.name}
-                                priority
-                            />
-                        )}
-                    </S.DivImage>
-
-                    <RowTypes types={pokemon?.types} />
-
-                    <S.PokemonData>
-                        <S.DivData>
-                            <S.DataTitle>Height</S.DataTitle>
-                            <p>{pokemon?.height / 10}m</p>
-                        </S.DivData>
-                        <S.DivData>
-                            <S.DataTitle>Weight</S.DataTitle>
-                            <p>{pokemon?.weight / 10}kg</p>
-                        </S.DivData>
-                        <S.DivData>
-                            <S.DataTitle>Abilities</S.DataTitle>
-                            {pokemon.abilities.map((item, index) => (
-                                <p key={index}>
-                                    {item.ability.name.replace("-", " ")}
-                                </p>
-                            ))}
-                        </S.DivData>
-                    </S.PokemonData>
-
-                    <S.PokemonStats>
-                        <S.DataTitle>Stats</S.DataTitle>
-                        {pokemon?.stats.map((item, index) => (
-                            <S.Stat key={index}>
-                                <S.StatInfo>
-                                    <span>
-                                        {item.stat.name.replace(
-                                            "special-",
-                                            "Sp. "
-                                        )}
-                                    </span>
-                                    <span>{item.base_stat}</span>
-                                </S.StatInfo>
-                                <StatBar
-                                    type={pokemon?.types[0].type.name}
-                                    stat={item.stat.name}
-                                    baseStat={item.base_stat}
+                        <S.DivImage>
+                            {pokemon?.sprites?.other["official-artwork"]?.[
+                                sprite
+                            ] && (
+                                <S.PokemonImage
+                                    src={
+                                        pokemon?.sprites.other[
+                                            "official-artwork"
+                                        ][sprite]
+                                    }
+                                    width={256}
+                                    height={256}
+                                    alt={pokemon?.name}
+                                    priority
                                 />
-                            </S.Stat>
-                        ))}
-                    </S.PokemonStats>
-                </S.PokemonCard>
-            </S.Container>
+                            )}
+                        </S.DivImage>
+
+                        <RowTypes types={pokemon?.types} />
+
+                        <S.PokemonData>
+                            <S.Data>
+                                <S.DataTitle>Height</S.DataTitle>
+                                <p>{pokemon?.height / 10}m</p>
+                            </S.Data>
+                            <S.Data>
+                                <S.DataTitle>Weight</S.DataTitle>
+                                <p>{pokemon?.weight / 10}kg</p>
+                            </S.Data>
+                            <S.Data>
+                                <S.DataTitle>Abilities</S.DataTitle>
+                                {pokemon.abilities.map((item, index) => (
+                                    <p key={index}>
+                                        {item.ability.name.replace("-", " ")}
+                                    </p>
+                                ))}
+                            </S.Data>
+                        </S.PokemonData>
+
+                        <S.PokemonStats>
+                            <S.DataTitle>Stats</S.DataTitle>
+                            {pokemon?.stats.map((item, index) => (
+                                <S.Stat key={index}>
+                                    <S.StatInfo>
+                                        <span>
+                                            {item.stat.name.replace(
+                                                "special-",
+                                                "Sp. "
+                                            )}
+                                        </span>
+                                        <span>{item.base_stat}</span>
+                                    </S.StatInfo>
+                                    <StatBar
+                                        type={pokemon?.types[0].type.name}
+                                        stat={item.stat.name}
+                                        baseStat={item.base_stat}
+                                    />
+                                </S.Stat>
+                            ))}
+                        </S.PokemonStats>
+                    </S.PokemonCard>
+                </S.Wrapper>
+            </S.Background>
         </>
     )
 }

@@ -1,24 +1,21 @@
 import styled from "styled-components"
+import { mediaQueries as media } from "utils"
+
 import Link from "next/link"
 import { StyledIconBase } from "@styled-icons/styled-icon"
-import { mediaQueries as media } from "utils"
+
+export const Header = styled.header``
 
 export const Navbar = styled.nav`
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem 10%;
+    padding: 1rem 0;
     font-size: 1.2rem;
-    background-color: #212121;
-    color: #fff;
-    border-bottom: 5px solid #111;
 
-    ${media.lessThan("smallMobile")`
+    ${media.lessThan("mobile")`
         flex-direction: column;
-        padding: 1rem 10%;
     `}
 `
 
@@ -35,14 +32,14 @@ export const NavList = styled.ul`
     gap: 1.5rem;
 `
 
+export const NavItem = styled("li")``
+
 export const NavLink = styled(Link)`
     line-height: 1.5;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    color: #fff;
-    text-decoration: none;
-    transition: 0.4s;
+    transition: border 0.3s ease;
     border-bottom: 2px solid transparent;
 
     :hover {

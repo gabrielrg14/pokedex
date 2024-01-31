@@ -1,24 +1,24 @@
 import { mediaQueries } from "."
 
 describe("mediaQueries", () => {
-    it("should call lessThan passing smallMobile parameter", () => {
+    it("should call lessThan passing mobile parameter", () => {
         const lessThanFn = jest.spyOn(mediaQueries, "lessThan")
 
-        mediaQueries.lessThan("smallMobile")
-        expect(lessThanFn).toBeCalledWith("smallMobile")
+        mediaQueries.lessThan("mobile")
+        expect(lessThanFn).toHaveBeenCalledWith("mobile")
     })
 
-    it("should call greaterThan passing desktop parameter", () => {
+    it("should call greaterThan passing tablet parameter", () => {
         const greaterThanFn = jest.spyOn(mediaQueries, "greaterThan")
 
-        mediaQueries.greaterThan("desktop")
-        expect(greaterThanFn).toBeCalledWith("desktop")
+        mediaQueries.greaterThan("tablet")
+        expect(greaterThanFn).toHaveBeenCalledWith("tablet")
     })
 
-    it("should call between passing mobile and tablet parameter", () => {
+    it("should call between passing desktop and largeDesktop parameter", () => {
         const betweenFn = jest.spyOn(mediaQueries, "between")
 
-        mediaQueries.between("mobile", "tablet")
-        expect(betweenFn).toBeCalledWith("mobile", "tablet")
+        mediaQueries.between("desktop", "largeDesktop")
+        expect(betweenFn).toHaveBeenCalledWith("desktop", "largeDesktop")
     })
 })

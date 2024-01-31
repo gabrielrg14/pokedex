@@ -18,5 +18,5 @@ export const ChildBar = styled.div<ChildBarProps>`
     background-color: ${(props) => props.bgColor};
     border-radius: inherit;
     text-align: right;
-    transition: width 1s ease-in-out;
+    transition: width 1s ease;
 `

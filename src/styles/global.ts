@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 0;
     }
 
-    html, body {
+    html, body, #__next {
         height: 100%;
     }
 
@@ -27,31 +27,9 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     a {
-        text-decoration: none;
-        color: #212121;
-    }
-
-    button {
-        cursor: pointer;
-        border: 0;
-    }
-
-    .btn-default {
-        display: inline-block;
-        text-decoration: none;
-        vertical-align: middle;
-        text-align: center;
-        font-size: 1rem;
-        padding: 0.75rem 1.25rem;
-        border-radius: 5px;
         color: #fff;
-        background-color: #3E6CBD;
-        border: 2px solid #FBC418;
-        transition: all .3s ease;
-    }
-
-    .btn-default:hover {
-        scale: 1.03;
+        text-decoration: none;
+        cursor: pointer;
     }
 
     @keyframes fade-in {

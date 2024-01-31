@@ -1,5 +1,5 @@
 import * as S from "./styles"
-import { Header, Footer } from "components"
+import { Header, Main, Footer } from "components"
 
 type LayoutProps = {
     children: React.ReactNode
@@ -7,10 +7,10 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps) => {
     return (
-        <>
+        <S.Wrapper>
             <Header />
-            <S.Main>{children}</S.Main>
+            <Main>{children}</Main>
             <Footer />
-        </>
+        </S.Wrapper>
     )
 }

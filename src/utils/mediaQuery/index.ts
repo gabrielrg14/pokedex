@@ -1,9 +1,8 @@
 import { generateMedia } from "styled-media-query"
 
 export const mediaQueries = generateMedia({
-    smallMobile: "375px",
-    mobile: "480px",
+    mobile: "576px",
     tablet: "768px",
-    desktop: "1280px",
-    largeDesktop: "1920px"
+    desktop: "1200px",
+    largeDesktop: "1400px"
 })

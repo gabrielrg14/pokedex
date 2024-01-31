@@ -1,17 +1,17 @@
 import { render, screen } from "@testing-library/react"
 
-import { Layout } from "."
+import { Main } from "components"
 
-describe("<Layout />", () => {
+describe("<Main />", () => {
     it("should render the main element and the passed children", () => {
         render(
-            <Layout>
-                <div data-testid="page">Test</div>
-            </Layout>
+            <Main>
+                <section data-testid="section">Test</section>
+            </Main>
         )
 
         expect(screen.getByRole("main")).toBeInTheDocument()
-        expect(screen.getByTestId(/page/i)).toBeInTheDocument()
+        expect(screen.getByTestId(/section/i)).toBeInTheDocument()
         expect(screen.getByText(/test/i)).toBeInTheDocument()
     })
 })

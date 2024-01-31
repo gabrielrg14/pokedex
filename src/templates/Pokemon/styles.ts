@@ -1,17 +1,22 @@
 import styled from "styled-components"
 import Image from "next/image"
+import { Container } from "components"
 import { mediaQueries as media } from "utils"
 
-export const Container = styled.div`
+export const Background = styled.div`
+    height: 100%;
+    padding: 1rem 0;
+`
+
+export const Wrapper = styled(Container)`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: inherit;
+    height: 100%;
 `
 
 export const PokemonCard = styled.div`
-    margin: 1rem;
     padding: 1.5rem 5rem;
     background-color: #f2f2f2;
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
@@ -22,8 +27,8 @@ export const PokemonCard = styled.div`
         padding: 1.5rem 3rem;
     `}
 
-    ${media.lessThan("smallMobile")`
-        padding: 1rem 1rem;
+    ${media.lessThan("mobile")`
+        padding: 1rem;
     `}
 `
 
@@ -40,7 +45,7 @@ export const PokemonName = styled.h1`
     text-align: center;
 `
 
-export const SpanNumber = styled.span``
+export const Number = styled.span``
 
 export const DivImage = styled.div`
     text-align: center;
@@ -59,7 +64,7 @@ export const PokemonData = styled.div`
     text-align: center;
 `
 
-export const DivData = styled.div`
+export const Data = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,7 +88,6 @@ export const PokemonStats = styled.div`
 
 export const Stat = styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
@@ -91,7 +95,6 @@ export const Stat = styled.div`
 
     ${media.lessThan("mobile")`
         flex-direction: column;
-        flex-wrap: wrap;
         gap: 0.2rem;
         margin: 0 0 1rem;
     `}

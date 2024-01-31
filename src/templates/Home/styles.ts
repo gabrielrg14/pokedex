@@ -1,11 +1,12 @@
 import styled from "styled-components"
 import { mediaQueries as media } from "utils"
+import { Container } from "components"
 
 type TypeProps = {
     typeColor: string
 }
 
-export const TitleDiv = styled.nav`
+export const TitleDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -15,7 +16,7 @@ export const TitleDiv = styled.nav`
     background-position: center;
     background-repeat: repeat-x;
 
-    ${media.lessThan("smallMobile")`
+    ${media.lessThan("mobile")`
         padding: 1rem;
     `}
 `
@@ -29,21 +30,17 @@ export const Title = styled.h1`
     font-weight: bold;
     color: #fbc418;
     text-shadow: 3px 3px 3px #3e6cbd;
-    animation: fade-in 0.5s;
+    animation: fade-in 0.5s ease-in;
 
-    ${media.lessThan("smallMobile")`
+    ${media.lessThan("mobile")`
         font-size: 2rem;
     `}
 `
 
-export const Container = styled.div`
-    padding: 1.5rem 20%;
+export const Wrapper = styled(Container)`
+    padding: 1.5rem 0;
+    animation: fade-in 0.5s ease-in;
     margin: 0 auto;
-    animation: fade-in 0.5s;
-
-    ${media.lessThan("desktop")`
-        padding: 1.5rem 10%;
-    `}
 `
 
 export const TopArea = styled.div`
@@ -51,28 +48,27 @@ export const TopArea = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    border-radius: 120px;
     gap: 1rem;
 `
 
 export const SearchInput = styled.input`
     flex: 1;
     max-width: fit-content;
-    padding: 10px 20px;
+    padding: 0.75rem 1.5rem;
     background-color: rgb(183 189 193 / 30%);
     border: 1px solid #ccc;
-    border-radius: 122px;
+    border-radius: 24px;
     font-size: 1rem;
     color: #7a7d80;
     outline: none;
 `
 
 export const SearchButton = styled.button`
+    padding: 0.75rem;
     background-color: rgb(183 189 193 / 30%);
     border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 50%;
-    transition: background-color 0.3s;
+    border-radius: 24px;
+    transition: background-color 0.3s ease;
     cursor: default;
 
     :not(:disabled):hover {
@@ -101,7 +97,6 @@ export const Counter = styled.span`
 
 export const BottomArea = styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: stretch;
     gap: 1.5rem;
@@ -153,7 +148,7 @@ export const TypeItem = styled.button`
     filter: grayscale(100%);
     background-color: transparent;
     margin: 1.5rem 0;
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
 
     :hover,
     &.selected {
@@ -181,6 +176,7 @@ export const PokemonCards = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1.5rem;
+    margin-bottom: 1.5rem;
 
     ${media.lessThan("desktop")`
         grid-template-columns: repeat(2, 1fr);
@@ -197,8 +193,5 @@ export const SearchError = styled.div`
 
 export const TextNotFound = styled.p`
     font-size: 1.1rem;
-`
-
-export const ButtonLoad = styled.button`
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 `

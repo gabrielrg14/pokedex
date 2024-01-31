@@ -5,7 +5,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Image from "next/image"
 import { IPokemon, IType } from "interfaces"
-import { Card } from "components"
+import { Card, Button } from "components"
 import { getColorsByPokemonType } from "utils"
 
 export const LIMIT = 12
@@ -50,7 +50,7 @@ export const HomeTemplate = ({
                 <S.Title>Choose your Pokémon</S.Title>
             </S.TitleDiv>
 
-            <S.Container>
+            <S.Wrapper>
                 <S.TopArea>
                     <S.SearchInput
                         type="text"
@@ -79,7 +79,7 @@ export const HomeTemplate = ({
                         src={`/images/types/${state.typeSelected}.svg`}
                         width={32}
                         height={32}
-                        alt={`Type ${state.typeSelected}`}
+                        alt={state.typeSelected}
                     />
                     <S.Counter>{pokemons.length}</S.Counter>
                 </S.PokemonCount>
@@ -108,7 +108,7 @@ export const HomeTemplate = ({
                                             src={`/images/types/${type.name}.svg`}
                                             width={24}
                                             height={24}
-                                            alt={`Type ${type.name}`}
+                                            alt={type.name}
                                         />
                                         <S.Type
                                             typeColor={
@@ -133,12 +133,9 @@ export const HomeTemplate = ({
 
                             {state.typeSelected === "all" &&
                                 pokemons.length >= LIMIT && (
-                                    <S.ButtonLoad
-                                        className="btn-default"
-                                        onClick={() => loadPokemons(null)}
-                                    >
+                                    <Button onClick={() => loadPokemons(null)}>
                                         Load more Pokémon
-                                    </S.ButtonLoad>
+                                    </Button>
                                 )}
                         </S.PokemonList>
                     </S.BottomArea>
@@ -160,15 +157,12 @@ export const HomeTemplate = ({
                             </small>
                         </S.TextNotFound>
 
-                        <S.ButtonLoad
-                            className="btn-default"
-                            onClick={() => searchPokemon("")}
-                        >
+                        <Button onClick={() => searchPokemon("")}>
                             Back to list
-                        </S.ButtonLoad>
+                        </Button>
                     </S.SearchError>
                 )}
-            </S.Container>
+            </S.Wrapper>
         </>
     )
 }
