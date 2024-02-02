@@ -5,10 +5,14 @@ import { mediaQueries as media } from "utils"
 
 export const Background = styled.div`
     height: 100%;
-    padding: 1rem 0;
+    padding: var(--default-size) 0;
 `
 
 export const Wrapper = styled(Container)`
+    height: 100%;
+`
+
+export const Content = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,18 +21,14 @@ export const Wrapper = styled(Container)`
 `
 
 export const PokemonCard = styled.div`
-    padding: 1.5rem 5rem;
-    background-color: #f2f2f2;
+    padding: var(--lg-size) 8rem;
+    background-color: #f7fcfe;
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
     border-radius: 12px;
-    border: 2px solid #212121;
-
-    ${media.lessThan("tablet")`
-        padding: 1.5rem 3rem;
-    `}
+    border: 2px solid var(--dark-color);
 
     ${media.lessThan("mobile")`
-        padding: 1rem;
+        padding: var(--default-size);
     `}
 `
 
@@ -40,7 +40,7 @@ export const PokemonTitle = styled.div`
 `
 
 export const PokemonName = styled.h1`
-    font-size: 2rem;
+    font-size: var(--xl-size);
     text-transform: capitalize;
     text-align: center;
 `
@@ -69,20 +69,20 @@ export const Data = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1rem 0 0;
-    padding: 0 1rem;
+    margin: var(--default-size) 0 0;
+    padding: 0 var(--default-size);
     text-transform: capitalize;
 `
 
 export const DataTitle = styled.h2`
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+    font-size: var(--default-size);
+    margin-bottom: 0.4rem;
     text-align: center;
 `
 
 export const PokemonStats = styled.div`
-    padding: 0 1rem;
-    margin: 1rem 0 0;
+    padding: 0 var(--default-size);
+    margin: var(--default-size) 0 0;
     text-transform: capitalize;
 `
 
@@ -90,13 +90,13 @@ export const Stat = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 0.2rem;
+    gap: var(--xs-size);
+    margin: 0 0 0.4rem;
 
     ${media.lessThan("mobile")`
         flex-direction: column;
-        gap: 0.2rem;
-        margin: 0 0 1rem;
+        gap: 0.4rem;
+        margin: 0 0 var(--default-size);
     `}
 `
 
@@ -104,6 +104,6 @@ export const StatInfo = styled.span`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--xs-size);
     width: 100%;
 `

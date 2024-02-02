@@ -7,10 +7,10 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps) => {
     return (
-        <S.Wrapper>
+        <S.Layout>
             <Header />
             <Main>{children}</Main>
             <Footer />
-        </S.Wrapper>
+        </S.Layout>
     )
 }

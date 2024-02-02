@@ -10,23 +10,25 @@ export const PageNotFoundTemplate = () => {
             <NextSeo title="404 | Page not found" />
 
             <S.Wrapper>
-                <S.TextNotFound>Page or Pokémon not found!</S.TextNotFound>
+                <S.Content>
+                    <S.TextNotFound>Page or Pokémon not found!</S.TextNotFound>
 
-                <S.TextNotHere>
-                    Unfortunately the page you are looking for is not here.
-                </S.TextNotHere>
+                    <S.TextNotHere>
+                        Unfortunately the page you are looking for is not here.
+                    </S.TextNotHere>
 
-                <S.PsyduckImage
-                    src="/images/psyduck.png"
-                    width={350}
-                    height={200}
-                    alt="Psyduck confused"
-                    priority
-                />
+                    <S.PsyduckImage
+                        src="/images/psyduck.png"
+                        width={350}
+                        height={200}
+                        alt="Psyduck confused"
+                        priority
+                    />
 
-                <Link href="/" aria-label="Go to Home">
-                    <Button>Go to Home</Button>
-                </Link>
+                    <Link href="/" aria-label="Go to Home">
+                        <Button>Go to Home</Button>
+                    </Link>
+                </S.Content>
             </S.Wrapper>
         </>
     )

@@ -6,39 +6,41 @@ type TypeProps = {
     typeColor: string
 }
 
+export const Content = styled.section``
+
 export const TitleDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 2rem;
+    padding: var(--xl-size);
     background-image: url("/images/bg-title.png");
     background-size: contain;
     background-position: center;
     background-repeat: repeat-x;
 
     ${media.lessThan("mobile")`
-        padding: 1rem;
+        padding: var(--default-size);
     `}
 `
 
 export const Title = styled.h1`
     font-family: "Pokemon Solid", sans-serif;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.4rem;
     line-height: 1.5;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 4rem;
     font-weight: bold;
-    color: #fbc418;
-    text-shadow: 3px 3px 3px #3e6cbd;
+    color: var(--primary-color);
+    text-shadow: 3px 3px 3px var(--secondary-color);
     animation: fade-in 0.5s ease-in;
 
     ${media.lessThan("mobile")`
-        font-size: 2rem;
+        font-size: var(--xl-size);
     `}
 `
 
 export const Wrapper = styled(Container)`
-    padding: 1.5rem 0;
+    padding: var(--lg-size) 0;
     animation: fade-in 0.5s ease-in;
     margin: 0 auto;
 `
@@ -48,25 +50,25 @@ export const TopArea = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: var(--default-size);
 `
 
 export const SearchInput = styled.input`
     flex: 1;
     max-width: fit-content;
-    padding: 0.75rem 1.5rem;
+    padding: var(--sm-size) var(--lg-size);
     background-color: rgb(183 189 193 / 30%);
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray-color);
     border-radius: 24px;
-    font-size: 1rem;
+    font-size: var(--default-size);
     color: #7a7d80;
     outline: none;
 `
 
 export const SearchButton = styled.button`
-    padding: 0.75rem;
+    padding: var(--sm-size);
     background-color: rgb(183 189 193 / 30%);
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray-color);
     border-radius: 24px;
     transition: background-color 0.3s ease;
     cursor: default;
@@ -81,17 +83,17 @@ export const PokemonCount = styled.div`
     display: flex;
     justify-content: center;
     align-items: baseline;
-    gap: 0.5rem;
-    margin: 1.5rem 0;
+    gap: var(--xs-size);
+    margin: var(--lg-size) 0;
 `
 
 export const Counter = styled.span`
     font-family: "Pokemon Solid", sans-serif;
-    letter-spacing: 0.5rem;
+    letter-spacing: var(--xs-size);
     line-height: 0;
-    font-size: 2rem;
-    color: #fbc418;
-    text-shadow: 2px 2px 1px #3e6cbd;
+    font-size: var(--xl-size);
+    color: var(--primary-color);
+    text-shadow: 2px 2px 1px var(--secondary-color);
     align-self: baseline;
 `
 
@@ -99,7 +101,7 @@ export const BottomArea = styled.div`
     display: flex;
     justify-content: center;
     align-items: stretch;
-    gap: 1.5rem;
+    gap: var(--lg-size);
 
     ${media.lessThan("tablet")`
         flex-direction: column;
@@ -110,18 +112,18 @@ export const TypeList = styled.ul`
     flex: 1;
     height: fit-content;
     max-width: fit-content;
-    background-color: #fff;
+    background-color: var(--light-color);
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray-color);
     border-radius: 12px;
-    padding: 0 5rem 0 1.5rem;
+    padding: 0 8rem 0 var(--lg-size);
 
     ${media.lessThan("tablet")`
         max-height: 150px;
         max-width: 100%;
         overflow-y: auto;
         border-radius: 5px;
-        padding: 0 1rem;
+        padding: 0 var(--default-size);
 
         ::-webkit-scrollbar {
             height: 10px;
@@ -131,9 +133,9 @@ export const TypeList = styled.ul`
         ::-webkit-scrollbar-thumb,
         ::-webkit-scrollbar-thumb:horizontal {
             height: 25%;
-            background-color: #3E6CBD;
+            background-color: var(--secondary-color);
             border-radius: 5px;
-            border: 2px solid #FFF;
+            border: 2px solid var(--light-color);
         }
     `}
 `
@@ -141,13 +143,13 @@ export const TypeList = styled.ul`
 export const TypeItem = styled.button`
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--default-size);
     opacity: 0.6;
     border: 0;
     cursor: pointer;
     filter: grayscale(100%);
     background-color: transparent;
-    margin: 1.5rem 0;
+    margin: var(--lg-size) 0;
     transition: all 0.3s ease-in-out;
 
     :hover,
@@ -157,14 +159,14 @@ export const TypeItem = styled.button`
     }
 
     ${media.lessThan("tablet")`
-        margin: 1rem 0;
+        margin: var(--default-size) 0;
     `}
 `
 
 export const Type = styled.span<TypeProps>`
     color: ${(props) => props.typeColor};
     text-transform: capitalize;
-    font-size: 1rem;
+    font-size: var(--default-size);
 `
 
 export const PokemonList = styled.div`
@@ -175,8 +177,8 @@ export const PokemonList = styled.div`
 export const PokemonCards = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    grid-gap: var(--lg-size);
+    margin-bottom: var(--lg-size);
 
     ${media.lessThan("desktop")`
         grid-template-columns: repeat(2, 1fr);
@@ -192,6 +194,6 @@ export const SearchError = styled.div`
 `
 
 export const TextNotFound = styled.p`
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+    font-size: var(--md-size);
+    margin-bottom: var(--lg-size);
 `

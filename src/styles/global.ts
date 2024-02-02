@@ -1,6 +1,21 @@
 import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
+    :root {
+        --primary-color: #fbc418;
+        --secondary-color: #3e6cbd;
+        --dark-color: #161817;
+        --light-color: #fff;
+        --gray-color: #ccc;
+
+        --xs-size: 0.8rem;
+        --sm-size: 1.2rem;
+        --default-size: 1.6rem;
+        --md-size: 1.8rem;
+        --lg-size: 2.4rem;
+        --xl-size: 3.2rem;
+    }
+
     * {
         padding: 0;
         margin: 0;
@@ -11,11 +26,15 @@ export const GlobalStyle = createGlobalStyle`
         height: 100%;
     }
 
+    html {
+        font-size: 62.5%;
+    }
+
     body {
         font-family: 'Roboto', Helvetica, sans-serif;
-        font-size: 16px;
-        color: #212121;
-        background-color: #212121;
+        font-size: var(--default-size);
+        color: var(--dark-color);
+        background-color: var(--dark-color);
     }
 
     ol, ul, li {
@@ -24,10 +43,11 @@ export const GlobalStyle = createGlobalStyle`
 
     img {
         max-width: 100%;
+        max-height: 100%;
     }
 
     a {
-        color: #fff;
+        color: var(--light-color);
         text-decoration: none;
         cursor: pointer;
     }

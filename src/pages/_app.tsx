@@ -27,7 +27,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <GlobalStyle />
             <Layout>
                 <NextNProgress
-                    color="#FBC418"
+                    color="var(--primary-color)"
                     height={5}
                     options={{ showSpinner: false }}
                 />

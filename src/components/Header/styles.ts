@@ -10,9 +10,9 @@ export const Navbar = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem 0;
-    font-size: 1.2rem;
+    gap: var(--default-size);
+    padding: var(--default-size) 0;
+    font-size: var(--md-size);
 
     ${media.lessThan("mobile")`
         flex-direction: column;
@@ -29,32 +29,32 @@ export const NavList = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--lg-size);
 `
 
 export const NavItem = styled("li")``
 
 export const NavLink = styled(Link)`
-    line-height: 1.5;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     transition: border 0.3s ease;
+    line-height: var(--lg-size);
     border-bottom: 2px solid transparent;
 
     :hover {
-        border-color: #fbc418;
+        border-color: var(--primary-color);
     }
 `
 
 export const ShinyIcon = styled.div`
     ${StyledIconBase} {
         cursor: pointer;
-        color: #fff;
-        width: 24px;
+        color: var(--light-color);
+        width: var(--lg-size);
 
         &.shiny {
-            color: #fbc418;
+            color: var(--primary-color);
         }
 
         /* https://codepen.io/amit_merchant/pen/wvxGjpG */

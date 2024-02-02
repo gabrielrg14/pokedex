@@ -5,14 +5,14 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--xs-size);
 `
 
 export const Type = styled.span`
-    padding: 0.5rem 1.1rem;
-    color: #fff;
-    background-color: #212121;
+    padding: var(--xs-size) var(--md-size);
+    color: var(--light-color);
+    background-color: var(--dark-color);
     border-radius: 5px;
     text-transform: capitalize;
-    font-size: 0.9rem;
+    font-size: 1.4rem;
 `

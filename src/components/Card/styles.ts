@@ -6,11 +6,11 @@ export const CardLink = styled(Link)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-    background-color: #fff;
+    padding: var(--default-size);
+    background-color: var(--light-color);
     border-radius: 12px;
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray-color);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     animation: fade-in 0.5s ease-in;
@@ -27,13 +27,12 @@ export const PokemonInfos = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.2rem;
-    margin: 0.5rem auto;
+    margin: var(--xs-size) auto;
 `
 
 export const PokemonName = styled.h2`
-    color: #212121;
+    color: var(--dark-color);
     text-transform: capitalize;
-    font-size: 1.3rem;
+    font-size: 2rem;
     margin: 0;
 `

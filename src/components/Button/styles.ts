@@ -4,12 +4,12 @@ export const Button = styled.button`
     cursor: pointer;
     line-height: normal;
     text-align: center;
-    font-size: 1rem;
-    padding: 0.75rem 1.25rem;
+    font-size: var(--default-size);
+    padding: var(--sm-size) 2rem;
     border-radius: 5px;
-    color: #fff;
-    background-color: #3e6cbd;
-    border: 2px solid #fbc418;
+    color: var(--light-color);
+    background-color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
     transition: scale 0.3s ease;
 
     :hover {

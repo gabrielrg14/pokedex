@@ -46,123 +46,127 @@ export const HomeTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/`}
             />
 
-            <S.TitleDiv>
-                <S.Title>Choose your Pokémon</S.Title>
-            </S.TitleDiv>
+            <S.Content>
+                <S.TitleDiv>
+                    <S.Title>Choose your Pokémon</S.Title>
+                </S.TitleDiv>
 
-            <S.Wrapper>
-                <S.TopArea>
-                    <S.SearchInput
-                        type="text"
-                        spellCheck={false}
-                        placeholder="Search by name or number"
-                        value={state.search}
-                        onChange={(e) => state.setSearch(e.target.value)}
-                        onKeyDown={(e) =>
-                            e.key === "Enter"
-                                ? searchPokemon(state.search)
-                                : null
-                        }
-                    />
+                <S.Wrapper>
+                    <S.TopArea>
+                        <S.SearchInput
+                            type="text"
+                            spellCheck={false}
+                            placeholder="Search by name or number"
+                            value={state.search}
+                            onChange={(e) => state.setSearch(e.target.value)}
+                            onKeyDown={(e) =>
+                                e.key === "Enter"
+                                    ? searchPokemon(state.search)
+                                    : null
+                            }
+                        />
 
-                    <S.SearchButton
-                        type="button"
-                        onClick={() => searchPokemon(state.search)}
-                        disabled={state.search === ""}
-                    >
-                        🔍
-                    </S.SearchButton>
-                </S.TopArea>
+                        <S.SearchButton
+                            type="button"
+                            onClick={() => searchPokemon(state.search)}
+                            disabled={state.search === ""}
+                        >
+                            🔍
+                        </S.SearchButton>
+                    </S.TopArea>
 
-                <S.PokemonCount>
-                    <Image
-                        src={`/images/types/${state.typeSelected}.svg`}
-                        width={32}
-                        height={32}
-                        alt={state.typeSelected}
-                    />
-                    <S.Counter>{pokemons.length}</S.Counter>
-                </S.PokemonCount>
+                    <S.PokemonCount>
+                        <Image
+                            src={`/images/types/${state.typeSelected}.svg`}
+                            width={32}
+                            height={32}
+                            alt={state.typeSelected}
+                        />
+                        <S.Counter>{pokemons.length}</S.Counter>
+                    </S.PokemonCount>
 
-                {pokemons.length > 0 && (
-                    <S.BottomArea>
-                        <S.TypeList>
-                            {types.map((type, index) => (
-                                <li key={index}>
-                                    <S.TypeItem
-                                        className={
-                                            state.typeSelected === type.name
-                                                ? "selected"
-                                                : ""
-                                        }
-                                        onClick={() => {
-                                            window.scrollTo({
-                                                top: 125,
-                                                behavior: "smooth"
-                                            })
-                                            state.setTypeSelected(type.name)
-                                            loadPokemons(null, type.name)
-                                        }}
-                                    >
-                                        <Image
-                                            src={`/images/types/${type.name}.svg`}
-                                            width={24}
-                                            height={24}
-                                            alt={type.name}
-                                        />
-                                        <S.Type
-                                            typeColor={
-                                                getColorsByPokemonType(
-                                                    type.name
-                                                ).backgroundColor
+                    {pokemons.length > 0 && (
+                        <S.BottomArea>
+                            <S.TypeList>
+                                {types.map((type, index) => (
+                                    <li key={index}>
+                                        <S.TypeItem
+                                            className={
+                                                state.typeSelected === type.name
+                                                    ? "selected"
+                                                    : ""
                                             }
+                                            onClick={() => {
+                                                window.scrollTo({
+                                                    top: 125,
+                                                    behavior: "smooth"
+                                                })
+                                                state.setTypeSelected(type.name)
+                                                loadPokemons(null, type.name)
+                                            }}
                                         >
-                                            {type.name}
-                                        </S.Type>
-                                    </S.TypeItem>
-                                </li>
-                            ))}
-                        </S.TypeList>
-
-                        <S.PokemonList>
-                            <S.PokemonCards>
-                                {pokemons.map((pokemon, index) => (
-                                    <Card key={index} pokemon={pokemon} />
+                                            <Image
+                                                src={`/images/types/${type.name}.svg`}
+                                                width={24}
+                                                height={24}
+                                                alt={type.name}
+                                            />
+                                            <S.Type
+                                                typeColor={
+                                                    getColorsByPokemonType(
+                                                        type.name
+                                                    ).backgroundColor
+                                                }
+                                            >
+                                                {type.name}
+                                            </S.Type>
+                                        </S.TypeItem>
+                                    </li>
                                 ))}
-                            </S.PokemonCards>
+                            </S.TypeList>
 
-                            {state.typeSelected === "all" &&
-                                pokemons.length >= LIMIT && (
-                                    <Button onClick={() => loadPokemons(null)}>
-                                        Load more Pokémon
-                                    </Button>
-                                )}
-                        </S.PokemonList>
-                    </S.BottomArea>
-                )}
+                            <S.PokemonList>
+                                <S.PokemonCards>
+                                    {pokemons.map((pokemon, index) => (
+                                        <Card key={index} pokemon={pokemon} />
+                                    ))}
+                                </S.PokemonCards>
 
-                {pokemons.length === 0 && (
-                    <S.SearchError>
-                        <S.TextNotFound>
-                            Pokémon{" "}
-                            <strong>
-                                {'"'}
-                                {state.prevSearchRef.current}
-                                {'"'}
-                            </strong>{" "}
-                            not found! <br />
-                            <small>
-                                Try again by searching for your full name or
-                                your Pokédex number.
-                            </small>
-                        </S.TextNotFound>
+                                {state.typeSelected === "all" &&
+                                    pokemons.length >= LIMIT && (
+                                        <Button
+                                            onClick={() => loadPokemons(null)}
+                                        >
+                                            Load more Pokémon
+                                        </Button>
+                                    )}
+                            </S.PokemonList>
+                        </S.BottomArea>
+                    )}
 
-                        <Button onClick={() => searchPokemon("")}>
-                            Back to list
-                        </Button>
-                    </S.SearchError>
-                )}
-            </S.Wrapper>
+                    {pokemons.length === 0 && (
+                        <S.SearchError>
+                            <S.TextNotFound>
+                                Pokémon{" "}
+                                <strong>
+                                    {'"'}
+                                    {state.prevSearchRef.current}
+                                    {'"'}
+                                </strong>{" "}
+                                not found! <br />
+                                <small>
+                                    Try again by searching for your full name or
+                                    your Pokédex number.
+                                </small>
+                            </S.TextNotFound>
+
+                            <Button onClick={() => searchPokemon("")}>
+                                Back to list
+                            </Button>
+                        </S.SearchError>
+                    )}
+                </S.Wrapper>
+            </S.Content>
         </>
     )
 }

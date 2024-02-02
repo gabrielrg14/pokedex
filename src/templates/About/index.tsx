@@ -19,29 +19,31 @@ export const AboutTemplate = () => {
             />
 
             <S.Wrapper>
-                <S.Title>About the Pokédex</S.Title>
+                <S.Content>
+                    <S.Title>About the Pokédex</S.Title>
 
-                <S.Description>
-                    This project was developed with the aim of putting into
-                    practice the knowledge acquired in Next.js, TypeScript,
-                    Styled Components, Zustand, Jest, React Testing Library and
-                    Mock Service Worker, through a fun theme that is one of the
-                    creator&apos;s passions: Pokémon!
-                </S.Description>
+                    <S.Description>
+                        This project was developed with the aim of putting into
+                        practice the knowledge acquired in Next.js, TypeScript,
+                        Styled Components, Zustand, Jest, React Testing Library
+                        and Mock Service Worker, through a fun theme that is one
+                        of the creator&apos;s passions: Pokémon!
+                    </S.Description>
 
-                <S.Description>
-                    Over time, the Pokédex will receive updates that will
-                    implement improvements in the search filters and display of
-                    Pokémon information.
-                </S.Description>
+                    <S.Description>
+                        Over time, the Pokédex will receive updates that will
+                        implement improvements in the search filters and display
+                        of Pokémon information.
+                    </S.Description>
 
-                <S.AboutImage
-                    src="/images/about.png"
-                    width={250}
-                    height={200}
-                    alt="Pokémon thinking"
-                    priority
-                />
+                    <S.AboutImage
+                        src="/images/about.png"
+                        width={250}
+                        height={200}
+                        alt="Pokémon thinking"
+                        priority
+                    />
+                </S.Content>
             </S.Wrapper>
         </>
     )

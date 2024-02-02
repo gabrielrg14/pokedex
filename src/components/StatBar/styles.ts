@@ -9,7 +9,7 @@ export const ParentBar = styled.div`
     height: 5px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
+    border-radius: 12px;
 `
 
 export const ChildBar = styled.div<ChildBarProps>`
