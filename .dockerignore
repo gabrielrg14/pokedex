@@ -1,0 +1,23 @@
+# dependencies
+node_modules
+
+# docker
+Dockerfile
+docker-compose
+.dockerignore
+
+# git
+.git
+.gitignore
+
+# next.js
+.next
+
+# vercel
+.vercel
+
+# others
+coverage
+.vscode
+README.md
+LICENSE

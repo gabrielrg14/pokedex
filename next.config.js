@@ -8,6 +8,7 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = withPWA({
     reactStrictMode: true,
+    output: "standalone",
     images: {
         domains: ["raw.githubusercontent.com"],
         remotePatterns: [
