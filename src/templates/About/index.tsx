@@ -26,8 +26,9 @@ export const AboutTemplate = () => {
                         This project was developed with the aim of putting into
                         practice the knowledge acquired in Next.js, TypeScript,
                         Styled Components, Zustand, Jest, React Testing Library
-                        and Mock Service Worker, through a fun theme that is one
-                        of the creator&apos;s passions: Pokémon!
+                        Mock Service Worker, Cypress and Docker through a fun
+                        theme that is one of the creator&apos;s passions:
+                        Pokémon!
                     </S.Description>
 
                     <S.Description>

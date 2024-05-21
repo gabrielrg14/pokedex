@@ -19,9 +19,8 @@ describe("PokedexService", () => {
 
     describe("getPokemonsWithPagination", () => {
         it("should return a list of pokemon with venusaur, charizard and blastoise", async () => {
-            const pokemonList = await PokedexService.getPokemonsWithPagination(
-                12
-            )
+            const pokemonList =
+                await PokedexService.getPokemonsWithPagination(12)
 
             expect(pokemonList).toContainEqual(pokemonMocks.venusaur)
             expect(pokemonList).toContainEqual(pokemonMocks.charizard)
