@@ -1,5 +1,11 @@
 import styled from "styled-components"
 
+type TypeProps = {
+    background: string
+    backgroundColor: string
+    color: string
+}
+
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -8,10 +14,11 @@ export const Wrapper = styled.div`
     gap: var(--xs-size);
 `
 
-export const Type = styled.span`
+export const Type = styled.span<TypeProps>`
     padding: var(--xs-size) var(--md-size);
-    color: var(--light-color);
-    background-color: var(--dark-color);
+    background: ${(props) => props.background};
+    background-color: ${(props) => props.backgroundColor};
+    color: ${(props) => props.color};
     border-radius: 5px;
     text-transform: capitalize;
     font-size: 1.4rem;

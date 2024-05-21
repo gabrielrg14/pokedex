@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { mediaQueries as media } from "utils"
 
-export const Container = styled.div`
+export const Container = styled("div")`
     width: 60%;
     margin: auto;
 

@@ -5,7 +5,7 @@ type ChildBarProps = {
     bgColor: string
 }
 
-export const ParentBar = styled.div`
+export const ParentBar = styled("div")`
     height: 5px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.1);

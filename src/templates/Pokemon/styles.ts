@@ -3,7 +3,7 @@ import Image from "next/image"
 import { Container } from "components"
 import { mediaQueries as media } from "utils"
 
-export const Background = styled.div`
+export const Background = styled("div")`
     height: 100%;
     padding: var(--default-size) 0;
 `
@@ -86,7 +86,7 @@ export const PokemonStats = styled.div`
     text-transform: capitalize;
 `
 
-export const Stat = styled.div`
+export const Stat = styled("div")`
     display: flex;
     justify-content: space-between;
     align-items: center;

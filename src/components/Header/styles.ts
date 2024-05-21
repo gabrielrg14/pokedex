@@ -47,7 +47,7 @@ export const NavLink = styled(Link)`
     }
 `
 
-export const ShinyIcon = styled.div`
+export const ShinyIcon = styled("div")`
     ${StyledIconBase} {
         cursor: pointer;
         color: var(--light-color);

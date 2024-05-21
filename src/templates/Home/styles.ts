@@ -53,7 +53,7 @@ export const TopArea = styled.div`
     gap: var(--default-size);
 `
 
-export const SearchInput = styled.input`
+export const SearchInput = styled("input")`
     flex: 1;
     max-width: fit-content;
     padding: var(--sm-size) var(--lg-size);
@@ -65,7 +65,7 @@ export const SearchInput = styled.input`
     outline: none;
 `
 
-export const SearchButton = styled.button`
+export const SearchButton = styled("button")`
     padding: var(--sm-size);
     background-color: rgb(183 189 193 / 30%);
     border: 1px solid var(--gray-color);
@@ -140,7 +140,7 @@ export const TypeList = styled.ul`
     `}
 `
 
-export const TypeItem = styled.button`
+export const TypeItem = styled("button")`
     display: flex;
     align-items: center;
     gap: var(--default-size);
@@ -163,7 +163,7 @@ export const TypeItem = styled.button`
     `}
 `
 
-export const Type = styled.span<TypeProps>`
+export const Type = styled("span")<TypeProps>`
     color: ${(props) => props.typeColor};
     text-transform: capitalize;
     font-size: var(--default-size);

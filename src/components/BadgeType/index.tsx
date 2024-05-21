@@ -15,7 +15,7 @@ export const BadgeType = ({ type }: BadgeTypeProps) => {
                 height={32}
                 alt={`Type ${type}`}
             />
-            <S.Type style={getColorsByPokemonType(type)}>{type}</S.Type>
+            <S.Type {...getColorsByPokemonType(type)}>{type}</S.Type>
         </S.Wrapper>
     )
 }
