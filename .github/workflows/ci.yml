@@ -1,0 +1,60 @@
+name: CI 🔄
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies 🛠️
+      run: npm ci
+
+    - name: Run lint 🔍
+      run: npm run lint
+
+  unit-tests:
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository 📦
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ⚙️
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies 🛠️
+        run: npm ci
+
+      - name: Run unit tests 🧪
+        run: npm run jest
+
+  e2e-tests:
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository 📦
+        uses: actions/checkout@v4
+
+      - name: Run end-to-end tests 🧪
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run start
+          wait-on: 'http://localhost:3000'
+          record: true
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

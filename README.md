@@ -14,4 +14,5 @@
 - [Mock Service Worker](https://mswjs.io/)
 - [Cypress](https://www.cypress.io/)
 - [Docker](https://www.docker.com/)
+- [GitHub Actions](https://github.com/features/actions/)
 - [Vercel](https://www.vercel.com/)
