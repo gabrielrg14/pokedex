@@ -125,12 +125,14 @@ export const HomeTemplate = ({
                                 ))}
                             </S.TypeList>
 
-                            <S.PokemonList>
-                                <S.PokemonCards>
+                            <S.PokemonCards>
+                                <S.PokemonList>
                                     {pokemons.map((pokemon, index) => (
-                                        <Card key={index} pokemon={pokemon} />
+                                        <S.PokemonItem key={index}>
+                                            <Card pokemon={pokemon} />
+                                        </S.PokemonItem>
                                     ))}
-                                </S.PokemonCards>
+                                </S.PokemonList>
 
                                 {state.typeSelected === "all" &&
                                     pokemons.length >= LIMIT && (
@@ -140,7 +142,7 @@ export const HomeTemplate = ({
                                             Load more Pokémon
                                         </Button>
                                     )}
-                            </S.PokemonList>
+                            </S.PokemonCards>
                         </S.BottomArea>
                     )}
 

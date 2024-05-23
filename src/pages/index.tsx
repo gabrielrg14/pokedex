@@ -67,12 +67,6 @@ const Home = ({ pokemons, types }: HomeProps) => {
         setTypeSelected("all")
     }
 
-    // Remove types that do not have pokémon coming from the API
-    const typesToRemove = ["unknown", "shadow"]
-    const typesFiltered = types.filter(
-        (type) => !typesToRemove.includes(type.name)
-    )
-
     return (
         <HomeTemplate
             state={{
@@ -83,7 +77,7 @@ const Home = ({ pokemons, types }: HomeProps) => {
                 setTypeSelected
             }}
             pokemons={pokemonList}
-            types={typesFiltered}
+            types={types}
             searchPokemon={searchPokemon}
             loadPokemons={loadPokemons}
         />

@@ -169,12 +169,12 @@ export const Type = styled("span")<TypeProps>`
     font-size: var(--default-size);
 `
 
-export const PokemonList = styled.div`
+export const PokemonCards = styled.div`
     flex: 1;
     text-align: center;
 `
 
-export const PokemonCards = styled.div`
+export const PokemonList = styled.ul`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: var(--lg-size);
@@ -188,6 +188,8 @@ export const PokemonCards = styled.div`
         grid-template-columns: repeat(1, 1fr);
     `}
 `
+
+export const PokemonItem = styled("li")``
 
 export const SearchError = styled.div`
     text-align: center;

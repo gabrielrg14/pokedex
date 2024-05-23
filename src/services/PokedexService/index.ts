@@ -22,7 +22,7 @@ const getAllTypes = async (): Promise<IType[]> => {
     data.results.unshift({ name: "all", url: "" }) // Adds type "all" to be one of the filterable options
 
     // Remove types that do not have pokémon coming from the API
-    const typesToRemove = ["unknown", "shadow"]
+    const typesToRemove = ["unknown", "stellar"]
     const typesFiltered = data.results.filter(
         (type: IType) => !typesToRemove.includes(type.name)
     )

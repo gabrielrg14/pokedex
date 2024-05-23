@@ -66,6 +66,6 @@ describe("Search for Pokémon", () => {
             .should("be.visible")
             .click()
 
-        cy.contains("main section h2", "Bulbasaur").should("be.visible")
+        cy.contains("main section ul li h2", "Bulbasaur").should("be.visible")
     })
 })

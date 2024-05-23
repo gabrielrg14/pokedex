@@ -6,13 +6,13 @@ describe("Pokémon sprite", () => {
     const srcShinySprite =
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png"
 
-    it("change the Pokémons sprite from default to shiny and from shiny to standard", () => {
+    it("change the Pokémons sprite from default to shiny and from shiny to default", () => {
         cy.intercept("GET", "**/pokemon/bulbasaur").as("getBulbasaur")
 
         cy.visit("/")
         cy.wait("@getBulbasaur")
 
-        cy.get("main section img[alt='bulbasaur']")
+        cy.get("main section ul li img[alt='bulbasaur']")
             .should("be.visible")
             .as("bulbasaurSprite")
         cy.get("header nav ul li svg").should("be.visible").as("spriteSwitcher")
