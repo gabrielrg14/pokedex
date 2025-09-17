@@ -9,7 +9,7 @@ import { getColorsByPokemonType } from "utils"
 import { useStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const pokemons = await PokedexService.getPokemonsWithPagination(12) // Pré-render only 12 Pokémons
+    const pokemons = await PokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
     const paths = pokemons.map((pokemon: IPokemon) => {
         return {
             params: { name: pokemon.name }
@@ -40,14 +40,15 @@ type PokemonPageProps = {
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {
+    const router = useRouter()
     const { sprite } = useStore()
 
-    const router = useRouter()
     if (router && router.isFallback) return <Loading />
 
     let background = getColorsByPokemonType(
         pokemon.types[0].type.name
     ).background
+
     if (pokemon.types.length >= 2) {
         // Pokémon with 2 or more types
         background = `linear-gradient(
