@@ -1,4 +1,6 @@
-const venusaur = {
+import { IPokemon } from "interfaces"
+
+const venusaur: IPokemon = {
     id: 3,
     name: "venusaur",
     url: "https://pokeapi.co/api/v2/pokemon/3/",
@@ -7,17 +9,13 @@ const venusaur = {
             ability: {
                 name: "overgrow",
                 url: "https://pokeapi.co/api/v2/ability/65/"
-            },
-            is_hidden: false,
-            slot: 1
+            }
         },
         {
             ability: {
                 name: "chlorophyll",
                 url: "https://pokeapi.co/api/v2/ability/34/"
-            },
-            is_hidden: true,
-            slot: 3
+            }
         }
     ],
     height: 20,
@@ -39,7 +37,6 @@ const venusaur = {
     stats: [
         {
             base_stat: 80,
-            effort: 0,
             stat: {
                 name: "hp",
                 url: "https://pokeapi.co/api/v2/stat/1/"
@@ -47,7 +44,6 @@ const venusaur = {
         },
         {
             base_stat: 82,
-            effort: 0,
             stat: {
                 name: "attack",
                 url: "https://pokeapi.co/api/v2/stat/2/"
@@ -55,7 +51,6 @@ const venusaur = {
         },
         {
             base_stat: 83,
-            effort: 0,
             stat: {
                 name: "defense",
                 url: "https://pokeapi.co/api/v2/stat/3/"
@@ -63,7 +58,6 @@ const venusaur = {
         },
         {
             base_stat: 100,
-            effort: 2,
             stat: {
                 name: "special-attack",
                 url: "https://pokeapi.co/api/v2/stat/4/"
@@ -71,7 +65,6 @@ const venusaur = {
         },
         {
             base_stat: 100,
-            effort: 1,
             stat: {
                 name: "special-defense",
                 url: "https://pokeapi.co/api/v2/stat/5/"
@@ -79,7 +72,6 @@ const venusaur = {
         },
         {
             base_stat: 80,
-            effort: 0,
             stat: {
                 name: "speed",
                 url: "https://pokeapi.co/api/v2/stat/6/"
@@ -88,14 +80,12 @@ const venusaur = {
     ],
     types: [
         {
-            slot: 1,
             type: {
                 name: "grass",
                 url: "https://pokeapi.co/api/v2/type/12/"
             }
         },
         {
-            slot: 2,
             type: {
                 name: "poison",
                 url: "https://pokeapi.co/api/v2/type/4/"
@@ -104,7 +94,7 @@ const venusaur = {
     ]
 }
 
-const charizard = {
+const charizard: IPokemon = {
     id: 6,
     name: "charizard",
     url: "https://pokeapi.co/api/v2/pokemon/6/",
@@ -113,17 +103,13 @@ const charizard = {
             ability: {
                 name: "blaze",
                 url: "https://pokeapi.co/api/v2/ability/66/"
-            },
-            is_hidden: false,
-            slot: 1
+            }
         },
         {
             ability: {
                 name: "solar-power",
                 url: "https://pokeapi.co/api/v2/ability/94/"
-            },
-            is_hidden: true,
-            slot: 3
+            }
         }
     ],
     height: 17,
@@ -145,7 +131,6 @@ const charizard = {
     stats: [
         {
             base_stat: 78,
-            effort: 0,
             stat: {
                 name: "hp",
                 url: "https://pokeapi.co/api/v2/stat/1/"
@@ -153,7 +138,6 @@ const charizard = {
         },
         {
             base_stat: 84,
-            effort: 0,
             stat: {
                 name: "attack",
                 url: "https://pokeapi.co/api/v2/stat/2/"
@@ -161,7 +145,6 @@ const charizard = {
         },
         {
             base_stat: 78,
-            effort: 0,
             stat: {
                 name: "defense",
                 url: "https://pokeapi.co/api/v2/stat/3/"
@@ -169,7 +152,6 @@ const charizard = {
         },
         {
             base_stat: 109,
-            effort: 3,
             stat: {
                 name: "special-attack",
                 url: "https://pokeapi.co/api/v2/stat/4/"
@@ -177,7 +159,6 @@ const charizard = {
         },
         {
             base_stat: 85,
-            effort: 0,
             stat: {
                 name: "special-defense",
                 url: "https://pokeapi.co/api/v2/stat/5/"
@@ -185,7 +166,6 @@ const charizard = {
         },
         {
             base_stat: 100,
-            effort: 0,
             stat: {
                 name: "speed",
                 url: "https://pokeapi.co/api/v2/stat/6/"
@@ -194,14 +174,12 @@ const charizard = {
     ],
     types: [
         {
-            slot: 1,
             type: {
                 name: "fire",
                 url: "https://pokeapi.co/api/v2/type/10/"
             }
         },
         {
-            slot: 2,
             type: {
                 name: "flying",
                 url: "https://pokeapi.co/api/v2/type/3/"
@@ -210,7 +188,7 @@ const charizard = {
     ]
 }
 
-const blastoise = {
+const blastoise: IPokemon = {
     id: 9,
     name: "blastoise",
     url: "https://pokeapi.co/api/v2/pokemon/9/",
@@ -219,17 +197,13 @@ const blastoise = {
             ability: {
                 name: "torrent",
                 url: "https://pokeapi.co/api/v2/ability/67/"
-            },
-            is_hidden: false,
-            slot: 1
+            }
         },
         {
             ability: {
                 name: "rain-dish",
                 url: "https://pokeapi.co/api/v2/ability/44/"
-            },
-            is_hidden: true,
-            slot: 3
+            }
         }
     ],
     height: 16,
@@ -251,7 +225,6 @@ const blastoise = {
     stats: [
         {
             base_stat: 79,
-            effort: 0,
             stat: {
                 name: "hp",
                 url: "https://pokeapi.co/api/v2/stat/1/"
@@ -259,7 +232,6 @@ const blastoise = {
         },
         {
             base_stat: 83,
-            effort: 0,
             stat: {
                 name: "attack",
                 url: "https://pokeapi.co/api/v2/stat/2/"
@@ -267,7 +239,6 @@ const blastoise = {
         },
         {
             base_stat: 100,
-            effort: 0,
             stat: {
                 name: "defense",
                 url: "https://pokeapi.co/api/v2/stat/3/"
@@ -275,7 +246,6 @@ const blastoise = {
         },
         {
             base_stat: 85,
-            effort: 0,
             stat: {
                 name: "special-attack",
                 url: "https://pokeapi.co/api/v2/stat/4/"
@@ -283,7 +253,6 @@ const blastoise = {
         },
         {
             base_stat: 105,
-            effort: 3,
             stat: {
                 name: "special-defense",
                 url: "https://pokeapi.co/api/v2/stat/5/"
@@ -291,7 +260,6 @@ const blastoise = {
         },
         {
             base_stat: 78,
-            effort: 0,
             stat: {
                 name: "speed",
                 url: "https://pokeapi.co/api/v2/stat/6/"
@@ -300,7 +268,6 @@ const blastoise = {
     ],
     types: [
         {
-            slot: 1,
             type: {
                 name: "water",
                 url: "https://pokeapi.co/api/v2/type/11/"

@@ -5,7 +5,7 @@ import { BadgeType } from "."
 
 describe("<BadgeType />", () => {
     it("should render the grass badge and text with the correct colors", () => {
-        render(<BadgeType type={typeMocks.grass.name} />)
+        render(<BadgeType type={typeMocks.types.grass.name} />)
 
         const image = screen.getByRole("img", { name: /type grass/i })
         const text = screen.getByText(/grass/i)
@@ -20,7 +20,7 @@ describe("<BadgeType />", () => {
     })
 
     it("should render the fire badge and text with the correct colors", () => {
-        render(<BadgeType type={typeMocks.fire.name} />)
+        render(<BadgeType type={typeMocks.types.fire.name} />)
 
         const image = screen.getByRole("img", { name: /type fire/i })
         const text = screen.getByText(/fire/i)
@@ -35,7 +35,7 @@ describe("<BadgeType />", () => {
     })
 
     it("should render the water badge and text with the correct colors", () => {
-        render(<BadgeType type={typeMocks.water.name} />)
+        render(<BadgeType type={typeMocks.types.water.name} />)
 
         const image = screen.getByRole("img", { name: /type water/i })
         const text = screen.getByText(/water/i)

@@ -34,8 +34,8 @@ describe("PokedexService", () => {
             const types = await PokedexService.getAllTypes()
 
             expect(types).toHaveLength(19)
-            expect(types).toContainEqual(typeMocks.all)
-            expect(types).toStrictEqual([typeMocks.all, ...typeMocks.list])
+            expect(types).toContainEqual(typeMocks.typeAll)
+            expect(types).toStrictEqual([typeMocks.typeAll, ...typeMocks.list])
         })
     })
 

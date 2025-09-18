@@ -6,7 +6,7 @@ import { RowTypes } from "."
 describe("<RowTypes />", () => {
     describe("when 1 type were passed", () => {
         it("should render the electric badge when passing only the electric type", () => {
-            render(<RowTypes types={[{ type: typeMocks.electric }]} />)
+            render(<RowTypes types={[{ type: typeMocks.types.electric }]} />)
 
             const imageElectric = screen.getByRole("img", {
                 name: /type electric/i
@@ -17,7 +17,7 @@ describe("<RowTypes />", () => {
         })
 
         it("should render the electric text with the correct styles when passing only the electric type", () => {
-            render(<RowTypes types={[{ type: typeMocks.electric }]} />)
+            render(<RowTypes types={[{ type: typeMocks.types.electric }]} />)
 
             const textElectric = screen.getByText(/electric/i)
 
@@ -33,8 +33,8 @@ describe("<RowTypes />", () => {
             render(
                 <RowTypes
                     types={[
-                        { type: typeMocks.fighting },
-                        { type: typeMocks.poison }
+                        { type: typeMocks.types.fighting },
+                        { type: typeMocks.types.poison }
                     ]}
                 />
             )
@@ -56,8 +56,8 @@ describe("<RowTypes />", () => {
             render(
                 <RowTypes
                     types={[
-                        { type: typeMocks.fighting },
-                        { type: typeMocks.poison }
+                        { type: typeMocks.types.fighting },
+                        { type: typeMocks.types.poison }
                     ]}
                 />
             )
@@ -81,8 +81,8 @@ describe("<RowTypes />", () => {
             render(
                 <RowTypes
                     types={[
-                        { type: typeMocks.ice },
-                        { type: typeMocks.ground }
+                        { type: typeMocks.types.ice },
+                        { type: typeMocks.types.ground }
                     ]}
                 />
             )
@@ -104,8 +104,8 @@ describe("<RowTypes />", () => {
             render(
                 <RowTypes
                     types={[
-                        { type: typeMocks.ice },
-                        { type: typeMocks.ground }
+                        { type: typeMocks.types.ice },
+                        { type: typeMocks.types.ground }
                     ]}
                 />
             )

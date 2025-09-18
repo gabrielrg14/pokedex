@@ -5,7 +5,7 @@ import { getColorsByPokemonType } from "."
 describe("pokemonType", () => {
     describe("getColorsByPokemonType", () => {
         it("should return the correct normal type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.normal.name)
+            const props = getColorsByPokemonType(typeMocks.types.normal.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #9099A1 50%, #9099A1 50%)"
@@ -15,7 +15,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct fire type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.fire.name)
+            const props = getColorsByPokemonType(typeMocks.types.fire.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #FF9C54 50%, #FF9C54 50%)"
@@ -25,7 +25,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct water type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.water.name)
+            const props = getColorsByPokemonType(typeMocks.types.water.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #4D90D5 50%, #4D90D5 50%)"
@@ -35,7 +35,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct electric type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.electric.name)
+            const props = getColorsByPokemonType(typeMocks.types.electric.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #F3D23B 50%, #F3D23B 50%)"
@@ -45,7 +45,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct grass type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.grass.name)
+            const props = getColorsByPokemonType(typeMocks.types.grass.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #63BB5B 50%, #63BB5B 50%)"
@@ -55,7 +55,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct ice type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.ice.name)
+            const props = getColorsByPokemonType(typeMocks.types.ice.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #74CEC0 50%, #74CEC0 50%)"
@@ -65,7 +65,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct fighting type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.fighting.name)
+            const props = getColorsByPokemonType(typeMocks.types.fighting.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #CE4069 50%, #CE4069 50%)"
@@ -75,7 +75,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct poison type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.poison.name)
+            const props = getColorsByPokemonType(typeMocks.types.poison.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #AB6AC8 50%, #AB6AC8 50%)"
@@ -85,7 +85,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct ground type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.ground.name)
+            const props = getColorsByPokemonType(typeMocks.types.ground.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #D97746 50%, #D97746 50%)"
@@ -95,7 +95,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct flying type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.flying.name)
+            const props = getColorsByPokemonType(typeMocks.types.flying.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #92AADE 50%, #92AADE 50%)"
@@ -105,7 +105,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct psychic type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.psychic.name)
+            const props = getColorsByPokemonType(typeMocks.types.psychic.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #F97176 50%, #F97176 50%)"
@@ -115,7 +115,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct bug type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.bug.name)
+            const props = getColorsByPokemonType(typeMocks.types.bug.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #90C12C 50%, #90C12C 50%)"
@@ -125,7 +125,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct rock type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.rock.name)
+            const props = getColorsByPokemonType(typeMocks.types.rock.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #C7B78B 50%, #C7B78B 50%)"
@@ -135,7 +135,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct ghost type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.ghost.name)
+            const props = getColorsByPokemonType(typeMocks.types.ghost.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #5269AC 50%, #5269AC 50%)"
@@ -145,7 +145,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct dragon type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.dragon.name)
+            const props = getColorsByPokemonType(typeMocks.types.dragon.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #096DC4 50%, #096DC4 50%)"
@@ -155,7 +155,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct dark type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.dark.name)
+            const props = getColorsByPokemonType(typeMocks.types.dark.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #5A5366 50%, #5A5366 50%)"
@@ -165,7 +165,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct steel type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.steel.name)
+            const props = getColorsByPokemonType(typeMocks.types.steel.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #5A8EA1 50%, #5A8EA1 50%)"
@@ -175,7 +175,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct fairy type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.fairy.name)
+            const props = getColorsByPokemonType(typeMocks.types.fairy.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #EC8FE6 50%, #EC8FE6 50%)"
@@ -185,7 +185,7 @@ describe("pokemonType", () => {
         })
 
         it("should return the correct default type colors", () => {
-            const props = getColorsByPokemonType(typeMocks.all.name)
+            const props = getColorsByPokemonType(typeMocks.typeAll.name)
 
             expect(props.background).toEqual(
                 "linear-gradient(180deg, #000 50%, #000 50%)"
