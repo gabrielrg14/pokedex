@@ -280,5 +280,10 @@ export const pokemonMocks = {
     venusaur,
     charizard,
     blastoise,
-    list: [venusaur, charizard, blastoise]
+    list: [venusaur, charizard, blastoise],
+    arrayList: [
+        [venusaur.name, venusaur],
+        [charizard.name, charizard],
+        [blastoise.name, blastoise]
+    ]
 }

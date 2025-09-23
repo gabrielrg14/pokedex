@@ -3,10 +3,6 @@ import { API_URL } from "common"
 import { pokemonMocks, typeMocks } from "test/mocks"
 
 export const handlers = [
-    http.get(`${API_URL}/pokemon/:query`, () => {
-        return HttpResponse.json(pokemonMocks.venusaur, { status: 200 })
-    }),
-
     http.get(`${API_URL}/pokemon`, () => {
         return HttpResponse.json(
             { results: pokemonMocks.list },
@@ -14,13 +10,39 @@ export const handlers = [
         )
     }),
 
+    http.get(`${API_URL}/pokemon/venusaur`, () => {
+        return HttpResponse.json(pokemonMocks.venusaur, { status: 200 })
+    }),
+
+    http.get(`${API_URL}/pokemon/charizard`, () => {
+        return HttpResponse.json(pokemonMocks.charizard, { status: 200 })
+    }),
+
+    http.get(`${API_URL}/pokemon/blastoise`, () => {
+        return HttpResponse.json(pokemonMocks.blastoise, { status: 200 })
+    }),
+
     http.get(`${API_URL}/type`, () => {
         return HttpResponse.json({ results: typeMocks.list }, { status: 200 })
     }),
 
-    http.get(`${API_URL}/type/:type`, () => {
+    http.get(`${API_URL}/type/grass`, () => {
         return HttpResponse.json(
-            { pokemon: pokemonMocks.list.map((item) => ({ pokemon: item })) },
+            { pokemon: [{ pokemon: pokemonMocks.venusaur }] },
+            { status: 200 }
+        )
+    }),
+
+    http.get(`${API_URL}/type/fire`, () => {
+        return HttpResponse.json(
+            { pokemon: [{ pokemon: pokemonMocks.charizard }] },
+            { status: 200 }
+        )
+    }),
+
+    http.get(`${API_URL}/type/water`, () => {
+        return HttpResponse.json(
+            { pokemon: [{ pokemon: pokemonMocks.blastoise }] },
             { status: 200 }
         )
     })
