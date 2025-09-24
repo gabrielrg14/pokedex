@@ -64,15 +64,6 @@ const PokemonPage = ({ pokemon }: PokemonPageProps) => {
         )`
     }
 
-    // Removes abilities that have the same name
-    const abilities = pokemon.abilities.map((item) => item.ability.name)
-    const filtered = abilities.filter(
-        (item, index) => abilities.indexOf(item) === index
-    )
-    pokemon.abilities = pokemon.abilities.filter(
-        (item, index) => filtered.indexOf(item.ability.name) === index
-    )
-
     return (
         <PokemonTemplate
             pokemon={pokemon}

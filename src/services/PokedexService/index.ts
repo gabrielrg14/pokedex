@@ -2,8 +2,18 @@ import { IPokemon, IType } from "interfaces"
 import { Api } from "providers"
 
 const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
-    const { data } = await Api.get(`/pokemon/${query ?? ""}`)
-    return data ?? { id: null }
+    const { data: pokemon } = await Api.get<IPokemon>(`/pokemon/${query ?? ""}`)
+
+    // Removes abilities that have the same name
+    const abilityNames = pokemon.abilities.map((item) => item.ability.name)
+    const abilitiesFiltered = abilityNames.filter(
+        (item, index) => abilityNames.indexOf(item) === index
+    )
+    pokemon.abilities = pokemon.abilities.filter(
+        (item, index) => abilitiesFiltered.indexOf(item.ability.name) === index
+    )
+
+    return pokemon ?? { id: null }
 }
 
 const getPokemonsWithPagination = async (

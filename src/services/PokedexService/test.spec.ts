@@ -4,6 +4,19 @@ import { PokedexService } from "."
 
 describe("PokedexService", () => {
     describe("getPokemonByQuery", () => {
+        it("should not return duplicate abilities in pokemon data", async () => {
+            const pokemonData = await PokedexService.getPokemonByQuery(
+                pokemonMocks.venusaur.name
+            )
+            expect(pokemonData).not.toStrictEqual({
+                ...pokemonMocks.venusaur,
+                abilities: [
+                    ...pokemonMocks.venusaur.abilities,
+                    pokemonMocks.venusaur.abilities[0]
+                ]
+            })
+        })
+
         it.each(pokemonMocks.arrayList)(
             "should return %s data",
             async (name, pokemon) => {
