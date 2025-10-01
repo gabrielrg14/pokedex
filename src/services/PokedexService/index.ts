@@ -23,6 +23,7 @@ const getPokemonsWithPagination = async (
     const { data } = await Api.get(
         `/pokemon?limit=${limit}${offset ? `&offset=${offset}` : ""}`
     )
+
     return data.results
 }
 
@@ -42,9 +43,11 @@ const getAllTypes = async (): Promise<IType[]> => {
 
 const getPokemonsByType = async (type: string): Promise<IPokemon[]> => {
     const { data } = await Api.get(`/type/${type}`)
+
     const pokemonsByType = data.pokemon.map(
         (item: { pokemon: IPokemon }) => item.pokemon
     )
+
     return pokemonsByType
 }
 

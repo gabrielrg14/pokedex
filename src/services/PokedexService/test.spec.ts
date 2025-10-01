@@ -4,6 +4,12 @@ import { PokedexService } from "."
 
 describe("PokedexService", () => {
     describe("getPokemonByQuery", () => {
+        it("should throw an error when the searched pokemon does not exist", async () => {
+            await expect(
+                PokedexService.getPokemonByQuery("not-a-pokemon")
+            ).rejects.toThrow()
+        })
+
         it("should not return duplicate abilities in pokemon data", async () => {
             const pokemonData = await PokedexService.getPokemonByQuery(
                 pokemonMocks.venusaur.name
@@ -64,6 +70,12 @@ describe("PokedexService", () => {
     })
 
     describe("getPokemonsByType", () => {
+        it("should throw an error when the searched type does not exist", async () => {
+            await expect(
+                PokedexService.getPokemonsByType("not-a-pokemon")
+            ).rejects.toThrow()
+        })
+
         it.each(typeMocks.pokemonsByTypeArray)(
             "should return a list of pokemons from type %s",
             async (name, pokemon) => {
