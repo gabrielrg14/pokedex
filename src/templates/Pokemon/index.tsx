@@ -17,21 +17,17 @@ export const PokemonTemplate = ({
     background,
     sprite
 }: PokemonTemplateProps) => {
+    const pokemonName = formatPokemonName(pokemon?.name)
+
     return (
         <>
             <NextSeo
-                title={`${formatPokemonName(pokemon?.name)} | Pokédex`}
-                description={`Data found in the Pokédex for ${formatPokemonName(
-                    pokemon?.name
-                )}.`}
+                title={`${pokemonName} | Pokédex`}
+                description={`Data found in the Pokédex for ${pokemonName}.`}
                 additionalMetaTags={[
                     {
                         name: "keywords",
-                        content: `${formatPokemonName(
-                            pokemon?.name
-                        )}, ${formatPokemonName(
-                            pokemon?.name
-                        )}#${pokemon?.id}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
+                        content: `${pokemonName}, ${pokemonName}#${pokemon?.id}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
                     }
                 ]}
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemon?.name}`}
@@ -42,9 +38,7 @@ export const PokemonTemplate = ({
                     <S.Content>
                         <S.PokemonCard>
                             <S.PokemonTitle>
-                                <S.PokemonName>
-                                    {formatPokemonName(pokemon?.name)}
-                                </S.PokemonName>
+                                <S.PokemonName>{pokemonName}</S.PokemonName>
                                 <S.Number>
                                     <PokemonNumber number={pokemon?.id} />
                                 </S.Number>
