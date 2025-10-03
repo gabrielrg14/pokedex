@@ -10,15 +10,19 @@ export const handlers = [
         )
     }),
 
-    http.get(`${API_URL}/pokemon/venusaur`, () => {
+    http.get(`${API_URL}/pokemon/not-a-pokemon`, () => {
+        return HttpResponse.json(null, { status: 404 })
+    }),
+
+    http.get(`${API_URL}/pokemon/${pokemonMocks.venusaur.name}`, () => {
         return HttpResponse.json(pokemonMocks.venusaur, { status: 200 })
     }),
 
-    http.get(`${API_URL}/pokemon/charizard`, () => {
+    http.get(`${API_URL}/pokemon/${pokemonMocks.charizard.name}`, () => {
         return HttpResponse.json(pokemonMocks.charizard, { status: 200 })
     }),
 
-    http.get(`${API_URL}/pokemon/blastoise`, () => {
+    http.get(`${API_URL}/pokemon/${pokemonMocks.blastoise.name}`, () => {
         return HttpResponse.json(pokemonMocks.blastoise, { status: 200 })
     }),
 
@@ -26,21 +30,25 @@ export const handlers = [
         return HttpResponse.json({ results: typeMocks.list }, { status: 200 })
     }),
 
-    http.get(`${API_URL}/type/grass`, () => {
+    http.get(`${API_URL}/type/not-a-type`, () => {
+        return HttpResponse.json(null, { status: 404 })
+    }),
+
+    http.get(`${API_URL}/type/${typeMocks.types.grass.name}`, () => {
         return HttpResponse.json(
             { pokemon: [{ pokemon: pokemonMocks.venusaur }] },
             { status: 200 }
         )
     }),
 
-    http.get(`${API_URL}/type/fire`, () => {
+    http.get(`${API_URL}/type/${typeMocks.types.fire.name}`, () => {
         return HttpResponse.json(
             { pokemon: [{ pokemon: pokemonMocks.charizard }] },
             { status: 200 }
         )
     }),
 
-    http.get(`${API_URL}/type/water`, () => {
+    http.get(`${API_URL}/type/${typeMocks.types.water.name}`, () => {
         return HttpResponse.json(
             { pokemon: [{ pokemon: pokemonMocks.blastoise }] },
             { status: 200 }

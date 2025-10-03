@@ -6,8 +6,8 @@ Cypress.Commands.add("navigateToPokemonPage", (name: string) => {
 
 Cypress.Commands.add(
     "validatePokemonPage",
-    (title: string, name: string, number: string, types: string[]) => {
-        cy.contains("main section h1", title).should("be.visible")
+    (name: string, number: string, types: string[]) => {
+        cy.contains("main section h1", name).should("be.visible")
         cy.contains("main section span", number).should("be.visible")
         cy.get(`main section img[alt='${name}']`).should("be.visible")
         types.forEach((type) => {

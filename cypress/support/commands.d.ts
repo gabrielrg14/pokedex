@@ -7,7 +7,7 @@ declare namespace Cypress {
          *
          * @param name string - The name of the Pokémon page you want to navigate to
          *
-         * @example cy.navigateToPokemonPage("pikachu") // Navigate to the provided Pokémon page
+         * @example cy.navigateToPokemonPage("Pikachu") // Navigate to the provided Pokémon page
          */
         navigateToPokemonPage(
             name: string
@@ -16,16 +16,14 @@ declare namespace Cypress {
         /**
          * Validates a Pokémon's data on its Pokémon page.
          *
-         * @param title string - The title of the Pokémon you want to validate
          * @param name string - The name of the Pokémon you want to validate
          * @param number string - The number of the Pokémon you want to validate
          * @param types string[] - The types of the Pokémon you want to validate
          *
-         * @example cy.validatePokemonPage("Venusaur", "venusaur", "#0003", ["grass", "poison"])
-         * @example cy.validatePokemonPage("Pikachu", "pikachu", "#0025", ["electric"])
+         * @example cy.validatePokemonPage("Venusaur", "#0003", ["grass", "poison"])
+         * @example cy.validatePokemonPage("Pikachu", "#0025", ["electric"])
          */
         validatePokemonPage(
-            title: string,
             name: string,
             number: string,
             types: string[]

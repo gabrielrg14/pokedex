@@ -5,7 +5,7 @@ import Image from "next/image"
 import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
 import { PokedexService } from "services"
-import { formatPokemonName } from "utils"
+import { formatName } from "utils"
 import { useStore } from "store"
 
 type CardProps = {
@@ -28,13 +28,16 @@ export const Card = ({ pokemon }: CardProps) => {
     const { sprite } = useStore()
 
     return (
-        <S.CardLink href={`/pokemon/${pokemon.name}`} aria-label={pokemon.name}>
+        <S.CardLink
+            href={`/pokemon/${pokemon.name}`}
+            aria-label={formatName(pokemon.name)}
+        >
             {pokemonData?.sprites?.other["official-artwork"]?.[sprite] && (
                 <Image
-                    src={pokemonData?.sprites.other["official-artwork"][sprite]}
+                    src={pokemonData.sprites.other["official-artwork"][sprite]}
                     width={156}
                     height={156}
-                    alt={pokemon.name}
+                    alt={formatName(pokemon.name)}
                     priority
                     unoptimized
                 />
@@ -42,7 +45,7 @@ export const Card = ({ pokemon }: CardProps) => {
 
             <S.PokemonInfos>
                 <PokemonNumber number={pokemonData?.id} />
-                <S.PokemonName>{formatPokemonName(pokemon.name)}</S.PokemonName>
+                <S.PokemonName>{formatName(pokemon.name)}</S.PokemonName>
             </S.PokemonInfos>
 
             <RowTypes types={pokemonData?.types} />

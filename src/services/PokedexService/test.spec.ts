@@ -72,7 +72,7 @@ describe("PokedexService", () => {
     describe("getPokemonsByType", () => {
         it("should throw an error when the searched type does not exist", async () => {
             await expect(
-                PokedexService.getPokemonsByType("not-a-pokemon")
+                PokedexService.getPokemonsByType("not-a-type")
             ).rejects.toThrow()
         })
 

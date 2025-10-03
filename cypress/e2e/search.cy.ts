@@ -9,11 +9,8 @@ describe("Search for Pokémon", () => {
     })
 
     it("search for Pokémon 'butterfree' in the initial list", () => {
-        cy.navigateToPokemonPage("butterfree")
-        cy.validatePokemonPage("Butterfree", "butterfree", "#0012", [
-            "bug",
-            "flying"
-        ])
+        cy.navigateToPokemonPage("Butterfree")
+        cy.validatePokemonPage("Butterfree", "#0012", ["bug", "flying"])
     })
 
     it("search for Pokémon 'pikachu' using pagination", () => {
@@ -28,20 +25,20 @@ describe("Search for Pokémon", () => {
         cy.get("@loadButton").click()
         cy.wait("@getPikachu")
 
-        cy.navigateToPokemonPage("pikachu")
-        cy.validatePokemonPage("Pikachu", "pikachu", "#0025", ["electric"])
+        cy.navigateToPokemonPage("Pikachu")
+        cy.validatePokemonPage("Pikachu", "#0025", ["electric"])
     })
 
     it("search for Pokémon 'sceptile' using search", () => {
         cy.searchForPokemon("sceptile")
-        cy.navigateToPokemonPage("sceptile")
-        cy.validatePokemonPage("Sceptile", "sceptile", "#0254", ["grass"])
+        cy.navigateToPokemonPage("Sceptile")
+        cy.validatePokemonPage("Sceptile", "#0254", ["grass"])
     })
 
     it("search for Pokémon '115' using search", () => {
         cy.searchForPokemon("115")
-        cy.navigateToPokemonPage("kangaskhan")
-        cy.validatePokemonPage("Kangaskhan", "kangaskhan", "#0115", ["normal"])
+        cy.navigateToPokemonPage("Kangaskhan")
+        cy.validatePokemonPage("Kangaskhan", "#0115", ["normal"])
     })
 
     it("search for Pokémon 'kyurem' using filter by type 'ice'", () => {
@@ -52,8 +49,8 @@ describe("Search for Pokémon", () => {
             .click()
         cy.wait("@getKyurem")
 
-        cy.navigateToPokemonPage("kyurem")
-        cy.validatePokemonPage("Kyurem", "kyurem", "#0646", ["dragon", "ice"])
+        cy.navigateToPokemonPage("Kyurem")
+        cy.validatePokemonPage("Kyurem", "#0646", ["dragon", "ice"])
     })
 
     it("search for the non-existent Pokémon 'test' using the search and return to the list", () => {

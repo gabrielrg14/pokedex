@@ -6,7 +6,7 @@ import * as S from "./styles"
 import Image from "next/image"
 import { IPokemon, IType } from "interfaces"
 import { Card, Button } from "components"
-import { getColorsByPokemonType } from "utils"
+import { getColorsByType } from "utils"
 
 export const LIMIT = 12
 
@@ -113,9 +113,8 @@ export const HomeTemplate = ({
                                             />
                                             <S.Type
                                                 typeColor={
-                                                    getColorsByPokemonType(
-                                                        type.name
-                                                    ).backgroundColor
+                                                    getColorsByType(type.name)
+                                                        .backgroundColor
                                                 }
                                             >
                                                 {type.name}

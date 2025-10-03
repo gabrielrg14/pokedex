@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 import * as S from "./styles"
-import { getColorsByPokemonType } from "utils"
+import { getColorsByType } from "utils"
 
 type StatBarProps = {
     type: string
@@ -34,7 +34,7 @@ export const StatBar = ({ type, stat, baseStat }: StatBarProps) => {
         <S.ParentBar data-testid="parent-bar">
             <S.ChildBar
                 data-testid="child-bar"
-                bgColor={getColorsByPokemonType(type).backgroundColor}
+                bgColor={getColorsByType(type).backgroundColor}
                 completed={completed}
             />
         </S.ParentBar>

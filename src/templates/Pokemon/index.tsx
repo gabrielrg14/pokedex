@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes, StatBar } from "components"
-import { formatPokemonName } from "utils"
+import { formatName } from "utils"
 import { Sprite } from "store"
 
 type PokemonTemplateProps = {
@@ -17,7 +17,8 @@ export const PokemonTemplate = ({
     background,
     sprite
 }: PokemonTemplateProps) => {
-    const pokemonName = formatPokemonName(pokemon?.name)
+    const pokemonName = formatName(pokemon?.name)
+    const pokemonNumber = pokemon?.id
 
     return (
         <>
@@ -27,10 +28,10 @@ export const PokemonTemplate = ({
                 additionalMetaTags={[
                     {
                         name: "keywords",
-                        content: `${pokemonName}, ${pokemonName}#${pokemon?.id}, Pokémon #${pokemon?.id}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
+                        content: `${pokemonName}, ${pokemonName}#${pokemonNumber}, Pokémon #${pokemonNumber}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
                     }
                 ]}
-                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemon?.name}`}
+                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonName}`}
             />
 
             <S.Background style={{ background }}>
@@ -40,7 +41,7 @@ export const PokemonTemplate = ({
                             <S.PokemonTitle>
                                 <S.PokemonName>{pokemonName}</S.PokemonName>
                                 <S.Number>
-                                    <PokemonNumber number={pokemon?.id} />
+                                    <PokemonNumber number={pokemonNumber} />
                                 </S.Number>
                             </S.PokemonTitle>
 
@@ -50,13 +51,13 @@ export const PokemonTemplate = ({
                                 ] && (
                                     <S.PokemonImage
                                         src={
-                                            pokemon?.sprites.other[
+                                            pokemon.sprites.other[
                                                 "official-artwork"
                                             ][sprite]
                                         }
                                         width={256}
                                         height={256}
-                                        alt={pokemon?.name}
+                                        alt={pokemonName}
                                         priority
                                     />
                                 )}
@@ -77,10 +78,7 @@ export const PokemonTemplate = ({
                                     <S.DataTitle>Abilities</S.DataTitle>
                                     {pokemon.abilities.map((item, index) => (
                                         <p key={index}>
-                                            {item.ability.name.replace(
-                                                "-",
-                                                " "
-                                            )}
+                                            {formatName(item.ability.name)}
                                         </p>
                                     ))}
                                 </S.Data>
@@ -92,15 +90,12 @@ export const PokemonTemplate = ({
                                     <S.Stat key={index}>
                                         <S.StatInfo>
                                             <span>
-                                                {item.stat.name.replace(
-                                                    "special-",
-                                                    "Sp. "
-                                                )}
+                                                {formatName(item.stat.name)}
                                             </span>
                                             <span>{item.base_stat}</span>
                                         </S.StatInfo>
                                         <StatBar
-                                            type={pokemon?.types[0].type.name}
+                                            type={pokemon.types[0].type.name}
                                             stat={item.stat.name}
                                             baseStat={item.base_stat}
                                         />

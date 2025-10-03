@@ -12,7 +12,7 @@ describe("Pokémon sprite", () => {
         cy.visit("/")
         cy.wait("@getBulbasaur")
 
-        cy.get("main section ul li img[alt='bulbasaur']")
+        cy.get("main section ul li img[alt='Bulbasaur']")
             .should("be.visible")
             .as("bulbasaurSprite")
         cy.get("header nav ul li svg").should("be.visible").as("spriteSwitcher")

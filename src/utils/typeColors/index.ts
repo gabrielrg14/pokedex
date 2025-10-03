@@ -1,4 +1,4 @@
-export function getColorsByPokemonType(type: string) {
+export function getColorsByType(type: string) {
     switch (type) {
         case "normal":
             return {

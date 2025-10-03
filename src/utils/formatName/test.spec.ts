@@ -1,25 +1,27 @@
-import { formatPokemonName } from "."
+import { formatName } from "."
 
 describe("pokemonName", () => {
-    describe("formatPokemonName", () => {
+    describe("formatName", () => {
         it("should return Bulbasaur formatted when passing bulbasaur", () => {
-            expect(formatPokemonName("bulbasaur")).toBe("Bulbasaur")
+            expect(formatName("bulbasaur")).toBe("Bulbasaur")
         })
 
         it("should return Kommo O formatted when passing kommo-o", () => {
-            expect(formatPokemonName("kommo-o")).toBe("Kommo O")
+            expect(formatName("kommo-o")).toBe("Kommo O")
         })
 
         it("should return Charizard Mega X formatted when passing charizard-mega-x", () => {
-            expect(formatPokemonName("charizard-mega-x")).toBe(
-                "Charizard Mega X"
-            )
+            expect(formatName("charizard-mega-x")).toBe("Charizard Mega X")
         })
 
         it("should return Zygarde 10 Power Construct formatted when passing zygarde-10-power-construct", () => {
-            expect(formatPokemonName("zygarde-10-power-construct")).toBe(
+            expect(formatName("zygarde-10-power-construct")).toBe(
                 "Zygarde 10 Power Construct"
             )
+        })
+
+        it("should return Good As Gold formatted when passing good-as-gold", () => {
+            expect(formatName("good-as-gold")).toBe("Good As Gold")
         })
     })
 })

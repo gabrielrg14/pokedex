@@ -5,7 +5,7 @@ import { IPokemon } from "interfaces"
 import { Loading } from "components"
 import { PokedexService } from "services"
 import { PokemonTemplate } from "templates"
-import { getColorsByPokemonType } from "utils"
+import { getColorsByType } from "utils"
 import { useStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,22 +45,14 @@ const PokemonPage = ({ pokemon }: PokemonPageProps) => {
 
     if (router && router.isFallback) return <Loading />
 
-    let background = getColorsByPokemonType(
-        pokemon.types[0].type.name
-    ).background
+    let background = getColorsByType(pokemon.types[0].type.name).background
 
     if (pokemon.types.length >= 2) {
         // Pokémon with 2 or more types
         background = `linear-gradient(
             to right,
-            ${
-                getColorsByPokemonType(pokemon.types[0].type.name)
-                    .backgroundColor
-            } 50%,
-            ${
-                getColorsByPokemonType(pokemon.types[1].type.name)
-                    .backgroundColor
-            } 50%
+            ${getColorsByType(pokemon.types[0].type.name).backgroundColor} 50%,
+            ${getColorsByType(pokemon.types[1].type.name).backgroundColor} 50%
         )`
     }
 

@@ -1,6 +1,6 @@
 import * as S from "./styles"
 import Image from "next/image"
-import { getColorsByPokemonType } from "utils"
+import { getColorsByType } from "utils"
 
 type BadgeTypeProps = {
     type: string
@@ -15,7 +15,7 @@ export const BadgeType = ({ type }: BadgeTypeProps) => {
                 height={32}
                 alt={`Type ${type}`}
             />
-            <S.Type {...getColorsByPokemonType(type)}>{type}</S.Type>
+            <S.Type {...getColorsByType(type)}>{type}</S.Type>
         </S.Wrapper>
     )
 }
