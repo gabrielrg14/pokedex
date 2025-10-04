@@ -18,12 +18,24 @@ export const handlers = [
         return HttpResponse.json(pokemonMocks.venusaur, { status: 200 })
     }),
 
+    http.get(`${API_URL}/pokemon-species/${pokemonMocks.venusaur.id}`, () => {
+        return HttpResponse.json(pokemonMocks.venusaurSpecies, { status: 200 })
+    }),
+
     http.get(`${API_URL}/pokemon/${pokemonMocks.charizard.name}`, () => {
         return HttpResponse.json(pokemonMocks.charizard, { status: 200 })
     }),
 
+    http.get(`${API_URL}/pokemon-species/${pokemonMocks.charizard.id}`, () => {
+        return HttpResponse.json(pokemonMocks.charizardSpecies, { status: 200 })
+    }),
+
     http.get(`${API_URL}/pokemon/${pokemonMocks.blastoise.name}`, () => {
         return HttpResponse.json(pokemonMocks.blastoise, { status: 200 })
+    }),
+
+    http.get(`${API_URL}/pokemon-species/${pokemonMocks.blastoise.id}`, () => {
+        return HttpResponse.json(pokemonMocks.blastoiseSpecies, { status: 200 })
     }),
 
     http.get(`${API_URL}/type`, () => {

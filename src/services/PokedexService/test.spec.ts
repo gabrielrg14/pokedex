@@ -23,8 +23,8 @@ describe("PokedexService", () => {
             })
         })
 
-        it.each(pokemonMocks.arrayList)(
-            "should return %s data",
+        it.each(pokemonMocks.pokemonSpeciesArrayList)(
+            "should return %s data including species",
             async (name, pokemon) => {
                 const pokemonData = await PokedexService.getPokemonByQuery(
                     name as string
@@ -41,7 +41,7 @@ describe("PokedexService", () => {
             expect(pokemonList).toStrictEqual(pokemonMocks.list)
         })
 
-        it.each(pokemonMocks.arrayList)(
+        it.each(pokemonMocks.pokemonArrayList)(
             "should return %s data in the list",
             async (name, pokemon) => {
                 const pokemonList =

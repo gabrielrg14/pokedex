@@ -1,5 +1,18 @@
-import { IPokemon, IType } from "interfaces"
+import { IPokemon, IPokemonSpecies, IType } from "interfaces"
 import { Api } from "providers"
+
+const getPokemonSpecies = async (
+    id: number
+): Promise<IPokemonSpecies | null> => {
+    try {
+        const { data: pokemonSpecies } = await Api.get<IPokemonSpecies>(
+            `/pokemon-species/${id}`
+        )
+        return pokemonSpecies
+    } catch {
+        return null
+    }
+}
 
 const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
     const { data: pokemon } = await Api.get<IPokemon>(`/pokemon/${query ?? ""}`)
@@ -13,7 +26,9 @@ const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
         (item, index) => abilitiesFiltered.indexOf(item.ability.name) === index
     )
 
-    return pokemon ?? { id: null }
+    const pokemonSpecies = await getPokemonSpecies(pokemon.id)
+
+    return { ...pokemonSpecies, ...pokemon }
 }
 
 const getPokemonsWithPagination = async (

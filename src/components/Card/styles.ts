@@ -32,7 +32,6 @@ export const PokemonInfos = styled.div`
 
 export const PokemonName = styled.h2`
     color: var(--dark-color);
-    text-transform: capitalize;
     font-size: 2rem;
     margin: 0;
 `

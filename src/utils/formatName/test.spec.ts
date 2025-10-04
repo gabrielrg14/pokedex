@@ -2,6 +2,10 @@ import { formatName } from "."
 
 describe("pokemonName", () => {
     describe("formatName", () => {
+        it("should return an empty string when passing undefined", () => {
+            expect(formatName(undefined)).toBe("")
+        })
+
         it("should return Bulbasaur formatted when passing bulbasaur", () => {
             expect(formatName("bulbasaur")).toBe("Bulbasaur")
         })
@@ -18,6 +22,10 @@ describe("pokemonName", () => {
             expect(formatName("zygarde-10-power-construct")).toBe(
                 "Zygarde 10 Power Construct"
             )
+        })
+
+        it("should return Solar Power formatted when passing solar-power", () => {
+            expect(formatName("solar-power")).toBe("Solar Power")
         })
 
         it("should return Good As Gold formatted when passing good-as-gold", () => {

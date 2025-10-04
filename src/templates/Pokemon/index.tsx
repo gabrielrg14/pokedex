@@ -1,13 +1,13 @@
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import { IPokemon } from "interfaces"
+import { IPokemonSpecies } from "interfaces"
 import { PokemonNumber, RowTypes, StatBar } from "components"
 import { formatName } from "utils"
 import { Sprite } from "store"
 
 type PokemonTemplateProps = {
-    pokemon: IPokemon
+    pokemon: IPokemonSpecies
     background: string
     sprite: Sprite
 }
@@ -40,12 +40,23 @@ export const PokemonTemplate = ({
                         <S.PokemonCard>
                             <S.PokemonTitle>
                                 <S.PokemonName>{pokemonName}</S.PokemonName>
-                                <S.Number>
+                                {pokemon.genera && (
+                                    <S.PokemonGenera>
+                                        {formatName(
+                                            pokemon.genera.find(
+                                                (genera) =>
+                                                    genera.language.name ===
+                                                    "en"
+                                            )?.genus
+                                        )}
+                                    </S.PokemonGenera>
+                                )}
+                                <S.PokemonId>
                                     <PokemonNumber number={pokemonNumber} />
-                                </S.Number>
+                                </S.PokemonId>
                             </S.PokemonTitle>
 
-                            <S.DivImage>
+                            <S.ImageWrapper>
                                 {pokemon?.sprites?.other["official-artwork"]?.[
                                     sprite
                                 ] && (
@@ -61,7 +72,7 @@ export const PokemonTemplate = ({
                                         priority
                                     />
                                 )}
-                            </S.DivImage>
+                            </S.ImageWrapper>
 
                             <RowTypes types={pokemon?.types} />
 

@@ -44,3 +44,15 @@ export interface IPokemon {
     abilities: IAbility[]
     stats: IStat[]
 }
+
+export interface IGenera {
+    genus: string
+    language: {
+        name: string
+        url: string
+    }
+}
+
+export interface IPokemonSpecies extends IPokemon {
+    genera?: IGenera[]
+}

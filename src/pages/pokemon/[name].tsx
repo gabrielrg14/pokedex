@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 
 import { useRouter } from "next/router"
-import { IPokemon } from "interfaces"
+import { IPokemon, IPokemonSpecies } from "interfaces"
 import { Loading } from "components"
 import { PokedexService } from "services"
 import { PokemonTemplate } from "templates"
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 type PokemonPageProps = {
-    pokemon: IPokemon
+    pokemon: IPokemonSpecies
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {

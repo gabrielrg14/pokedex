@@ -37,17 +37,27 @@ export const PokemonTitle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 0.3rem;
 `
 
 export const PokemonName = styled.h1`
     font-size: var(--xl-size);
-    text-transform: capitalize;
     text-align: center;
 `
 
-export const Number = styled.span``
+export const PokemonGenera = styled.h2`
+    font-size: var(--default-size);
+    line-height: var(--default-size);
+    font-weight: normal;
+`
 
-export const DivImage = styled.div`
+export const PokemonId = styled.h3`
+    font-size: var(--default-size);
+    line-height: var(--default-size);
+    font-weight: normal;
+`
+
+export const ImageWrapper = styled.div`
     text-align: center;
 `
 
@@ -71,7 +81,6 @@ export const Data = styled.div`
     align-items: center;
     margin: var(--default-size) 0 0;
     padding: 0 var(--default-size);
-    text-transform: capitalize;
 `
 
 export const DataTitle = styled.h2`
@@ -83,7 +92,6 @@ export const DataTitle = styled.h2`
 export const PokemonStats = styled.div`
     padding: 0 var(--default-size);
     margin: var(--default-size) 0 0;
-    text-transform: capitalize;
 `
 
 export const Stat = styled("div")`

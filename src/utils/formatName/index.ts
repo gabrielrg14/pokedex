@@ -1,4 +1,4 @@
-export const formatName = (name: string) => {
+export const formatName = (name: string = "") => {
     // Removes hyphen from pokémon name and puts a blank in its place
     return (
         name

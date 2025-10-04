@@ -1,4 +1,4 @@
-import { IPokemon } from "interfaces"
+import { IPokemon, IPokemonSpecies } from "interfaces"
 
 const venusaur: IPokemon = {
     id: 3,
@@ -89,6 +89,19 @@ const venusaur: IPokemon = {
             type: {
                 name: "poison",
                 url: "https://pokeapi.co/api/v2/type/4/"
+            }
+        }
+    ]
+}
+
+const venusaurSpecies: IPokemonSpecies = {
+    ...venusaur,
+    genera: [
+        {
+            genus: "Seed Pokémon",
+            language: {
+                name: "en",
+                url: "https://pokeapi.co/api/v2/language/9/"
             }
         }
     ]
@@ -188,6 +201,19 @@ const charizard: IPokemon = {
     ]
 }
 
+const charizardSpecies: IPokemonSpecies = {
+    ...charizard,
+    genera: [
+        {
+            genus: "Flame Pokémon",
+            language: {
+                name: "en",
+                url: "https://pokeapi.co/api/v2/language/9/"
+            }
+        }
+    ]
+}
+
 const blastoise: IPokemon = {
     id: 9,
     name: "blastoise",
@@ -276,14 +302,35 @@ const blastoise: IPokemon = {
     ]
 }
 
+const blastoiseSpecies: IPokemonSpecies = {
+    ...blastoise,
+    genera: [
+        {
+            genus: "Shellfish Pokémon",
+            language: {
+                name: "en",
+                url: "https://pokeapi.co/api/v2/language/9/"
+            }
+        }
+    ]
+}
+
 export const pokemonMocks = {
     venusaur,
+    venusaurSpecies,
     charizard,
+    charizardSpecies,
     blastoise,
+    blastoiseSpecies,
     list: [venusaur, charizard, blastoise],
-    arrayList: [
+    pokemonArrayList: [
         [venusaur.name, venusaur],
         [charizard.name, charizard],
         [blastoise.name, blastoise]
+    ],
+    pokemonSpeciesArrayList: [
+        [venusaurSpecies.name, venusaurSpecies],
+        [charizardSpecies.name, charizardSpecies],
+        [blastoiseSpecies.name, blastoiseSpecies]
     ]
 }
