@@ -31,5 +31,13 @@ describe("pokemonName", () => {
         it("should return Good As Gold formatted when passing good-as-gold", () => {
             expect(formatName("good-as-gold")).toBe("Good As Gold")
         })
+
+        it("should return Waters Edge formatted when passing waters-edge", () => {
+            expect(formatName("waters-edge")).toBe("Waters Edge")
+        })
+
+        it("should return Rough Terrain formatted when passing rough-terrain", () => {
+            expect(formatName("rough-terrain")).toBe("Rough Terrain")
+        })
     })
 })

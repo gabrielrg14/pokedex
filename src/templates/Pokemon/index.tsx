@@ -85,6 +85,14 @@ export const PokemonTemplate = ({
                                     <S.DataTitle>Weight</S.DataTitle>
                                     <p>{pokemon?.weight / 10}kg</p>
                                 </S.Data>
+                                {pokemon?.habitat && (
+                                    <S.Data>
+                                        <S.DataTitle>Habitat</S.DataTitle>
+                                        <p>
+                                            {formatName(pokemon.habitat.name)}
+                                        </p>
+                                    </S.Data>
+                                )}
                                 <S.Data>
                                     <S.DataTitle>Abilities</S.DataTitle>
                                     {pokemon.abilities.map((item, index) => (

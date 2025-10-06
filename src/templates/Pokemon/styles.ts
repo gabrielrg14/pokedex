@@ -26,9 +26,11 @@ export const PokemonCard = styled.div`
     box-shadow: 0px 10px 50px -5px rgb(183 189 193 / 30%);
     border-radius: 12px;
     border: 2px solid var(--dark-color);
+    width: 300px;
 
     ${media.lessThan("mobile")`
         padding: var(--default-size);
+        width: auto;
     `}
 `
 

@@ -53,6 +53,12 @@ export interface IGenera {
     }
 }
 
+export interface IHabitat {
+    name: string
+    url: string
+}
+
 export interface IPokemonSpecies extends IPokemon {
     genera?: IGenera[]
+    habitat?: IHabitat
 }

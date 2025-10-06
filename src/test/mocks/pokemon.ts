@@ -104,7 +104,11 @@ const venusaurSpecies: IPokemonSpecies = {
                 url: "https://pokeapi.co/api/v2/language/9/"
             }
         }
-    ]
+    ],
+    habitat: {
+        name: "grassland",
+        url: "https://pokeapi.co/api/v2/pokemon-habitat/3/"
+    }
 }
 
 const charizard: IPokemon = {
@@ -211,7 +215,11 @@ const charizardSpecies: IPokemonSpecies = {
                 url: "https://pokeapi.co/api/v2/language/9/"
             }
         }
-    ]
+    ],
+    habitat: {
+        name: "mountain",
+        url: "https://pokeapi.co/api/v2/pokemon-habitat/4/"
+    }
 }
 
 const blastoise: IPokemon = {
@@ -312,7 +320,11 @@ const blastoiseSpecies: IPokemonSpecies = {
                 url: "https://pokeapi.co/api/v2/language/9/"
             }
         }
-    ]
+    ],
+    habitat: {
+        name: "waters-edge",
+        url: "https://pokeapi.co/api/v2/pokemon-habitat/9/"
+    }
 }
 
 export const pokemonMocks = {
