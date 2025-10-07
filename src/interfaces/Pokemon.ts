@@ -9,6 +9,11 @@ export interface ISprites {
     }
 }
 
+export interface ICry {
+    latest: string
+    legacy?: string
+}
+
 export interface IType {
     name: string
     url: string
@@ -38,6 +43,7 @@ export interface IPokemon {
     name: string
     url: string
     sprites: ISprites
+    cries: ICry
     height: number
     weight: number
     types: IPokemonType[]

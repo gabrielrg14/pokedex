@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from "react"
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
@@ -20,6 +21,18 @@ export const PokemonTemplate = ({
     const pokemonName = formatName(pokemon?.name)
     const pokemonNumber = pokemon?.id
 
+    const playPokemonCry = useCallback(() => {
+        const cryAudioElement = document.getElementById(
+            `${pokemonName}-cry`
+        ) as HTMLAudioElement
+        cryAudioElement.volume = 0.05
+        cryAudioElement.play()
+    }, [pokemonName])
+
+    useEffect(() => {
+        playPokemonCry()
+    }, [playPokemonCry])
+
     return (
         <>
             <NextSeo
@@ -28,18 +41,30 @@ export const PokemonTemplate = ({
                 additionalMetaTags={[
                     {
                         name: "keywords",
-                        content: `${pokemonName}, ${pokemonName}#${pokemonNumber}, Pokémon #${pokemonNumber}, Pokédex, Pokédex Number, Sprite, Types, Height, Weight, Abilities, Stats`
+                        content: `${pokemonName}, ${pokemonName}#${pokemonNumber}, Pokémon #${pokemonNumber}, Pokédex Number, Cry, Sprite, Types, Height, Weight, Habitat, Abilities, Stats`
                     }
                 ]}
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonName}`}
             />
 
+            <audio id={`${pokemonName}-cry`} src={pokemon?.cries?.latest} />
+
             <S.Background style={{ background }}>
                 <S.Wrapper>
                     <S.Content>
                         <S.PokemonCard>
-                            <S.PokemonTitle>
-                                <S.PokemonName>{pokemonName}</S.PokemonName>
+                            <S.PokemonInfo>
+                                <S.PokemonTitle>
+                                    <S.PokemonName>{pokemonName}</S.PokemonName>
+                                    <S.CryButton
+                                        type="button"
+                                        title="Play cry"
+                                        onClick={() => playPokemonCry()}
+                                    >
+                                        🔊
+                                    </S.CryButton>
+                                </S.PokemonTitle>
+
                                 {pokemon.genera && (
                                     <S.PokemonGenera>
                                         {formatName(
@@ -51,10 +76,11 @@ export const PokemonTemplate = ({
                                         )}
                                     </S.PokemonGenera>
                                 )}
+
                                 <S.PokemonId>
                                     <PokemonNumber number={pokemonNumber} />
                                 </S.PokemonId>
-                            </S.PokemonTitle>
+                            </S.PokemonInfo>
 
                             <S.ImageWrapper>
                                 {pokemon?.sprites?.other["official-artwork"]?.[

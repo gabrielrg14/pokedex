@@ -34,7 +34,7 @@ export const PokemonCard = styled.div`
     `}
 `
 
-export const PokemonTitle = styled.div`
+export const PokemonInfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,9 +42,31 @@ export const PokemonTitle = styled.div`
     gap: 0.3rem;
 `
 
+export const PokemonTitle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+`
+
 export const PokemonName = styled.h1`
     font-size: var(--xl-size);
     text-align: center;
+`
+
+export const CryButton = styled("button")`
+    font-size: var(--md-size);
+    padding: 0.3rem;
+    background-color: rgb(183 189 193 / 30%);
+    border: 1px solid var(--gray-color);
+    border-radius: 24px;
+    transition: background-color 0.3s ease;
+
+    :hover {
+        cursor: pointer;
+        background-color: rgb(183 189 193 / 60%);
+    }
 `
 
 export const PokemonGenera = styled.h2`

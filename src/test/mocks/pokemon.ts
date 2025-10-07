@@ -91,7 +91,11 @@ const venusaur: IPokemon = {
                 url: "https://pokeapi.co/api/v2/type/4/"
             }
         }
-    ]
+    ],
+    cries: {
+        latest: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/3.ogg",
+        legacy: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/3.ogg"
+    }
 }
 
 const venusaurSpecies: IPokemonSpecies = {
@@ -202,7 +206,11 @@ const charizard: IPokemon = {
                 url: "https://pokeapi.co/api/v2/type/3/"
             }
         }
-    ]
+    ],
+    cries: {
+        latest: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/6.ogg",
+        legacy: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/6.ogg"
+    }
 }
 
 const charizardSpecies: IPokemonSpecies = {
@@ -307,7 +315,11 @@ const blastoise: IPokemon = {
                 url: "https://pokeapi.co/api/v2/type/11/"
             }
         }
-    ]
+    ],
+    cries: {
+        latest: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/9.ogg",
+        legacy: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/9.ogg"
+    }
 }
 
 const blastoiseSpecies: IPokemonSpecies = {
