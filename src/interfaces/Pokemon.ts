@@ -1,11 +1,11 @@
-export interface ISprites {
+export interface ISprite {
     front_default: string
     front_shiny: string
+}
+
+export interface ISprites extends ISprite {
     other: {
-        "official-artwork": {
-            front_default: string
-            front_shiny: string
-        }
+        "official-artwork": ISprite
     }
 }
 

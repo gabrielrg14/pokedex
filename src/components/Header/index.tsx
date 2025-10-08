@@ -1,11 +1,12 @@
 import * as S from "./styles"
 import Image from "next/image"
+import { Images } from "@styled-icons/entypo/Images"
 import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles"
 import { Container } from "components"
-import { useStore } from "store"
+import { SpriteType, SpriteVersion, useStore } from "store"
 
 export const Header = () => {
-    const { sprite, toggleSprite } = useStore()
+    const { sprite, toggleSpriteVersion, toggleSpriteType } = useStore()
 
     return (
         <S.Header>
@@ -24,13 +25,33 @@ export const Header = () => {
 
                     <S.NavList>
                         <S.NavItem>
-                            <S.ShinyIcon onClick={() => toggleSprite()}>
-                                <Sparkles
+                            <S.NavIcon
+                                title="Toggle sprite"
+                                onClick={() => toggleSpriteVersion()}
+                            >
+                                <Images
                                     className={
-                                        sprite === "front_shiny" ? "shiny" : ""
+                                        sprite.version ===
+                                        SpriteVersion.pixelated
+                                            ? "active"
+                                            : ""
                                     }
                                 />
-                            </S.ShinyIcon>
+                            </S.NavIcon>
+                        </S.NavItem>
+                        <S.NavItem>
+                            <S.NavIcon
+                                title="Toggle shiny"
+                                onClick={() => toggleSpriteType()}
+                            >
+                                <Sparkles
+                                    className={
+                                        sprite.type === SpriteType.shiny
+                                            ? "active"
+                                            : ""
+                                    }
+                                />
+                            </S.NavIcon>
                         </S.NavItem>
                         <S.NavItem>
                             <S.NavLink

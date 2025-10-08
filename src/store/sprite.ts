@@ -1,24 +1,52 @@
 import { create } from "zustand"
-import { STORAGE_KEY } from "common"
+import { SPRITE_STORAGE_KEY } from "common"
 
-export type Sprite = "front_default" | "front_shiny"
+export enum SpriteVersion {
+    official = "official",
+    pixelated = "pixelated"
+}
+
+export enum SpriteType {
+    default = "front_default",
+    shiny = "front_shiny"
+}
+
+export type Sprite = {
+    version: SpriteVersion
+    type: SpriteType
+}
 
 type SpriteStore = {
     sprite: Sprite
     setSprite: (sprite: Sprite) => void
-    toggleSprite: () => void
+    toggleSpriteVersion: () => void
+    toggleSpriteType: () => void
 }
 
 export const useStore = create<SpriteStore>()((set) => ({
-    sprite: "front_default",
+    sprite: {
+        version: SpriteVersion.official,
+        type: SpriteType.default
+    },
     setSprite: (sprite: Sprite) => set(() => ({ sprite })),
-    toggleSprite: () =>
+    toggleSpriteVersion: () =>
         set((state) => {
-            const sprite =
-                state.sprite === "front_default"
-                    ? "front_shiny"
-                    : "front_default"
-            localStorage.setItem(STORAGE_KEY, sprite)
+            const version =
+                state.sprite.version === SpriteVersion.official
+                    ? SpriteVersion.pixelated
+                    : SpriteVersion.official
+            const sprite = { ...state.sprite, version }
+            localStorage.setItem(SPRITE_STORAGE_KEY, JSON.stringify(sprite))
+            return { sprite }
+        }),
+    toggleSpriteType: () =>
+        set((state) => {
+            const type =
+                state.sprite.type === SpriteType.default
+                    ? SpriteType.shiny
+                    : SpriteType.default
+            const sprite = { ...state.sprite, type }
+            localStorage.setItem(SPRITE_STORAGE_KEY, JSON.stringify(sprite))
             return { sprite }
         })
 }))

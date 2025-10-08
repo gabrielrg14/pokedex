@@ -1,11 +1,12 @@
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
+import Image from "next/image"
 import { IPokemonSpecies } from "interfaces"
 import { PokemonNumber, RowTypes, StatBar } from "components"
 import { formatName } from "utils"
-import { Sprite } from "store"
+import { Sprite, SpriteVersion } from "store"
 
 type PokemonTemplateProps = {
     pokemon: IPokemonSpecies
@@ -18,8 +19,22 @@ export const PokemonTemplate = ({
     background,
     sprite
 }: PokemonTemplateProps) => {
-    const pokemonName = formatName(pokemon?.name)
-    const pokemonNumber = pokemon?.id
+    const pokemonName = useMemo(() => formatName(pokemon?.name), [pokemon])
+    const pokemonNumber = useMemo(() => pokemon?.id, [pokemon])
+    const pokemonCry = useMemo(
+        () =>
+            sprite.version === SpriteVersion.pixelated && pokemon?.cries?.legacy
+                ? pokemon?.cries?.legacy
+                : pokemon?.cries?.latest,
+        [pokemon, sprite]
+    )
+    const pokemonImage = useMemo(
+        () =>
+            sprite.version === SpriteVersion.pixelated
+                ? pokemon?.sprites?.[sprite.type]
+                : pokemon?.sprites?.other?.["official-artwork"]?.[sprite.type],
+        [sprite, pokemon]
+    )
 
     const playPokemonCry = useCallback(() => {
         const cryAudioElement = document.getElementById(
@@ -47,7 +62,7 @@ export const PokemonTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonName}`}
             />
 
-            <audio id={`${pokemonName}-cry`} src={pokemon?.cries?.latest} />
+            <audio id={`${pokemonName}-cry`} src={pokemonCry} />
 
             <S.Background style={{ background }}>
                 <S.Wrapper>
@@ -65,7 +80,7 @@ export const PokemonTemplate = ({
                                     </S.CryButton>
                                 </S.PokemonTitle>
 
-                                {pokemon.genera && (
+                                {pokemon?.genera && (
                                     <S.PokemonGenera>
                                         {formatName(
                                             pokemon.genera.find(
@@ -83,18 +98,19 @@ export const PokemonTemplate = ({
                             </S.PokemonInfo>
 
                             <S.ImageWrapper>
-                                {pokemon?.sprites?.other["official-artwork"]?.[
-                                    sprite
-                                ] && (
-                                    <S.PokemonImage
-                                        src={
-                                            pokemon.sprites.other[
-                                                "official-artwork"
-                                            ][sprite]
-                                        }
+                                {pokemonImage && (
+                                    <Image
+                                        src={pokemonImage}
                                         width={256}
                                         height={256}
                                         alt={pokemonName}
+                                        style={{
+                                            imageRendering:
+                                                sprite.version ===
+                                                SpriteVersion.pixelated
+                                                    ? "pixelated"
+                                                    : "unset"
+                                        }}
                                         priority
                                     />
                                 )}
@@ -121,7 +137,7 @@ export const PokemonTemplate = ({
                                 )}
                                 <S.Data>
                                     <S.DataTitle>Abilities</S.DataTitle>
-                                    {pokemon.abilities.map((item, index) => (
+                                    {pokemon?.abilities.map((item, index) => (
                                         <p key={index}>
                                             {formatName(item.ability.name)}
                                         </p>
@@ -140,7 +156,7 @@ export const PokemonTemplate = ({
                                             <span>{item.base_stat}</span>
                                         </S.StatInfo>
                                         <StatBar
-                                            type={pokemon.types[0].type.name}
+                                            type={pokemon?.types[0].type.name}
                                             stat={item.stat.name}
                                             baseStat={item.base_stat}
                                         />

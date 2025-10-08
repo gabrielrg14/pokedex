@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Image from "next/image"
 import { Container } from "components"
 import { mediaQueries as media } from "utils"
 
@@ -83,11 +82,6 @@ export const PokemonId = styled.h3`
 
 export const ImageWrapper = styled.div`
     text-align: center;
-`
-
-export const PokemonImage = styled(Image)`
-    width: auto;
-    height: auto;
 `
 
 export const PokemonData = styled.div`

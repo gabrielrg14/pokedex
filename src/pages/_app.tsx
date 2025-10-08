@@ -5,7 +5,7 @@ import { DefaultSeo } from "next-seo"
 import SEO from "../../next-seo.config"
 
 import { Sprite, useStore } from "store"
-import { STORAGE_KEY } from "common"
+import { SPRITE_STORAGE_KEY } from "common"
 import { GlobalStyle } from "styles"
 import { Analytics as GoogleAnalytics, Layout } from "components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
@@ -15,8 +15,8 @@ const App = ({ Component, pageProps }: AppProps) => {
     const { setSprite } = useStore()
 
     useEffect(() => {
-        const spriteStorage = localStorage.getItem(STORAGE_KEY)
-        if (spriteStorage) setSprite(spriteStorage as Sprite)
+        const spriteStorage = localStorage.getItem(SPRITE_STORAGE_KEY)
+        if (spriteStorage) setSprite(JSON.parse(spriteStorage) as Sprite)
     }, [setSprite])
 
     return (

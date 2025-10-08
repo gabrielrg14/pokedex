@@ -47,13 +47,13 @@ export const NavLink = styled(Link)`
     }
 `
 
-export const ShinyIcon = styled("div")`
+export const NavIcon = styled("div")`
     ${StyledIconBase} {
         cursor: pointer;
         color: var(--light-color);
         width: var(--lg-size);
 
-        &.shiny {
+        &.active {
             color: var(--primary-color);
         }
 

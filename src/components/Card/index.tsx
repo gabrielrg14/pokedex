@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect, useMemo } from "react"
 
 import * as S from "./styles"
 import Image from "next/image"
@@ -6,7 +6,7 @@ import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
 import { PokedexService } from "services"
 import { formatName } from "utils"
-import { useStore } from "store"
+import { SpriteVersion, useStore } from "store"
 
 type CardProps = {
     pokemon: IPokemon
@@ -27,25 +27,40 @@ export const Card = ({ pokemon }: CardProps) => {
 
     const { sprite } = useStore()
 
+    const pokemonName = useMemo(() => formatName(pokemon?.name), [pokemon])
+    const pokemonNumber = useMemo(() => pokemonData?.id, [pokemonData])
+    const pokemonImage = useMemo(
+        () =>
+            sprite.version === SpriteVersion.pixelated
+                ? pokemonData?.sprites?.[sprite.type]
+                : pokemonData?.sprites?.other?.["official-artwork"]?.[
+                      sprite.type
+                  ],
+        [sprite, pokemonData]
+    )
+
     return (
-        <S.CardLink
-            href={`/pokemon/${pokemon.name}`}
-            aria-label={formatName(pokemon.name)}
-        >
-            {pokemonData?.sprites?.other["official-artwork"]?.[sprite] && (
+        <S.CardLink href={`/pokemon/${pokemon?.name}`} aria-label={pokemonName}>
+            {pokemonImage && (
                 <Image
-                    src={pokemonData.sprites.other["official-artwork"][sprite]}
+                    src={pokemonImage}
                     width={156}
                     height={156}
-                    alt={formatName(pokemon.name)}
+                    alt={pokemonName}
+                    style={{
+                        imageRendering:
+                            sprite.version === SpriteVersion.pixelated
+                                ? "pixelated"
+                                : "unset"
+                    }}
                     priority
                     unoptimized
                 />
             )}
 
             <S.PokemonInfos>
-                <PokemonNumber number={pokemonData?.id} />
-                <S.PokemonName>{formatName(pokemon.name)}</S.PokemonName>
+                <PokemonNumber number={pokemonNumber} />
+                <S.PokemonName>{pokemonName}</S.PokemonName>
             </S.PokemonInfos>
 
             <RowTypes types={pokemonData?.types} />
