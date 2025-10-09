@@ -1,12 +1,17 @@
 import * as S from "./styles"
 import Image from "next/image"
 import { Images } from "@styled-icons/entypo/Images"
-import { Sparkles } from "@styled-icons/ionicons-solid/Sparkles"
+import { Repeat, Sparkles } from "@styled-icons/ionicons-solid"
 import { Container } from "components"
-import { SpriteType, SpriteVersion, useStore } from "store"
+import { SpritePosition, SpriteType, SpriteVersion, useStore } from "store"
 
 export const Header = () => {
-    const { sprite, toggleSpriteVersion, toggleSpriteType } = useStore()
+    const {
+        sprite,
+        toggleSpriteVersion,
+        toggleSpritePosition,
+        toggleSpriteType
+    } = useStore()
 
     return (
         <S.Header>
@@ -19,6 +24,7 @@ export const Header = () => {
                                 width={160}
                                 height={60}
                                 alt="Pokédex logo"
+                                priority
                             />
                         </S.NavLink>
                     </S.Logo>
@@ -33,6 +39,23 @@ export const Header = () => {
                                     className={
                                         sprite.version ===
                                         SpriteVersion.pixelated
+                                            ? "active"
+                                            : ""
+                                    }
+                                />
+                            </S.NavIcon>
+                        </S.NavItem>
+                        <S.NavItem>
+                            <S.NavIcon
+                                title="Toggle rotation"
+                                onClick={() => toggleSpritePosition()}
+                                disabled={
+                                    sprite.version !== SpriteVersion.pixelated
+                                }
+                            >
+                                <Repeat
+                                    className={
+                                        sprite.position === SpritePosition.back
                                             ? "active"
                                             : ""
                                     }

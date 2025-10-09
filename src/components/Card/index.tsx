@@ -32,9 +32,9 @@ export const Card = ({ pokemon }: CardProps) => {
     const pokemonImage = useMemo(
         () =>
             sprite.version === SpriteVersion.pixelated
-                ? pokemonData?.sprites?.[sprite.type]
+                ? pokemonData?.sprites?.[`${sprite.position}_${sprite.type}`]
                 : pokemonData?.sprites?.other?.["official-artwork"]?.[
-                      sprite.type
+                      `${sprite.position}_${sprite.type}`
                   ],
         [sprite, pokemonData]
     )

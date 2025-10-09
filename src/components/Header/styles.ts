@@ -47,30 +47,37 @@ export const NavLink = styled(Link)`
     }
 `
 
-export const NavIcon = styled("div")`
+export const NavIcon = styled("button")`
+    background-color: transparent;
+    opacity: 1;
+    cursor: pointer;
+
+    /* https://codepen.io/amit_merchant/pen/wvxGjpG */
+    mask-image: linear-gradient(
+        45deg,
+        #000 25%,
+        rgba(0, 0, 0, 0.2) 50%,
+        #000 75%
+    );
+    mask-size: 800%;
+    mask-position: 0;
+
+    :not(:disabled):hover {
+        transition: -webkit-mask-position 2s ease;
+        mask-position: 120%;
+    }
+
+    :disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
     ${StyledIconBase} {
-        cursor: pointer;
         color: var(--light-color);
         width: var(--lg-size);
 
         &.active {
             color: var(--primary-color);
-        }
-
-        /* https://codepen.io/amit_merchant/pen/wvxGjpG */
-        mask-image: linear-gradient(
-            45deg,
-            #000 25%,
-            rgba(0, 0, 0, 0.2) 50%,
-            #000 75%
-        );
-        mask-size: 800%;
-        mask-position: 0;
-
-        :hover {
-            transition: -webkit-mask-position 2s ease;
-            mask-position: 120%;
-            opacity: 1;
         }
     }
 `

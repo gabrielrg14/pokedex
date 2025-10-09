@@ -31,8 +31,10 @@ export const PokemonTemplate = ({
     const pokemonImage = useMemo(
         () =>
             sprite.version === SpriteVersion.pixelated
-                ? pokemon?.sprites?.[sprite.type]
-                : pokemon?.sprites?.other?.["official-artwork"]?.[sprite.type],
+                ? pokemon?.sprites?.[`${sprite.position}_${sprite.type}`]
+                : pokemon?.sprites?.other?.["official-artwork"]?.[
+                      `${sprite.position}_${sprite.type}`
+                  ],
         [sprite, pokemon]
     )
 

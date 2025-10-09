@@ -25,6 +25,10 @@ const venusaur: IPokemon = {
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
         front_shiny:
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/3.png",
+        back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/3.png",
+        back_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/3.png",
         other: {
             "official-artwork": {
                 front_default:
@@ -140,6 +144,10 @@ const charizard: IPokemon = {
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
         front_shiny:
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png",
+        back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/6.png",
+        back_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/6.png",
         other: {
             "official-artwork": {
                 front_default:
@@ -255,6 +263,10 @@ const blastoise: IPokemon = {
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
         front_shiny:
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/9.png",
+        back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/9.png",
+        back_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/9.png",
         other: {
             "official-artwork": {
                 front_default:
