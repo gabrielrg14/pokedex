@@ -14,6 +14,10 @@ export const handlers = [
         return HttpResponse.json(null, { status: 404 })
     }),
 
+    http.get(`${API_URL}/pokemon-species/not-a-url`, () => {
+        return HttpResponse.json(null, { status: 404 })
+    }),
+
     http.get(`${API_URL}/pokemon/${pokemonMocks.venusaur.name}`, () => {
         return HttpResponse.json(pokemonMocks.venusaur, { status: 200 })
     }),

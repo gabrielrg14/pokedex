@@ -1,12 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 
 import { useRouter } from "next/router"
-import { IPokemon, IPokemonSpecies } from "interfaces"
+import { IPokemon, IPokemonWithSpecies } from "interfaces"
 import { Loading } from "components"
 import { PokedexService } from "services"
 import { PokemonTemplate } from "templates"
 import { getColorsByType } from "utils"
-import { useStore } from "store"
+import { useSpriteStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const pokemons = await PokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
@@ -23,25 +23,33 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const pokemon = await PokedexService.getPokemonByQuery(
-        params?.name as string
-    )
+    try {
+        const pokemonData = await PokedexService.getPokemonByQuery(
+            params?.name as string
+        )
 
-    if (!pokemon) return { notFound: true }
+        const pokemonSpecies = await PokedexService.getPokemonSpeciesByUrl(
+            pokemonData.species.url
+        )
 
-    return {
-        revalidate: 60,
-        props: { pokemon }
+        const pokemon = { ...pokemonSpecies, ...pokemonData }
+
+        return {
+            revalidate: 60,
+            props: { pokemon }
+        }
+    } catch {
+        return { notFound: true }
     }
 }
 
 type PokemonPageProps = {
-    pokemon: IPokemonSpecies
+    pokemon: IPokemonWithSpecies
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {
     const router = useRouter()
-    const { sprite } = useStore()
+    const { sprite } = useSpriteStore()
 
     if (router && router.isFallback) return <Loading />
 

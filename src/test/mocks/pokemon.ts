@@ -38,6 +38,10 @@ const venusaur: IPokemon = {
             }
         }
     },
+    species: {
+        name: "venusaur",
+        url: "https://pokeapi.co/api/v2/pokemon-species/3/"
+    },
     stats: [
         {
             base_stat: 80,
@@ -103,7 +107,6 @@ const venusaur: IPokemon = {
 }
 
 const venusaurSpecies: IPokemonSpecies = {
-    ...venusaur,
     genera: [
         {
             genus: "Seed Pokémon",
@@ -156,6 +159,10 @@ const charizard: IPokemon = {
                     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/6.png"
             }
         }
+    },
+    species: {
+        name: "charizard",
+        url: "https://pokeapi.co/api/v2/pokemon-species/6/"
     },
     stats: [
         {
@@ -222,7 +229,6 @@ const charizard: IPokemon = {
 }
 
 const charizardSpecies: IPokemonSpecies = {
-    ...charizard,
     genera: [
         {
             genus: "Flame Pokémon",
@@ -275,6 +281,10 @@ const blastoise: IPokemon = {
                     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/9.png"
             }
         }
+    },
+    species: {
+        name: "blastoise",
+        url: "https://pokeapi.co/api/v2/pokemon-species/9/"
     },
     stats: [
         {
@@ -335,7 +345,6 @@ const blastoise: IPokemon = {
 }
 
 const blastoiseSpecies: IPokemonSpecies = {
-    ...blastoise,
     genera: [
         {
             genus: "Shellfish Pokémon",
@@ -365,8 +374,8 @@ export const pokemonMocks = {
         [blastoise.name, blastoise]
     ],
     pokemonSpeciesArrayList: [
-        [venusaurSpecies.name, venusaurSpecies],
-        [charizardSpecies.name, charizardSpecies],
-        [blastoiseSpecies.name, blastoiseSpecies]
+        [venusaur.species.name, venusaur.species.url, venusaurSpecies],
+        [charizard.species.name, charizard.species.url, charizardSpecies],
+        [blastoise.species.name, blastoise.species.url, blastoiseSpecies]
     ]
 }

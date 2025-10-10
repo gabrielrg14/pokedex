@@ -3,13 +3,13 @@ import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
 import Image from "next/image"
-import { IPokemonSpecies } from "interfaces"
+import { IPokemonWithSpecies } from "interfaces"
 import { PokemonNumber, RowTypes, StatBar } from "components"
 import { formatName } from "utils"
 import { Sprite, SpriteVersion } from "store"
 
 type PokemonTemplateProps = {
-    pokemon: IPokemonSpecies
+    pokemon: IPokemonWithSpecies
     background: string
     sprite: Sprite
 }
@@ -19,14 +19,17 @@ export const PokemonTemplate = ({
     background,
     sprite
 }: PokemonTemplateProps) => {
-    const pokemonName = useMemo(() => formatName(pokemon?.name), [pokemon])
-    const pokemonNumber = useMemo(() => pokemon?.id, [pokemon])
+    const pokemonName = useMemo(
+        () => formatName(pokemon?.name),
+        [pokemon?.name]
+    )
+    const pokemonNumber = useMemo(() => pokemon?.id, [pokemon?.id])
     const pokemonCry = useMemo(
         () =>
             sprite.version === SpriteVersion.pixelated && pokemon?.cries?.legacy
                 ? pokemon?.cries?.legacy
                 : pokemon?.cries?.latest,
-        [pokemon, sprite]
+        [sprite?.version, pokemon?.cries]
     )
     const pokemonImage = useMemo(
         () =>
@@ -35,7 +38,7 @@ export const PokemonTemplate = ({
                 : pokemon?.sprites?.other?.["official-artwork"]?.[
                       `${sprite.position}_${sprite.type}`
                   ],
-        [sprite, pokemon]
+        [sprite, pokemon?.sprites]
     )
 
     const playPokemonCry = useCallback(() => {

@@ -3,7 +3,12 @@ import Image from "next/image"
 import { Images } from "@styled-icons/entypo/Images"
 import { Repeat, Sparkles } from "@styled-icons/ionicons-solid"
 import { Container } from "components"
-import { SpritePosition, SpriteType, SpriteVersion, useStore } from "store"
+import {
+    SpritePosition,
+    SpriteType,
+    SpriteVersion,
+    useSpriteStore
+} from "store"
 
 export const Header = () => {
     const {
@@ -11,7 +16,7 @@ export const Header = () => {
         toggleSpriteVersion,
         toggleSpritePosition,
         toggleSpriteType
-    } = useStore()
+    } = useSpriteStore()
 
     return (
         <S.Header>

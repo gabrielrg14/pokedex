@@ -1,9 +1,11 @@
 import { GetStaticProps } from "next"
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 
 import { IPokemon, IType } from "interfaces"
 import { PokedexService } from "services"
-import { HomeTemplate, LIMIT } from "templates"
+import { HomeTemplate } from "templates"
+import { useFilterStore } from "store"
+import { PAGINATION_LIMIT } from "common"
 
 type HomeProps = {
     pokemons: IPokemon[]
@@ -11,7 +13,8 @@ type HomeProps = {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const pokemons = await PokedexService.getPokemonsWithPagination(LIMIT)
+    const pokemons =
+        await PokedexService.getPokemonsWithPagination(PAGINATION_LIMIT)
     const types = await PokedexService.getAllTypes()
 
     return {
@@ -20,66 +23,79 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home = ({ pokemons, types }: HomeProps) => {
+    const { filter, setSearchFilter, setTypeFilter, setLimitFilter } =
+        useFilterStore()
+
     const prevSearchRef = useRef("")
-    const [search, setSearch] = useState("")
-    const [typeSelected, setTypeSelected] = useState("all")
     const [pokemonList, setPokemonList] = useState(pokemons)
-    const [pokemonLimit, setPokemonLimit] = useState(LIMIT)
 
-    const loadPokemons = useCallback(
-        async (query: string | null, type: string | null = null) => {
-            if (query === "" || type === "all") {
-                await PokedexService.getPokemonsWithPagination(
-                    pokemonLimit
-                ).then((data) => setPokemonList([...data]))
-            } else if (query !== null) {
-                await PokedexService.getPokemonByQuery(
-                    query.replace(/ /g, "-").toLowerCase()
-                )
-                    .then((data) => setPokemonList([data]))
-                    .catch(() => setPokemonList([]))
-                prevSearchRef.current = query
-            } else if (query === null && type === null) {
-                await PokedexService.getPokemonsWithPagination(
-                    LIMIT,
-                    pokemonLimit
-                ).then((data) => {
-                    setPokemonList((prevPokemonList) => [
-                        ...prevPokemonList,
-                        ...data
-                    ])
-                    setPokemonLimit(
-                        (prevPokemonLimit) => prevPokemonLimit + LIMIT
-                    )
-                })
-            } else if (type !== null) {
-                await PokedexService.getPokemonsByType(type).then((data) =>
-                    setPokemonList([...data])
-                )
-            }
-        },
-        [pokemonLimit]
-    )
+    const getInitialPokemonPagination = useCallback(async (limit: number) => {
+        await PokedexService.getPokemonsWithPagination(limit).then((data) =>
+            setPokemonList([...data])
+        )
+    }, [])
 
-    function searchPokemon(search: string | null) {
-        setSearch(search ?? "")
-        loadPokemons(search)
-        setTypeSelected("all")
+    const getNextPokemonPagination = useCallback(async (limit: number) => {
+        await PokedexService.getPokemonsWithPagination(
+            PAGINATION_LIMIT,
+            limit
+        ).then((data) => {
+            setPokemonList((prevPokemonList) => [...prevPokemonList, ...data])
+        })
+    }, [])
+
+    const getPokemonByQuery = useCallback(async (search: string) => {
+        prevSearchRef.current = search
+        await PokedexService.getPokemonByQuery(
+            search.replace(/ /g, "-").toLowerCase()
+        )
+            .then((data) => setPokemonList([data]))
+            .catch(() => setPokemonList([]))
+    }, [])
+
+    const getPokemonsByType = useCallback(async (type: string) => {
+        await PokedexService.getPokemonsByType(type).then((data) =>
+            setPokemonList([...data])
+        )
+    }, [])
+
+    useEffect(() => {
+        if (filter.search === "" && filter.type === "all")
+            getInitialPokemonPagination(filter.limit)
+        else if (filter.type !== "all") getPokemonsByType(filter.type)
+        else if (filter.search !== "") getPokemonByQuery(filter.search)
+        else getNextPokemonPagination(filter.limit)
+    }, [
+        filter,
+        getInitialPokemonPagination,
+        getPokemonsByType,
+        getPokemonByQuery,
+        getNextPokemonPagination
+    ])
+
+    const searchPokemon = (search: string) => {
+        setTypeFilter("all")
+        setSearchFilter(search)
+    }
+
+    const filterByType = (type: string) => {
+        setSearchFilter("")
+        setTypeFilter(type)
+    }
+
+    const nextPokemonPagination = (limit: number) => {
+        setLimitFilter(limit + PAGINATION_LIMIT)
     }
 
     return (
         <HomeTemplate
-            state={{
-                prevSearchRef,
-                search,
-                setSearch,
-                typeSelected,
-                setTypeSelected
-            }}
+            prevSearchRef={prevSearchRef}
+            filter={filter}
+            searchPokemon={searchPokemon}
+            filterByType={filterByType}
+            nextPokemonPagination={nextPokemonPagination}
             pokemons={pokemonList}
             types={types}
-            searchPokemon={searchPokemon}
-            loadPokemons={loadPokemons}
         />
     )
 }

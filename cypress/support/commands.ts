@@ -1,3 +1,9 @@
+Cypress.on("uncaught:exception", (err) => {
+    if (err.message.includes("play() request was interrupted")) {
+        return false
+    }
+})
+
 Cypress.Commands.add("navigateToPokemonPage", (name: string) => {
     cy.get(`main section ul li a[aria-label='${name}']`)
         .should("be.visible")

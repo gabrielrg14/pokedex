@@ -1,4 +1,4 @@
-import { MutableRefObject, SetStateAction } from "react"
+import { MutableRefObject, useEffect, useMemo, useState } from "react"
 
 import { NextSeo } from "next-seo"
 
@@ -7,30 +7,36 @@ import Image from "next/image"
 import { IPokemon, IType } from "interfaces"
 import { Card, Button } from "components"
 import { getColorsByType } from "utils"
-
-export const LIMIT = 12
+import { Filter } from "store"
+import { PAGINATION_LIMIT } from "common"
 
 type HomeTemplateProps = {
-    state: {
-        prevSearchRef: MutableRefObject<string>
-        search: string
-        setSearch: (value: SetStateAction<string>) => void
-        typeSelected: string
-        setTypeSelected: (value: SetStateAction<string>) => void
-    }
+    prevSearchRef: MutableRefObject<string>
+    filter: Filter
+    searchPokemon: (search: string) => void
+    filterByType: (type: string) => void
+    nextPokemonPagination: (limit: number) => void
     pokemons: IPokemon[]
     types: IType[]
-    searchPokemon: (search: string) => void
-    loadPokemons: (query: string | null, type?: string | null) => Promise<void>
 }
 
 export const HomeTemplate = ({
-    state,
-    pokemons,
-    types,
+    prevSearchRef,
+    filter,
     searchPokemon,
-    loadPokemons
+    filterByType,
+    nextPokemonPagination,
+    pokemons,
+    types
 }: HomeTemplateProps) => {
+    const [search, setSearch] = useState(filter.search)
+    const typeSelected = useMemo(() => filter.type, [filter.type])
+    const pokemonLimit = useMemo(() => filter.limit, [filter.limit])
+
+    useEffect(() => {
+        setSearch(filter.search)
+    }, [filter.search])
+
     return (
         <>
             <NextSeo
@@ -57,19 +63,17 @@ export const HomeTemplate = ({
                             type="text"
                             spellCheck={false}
                             placeholder="Search by name or number"
-                            value={state.search}
-                            onChange={(e) => state.setSearch(e.target.value)}
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             onKeyDown={(e) =>
-                                e.key === "Enter"
-                                    ? searchPokemon(state.search)
-                                    : null
+                                e.key === "Enter" ? searchPokemon(search) : null
                             }
                         />
 
                         <S.SearchButton
                             type="button"
-                            onClick={() => searchPokemon(state.search)}
-                            disabled={state.search === ""}
+                            onClick={() => searchPokemon(search)}
+                            disabled={search === ""}
                         >
                             🔍
                         </S.SearchButton>
@@ -77,10 +81,10 @@ export const HomeTemplate = ({
 
                     <S.PokemonCount>
                         <Image
-                            src={`/images/types/${state.typeSelected}.svg`}
+                            src={`/images/types/${typeSelected}.svg`}
                             width={32}
                             height={32}
-                            alt={state.typeSelected}
+                            alt={typeSelected}
                         />
                         <S.Counter>{pokemons.length}</S.Counter>
                     </S.PokemonCount>
@@ -92,7 +96,7 @@ export const HomeTemplate = ({
                                     <li key={index}>
                                         <S.TypeItem
                                             className={
-                                                state.typeSelected === type.name
+                                                typeSelected === type.name
                                                     ? "selected"
                                                     : ""
                                             }
@@ -101,8 +105,7 @@ export const HomeTemplate = ({
                                                     top: 125,
                                                     behavior: "smooth"
                                                 })
-                                                state.setTypeSelected(type.name)
-                                                loadPokemons(null, type.name)
+                                                filterByType(type.name)
                                             }}
                                         >
                                             <Image
@@ -133,10 +136,14 @@ export const HomeTemplate = ({
                                     ))}
                                 </S.PokemonList>
 
-                                {state.typeSelected === "all" &&
-                                    pokemons.length >= LIMIT && (
+                                {typeSelected === "all" &&
+                                    pokemons.length >= PAGINATION_LIMIT && (
                                         <Button
-                                            onClick={() => loadPokemons(null)}
+                                            onClick={() =>
+                                                nextPokemonPagination(
+                                                    pokemonLimit
+                                                )
+                                            }
                                         >
                                             Load more Pokémon
                                         </Button>
@@ -151,7 +158,7 @@ export const HomeTemplate = ({
                                 Pokémon{" "}
                                 <strong>
                                     {'"'}
-                                    {state.prevSearchRef.current}
+                                    {prevSearchRef.current}
                                     {'"'}
                                 </strong>{" "}
                                 not found! <br />

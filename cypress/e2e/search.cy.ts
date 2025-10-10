@@ -42,12 +42,12 @@ describe("Search for Pokémon", () => {
     })
 
     it("search for Pokémon 'kyurem' using filter by type 'ice'", () => {
-        cy.intercept("GET", "**/pokemon/kyurem").as("getKyurem")
+        cy.intercept("GET", "**/pokemon/avalugg-hisui").as("getLastIcePokemon")
 
         cy.contains("main section ul li button", "ice")
             .should("be.visible")
             .click()
-        cy.wait("@getKyurem")
+        cy.wait("@getLastIcePokemon")
 
         cy.navigateToPokemonPage("Kyurem")
         cy.validatePokemonPage("Kyurem", "#0646", ["dragon", "ice"])

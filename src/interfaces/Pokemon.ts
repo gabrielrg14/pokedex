@@ -11,6 +11,11 @@ export interface ISprites extends ISprite {
     }
 }
 
+export interface ISpecies {
+    name: string
+    url: string
+}
+
 export interface ICry {
     latest: string
     legacy?: string
@@ -45,28 +50,11 @@ export interface IPokemon {
     name: string
     url: string
     sprites: ISprites
+    species: ISpecies
     cries: ICry
     height: number
     weight: number
     types: IPokemonType[]
     abilities: IAbility[]
     stats: IStat[]
-}
-
-export interface IGenera {
-    genus: string
-    language: {
-        name: string
-        url: string
-    }
-}
-
-export interface IHabitat {
-    name: string
-    url: string
-}
-
-export interface IPokemonSpecies extends IPokemon {
-    genera?: IGenera[]
-    habitat?: IHabitat
 }

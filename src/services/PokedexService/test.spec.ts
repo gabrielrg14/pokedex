@@ -22,14 +22,22 @@ describe("PokedexService", () => {
                 ]
             })
         })
+    })
+
+    describe("getPokemonSpeciesByUrl", () => {
+        it("should throw an error when the given url does not exist", async () => {
+            await expect(
+                PokedexService.getPokemonSpeciesByUrl("not-a-url")
+            ).rejects.toThrow()
+        })
 
         it.each(pokemonMocks.pokemonSpeciesArrayList)(
-            "should return %s data including species",
-            async (name, pokemon) => {
-                const pokemonData = await PokedexService.getPokemonByQuery(
-                    name as string
+            "should return data for the %s species",
+            async (name, url, species) => {
+                const speciesData = await PokedexService.getPokemonSpeciesByUrl(
+                    url as string
                 )
-                expect(pokemonData).toStrictEqual(pokemon)
+                expect(speciesData).toStrictEqual(species)
             }
         )
     })
