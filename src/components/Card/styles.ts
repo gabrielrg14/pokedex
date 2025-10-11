@@ -13,7 +13,6 @@ export const CardLink = styled(Link)`
     border: 1px solid var(--gray-color);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    animation: fade-in 0.5s ease-in;
 
     :hover {
         -webkit-transform: translateY(1px);
@@ -22,11 +21,19 @@ export const CardLink = styled(Link)`
     }
 `
 
-export const PokemonInfos = styled.div`
+export const CardBody = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: fade-in 0.5s ease-in-out;
+`
+
+export const PokemonLoading = styled(CardBody)`
+    height: 288px;
+`
+
+export const PokemonInfos = styled.div`
     margin: var(--xs-size) auto;
 `
 

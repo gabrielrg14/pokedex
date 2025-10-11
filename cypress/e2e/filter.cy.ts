@@ -50,14 +50,13 @@ describe("Filter for type", () => {
     })
 
     it("filter by type 'fire', find 'charizard' and navigate to its page, go back to the filtered list, find 'skeledirge' and navigate to its page", () => {
-        cy.intercept("GET", "**/pokemon/ogerpon-hearthflame-mask").as(
-            "getLastFirePokemon"
-        )
+        cy.intercept("GET", "**/pokemon/charizard").as("getCharizard")
+        cy.intercept("GET", "**/pokemon/skeledirge").as("getSkeledirge")
 
         cy.contains("main section ul li button", "fire")
             .should("be.visible")
             .click()
-        cy.wait("@getLastFirePokemon")
+        cy.wait("@getCharizard")
 
         cy.navigateToPokemonPage("Charizard")
         cy.validatePokemonPage("Charizard", "#0006", ["fire", "flying"])
@@ -65,7 +64,7 @@ describe("Filter for type", () => {
         cy.get("header nav img[alt='Pokédex logo']")
             .should("be.visible")
             .click()
-        cy.wait("@getLastFirePokemon")
+        cy.wait("@getSkeledirge")
 
         cy.navigateToPokemonPage("Skeledirge")
         cy.validatePokemonPage("Skeledirge", "#0911", ["fire", "ghost"])
