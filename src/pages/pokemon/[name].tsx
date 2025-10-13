@@ -6,7 +6,7 @@ import { Loading } from "components"
 import { PokedexService } from "services"
 import { PokemonTemplate } from "templates"
 import { getColorsByType } from "utils"
-import { useSpriteStore } from "store"
+import { useSpriteMenuStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const pokemons = await PokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
@@ -49,7 +49,7 @@ type PokemonPageProps = {
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {
     const router = useRouter()
-    const { sprite } = useSpriteStore()
+    const { sprite } = useSpriteMenuStore()
 
     if (router && router.isFallback) return <Loading />
 

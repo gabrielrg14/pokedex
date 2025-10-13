@@ -1,6 +1,6 @@
 import { IPokemon, IPokemonSpecies, IType } from "interfaces"
 import { Api } from "providers"
-import { PAGINATION_LIMIT } from "common"
+import { POKEMON_PAGINATION_LIMIT } from "common"
 
 const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
     const { data: pokemon } = await Api.get<IPokemon>(`/pokemon/${query ?? ""}`)
@@ -27,7 +27,7 @@ const getPokemonSpeciesByUrl = async (
 }
 
 const getPokemonsWithPagination = async (
-    limit: number = PAGINATION_LIMIT,
+    limit: number = POKEMON_PAGINATION_LIMIT,
     offset?: number
 ): Promise<IPokemon[]> => {
     const { data } = await Api.get(

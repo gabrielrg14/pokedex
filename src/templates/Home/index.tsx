@@ -8,7 +8,7 @@ import { IPokemon, IType } from "interfaces"
 import { Card, Button } from "components"
 import { getColorsByType } from "utils"
 import { Filter } from "store"
-import { PAGINATION_LIMIT } from "common"
+import { POKEMON_PAGINATION_LIMIT } from "common"
 
 type HomeTemplateProps = {
     prevSearchRef: MutableRefObject<string>
@@ -137,7 +137,8 @@ export const HomeTemplate = ({
                                 </S.PokemonList>
 
                                 {typeSelected === "all" &&
-                                    pokemons.length >= PAGINATION_LIMIT && (
+                                    pokemons.length >=
+                                        POKEMON_PAGINATION_LIMIT && (
                                         <Button
                                             onClick={() =>
                                                 nextPokemonPagination(

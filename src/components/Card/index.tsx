@@ -6,7 +6,7 @@ import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
 import { PokedexService } from "services"
 import { formatName } from "utils"
-import { SpriteVersion, useSpriteStore } from "store"
+import { SpriteVersion, useSpriteMenuStore } from "store"
 
 type CardProps = {
     pokemon: IPokemon
@@ -27,7 +27,7 @@ export const Card = ({ pokemon }: CardProps) => {
         getPokemonData()
     }, [getPokemonData])
 
-    const { sprite } = useSpriteStore()
+    const { sprite } = useSpriteMenuStore()
 
     const pokemonName = useMemo(
         () => formatName(pokemon?.name),

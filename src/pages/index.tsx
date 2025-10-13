@@ -4,8 +4,8 @@ import { useState, useRef, useCallback, useEffect } from "react"
 import { IPokemon, IType } from "interfaces"
 import { PokedexService } from "services"
 import { HomeTemplate } from "templates"
-import { useFilterStore } from "store"
-import { PAGINATION_LIMIT } from "common"
+import { useListFilterStore } from "store"
+import { POKEMON_PAGINATION_LIMIT } from "common"
 
 type HomeProps = {
     pokemons: IPokemon[]
@@ -13,8 +13,9 @@ type HomeProps = {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const pokemons =
-        await PokedexService.getPokemonsWithPagination(PAGINATION_LIMIT)
+    const pokemons = await PokedexService.getPokemonsWithPagination(
+        POKEMON_PAGINATION_LIMIT
+    )
     const types = await PokedexService.getAllTypes()
 
     return {
@@ -24,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home = ({ pokemons, types }: HomeProps) => {
     const { filter, setSearchFilter, setTypeFilter, setLimitFilter } =
-        useFilterStore()
+        useListFilterStore()
 
     const prevSearchRef = useRef("")
     const [pokemonList, setPokemonList] = useState(pokemons)
@@ -37,7 +38,7 @@ const Home = ({ pokemons, types }: HomeProps) => {
 
     const getNextPokemonPagination = useCallback(async (limit: number) => {
         await PokedexService.getPokemonsWithPagination(
-            PAGINATION_LIMIT,
+            POKEMON_PAGINATION_LIMIT,
             limit
         ).then((data) => {
             setPokemonList((prevPokemonList) => [...prevPokemonList, ...data])
@@ -84,7 +85,7 @@ const Home = ({ pokemons, types }: HomeProps) => {
     }
 
     const nextPokemonPagination = (limit: number) => {
-        setLimitFilter(limit + PAGINATION_LIMIT)
+        setLimitFilter(limit + POKEMON_PAGINATION_LIMIT)
     }
 
     return (

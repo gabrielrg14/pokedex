@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { SPRITE_STORAGE_KEY } from "common"
+import { SPRITE_MENU_STORAGE_KEY } from "common"
 
 export enum SpriteVersion {
     official = "official",
@@ -23,15 +23,14 @@ export type Sprite = {
     type: SpriteType
 }
 
-type SpriteStore = {
+type SpriteMenuStore = {
     sprite: Sprite
-    setSprite: (sprite: Sprite) => void
     toggleSpriteVersion: () => void
     toggleSpritePosition: () => void
     toggleSpriteType: () => void
 }
 
-export const useSpriteStore = create<SpriteStore>()(
+export const useSpriteMenuStore = create<SpriteMenuStore>()(
     persist(
         (set) => ({
             sprite: {
@@ -39,7 +38,6 @@ export const useSpriteStore = create<SpriteStore>()(
                 position: SpritePosition.front,
                 type: SpriteType.default
             },
-            setSprite: (sprite: Sprite) => set(() => ({ sprite })),
             toggleSpriteVersion: () =>
                 set((state) => {
                     const version =
@@ -74,6 +72,6 @@ export const useSpriteStore = create<SpriteStore>()(
                     return { sprite: { ...state.sprite, type } }
                 })
         }),
-        { name: SPRITE_STORAGE_KEY }
+        { name: SPRITE_MENU_STORAGE_KEY, version: 1 }
     )
 )

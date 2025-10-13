@@ -19,7 +19,7 @@ export const Navbar = styled.nav`
     `}
 `
 
-export const Logo = styled.div`
+export const NavLogo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;

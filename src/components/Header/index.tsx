@@ -7,7 +7,7 @@ import {
     SpritePosition,
     SpriteType,
     SpriteVersion,
-    useSpriteStore
+    useSpriteMenuStore
 } from "store"
 
 export const Header = () => {
@@ -16,13 +16,13 @@ export const Header = () => {
         toggleSpriteVersion,
         toggleSpritePosition,
         toggleSpriteType
-    } = useSpriteStore()
+    } = useSpriteMenuStore()
 
     return (
         <S.Header>
             <Container>
                 <S.Navbar>
-                    <S.Logo>
+                    <S.NavLogo>
                         <S.NavLink href="/" aria-label="Go to Home">
                             <Image
                                 src="/images/pokedex.png"
@@ -32,7 +32,7 @@ export const Header = () => {
                                 priority
                             />
                         </S.NavLink>
-                    </S.Logo>
+                    </S.NavLogo>
 
                     <S.NavList>
                         <S.NavItem>

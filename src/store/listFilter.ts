@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { FILTER_STORAGE_KEY, PAGINATION_LIMIT } from "common"
+import { LIST_FILTER_STORAGE_KEY, POKEMON_PAGINATION_LIMIT } from "common"
 
 export type Filter = {
     search: string
@@ -8,23 +8,21 @@ export type Filter = {
     limit: number
 }
 
-type FilterStore = {
+type ListFilterStore = {
     filter: Filter
-    setFilter: (filter: Filter) => void
     setSearchFilter: (search: string) => void
     setTypeFilter: (type: string) => void
     setLimitFilter: (limit: number) => void
 }
 
-export const useFilterStore = create<FilterStore>()(
+export const useListFilterStore = create<ListFilterStore>()(
     persist(
         (set) => ({
             filter: {
                 search: "",
-                limit: PAGINATION_LIMIT,
+                limit: POKEMON_PAGINATION_LIMIT,
                 type: "all"
             },
-            setFilter: (filter: Filter) => set(() => ({ filter })),
             setSearchFilter: (search: string) =>
                 set((state) => {
                     return { filter: { ...state.filter, search } }
@@ -39,7 +37,8 @@ export const useFilterStore = create<FilterStore>()(
                 })
         }),
         {
-            name: FILTER_STORAGE_KEY
+            name: LIST_FILTER_STORAGE_KEY,
+            version: 1
         }
     )
 )
