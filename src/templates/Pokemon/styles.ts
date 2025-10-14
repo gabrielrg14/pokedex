@@ -55,8 +55,7 @@ export const PokemonName = styled.h1`
 `
 
 export const CryButton = styled("button")`
-    font-size: var(--md-size);
-    padding: 0.3rem;
+    padding: 0.4rem;
     background-color: rgb(183 189 193 / 30%);
     border: 1px solid var(--gray-color);
     border-radius: 24px;

@@ -28,6 +28,6 @@ Cypress.Commands.add("searchForPokemon", (query: string) => {
     cy.get("main section input[placeholder='Search by name or number']").type(
         query
     )
-    cy.contains("main section button", "🔍").click()
+    cy.get("button[data-testid='search-button']").click()
     cy.wait("@getSearch")
 })

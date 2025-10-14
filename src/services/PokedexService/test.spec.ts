@@ -1,4 +1,5 @@
 import { pokemonMocks, typeMocks } from "test/mocks"
+import { API_URL } from "common"
 
 import { PokedexService } from "."
 
@@ -27,7 +28,9 @@ describe("PokedexService", () => {
     describe("getPokemonSpeciesByUrl", () => {
         it("should throw an error when the given url does not exist", async () => {
             await expect(
-                PokedexService.getPokemonSpeciesByUrl("not-a-url")
+                PokedexService.getPokemonSpeciesByUrl(
+                    `${API_URL}/pokemon-species/not-a-url`
+                )
             ).rejects.toThrow()
         })
 

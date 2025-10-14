@@ -50,19 +50,27 @@ export const TopArea = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: var(--default-size);
+    gap: var(--sm-size);
 `
 
 export const SearchInput = styled("input")`
     flex: 1;
-    max-width: fit-content;
-    padding: var(--sm-size) var(--lg-size);
+    max-width: 250px;
+    padding: var(--sm-size) var(--default-size);
     background-color: rgb(183 189 193 / 30%);
     border: 1px solid var(--gray-color);
     border-radius: 24px;
     font-size: var(--default-size);
     color: #7a7d80;
     outline: none;
+
+    ::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 18px;
+        width: 18px;
+        content: url("https://api.iconify.design/ic:outline-close.svg");
+        background-size: contain;
+    }
 `
 
 export const SearchButton = styled("button")`

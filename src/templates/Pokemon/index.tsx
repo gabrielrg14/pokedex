@@ -7,6 +7,7 @@ import { IPokemonWithSpecies } from "interfaces"
 import { PokemonNumber, RowTypes, StatBar } from "components"
 import { formatName } from "utils"
 import { Sprite, SpriteVersion } from "store"
+import { VolumeUp } from "styled-icons/material-outlined"
 
 type PokemonTemplateProps = {
     pokemon: IPokemonWithSpecies
@@ -43,11 +44,11 @@ export const PokemonTemplate = ({
 
     const playPokemonCry = useCallback(() => {
         const cryAudioElement = document.getElementById(
-            `${pokemonName}-cry`
+            `cry-pokemon-${pokemonNumber}`
         ) as HTMLAudioElement
         cryAudioElement.volume = 0.05
         cryAudioElement.play()
-    }, [pokemonName])
+    }, [pokemonNumber])
 
     useEffect(() => {
         playPokemonCry()
@@ -67,7 +68,7 @@ export const PokemonTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonName}`}
             />
 
-            <audio id={`${pokemonName}-cry`} src={pokemonCry} />
+            <audio id={`cry-pokemon-${pokemonNumber}`} src={pokemonCry} />
 
             <S.Background style={{ background }}>
                 <S.Wrapper>
@@ -78,10 +79,14 @@ export const PokemonTemplate = ({
                                     <S.PokemonName>{pokemonName}</S.PokemonName>
                                     <S.CryButton
                                         type="button"
-                                        title="Play cry"
+                                        title={`${pokemonName} cry`}
                                         onClick={() => playPokemonCry()}
+                                        data-testid="pokemon-cry-button"
                                     >
-                                        🔊
+                                        <VolumeUp
+                                            size={24}
+                                            color="var(--dark-color)"
+                                        />
                                     </S.CryButton>
                                 </S.PokemonTitle>
 

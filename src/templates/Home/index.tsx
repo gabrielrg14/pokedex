@@ -9,6 +9,7 @@ import { Card, Button } from "components"
 import { getColorsByType } from "utils"
 import { Filter } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
+import { Search } from "styled-icons/material-outlined"
 
 type HomeTemplateProps = {
     prevSearchRef: MutableRefObject<string>
@@ -60,7 +61,7 @@ export const HomeTemplate = ({
                 <S.Wrapper>
                     <S.TopArea>
                         <S.SearchInput
-                            type="text"
+                            type="search"
                             spellCheck={false}
                             placeholder="Search by name or number"
                             value={search}
@@ -72,10 +73,12 @@ export const HomeTemplate = ({
 
                         <S.SearchButton
                             type="button"
+                            title="Search"
                             onClick={() => searchPokemon(search)}
                             disabled={search === ""}
+                            data-testid="search-button"
                         >
-                            🔍
+                            <Search size={18} />
                         </S.SearchButton>
                     </S.TopArea>
 
