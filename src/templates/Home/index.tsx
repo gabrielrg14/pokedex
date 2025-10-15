@@ -5,7 +5,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Image from "next/image"
 import { IPokemon, IType } from "interfaces"
-import { Card, Button } from "components"
+import { Card, Button, SpriteMenu } from "components"
 import { getColorsByType } from "utils"
 import { Filter } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
@@ -178,6 +178,8 @@ export const HomeTemplate = ({
                         </S.SearchError>
                     )}
                 </S.Wrapper>
+
+                <SpriteMenu />
             </S.Content>
         </>
     )

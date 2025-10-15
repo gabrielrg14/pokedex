@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { mediaQueries as media } from "utils"
 
 import Link from "next/link"
-import { StyledIconBase } from "@styled-icons/styled-icon"
 
 export const Header = styled.header``
 
@@ -25,15 +24,6 @@ export const NavLogo = styled.div`
     align-items: center;
 `
 
-export const NavList = styled.ul`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--lg-size);
-`
-
-export const NavItem = styled("li")``
-
 export const NavLink = styled(Link)`
     display: flex;
     justify-content: center;
@@ -47,37 +37,11 @@ export const NavLink = styled(Link)`
     }
 `
 
-export const NavIcon = styled("button")`
-    background-color: transparent;
-    opacity: 1;
-    cursor: pointer;
-
-    /* https://codepen.io/amit_merchant/pen/wvxGjpG */
-    mask-image: linear-gradient(
-        45deg,
-        #000 25%,
-        rgba(0, 0, 0, 0.2) 50%,
-        #000 75%
-    );
-    mask-size: 800%;
-    mask-position: 0;
-
-    :not(:disabled):hover {
-        transition: -webkit-mask-position 2s ease;
-        mask-position: 120%;
-    }
-
-    :disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-    }
-
-    ${StyledIconBase} {
-        color: var(--light-color);
-        width: var(--lg-size);
-
-        &.active {
-            color: var(--primary-color);
-        }
-    }
+export const NavList = styled.ul`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--lg-size);
 `
+
+export const NavItem = styled("li")``

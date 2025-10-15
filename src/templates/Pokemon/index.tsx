@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Image from "next/image"
 import { IPokemonWithSpecies } from "interfaces"
-import { PokemonNumber, RowTypes, StatBar } from "components"
+import { PokemonNumber, RowTypes, SpriteMenu, StatBar } from "components"
 import { formatName } from "utils"
 import { Sprite, SpriteVersion } from "store"
 import { VolumeUp } from "styled-icons/material-outlined"
@@ -176,6 +176,8 @@ export const PokemonTemplate = ({
                         </S.PokemonCard>
                     </S.Content>
                 </S.Wrapper>
+
+                <SpriteMenu />
             </S.Background>
         </>
     )

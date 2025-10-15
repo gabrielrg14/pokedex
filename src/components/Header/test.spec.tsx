@@ -3,26 +3,30 @@ import { render, screen } from "@testing-library/react"
 import { Header } from "."
 
 describe("<Header />", () => {
-    it("should render Header with navigation, list and pokédex image", () => {
+    it("should render the pokédex logo image", () => {
         render(<Header />)
 
-        const image = screen.getByRole("img", { name: /pokédex logo/i })
+        const logoImage = screen.getByRole("img", { name: /pokédex logo/i })
 
-        expect(screen.getByRole("navigation")).toBeInTheDocument()
-        expect(screen.getByRole("list")).toBeInTheDocument()
-        expect(image).toBeInTheDocument()
-        expect(image).toHaveAccessibleName(/pokédex logo/i)
+        expect(logoImage).toBeInTheDocument()
+        expect(logoImage).toHaveAccessibleName(/pokédex logo/i)
     })
 
-    it("should render Header links with the correct attributes", () => {
+    it("should render a link to the home page", () => {
         render(<Header />)
 
         const homeLink = screen.getByRole("link", { name: /go to home/i })
-        const aboutLink = screen.getByRole("link", { name: /about/i })
 
         expect(homeLink).toBeInTheDocument()
         expect(homeLink).toHaveAttribute("href", "/")
         expect(homeLink).toHaveAccessibleName(/go to home/i)
+    })
+
+    it("should render a link to the about page", () => {
+        render(<Header />)
+
+        const aboutLink = screen.getByRole("link", { name: /about/i })
+
         expect(aboutLink).toBeInTheDocument()
         expect(aboutLink).toHaveAttribute("href", "/about")
         expect(aboutLink).toHaveAccessibleName(/go to about page/i)

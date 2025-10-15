@@ -18,6 +18,7 @@ export enum SpriteType {
 }
 
 export type Sprite = {
+    isMenuOpen: boolean
     version: SpriteVersion
     position: SpritePosition
     type: SpriteType
@@ -25,6 +26,7 @@ export type Sprite = {
 
 type SpriteMenuStore = {
     sprite: Sprite
+    toggleMenuOpen: () => void
     toggleSpriteVersion: () => void
     toggleSpritePosition: () => void
     toggleSpriteType: () => void
@@ -34,10 +36,20 @@ export const useSpriteMenuStore = create<SpriteMenuStore>()(
     persist(
         (set) => ({
             sprite: {
+                isMenuOpen: false,
                 version: SpriteVersion.official,
                 position: SpritePosition.front,
                 type: SpriteType.default
             },
+            toggleMenuOpen: () =>
+                set((state) => {
+                    return {
+                        sprite: {
+                            ...state.sprite,
+                            isMenuOpen: !state.sprite.isMenuOpen
+                        }
+                    }
+                }),
             toggleSpriteVersion: () =>
                 set((state) => {
                     const version =
