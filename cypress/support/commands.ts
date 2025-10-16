@@ -25,9 +25,7 @@ Cypress.Commands.add(
 Cypress.Commands.add("searchForPokemon", (query: string) => {
     cy.intercept("GET", `**/pokemon/${query}`).as("getSearch")
 
-    cy.get("main section input[placeholder='Search by name or number']").type(
-        query
-    )
-    cy.get("button[data-testid='search-button']").click()
+    cy.get("main section input[name='search-input']").type(query)
+    cy.get("main section button[title='Search']").click()
     cy.wait("@getSearch")
 })

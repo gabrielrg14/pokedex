@@ -4,7 +4,12 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Image from "next/image"
 import { IPokemonWithSpecies } from "interfaces"
-import { PokemonNumber, RowTypes, SpriteMenu, StatBar } from "components"
+import {
+    PokemonNumber,
+    RowTypes,
+    SpriteFloatingMenu,
+    StatBar
+} from "components"
 import { formatName } from "utils"
 import { Sprite, SpriteVersion } from "store"
 import { VolumeUp } from "styled-icons/material-outlined"
@@ -81,7 +86,6 @@ export const PokemonTemplate = ({
                                         type="button"
                                         title={`${pokemonName} cry`}
                                         onClick={() => playPokemonCry()}
-                                        data-testid="pokemon-cry-button"
                                     >
                                         <VolumeUp
                                             size={24}
@@ -177,7 +181,7 @@ export const PokemonTemplate = ({
                     </S.Content>
                 </S.Wrapper>
 
-                <SpriteMenu />
+                <SpriteFloatingMenu />
             </S.Background>
         </>
     )

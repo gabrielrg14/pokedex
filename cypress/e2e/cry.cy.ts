@@ -3,7 +3,7 @@
 describe("Pokémon cry", () => {
     beforeEach(() => {
         cy.visit("/pokemon/ditto")
-        cy.get("#cry-pokemon-132").as("dittoCry").should("exist")
+        cy.get("audio[id='cry-pokemon-132']").as("dittoCry").should("exist")
     })
 
     it("play the pokemon cry when accessing the page", () => {
@@ -16,7 +16,7 @@ describe("Pokémon cry", () => {
     })
 
     it("play the pokemon cry by clicking the button", () => {
-        cy.get("button[data-testid='pokemon-cry-button']").click()
+        cy.get("main section button[title='Ditto cry']").click()
 
         cy.get("@dittoCry").should((cries) => {
             const pokemonCry = cries[0] as HTMLAudioElement

@@ -18,23 +18,29 @@ describe("Pokémon sprite", () => {
             .should("be.visible")
             .as("venusaurSprite")
 
-        cy.get("a[data-testid='sprite-menu-button']")
+        cy.get("main section button[title='Open menu']")
             .should("be.visible")
             .should("not.have.class", "active")
             .as("spriteMenuButton")
 
-        cy.get("li[data-testid='sprite-option']").as("spriteVersionSwitcher")
-        cy.get("svg[data-testid='sprite-option-icon']")
+        cy.get("main section button[title='Toggle sprite']").as(
+            "spriteVersionButton"
+        )
+        cy.get("main section button[title='Toggle sprite'] svg")
             .should("not.have.class", "active")
             .as("spriteVersionIcon")
 
-        cy.get("li[data-testid='rotation-option']").as("spriteRotationSwitcher")
-        cy.get("svg[data-testid='rotation-option-icon']")
+        cy.get("main section button[title='Toggle rotation']").as(
+            "spriteRotationButton"
+        )
+        cy.get("main section button[title='Toggle rotation'] svg")
             .should("not.have.class", "active")
             .as("spriteRotationIcon")
 
-        cy.get("li[data-testid='shiny-option']").as("spriteTypeSwitcher")
-        cy.get("svg[data-testid='shiny-option-icon']")
+        cy.get("main section button[title='Toggle shiny']").as(
+            "spriteTypeButton"
+        )
+        cy.get("main section button[title='Toggle shiny'] svg")
             .should("not.have.class", "active")
             .as("spriteTypeIcon")
     })
@@ -52,7 +58,7 @@ describe("Pokémon sprite", () => {
             )
 
             cy.get("@spriteMenuButton").click()
-            cy.get("@spriteVersionSwitcher").should("be.visible").click()
+            cy.get("@spriteVersionButton").should("be.visible").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",
@@ -61,7 +67,7 @@ describe("Pokémon sprite", () => {
             )
 
             cy.get("@spriteVersionIcon").should("have.class", "active")
-            cy.get("@spriteVersionSwitcher").click()
+            cy.get("@spriteVersionButton").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",
@@ -78,14 +84,14 @@ describe("Pokémon sprite", () => {
 
         it("change the sprite version to pixelated and the sprite rotation from front to back and from back to front", () => {
             cy.get("@spriteMenuButton").click()
-            cy.get("@spriteVersionSwitcher").should("be.visible").click()
+            cy.get("@spriteVersionButton").should("be.visible").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",
                 "src",
                 frontPositionSprite
             )
-            cy.get("@spriteRotationSwitcher").should("be.visible").click()
+            cy.get("@spriteRotationButton").should("be.visible").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",
@@ -93,7 +99,7 @@ describe("Pokémon sprite", () => {
                 backPositionSprite
             )
             cy.get("@spriteRotationIcon").should("have.class", "active")
-            cy.get("@spriteRotationSwitcher").click()
+            cy.get("@spriteRotationButton").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",
@@ -106,17 +112,17 @@ describe("Pokémon sprite", () => {
         it("disables the sprite rotation option when the sprite version is official", () => {
             cy.get("@spriteMenuButton").click()
 
-            cy.get("@spriteRotationSwitcher")
+            cy.get("@spriteRotationButton")
                 .should("be.visible")
                 .should("have.class", "disabled")
-            cy.get("@spriteVersionSwitcher").should("be.visible").click()
+            cy.get("@spriteVersionButton").should("be.visible").click()
 
-            cy.get("@spriteRotationSwitcher")
+            cy.get("@spriteRotationButton")
                 .should("not.have.class", "disabled")
                 .click()
-            cy.get("@spriteVersionSwitcher").click()
+            cy.get("@spriteVersionButton").click()
 
-            cy.get("@spriteRotationSwitcher").should("have.class", "disabled")
+            cy.get("@spriteRotationButton").should("have.class", "disabled")
         })
     })
 
@@ -134,7 +140,7 @@ describe("Pokémon sprite", () => {
             )
 
             cy.get("@spriteMenuButton").click()
-            cy.get("@spriteTypeSwitcher").should("be.visible").click()
+            cy.get("@spriteTypeButton").should("be.visible").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",
@@ -142,7 +148,7 @@ describe("Pokémon sprite", () => {
                 shinyTypeSprite
             )
             cy.get("@spriteTypeIcon").should("have.class", "active")
-            cy.get("@spriteTypeSwitcher").click()
+            cy.get("@spriteTypeButton").click()
 
             cy.get("@venusaurSprite").should(
                 "have.attr",

@@ -5,7 +5,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Image from "next/image"
 import { IPokemon, IType } from "interfaces"
-import { Card, Button, SpriteMenu } from "components"
+import { Card, Button, SpriteFloatingMenu } from "components"
 import { getColorsByType } from "utils"
 import { Filter } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
@@ -61,6 +61,7 @@ export const HomeTemplate = ({
                 <S.Wrapper>
                     <S.TopArea>
                         <S.SearchInput
+                            name="search-input"
                             type="search"
                             spellCheck={false}
                             placeholder="Search by name or number"
@@ -76,7 +77,6 @@ export const HomeTemplate = ({
                             title="Search"
                             onClick={() => searchPokemon(search)}
                             disabled={search === ""}
-                            data-testid="search-button"
                         >
                             <Search size={18} />
                         </S.SearchButton>
@@ -179,7 +179,7 @@ export const HomeTemplate = ({
                     )}
                 </S.Wrapper>
 
-                <SpriteMenu />
+                <SpriteFloatingMenu />
             </S.Content>
         </>
     )
