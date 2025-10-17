@@ -118,6 +118,8 @@ export const BottomArea = styled.div`
 
 export const TypeList = styled.ul`
     flex: 1;
+    position: sticky;
+    top: 10px;
     height: fit-content;
     max-width: fit-content;
     background-color: var(--light-color);
@@ -127,6 +129,7 @@ export const TypeList = styled.ul`
     padding: 0 8rem 0 var(--lg-size);
 
     ${media.lessThan("tablet")`
+        position: static;
         max-height: 150px;
         max-width: 100%;
         overflow-y: auto;
@@ -157,7 +160,7 @@ export const TypeItem = styled("button")`
     cursor: pointer;
     filter: grayscale(100%);
     background-color: transparent;
-    margin: var(--lg-size) 0;
+    margin: var(--md-size) 0;
     transition: all 0.3s ease-in-out;
 
     :hover,
@@ -173,7 +176,6 @@ export const TypeItem = styled("button")`
 
 export const Type = styled("span")<TypeProps>`
     color: ${(props) => props.typeColor};
-    text-transform: capitalize;
     font-size: var(--default-size);
 `
 
@@ -197,7 +199,9 @@ export const PokemonList = styled.ul`
     `}
 `
 
-export const PokemonItem = styled("li")``
+export const PokemonItem = styled("li")`
+    display: contents;
+`
 
 export const SearchError = styled.div`
     text-align: center;

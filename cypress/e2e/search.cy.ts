@@ -10,7 +10,7 @@ describe("Search for Pokémon", () => {
 
     it("search for Pokémon 'butterfree' in the initial list", () => {
         cy.navigateToPokemonPage("Butterfree")
-        cy.validatePokemonPage("Butterfree", "#0012", ["bug", "flying"])
+        cy.validatePokemonPage("Butterfree", "#0012", ["Bug", "Flying"])
     })
 
     it("search for Pokémon 'pikachu' using pagination", () => {
@@ -26,31 +26,29 @@ describe("Search for Pokémon", () => {
         cy.wait("@getPikachu")
 
         cy.navigateToPokemonPage("Pikachu")
-        cy.validatePokemonPage("Pikachu", "#0025", ["electric"])
+        cy.validatePokemonPage("Pikachu", "#0025", ["Electric"])
     })
 
     it("search for Pokémon 'sceptile' using search", () => {
         cy.searchForPokemon("sceptile")
         cy.navigateToPokemonPage("Sceptile")
-        cy.validatePokemonPage("Sceptile", "#0254", ["grass"])
+        cy.validatePokemonPage("Sceptile", "#0254", ["Grass"])
     })
 
     it("search for Pokémon '115' using search", () => {
         cy.searchForPokemon("115")
         cy.navigateToPokemonPage("Kangaskhan")
-        cy.validatePokemonPage("Kangaskhan", "#0115", ["normal"])
+        cy.validatePokemonPage("Kangaskhan", "#0115", ["Normal"])
     })
 
     it("search for Pokémon 'kyurem' using filter by type 'ice'", () => {
         cy.intercept("GET", "**/pokemon/kyurem").as("getKyurem")
 
-        cy.contains("main section ul li button", "ice")
-            .should("be.visible")
-            .click()
+        cy.contains("main section ul li button", "Ice").click()
         cy.wait("@getKyurem")
 
         cy.navigateToPokemonPage("Kyurem")
-        cy.validatePokemonPage("Kyurem", "#0646", ["dragon", "ice"])
+        cy.validatePokemonPage("Kyurem", "#0646", ["Dragon", "Ice"])
     })
 
     it("search for the non-existent Pokémon 'test' using the search and return to the list", () => {

@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect, useMemo } from "react"
 
 import * as S from "./styles"
-import Image from "next/image"
 import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
 import { PokedexService } from "services"
@@ -10,17 +9,18 @@ import { SpriteVersion, useSpriteMenuStore } from "store"
 
 type CardProps = {
     pokemon: IPokemon
+    isLoading: boolean
 }
 
-export const Card = ({ pokemon }: CardProps) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+export const Card = ({ pokemon, isLoading }: CardProps) => {
+    const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(isLoading)
     const [pokemonData, setPokemonData] = useState<IPokemon>()
 
     const getPokemonData = useCallback(async () => {
-        setIsLoading(true)
+        setIsLoadingPokemon(true)
         await PokedexService.getPokemonByQuery(pokemon?.name)
             .then((data) => setPokemonData(data))
-            .finally(() => setIsLoading(false))
+            .finally(() => setIsLoadingPokemon(false))
     }, [pokemon?.name])
 
     useEffect(() => {
@@ -44,16 +44,27 @@ export const Card = ({ pokemon }: CardProps) => {
         [sprite, pokemonData?.sprites]
     )
 
+    const PokemonImageFallback = () => (
+        <S.PokemonImage
+            src="/images/types/all.svg"
+            width={96}
+            height={96}
+            alt={`${pokemonName} fallback`}
+            priority
+            unoptimized
+        />
+    )
+
     return (
         <S.CardLink href={`/pokemon/${pokemon?.name}`} aria-label={pokemonName}>
-            {isLoading ? (
+            {isLoadingPokemon ? (
                 <S.PokemonLoading>
-                    <S.PokemonName>{pokemonName}</S.PokemonName>
+                    <PokemonImageFallback />
                 </S.PokemonLoading>
             ) : (
                 <S.CardBody>
-                    {pokemonImage && (
-                        <Image
+                    {pokemonImage ? (
+                        <S.PokemonImage
                             src={pokemonImage}
                             width={156}
                             height={156}
@@ -67,14 +78,18 @@ export const Card = ({ pokemon }: CardProps) => {
                             priority
                             unoptimized
                         />
+                    ) : (
+                        <PokemonImageFallback />
                     )}
 
-                    <S.PokemonInfos>
-                        <PokemonNumber number={pokemonNumber} />
-                        <S.PokemonName>{pokemonName}</S.PokemonName>
-                    </S.PokemonInfos>
+                    <S.CardBottom>
+                        <S.PokemonInfos>
+                            <PokemonNumber number={pokemonNumber} />
+                            <S.PokemonName>{pokemonName}</S.PokemonName>
+                        </S.PokemonInfos>
 
-                    <RowTypes types={pokemonData?.types} />
+                        <RowTypes types={pokemonData?.types} />
+                    </S.CardBottom>
                 </S.CardBody>
             )}
         </S.CardLink>

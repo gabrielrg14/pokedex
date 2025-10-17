@@ -20,6 +20,5 @@ export const Type = styled.span<TypeProps>`
     background-color: ${(props) => props.backgroundColor};
     color: ${(props) => props.color};
     border-radius: 5px;
-    text-transform: capitalize;
     font-size: 1.4rem;
 `

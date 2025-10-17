@@ -8,56 +8,63 @@ import { useListFilterStore } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
 type HomeProps = {
-    pokemons: IPokemon[]
     types: IType[]
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const pokemons = await PokedexService.getPokemonsWithPagination(
-        POKEMON_PAGINATION_LIMIT
-    )
     const types = await PokedexService.getAllTypes()
 
     return {
-        props: { pokemons, types }
+        props: { types }
     }
 }
 
-const Home = ({ pokemons, types }: HomeProps) => {
+const Home = ({ types }: HomeProps) => {
     const { filter, setSearchFilter, setTypeFilter, setLimitFilter } =
         useListFilterStore()
 
     const prevSearchRef = useRef("")
-    const [pokemonList, setPokemonList] = useState(pokemons)
+    const [pokemonList, setPokemonList] = useState<IPokemon[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const getInitialPokemonPagination = useCallback(async (limit: number) => {
-        await PokedexService.getPokemonsWithPagination(limit).then((data) =>
-            setPokemonList([...data])
-        )
+        setIsLoading(true)
+        await PokedexService.getPokemonsWithPagination(limit)
+            .then((data) => setPokemonList(data))
+            .finally(() => setIsLoading(false))
     }, [])
 
     const getNextPokemonPagination = useCallback(async (limit: number) => {
+        setIsLoading(true)
         await PokedexService.getPokemonsWithPagination(
             POKEMON_PAGINATION_LIMIT,
             limit
-        ).then((data) => {
-            setPokemonList((prevPokemonList) => [...prevPokemonList, ...data])
-        })
+        )
+            .then((data) => {
+                setPokemonList((prevPokemonList) => [
+                    ...prevPokemonList,
+                    ...data
+                ])
+            })
+            .finally(() => setIsLoading(false))
     }, [])
 
     const getPokemonByQuery = useCallback(async (search: string) => {
+        setIsLoading(true)
         prevSearchRef.current = search
         await PokedexService.getPokemonByQuery(
             search.replace(/ /g, "-").toLowerCase()
         )
             .then((data) => setPokemonList([data]))
             .catch(() => setPokemonList([]))
+            .finally(() => setIsLoading(false))
     }, [])
 
     const getPokemonsByType = useCallback(async (type: string) => {
-        await PokedexService.getPokemonsByType(type).then((data) =>
-            setPokemonList([...data])
-        )
+        setIsLoading(true)
+        await PokedexService.getPokemonsByType(type)
+            .then((data) => setPokemonList(data))
+            .finally(() => setIsLoading(false))
     }, [])
 
     useEffect(() => {
@@ -90,13 +97,14 @@ const Home = ({ pokemons, types }: HomeProps) => {
 
     return (
         <HomeTemplate
-            prevSearchRef={prevSearchRef}
+            pokemons={pokemonList}
+            types={types}
+            isLoading={isLoading}
             filter={filter}
+            prevSearchRef={prevSearchRef}
             searchPokemon={searchPokemon}
             filterByType={filterByType}
             nextPokemonPagination={nextPokemonPagination}
-            pokemons={pokemonList}
-            types={types}
         />
     )
 }

@@ -13,7 +13,7 @@ describe("Filter for type", () => {
 
         cy.searchForPokemon("goodra")
         cy.navigateToPokemonPage("Goodra")
-        cy.validatePokemonPage("Goodra", "#0706", ["dragon"])
+        cy.validatePokemonPage("Goodra", "#0706", ["Dragon"])
 
         cy.get("header nav img[alt='Pokédex logo']")
             .should("be.visible")
@@ -21,7 +21,7 @@ describe("Filter for type", () => {
         cy.wait("@getGoodra")
 
         cy.navigateToPokemonPage("Goodra")
-        cy.validatePokemonPage("Goodra", "#0706", ["dragon"])
+        cy.validatePokemonPage("Goodra", "#0706", ["Dragon"])
     })
 
     it("filter 'nidoqueen' by pagination, navigate to its page, return to the paginated list, find 'nidoking' and navigate to its page", () => {
@@ -38,7 +38,7 @@ describe("Filter for type", () => {
         cy.wait("@getNidoqueen")
 
         cy.navigateToPokemonPage("Nidoqueen")
-        cy.validatePokemonPage("Nidoqueen", "#0031", ["poison", "ground"])
+        cy.validatePokemonPage("Nidoqueen", "#0031", ["Poison", "Ground"])
 
         cy.get("header nav img[alt='Pokédex logo']")
             .should("be.visible")
@@ -46,20 +46,18 @@ describe("Filter for type", () => {
         cy.wait("@getNidoking")
 
         cy.navigateToPokemonPage("Nidoking")
-        cy.validatePokemonPage("Nidoking", "#0034", ["poison", "ground"])
+        cy.validatePokemonPage("Nidoking", "#0034", ["Poison", "Ground"])
     })
 
     it("filter by type 'fire', find 'charizard' and navigate to its page, go back to the filtered list, find 'skeledirge' and navigate to its page", () => {
         cy.intercept("GET", "**/pokemon/charizard").as("getCharizard")
         cy.intercept("GET", "**/pokemon/skeledirge").as("getSkeledirge")
 
-        cy.contains("main section ul li button", "fire")
-            .should("be.visible")
-            .click()
+        cy.contains("main section ul li button", "Fire").click()
         cy.wait("@getCharizard")
 
         cy.navigateToPokemonPage("Charizard")
-        cy.validatePokemonPage("Charizard", "#0006", ["fire", "flying"])
+        cy.validatePokemonPage("Charizard", "#0006", ["Fire", "Flying"])
 
         cy.get("header nav img[alt='Pokédex logo']")
             .should("be.visible")
@@ -67,6 +65,6 @@ describe("Filter for type", () => {
         cy.wait("@getSkeledirge")
 
         cy.navigateToPokemonPage("Skeledirge")
-        cy.validatePokemonPage("Skeledirge", "#0911", ["fire", "ghost"])
+        cy.validatePokemonPage("Skeledirge", "#0911", ["Fire", "Ghost"])
     })
 })

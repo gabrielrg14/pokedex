@@ -6,29 +6,31 @@ import * as S from "./styles"
 import Image from "next/image"
 import { IPokemon, IType } from "interfaces"
 import { Card, Button, SpriteFloatingMenu } from "components"
-import { getColorsByType } from "utils"
+import { formatName, getColorsByType } from "utils"
 import { Filter } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 import { Search } from "styled-icons/material-outlined"
 
 type HomeTemplateProps = {
-    prevSearchRef: MutableRefObject<string>
+    pokemons: IPokemon[]
+    types: IType[]
+    isLoading: boolean
     filter: Filter
+    prevSearchRef: MutableRefObject<string>
     searchPokemon: (search: string) => void
     filterByType: (type: string) => void
     nextPokemonPagination: (limit: number) => void
-    pokemons: IPokemon[]
-    types: IType[]
 }
 
 export const HomeTemplate = ({
-    prevSearchRef,
+    pokemons,
+    types,
+    isLoading,
     filter,
+    prevSearchRef,
     searchPokemon,
     filterByType,
-    nextPokemonPagination,
-    pokemons,
-    types
+    nextPokemonPagination
 }: HomeTemplateProps) => {
     const [search, setSearch] = useState(filter.search)
     const typeSelected = useMemo(() => filter.type, [filter.type])
@@ -89,10 +91,14 @@ export const HomeTemplate = ({
                             height={32}
                             alt={typeSelected}
                         />
-                        <S.Counter>{pokemons.length}</S.Counter>
+                        <S.Counter>
+                            {isLoading && typeSelected !== "all"
+                                ? formatName(typeSelected)
+                                : pokemons.length}
+                        </S.Counter>
                     </S.PokemonCount>
 
-                    {pokemons.length > 0 && (
+                    {(isLoading || pokemons.length > 0) && (
                         <S.BottomArea>
                             <S.TypeList>
                                 {types.map((type, index) => (
@@ -123,7 +129,7 @@ export const HomeTemplate = ({
                                                         .backgroundColor
                                                 }
                                             >
-                                                {type.name}
+                                                {formatName(type.name)}
                                             </S.Type>
                                         </S.TypeItem>
                                     </li>
@@ -134,7 +140,10 @@ export const HomeTemplate = ({
                                 <S.PokemonList>
                                     {pokemons.map((pokemon, index) => (
                                         <S.PokemonItem key={index}>
-                                            <Card pokemon={pokemon} />
+                                            <Card
+                                                pokemon={pokemon}
+                                                isLoading={isLoading}
+                                            />
                                         </S.PokemonItem>
                                     ))}
                                 </S.PokemonList>
@@ -156,7 +165,7 @@ export const HomeTemplate = ({
                         </S.BottomArea>
                     )}
 
-                    {pokemons.length === 0 && (
+                    {!isLoading && pokemons.length === 0 && (
                         <S.SearchError>
                             <S.TextNotFound>
                                 Pokémon{" "}

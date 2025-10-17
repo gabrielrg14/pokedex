@@ -1,11 +1,8 @@
 import styled from "styled-components"
 import Link from "next/link"
+import Image from "next/image"
 
 export const CardLink = styled(Link)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: var(--default-size);
     background-color: var(--light-color);
     border-radius: 12px;
@@ -22,10 +19,12 @@ export const CardLink = styled(Link)`
 `
 
 export const CardBody = styled.div`
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: var(--xs-size);
     animation: fade-in 0.5s ease-in-out;
 `
 
@@ -33,9 +32,18 @@ export const PokemonLoading = styled(CardBody)`
     height: 288px;
 `
 
-export const PokemonInfos = styled.div`
-    margin: var(--xs-size) auto;
+export const PokemonImage = styled(Image)`
+    flex: 1;
 `
+
+export const CardBottom = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--xs-size);
+`
+
+export const PokemonInfos = styled.div``
 
 export const PokemonName = styled.h2`
     color: var(--dark-color);

@@ -112,7 +112,7 @@ export const PokemonTemplate = ({
                             </S.PokemonInfo>
 
                             <S.ImageWrapper>
-                                {pokemonImage && (
+                                {pokemonImage ? (
                                     <Image
                                         src={pokemonImage}
                                         width={256}
@@ -125,6 +125,14 @@ export const PokemonTemplate = ({
                                                     ? "pixelated"
                                                     : "unset"
                                         }}
+                                        priority
+                                    />
+                                ) : (
+                                    <Image
+                                        src="/images/types/all.svg"
+                                        width={196}
+                                        height={196}
+                                        alt={`${pokemonName} fallback`}
                                         priority
                                     />
                                 )}
