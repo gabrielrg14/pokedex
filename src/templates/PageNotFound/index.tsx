@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
 import Link from "next/link"
-import { Button } from "components"
+import { Button, PokemonNumber, RowTypes } from "components"
 
 export const PageNotFoundTemplate = () => {
     return (
@@ -11,19 +11,35 @@ export const PageNotFoundTemplate = () => {
 
             <S.Wrapper>
                 <S.Content>
-                    <S.TextNotFound>Page or Pokémon not found!</S.TextNotFound>
+                    <S.CardLink href="/pokemon/psyduck" aria-label="Psyduck">
+                        <S.CardBody>
+                            <S.PsyduckImage
+                                src="/images/psyduck.png"
+                                width={256}
+                                height={256}
+                                alt="Psyduck confused"
+                                priority
+                            />
 
-                    <S.TextNotHere>
-                        Unfortunately the page you are looking for is not here.
-                    </S.TextNotHere>
+                            <S.CardBottom>
+                                <S.ErrorInfos>
+                                    <PokemonNumber number={404} />
+                                    <S.TextNotFound>Not Found</S.TextNotFound>
+                                </S.ErrorInfos>
 
-                    <S.PsyduckImage
-                        src="/images/psyduck.png"
-                        width={350}
-                        height={200}
-                        alt="Psyduck confused"
-                        priority
-                    />
+                                <RowTypes
+                                    types={[
+                                        {
+                                            type: {
+                                                name: "error",
+                                                url: ""
+                                            }
+                                        }
+                                    ]}
+                                />
+                            </S.CardBottom>
+                        </S.CardBody>
+                    </S.CardLink>
 
                     <Link href="/" aria-label="Go to Home">
                         <Button>Go to Home</Button>

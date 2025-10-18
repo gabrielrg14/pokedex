@@ -5,9 +5,7 @@ Cypress.on("uncaught:exception", (err) => {
 })
 
 Cypress.Commands.add("navigateToPokemonPage", (name: string) => {
-    cy.get(`main section ul li a[aria-label='${name}']`)
-        .should("be.visible")
-        .click()
+    cy.get(`main section a[aria-label='${name}']`).should("be.visible").click()
 })
 
 Cypress.Commands.add(
