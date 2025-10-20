@@ -98,7 +98,7 @@ export const HomeTemplate = ({
                         </S.Counter>
                     </S.PokemonCount>
 
-                    {(isLoading || pokemons.length > 0) && (
+                    {((isLoading && search === "") || pokemons.length > 0) && (
                         <S.BottomArea>
                             <S.TypeList>
                                 {types.map((type, index) => (
