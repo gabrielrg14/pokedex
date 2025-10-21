@@ -160,7 +160,7 @@ export const TypeItem = styled("button")`
     cursor: pointer;
     filter: grayscale(100%);
     background-color: transparent;
-    margin: var(--md-size) 0;
+    margin: var(--default-size) 0;
     transition: all 0.3s ease-in-out;
 
     :hover,
@@ -168,10 +168,6 @@ export const TypeItem = styled("button")`
         opacity: 1;
         filter: grayscale(0%);
     }
-
-    ${media.lessThan("tablet")`
-        margin: var(--default-size) 0;
-    `}
 `
 
 export const Type = styled("span")<TypeProps>`

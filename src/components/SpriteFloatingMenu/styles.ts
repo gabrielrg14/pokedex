@@ -24,7 +24,7 @@ export const FloatingMenu = styled("div")`
 
     ${media.lessThan("tablet")`
         bottom: 32px;
-        right: 24px;
+        right: 16px;
     `}
 `
 
