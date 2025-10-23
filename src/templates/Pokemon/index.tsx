@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useMemo } from "react"
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
@@ -15,49 +14,26 @@ import { Sprite, SpriteVersion } from "store"
 import { VolumeUp } from "styled-icons/material-outlined"
 
 type PokemonTemplateProps = {
-    pokemon: IPokemonWithSpecies
+    pokemonName: string
+    pokemonNumber: number
+    pokemonCry?: string
+    pokemonImage?: string
+    pokemonData: IPokemonWithSpecies
+    playPokemonCry: () => void
     background: string
     sprite: Sprite
 }
 
 export const PokemonTemplate = ({
-    pokemon,
+    pokemonName,
+    pokemonNumber,
+    pokemonCry,
+    pokemonImage,
+    pokemonData,
+    playPokemonCry,
     background,
     sprite
 }: PokemonTemplateProps) => {
-    const pokemonName = useMemo(
-        () => formatName(pokemon?.name),
-        [pokemon?.name]
-    )
-    const pokemonNumber = useMemo(() => pokemon?.id, [pokemon?.id])
-    const pokemonCry = useMemo(
-        () =>
-            sprite.version === SpriteVersion.pixelated && pokemon?.cries?.legacy
-                ? pokemon?.cries?.legacy
-                : pokemon?.cries?.latest,
-        [sprite?.version, pokemon?.cries]
-    )
-    const pokemonImage = useMemo(() => {
-        if (!sprite.loading)
-            return sprite.version === SpriteVersion.pixelated
-                ? pokemon?.sprites?.[`${sprite.position}_${sprite.type}`]
-                : pokemon?.sprites?.other?.["official-artwork"]?.[
-                      `${sprite.position}_${sprite.type}`
-                  ]
-    }, [sprite, pokemon?.sprites])
-
-    const playPokemonCry = useCallback(() => {
-        const cryAudioElement = document.getElementById(
-            `cry-pokemon-${pokemonNumber}`
-        ) as HTMLAudioElement
-        cryAudioElement.volume = 0.05
-        cryAudioElement.play()
-    }, [pokemonNumber])
-
-    useEffect(() => {
-        playPokemonCry()
-    }, [playPokemonCry])
-
     return (
         <>
             <NextSeo
@@ -72,7 +48,11 @@ export const PokemonTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonName}`}
             />
 
-            <audio id={`cry-pokemon-${pokemonNumber}`} src={pokemonCry} />
+            <audio
+                id={`pokemon-cry-${pokemonNumber}`}
+                src={pokemonCry}
+                autoPlay
+            />
 
             <S.Background style={{ background }}>
                 <S.Wrapper>
@@ -93,10 +73,10 @@ export const PokemonTemplate = ({
                                     </S.CryButton>
                                 </S.PokemonTitle>
 
-                                {pokemon?.genera && (
+                                {pokemonData?.genera && (
                                     <S.PokemonGenera>
                                         {formatName(
-                                            pokemon.genera.find(
+                                            pokemonData.genera.find(
                                                 (genera) =>
                                                     genera.language.name ===
                                                     "en"
@@ -137,38 +117,46 @@ export const PokemonTemplate = ({
                                 )}
                             </S.ImageWrapper>
 
-                            <RowTypes types={pokemon?.types} />
+                            <RowTypes types={pokemonData?.types} />
 
                             <S.PokemonData>
                                 <S.Data>
                                     <S.DataTitle>Height</S.DataTitle>
-                                    <p>{pokemon?.height / 10}m</p>
+                                    <p>{pokemonData?.height / 10}m</p>
                                 </S.Data>
                                 <S.Data>
                                     <S.DataTitle>Weight</S.DataTitle>
-                                    <p>{pokemon?.weight / 10}kg</p>
+                                    <p>{pokemonData?.weight / 10}kg</p>
                                 </S.Data>
-                                {pokemon?.habitat && (
+                                {pokemonData?.habitat && (
                                     <S.Data>
                                         <S.DataTitle>Habitat</S.DataTitle>
                                         <p>
-                                            {formatName(pokemon.habitat.name)}
+                                            {formatName(
+                                                pokemonData.habitat.name
+                                            )}
                                         </p>
                                     </S.Data>
                                 )}
-                                <S.Data>
-                                    <S.DataTitle>Abilities</S.DataTitle>
-                                    {pokemon?.abilities.map((item, index) => (
-                                        <p key={index}>
-                                            {formatName(item.ability.name)}
-                                        </p>
-                                    ))}
-                                </S.Data>
+                                {pokemonData?.abilities?.length > 0 && (
+                                    <S.Data>
+                                        <S.DataTitle>Abilities</S.DataTitle>
+                                        {pokemonData.abilities.map(
+                                            (item, index) => (
+                                                <p key={index}>
+                                                    {formatName(
+                                                        item.ability.name
+                                                    )}
+                                                </p>
+                                            )
+                                        )}
+                                    </S.Data>
+                                )}
                             </S.PokemonData>
 
                             <S.PokemonStats>
                                 <S.DataTitle>Stats</S.DataTitle>
-                                {pokemon?.stats.map((item, index) => (
+                                {pokemonData?.stats.map((item, index) => (
                                     <S.Stat key={index}>
                                         <S.StatInfo>
                                             <span>
@@ -177,7 +165,9 @@ export const PokemonTemplate = ({
                                             <span>{item.base_stat}</span>
                                         </S.StatInfo>
                                         <StatBar
-                                            type={pokemon?.types[0].type.name}
+                                            type={
+                                                pokemonData?.types[0].type.name
+                                            }
                                             stat={item.stat.name}
                                             baseStat={item.base_stat}
                                         />
@@ -185,10 +175,10 @@ export const PokemonTemplate = ({
                                 ))}
                             </S.PokemonStats>
                         </S.PokemonCard>
+
+                        <SpriteFloatingMenu />
                     </S.Content>
                 </S.Wrapper>
-
-                <SpriteFloatingMenu />
             </S.Background>
         </>
     )

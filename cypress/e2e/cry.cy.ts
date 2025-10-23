@@ -2,27 +2,35 @@
 
 describe("Pokémon cry", () => {
     beforeEach(() => {
-        cy.visit("/pokemon/ditto")
-        cy.get("audio[id='cry-pokemon-132']").as("dittoCry").should("exist")
+        cy.intercept("GET", "**/cries/pokemon/latest/**").as("getLatestCry")
     })
 
-    it("play the pokemon cry when accessing the page", () => {
-        cy.get("@dittoCry").should((cries) => {
-            const pokemonCry = cries[0] as HTMLAudioElement
-            const cryWasPlayed =
-                pokemonCry.duration > 0 && pokemonCry.played.length > 0
-            expect(cryWasPlayed).to.be.equal(true)
-        })
+    it("play the Pokémon cry when accessing the page", () => {
+        cy.visit("/pokemon/131")
+        cy.wait("@getLatestCry")
+
+        cy.validatePokemonCry("131")
     })
 
-    it("play the pokemon cry by clicking the button", () => {
+    it("play the Pokémon cry by clicking the button", () => {
+        cy.visit("/pokemon/132")
+        cy.wait("@getLatestCry")
+
         cy.get("main section button[title='Ditto cry']").click()
 
-        cy.get("@dittoCry").should((cries) => {
-            const pokemonCry = cries[0] as HTMLAudioElement
-            const cryingWasPlayed =
-                pokemonCry.duration > 0 && pokemonCry.played.length > 0
-            expect(cryingWasPlayed).to.be.equal(true)
-        })
+        cy.validatePokemonCry("132")
+    })
+
+    it("play the Pokémon cry when changing sprite", () => {
+        cy.intercept("GET", "**/cries/pokemon/legacy/**").as("getLegacyCry")
+
+        cy.visit("/pokemon/133")
+        cy.wait("@getLatestCry")
+
+        cy.get("main section button[title='Open menu']").click()
+        cy.get("main section button[title='Toggle sprite']").click()
+
+        cy.wait("@getLegacyCry")
+        cy.validatePokemonCry("133")
     })
 })

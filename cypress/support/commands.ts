@@ -20,6 +20,16 @@ Cypress.Commands.add(
     }
 )
 
+Cypress.Commands.add("validatePokemonCry", (number: string) => {
+    cy.get(`audio[id='pokemon-cry-${number}']`).as("pokemonCry").should("exist")
+    cy.get("@pokemonCry").should((cries) => {
+        const pokemonCry = cries[0] as HTMLAudioElement
+        const cryWasPlayed =
+            pokemonCry.duration > 0 && pokemonCry.played.length > 0
+        expect(cryWasPlayed).to.be.equal(true)
+    })
+})
+
 Cypress.Commands.add("searchForPokemon", (query: string) => {
     cy.intercept("GET", `**/pokemon/${query}`).as("getSearch")
 

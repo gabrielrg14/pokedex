@@ -1,12 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from "next"
+import { useCallback, useEffect, useMemo } from "react"
 
 import { useRouter } from "next/router"
 import { IPokemon, IPokemonWithSpecies } from "interfaces"
 import { Loading } from "components"
 import { PokedexService } from "services"
 import { PokemonTemplate } from "templates"
-import { getColorsByType } from "utils"
-import { useSpriteMenuStore } from "store"
+import { formatName, getColorsByType } from "utils"
+import { SpriteVersion, useSpriteMenuStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const pokemons = await PokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
@@ -51,11 +52,45 @@ const PokemonPage = ({ pokemon }: PokemonPageProps) => {
     const router = useRouter()
     const { sprite } = useSpriteMenuStore()
 
+    const pokemonName = formatName(pokemon?.name)
+    const pokemonNumber = pokemon?.id
+    const pokemonCry = useMemo(() => {
+        if (!sprite.loading)
+            return sprite.version === SpriteVersion.pixelated &&
+                pokemon?.cries?.legacy
+                ? pokemon?.cries?.legacy
+                : pokemon?.cries?.latest
+    }, [sprite, pokemon?.cries])
+    const pokemonImage = useMemo(() => {
+        if (!sprite.loading)
+            return sprite.version === SpriteVersion.pixelated
+                ? pokemon?.sprites?.[`${sprite.position}_${sprite.type}`]
+                : pokemon?.sprites?.other?.["official-artwork"]?.[
+                      `${sprite.position}_${sprite.type}`
+                  ]
+    }, [sprite, pokemon?.sprites])
+
+    const playPokemonCry = useCallback(() => {
+        const cryAudioElement = document.getElementById(
+            `pokemon-cry-${pokemonNumber}`
+        ) as HTMLAudioElement
+        if (cryAudioElement) {
+            cryAudioElement.volume = 0.05
+            cryAudioElement.load()
+        }
+    }, [pokemonNumber])
+
+    useEffect(() => {
+        playPokemonCry()
+    }, [playPokemonCry])
+
     if (router && router.isFallback) return <Loading />
 
-    let background = getColorsByType(pokemon.types[0].type.name).background
+    let background = getColorsByType(
+        pokemon?.types?.[0]?.type?.name
+    )?.background
 
-    if (pokemon.types.length >= 2) {
+    if (pokemon?.types?.length >= 2) {
         // Pokémon with 2 or more types
         background = `linear-gradient(
             to right,
@@ -66,7 +101,12 @@ const PokemonPage = ({ pokemon }: PokemonPageProps) => {
 
     return (
         <PokemonTemplate
-            pokemon={pokemon}
+            pokemonName={pokemonName}
+            pokemonNumber={pokemonNumber}
+            pokemonCry={pokemonCry}
+            pokemonImage={pokemonImage}
+            pokemonData={pokemon}
+            playPokemonCry={playPokemonCry}
             background={background}
             sprite={sprite}
         />
