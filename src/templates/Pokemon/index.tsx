@@ -37,15 +37,14 @@ export const PokemonTemplate = ({
                 : pokemon?.cries?.latest,
         [sprite?.version, pokemon?.cries]
     )
-    const pokemonImage = useMemo(
-        () =>
-            sprite.version === SpriteVersion.pixelated
+    const pokemonImage = useMemo(() => {
+        if (!sprite.loading)
+            return sprite.version === SpriteVersion.pixelated
                 ? pokemon?.sprites?.[`${sprite.position}_${sprite.type}`]
                 : pokemon?.sprites?.other?.["official-artwork"]?.[
                       `${sprite.position}_${sprite.type}`
-                  ],
-        [sprite, pokemon?.sprites]
-    )
+                  ]
+    }, [sprite, pokemon?.sprites])
 
     const playPokemonCry = useCallback(() => {
         const cryAudioElement = document.getElementById(
@@ -130,8 +129,8 @@ export const PokemonTemplate = ({
                                 ) : (
                                     <Image
                                         src="/images/types/all.svg"
-                                        width={196}
-                                        height={196}
+                                        width={228}
+                                        height={228}
                                         alt={`${pokemonName} fallback`}
                                         priority
                                     />

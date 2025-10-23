@@ -9,11 +9,10 @@ import { SpriteVersion, useSpriteMenuStore } from "store"
 
 type CardProps = {
     pokemon: IPokemon
-    isLoading: boolean
 }
 
-export const Card = ({ pokemon, isLoading }: CardProps) => {
-    const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(isLoading)
+export const Card = ({ pokemon }: CardProps) => {
+    const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true)
     const [pokemonData, setPokemonData] = useState<IPokemon>()
 
     const getPokemonData = useCallback(async () => {
@@ -34,21 +33,20 @@ export const Card = ({ pokemon, isLoading }: CardProps) => {
         [pokemon?.name]
     )
     const pokemonNumber = useMemo(() => pokemonData?.id, [pokemonData?.id])
-    const pokemonImage = useMemo(
-        () =>
-            sprite.version === SpriteVersion.pixelated
+    const pokemonImage = useMemo(() => {
+        if (!sprite.loading)
+            return sprite.version === SpriteVersion.pixelated
                 ? pokemonData?.sprites?.[`${sprite.position}_${sprite.type}`]
                 : pokemonData?.sprites?.other?.["official-artwork"]?.[
                       `${sprite.position}_${sprite.type}`
-                  ],
-        [sprite, pokemonData?.sprites]
-    )
+                  ]
+    }, [sprite, pokemonData?.sprites])
 
     const PokemonImageFallback = () => (
         <S.PokemonImage
             src="/images/types/all.svg"
-            width={96}
-            height={96}
+            width={128}
+            height={128}
             alt={`${pokemonName} fallback`}
             priority
             unoptimized

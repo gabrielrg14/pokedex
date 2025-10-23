@@ -13,6 +13,7 @@ describe("<Card />", () => {
     beforeEach(() => {
         useSpriteMenuStore.setState({
             sprite: {
+                loading: false,
                 version: SpriteVersion.official,
                 position: SpritePosition.front,
                 type: SpriteType.default,
@@ -22,7 +23,7 @@ describe("<Card />", () => {
     })
 
     it("should render pokemon link with the correct attributes", async () => {
-        render(<Card pokemon={pokemonMocks.venusaur} isLoading={false} />)
+        render(<Card pokemon={pokemonMocks.venusaur} />)
 
         await waitFor(() =>
             expect(
@@ -37,7 +38,7 @@ describe("<Card />", () => {
     })
 
     it("should render the fallback image during loading and then pokemon image when available", async () => {
-        render(<Card pokemon={pokemonMocks.venusaur} isLoading={false} />)
+        render(<Card pokemon={pokemonMocks.venusaur} />)
 
         const fallback = screen.getByRole("img", { name: /venusaur fallback/i })
         expect(fallback).toBeInTheDocument()
@@ -61,7 +62,7 @@ describe("<Card />", () => {
             }
         }
 
-        render(<Card pokemon={noImagePokemon} isLoading={false} />)
+        render(<Card pokemon={noImagePokemon} />)
 
         await waitFor(() =>
             expect(
@@ -73,6 +74,7 @@ describe("<Card />", () => {
     it("should render image with pixelated imageRendering when the sprite version is pixelated", async () => {
         useSpriteMenuStore.setState({
             sprite: {
+                loading: false,
                 version: SpriteVersion.pixelated,
                 position: SpritePosition.front,
                 type: SpriteType.default,
@@ -80,7 +82,7 @@ describe("<Card />", () => {
             }
         })
 
-        render(<Card pokemon={pokemonMocks.charizard} isLoading={false} />)
+        render(<Card pokemon={pokemonMocks.charizard} />)
 
         await waitFor(() =>
             expect(
@@ -96,6 +98,7 @@ describe("<Card />", () => {
     it("should render image with unset imageRendering when sprite version is not pixelated", async () => {
         useSpriteMenuStore.setState({
             sprite: {
+                loading: false,
                 version: SpriteVersion.official,
                 position: SpritePosition.front,
                 type: SpriteType.default,
@@ -103,7 +106,7 @@ describe("<Card />", () => {
             }
         })
 
-        render(<Card pokemon={pokemonMocks.charizard} isLoading={false} />)
+        render(<Card pokemon={pokemonMocks.charizard} />)
 
         await waitFor(() =>
             expect(

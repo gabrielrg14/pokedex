@@ -13,6 +13,7 @@ describe("<SpriteFloatingMenu />", () => {
     beforeEach(() => {
         useSpriteMenuStore.setState({
             sprite: {
+                loading: false,
                 isMenuOpen: false,
                 version: SpriteVersion.official,
                 position: SpritePosition.front,

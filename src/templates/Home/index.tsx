@@ -140,10 +140,7 @@ export const HomeTemplate = ({
                                 <S.PokemonList>
                                     {pokemons.map((pokemon, index) => (
                                         <S.PokemonItem key={index}>
-                                            <Card
-                                                pokemon={pokemon}
-                                                isLoading={isLoading}
-                                            />
+                                            <Card pokemon={pokemon} />
                                         </S.PokemonItem>
                                     ))}
                                 </S.PokemonList>

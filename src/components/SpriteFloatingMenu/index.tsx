@@ -20,13 +20,14 @@ export const SpriteFloatingMenu = () => {
         toggleSpriteType
     } = useSpriteMenuStore()
 
-    const hasActiveFilter = useMemo(
-        () =>
-            sprite.version !== SpriteVersion.official ||
-            sprite.position !== SpritePosition.front ||
-            sprite.type !== SpriteType.default,
-        [sprite]
-    )
+    const hasActiveFilter = useMemo(() => {
+        if (!sprite.loading)
+            return (
+                sprite.version !== SpriteVersion.official ||
+                sprite.position !== SpritePosition.front ||
+                sprite.type !== SpriteType.default
+            )
+    }, [sprite])
 
     return (
         <S.FloatingMenu>

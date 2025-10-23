@@ -18,6 +18,7 @@ export enum SpriteType {
 }
 
 export type Sprite = {
+    loading: boolean
     isMenuOpen: boolean
     version: SpriteVersion
     position: SpritePosition
@@ -26,6 +27,7 @@ export type Sprite = {
 
 type SpriteMenuStore = {
     sprite: Sprite
+    setLoadingSprite: (loading: boolean) => void
     toggleMenuOpen: () => void
     toggleSpriteVersion: () => void
     toggleSpritePosition: () => void
@@ -36,11 +38,16 @@ export const useSpriteMenuStore = create<SpriteMenuStore>()(
     persist(
         (set) => ({
             sprite: {
+                loading: true,
                 isMenuOpen: false,
                 version: SpriteVersion.official,
                 position: SpritePosition.front,
                 type: SpriteType.default
             },
+            setLoadingSprite: (loading: boolean) =>
+                set((state) => {
+                    return { sprite: { ...state.sprite, loading } }
+                }),
             toggleMenuOpen: () =>
                 set((state) => {
                     return {
@@ -84,6 +91,11 @@ export const useSpriteMenuStore = create<SpriteMenuStore>()(
                     return { sprite: { ...state.sprite, type } }
                 })
         }),
-        { name: SPRITE_MENU_STORAGE_KEY, version: 1 }
+        {
+            name: SPRITE_MENU_STORAGE_KEY,
+            onRehydrateStorage: (state) => {
+                return () => void state.setLoadingSprite(false)
+            }
+        }
     )
 )

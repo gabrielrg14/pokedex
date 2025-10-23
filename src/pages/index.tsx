@@ -25,17 +25,15 @@ const Home = ({ types }: HomeProps) => {
 
     const prevSearchRef = useRef("")
     const [pokemonList, setPokemonList] = useState<IPokemon[]>([])
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const getInitialPokemonPagination = useCallback(async (limit: number) => {
-        setIsLoading(true)
         await PokedexService.getPokemonsWithPagination(limit)
             .then((data) => setPokemonList(data))
             .finally(() => setIsLoading(false))
     }, [])
 
     const getNextPokemonPagination = useCallback(async (limit: number) => {
-        setIsLoading(true)
         await PokedexService.getPokemonsWithPagination(
             POKEMON_PAGINATION_LIMIT,
             limit
@@ -50,7 +48,6 @@ const Home = ({ types }: HomeProps) => {
     }, [])
 
     const getPokemonByQuery = useCallback(async (search: string) => {
-        setIsLoading(true)
         prevSearchRef.current = search
         await PokedexService.getPokemonByQuery(
             search.replace(/ /g, "-").toLowerCase()
@@ -61,18 +58,20 @@ const Home = ({ types }: HomeProps) => {
     }, [])
 
     const getPokemonsByType = useCallback(async (type: string) => {
-        setIsLoading(true)
         await PokedexService.getPokemonsByType(type)
             .then((data) => setPokemonList(data))
             .finally(() => setIsLoading(false))
     }, [])
 
     useEffect(() => {
-        if (filter.search === "" && filter.type === "all")
-            getInitialPokemonPagination(filter.limit)
-        else if (filter.type !== "all") getPokemonsByType(filter.type)
-        else if (filter.search !== "") getPokemonByQuery(filter.search)
-        else getNextPokemonPagination(filter.limit)
+        if (!filter.loading) {
+            setIsLoading(true)
+            if (filter.search === "" && filter.type === "all")
+                getInitialPokemonPagination(filter.limit)
+            else if (filter.type !== "all") getPokemonsByType(filter.type)
+            else if (filter.search !== "") getPokemonByQuery(filter.search)
+            else getNextPokemonPagination(filter.limit)
+        }
     }, [
         filter,
         getInitialPokemonPagination,
