@@ -5,7 +5,7 @@ import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
 import { PokedexService } from "services"
 import { formatName } from "utils"
-import { SpriteVersion, useSpriteMenuStore } from "store"
+import { SpriteVersion, useListFilterStore, useSpriteMenuStore } from "store"
 
 type CardProps = {
     pokemon: IPokemon
@@ -27,6 +27,7 @@ export const Card = ({ pokemon }: CardProps) => {
     }, [getPokemonData])
 
     const { sprite } = useSpriteMenuStore()
+    const { setScrollFilter } = useListFilterStore()
 
     const pokemonName = useMemo(
         () => formatName(pokemon?.name),
@@ -42,6 +43,8 @@ export const Card = ({ pokemon }: CardProps) => {
                   ]
     }, [sprite, pokemonData?.sprites])
 
+    const setPageScroll = () => setScrollFilter(window.pageYOffset)
+
     const PokemonImageFallback = () => (
         <S.PokemonImage
             src="/images/types/all.svg"
@@ -54,7 +57,11 @@ export const Card = ({ pokemon }: CardProps) => {
     )
 
     return (
-        <S.CardLink href={`/pokemon/${pokemon?.name}`} aria-label={pokemonName}>
+        <S.CardLink
+            href={`/pokemon/${pokemon?.name}`}
+            aria-label={pokemonName}
+            onClick={setPageScroll}
+        >
             {isLoadingPokemon ? (
                 <S.PokemonLoading>
                     <PokemonImageFallback />

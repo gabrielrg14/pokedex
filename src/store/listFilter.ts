@@ -7,6 +7,7 @@ export type Filter = {
     search: string
     type: string
     limit: number
+    scroll: number
 }
 
 type ListFilterStore = {
@@ -15,6 +16,7 @@ type ListFilterStore = {
     setSearchFilter: (search: string) => void
     setTypeFilter: (type: string) => void
     setLimitFilter: (limit: number) => void
+    setScrollFilter: (scroll: number) => void
 }
 
 export const useListFilterStore = create<ListFilterStore>()(
@@ -23,8 +25,9 @@ export const useListFilterStore = create<ListFilterStore>()(
             filter: {
                 loading: true,
                 search: "",
+                type: "all",
                 limit: POKEMON_PAGINATION_LIMIT,
-                type: "all"
+                scroll: 0
             },
             setLoadingFilter: (loading: boolean) =>
                 set((state) => {
@@ -41,6 +44,10 @@ export const useListFilterStore = create<ListFilterStore>()(
             setLimitFilter: (limit: number) =>
                 set((state) => {
                     return { filter: { ...state.filter, limit } }
+                }),
+            setScrollFilter: (scroll: number) =>
+                set((state) => {
+                    return { filter: { ...state.filter, scroll } }
                 })
         }),
         {

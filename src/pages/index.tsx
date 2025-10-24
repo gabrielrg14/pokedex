@@ -20,8 +20,13 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home = ({ types }: HomeProps) => {
-    const { filter, setSearchFilter, setTypeFilter, setLimitFilter } =
-        useListFilterStore()
+    const {
+        filter,
+        setSearchFilter,
+        setTypeFilter,
+        setLimitFilter,
+        setScrollFilter
+    } = useListFilterStore()
 
     const prevSearchRef = useRef("")
     const [pokemonList, setPokemonList] = useState<IPokemon[]>([])
@@ -81,18 +86,28 @@ const Home = ({ types }: HomeProps) => {
     ])
 
     const searchPokemon = (search: string) => {
-        setTypeFilter("all")
         setSearchFilter(search)
+        setTypeFilter("all")
+        setScrollFilter(125) // scroll to pokemon search
     }
 
     const filterByType = (type: string) => {
-        setSearchFilter("")
         setTypeFilter(type)
+        setSearchFilter("")
+        setScrollFilter(125) // scroll to pokemon count
     }
 
     const nextPokemonPagination = (limit: number) => {
         setLimitFilter(limit + POKEMON_PAGINATION_LIMIT)
+        setScrollFilter(window.pageYOffset + 780) // scroll to next pokemon pagination
     }
+
+    useEffect(() =>
+        window.scrollTo({
+            top: filter.scroll,
+            behavior: "smooth"
+        })
+    )
 
     return (
         <HomeTemplate

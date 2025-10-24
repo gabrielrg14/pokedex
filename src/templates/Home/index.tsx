@@ -109,13 +109,9 @@ export const HomeTemplate = ({
                                                     ? "selected"
                                                     : ""
                                             }
-                                            onClick={() => {
-                                                window.scrollTo({
-                                                    top: 125,
-                                                    behavior: "smooth"
-                                                })
+                                            onClick={() =>
                                                 filterByType(type.name)
-                                            }}
+                                            }
                                         >
                                             <Image
                                                 src={`/images/types/${type.name}.svg`}

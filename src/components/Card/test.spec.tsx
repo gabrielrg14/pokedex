@@ -1,10 +1,11 @@
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen, waitFor, fireEvent } from "@testing-library/react"
 import { pokemonMocks } from "test/mocks"
 import {
     useSpriteMenuStore,
     SpriteVersion,
     SpriteType,
-    SpritePosition
+    SpritePosition,
+    useListFilterStore
 } from "store"
 
 import { Card } from "."
@@ -27,7 +28,7 @@ describe("<Card />", () => {
 
         await waitFor(() =>
             expect(
-                screen.getByRole("img", { name: "Venusaur" })
+                screen.getByRole("img", { name: /venusaur/i })
             ).toBeInTheDocument()
         )
 
@@ -45,14 +46,14 @@ describe("<Card />", () => {
 
         await waitFor(() =>
             expect(
-                screen.getByRole("img", { name: "Venusaur" })
+                screen.getByRole("img", { name: /venusaur/i })
             ).toBeInTheDocument()
         )
     })
 
     it("should render the fallback image when the pokemon has no sprite available", async () => {
         const noImagePokemon = {
-            ...pokemonMocks.blastoise,
+            ...pokemonMocks.venusaur,
             sprites: {
                 front_default: "",
                 front_shiny: "",
@@ -66,7 +67,7 @@ describe("<Card />", () => {
 
         await waitFor(() =>
             expect(
-                screen.getByRole("img", { name: /blastoise fallback/i })
+                screen.getByRole("img", { name: /venusaur fallback/i })
             ).toBeInTheDocument()
         )
     })
@@ -86,11 +87,11 @@ describe("<Card />", () => {
 
         await waitFor(() =>
             expect(
-                screen.getByRole("img", { name: "Charizard" })
+                screen.getByRole("img", { name: /charizard/i })
             ).toBeInTheDocument()
         )
 
-        expect(screen.getByRole("img", { name: "Charizard" })).toHaveStyle({
+        expect(screen.getByRole("img", { name: /charizard/i })).toHaveStyle({
             imageRendering: "pixelated"
         })
     })
@@ -110,12 +111,35 @@ describe("<Card />", () => {
 
         await waitFor(() =>
             expect(
-                screen.getByRole("img", { name: "Charizard" })
+                screen.getByRole("img", { name: /charizard/i })
             ).toBeInTheDocument()
         )
 
-        expect(screen.getByRole("img", { name: "Charizard" })).toHaveStyle({
+        expect(screen.getByRole("img", { name: /charizard/i })).toHaveStyle({
             imageRendering: "unset"
         })
+    })
+
+    it("should call setPageScroll when clicking on the card and update scroll property of listFilter store", async () => {
+        Object.defineProperty(window, "pageYOffset", {
+            value: 420
+        })
+
+        useListFilterStore.setState({
+            filter: { ...useListFilterStore.getState().filter, scroll: 0 }
+        })
+
+        render(<Card pokemon={pokemonMocks.blastoise} />)
+
+        await waitFor(() =>
+            expect(
+                screen.getByRole("img", { name: /blastoise/i })
+            ).toBeInTheDocument()
+        )
+
+        const cardLink = screen.getByRole("link", { name: /blastoise/i })
+        fireEvent.click(cardLink)
+
+        expect(useListFilterStore.getState().filter.scroll).toBe(420)
     })
 })
