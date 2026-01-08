@@ -3,7 +3,11 @@ import { Api } from "providers"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
 const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
-    const { data: pokemon } = await Api.get<IPokemon>(`/pokemon/${query ?? ""}`)
+    const search = query?.replace(/ /g, "-").toLowerCase()
+
+    const { data: pokemon } = await Api.get<IPokemon>(
+        `/pokemon/${search ?? ""}`
+    )
 
     // Removes abilities that have the same name
     const abilityNames = pokemon.abilities.map((item) => item.ability.name)
@@ -23,6 +27,7 @@ const getPokemonSpeciesByUrl = async (
     const { data: pokemonSpecies } = await Api.get<IPokemonSpecies>(url, {
         baseURL: ""
     })
+
     return pokemonSpecies
 }
 

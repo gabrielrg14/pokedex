@@ -54,9 +54,7 @@ const Home = ({ types }: HomeProps) => {
 
     const getPokemonByQuery = useCallback(async (search: string) => {
         prevSearchRef.current = search
-        await PokedexService.getPokemonByQuery(
-            search.replace(/ /g, "-").toLowerCase()
-        )
+        await PokedexService.getPokemonByQuery(search)
             .then((data) => setPokemonList([data]))
             .catch(() => setPokemonList([]))
             .finally(() => setIsLoading(false))
