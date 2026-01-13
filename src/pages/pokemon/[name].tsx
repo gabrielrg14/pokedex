@@ -11,14 +11,21 @@ import { SpriteVersion, useSpriteMenuStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const pokemons = await PokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
-    const paths = pokemons.map((pokemon: IPokemon) => {
+
+    const pathsByName = pokemons.map((pokemon: IPokemon) => {
         return {
             params: { name: pokemon.name }
         }
     })
 
+    const pathsByNumbers = pokemons.map((pokemon: IPokemon) => {
+        return {
+            params: { name: String(pokemon.id) }
+        }
+    })
+
     return {
-        paths,
+        paths: [...pathsByName, ...pathsByNumbers],
         fallback: true
     }
 }
