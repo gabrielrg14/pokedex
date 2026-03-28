@@ -45,7 +45,7 @@ export const PokemonTemplate = ({
                         content: `${pokemonName}, ${pokemonName}#${pokemonNumber}, Pokémon #${pokemonNumber}, Pokédex Number, Cry, Sprite, Types, Height, Weight, Habitat, Abilities, Stats`
                     }
                 ]}
-                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonName}`}
+                canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonData?.name}`}
             />
 
             <audio
