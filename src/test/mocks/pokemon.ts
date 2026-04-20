@@ -374,8 +374,8 @@ export const pokemonMocks = {
         [blastoise.name, blastoise]
     ],
     pokemonSpeciesArrayList: [
-        [venusaur.species.name, venusaur.species.url, venusaurSpecies],
-        [charizard.species.name, charizard.species.url, charizardSpecies],
-        [blastoise.species.name, blastoise.species.url, blastoiseSpecies]
+        [venusaur.species.name, venusaurSpecies],
+        [charizard.species.name, charizardSpecies],
+        [blastoise.species.name, blastoiseSpecies]
     ]
 }

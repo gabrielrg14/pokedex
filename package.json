@@ -34,6 +34,7 @@
     "cy:run": "cypress run"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.99.0",
     "@vercel/analytics": "^1.0.1",
     "axios": "^1.6.5",
     "next": "^14.2.31",

@@ -1,11 +1,11 @@
 import { IPokemon, IPokemonSpecies, IType } from "interfaces"
-import { Api } from "providers"
+import { api } from "providers"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
 const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
     const search = query?.replace(/ /g, "-").toLowerCase()
 
-    const { data: pokemon } = await Api.get<IPokemon>(
+    const { data: pokemon } = await api.get<IPokemon>(
         `/pokemon/${search ?? ""}`
     )
 
@@ -21,12 +21,14 @@ const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
     return pokemon
 }
 
-const getPokemonSpeciesByUrl = async (
-    url: string
+const getPokemonSpeciesByName = async (
+    name?: string
 ): Promise<IPokemonSpecies | null> => {
-    const { data: pokemonSpecies } = await Api.get<IPokemonSpecies>(url, {
-        baseURL: ""
-    })
+    if (!name) return {}
+
+    const { data: pokemonSpecies } = await api.get<IPokemonSpecies>(
+        `/pokemon-species/${name}`
+    )
 
     return pokemonSpecies
 }
@@ -35,7 +37,7 @@ const getPokemonsWithPagination = async (
     limit: number = POKEMON_PAGINATION_LIMIT,
     offset?: number
 ): Promise<IPokemon[]> => {
-    const { data } = await Api.get(
+    const { data } = await api.get(
         `/pokemon?limit=${limit}${offset ? `&offset=${offset}` : ""}`
     )
 
@@ -43,7 +45,7 @@ const getPokemonsWithPagination = async (
 }
 
 const getAllTypes = async (): Promise<IType[]> => {
-    const { data } = await Api.get("/type")
+    const { data } = await api.get("/type")
 
     data.results.unshift({ name: "all", url: "" }) // Adds type "all" to be one of the filterable options
 
@@ -57,7 +59,7 @@ const getAllTypes = async (): Promise<IType[]> => {
 }
 
 const getPokemonsByType = async (type: string): Promise<IPokemon[]> => {
-    const { data } = await Api.get(`/type/${type}`)
+    const { data } = await api.get(`/type/${type}`)
 
     const pokemonsByType = data.pokemon.map(
         (item: { pokemon: IPokemon }) => item.pokemon
@@ -66,9 +68,9 @@ const getPokemonsByType = async (type: string): Promise<IPokemon[]> => {
     return pokemonsByType
 }
 
-export const PokedexService = {
+export const pokedexService = {
     getPokemonByQuery,
-    getPokemonSpeciesByUrl,
+    getPokemonSpeciesByName,
     getPokemonsWithPagination,
     getAllTypes,
     getPokemonsByType

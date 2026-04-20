@@ -1,47 +1,38 @@
-import { useState, useCallback, useEffect, useMemo } from "react"
+import { useMemo } from "react"
 
 import * as S from "./styles"
-import { IPokemon } from "interfaces"
 import { PokemonNumber, RowTypes } from "components"
-import { PokedexService } from "services"
 import { formatName } from "utils"
 import { SpriteVersion, useListFilterStore, useSpriteMenuStore } from "store"
+import { pokedexService } from "services"
+import { useQuery } from "@tanstack/react-query"
 
 type CardProps = {
-    pokemon: IPokemon
+    name: string
 }
 
-export const Card = ({ pokemon }: CardProps) => {
-    const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true)
-    const [pokemonData, setPokemonData] = useState<IPokemon>()
-
-    const getPokemonData = useCallback(async () => {
-        setIsLoadingPokemon(true)
-        await PokedexService.getPokemonByQuery(pokemon?.name)
-            .then((data) => setPokemonData(data))
-            .finally(() => setIsLoadingPokemon(false))
-    }, [pokemon?.name])
-
-    useEffect(() => {
-        getPokemonData()
-    }, [getPokemonData])
-
+export const Card = ({ name }: CardProps) => {
     const { sprite } = useSpriteMenuStore()
     const { setScrollFilter } = useListFilterStore()
+
+    const { data: pokemon, isLoading: isLoadingPokemon } = useQuery({
+        queryKey: ["getPokemon", name],
+        queryFn: () => pokedexService.getPokemonByQuery(name)
+    })
 
     const pokemonName = useMemo(
         () => formatName(pokemon?.name),
         [pokemon?.name]
     )
-    const pokemonNumber = useMemo(() => pokemonData?.id, [pokemonData?.id])
+    const pokemonNumber = useMemo(() => pokemon?.id, [pokemon?.id])
     const pokemonImage = useMemo(() => {
         if (!sprite.loading)
             return sprite.version === SpriteVersion.pixelated
-                ? pokemonData?.sprites?.[`${sprite.position}_${sprite.type}`]
-                : pokemonData?.sprites?.other?.["official-artwork"]?.[
+                ? pokemon?.sprites?.[`${sprite.position}_${sprite.type}`]
+                : pokemon?.sprites?.other?.["official-artwork"]?.[
                       `${sprite.position}_${sprite.type}`
                   ]
-    }, [sprite, pokemonData?.sprites])
+    }, [sprite, pokemon?.sprites])
 
     const setPageScroll = () => setScrollFilter(window.pageYOffset)
 
@@ -50,11 +41,23 @@ export const Card = ({ pokemon }: CardProps) => {
             src="/images/types/all.svg"
             width={128}
             height={128}
-            alt={`${pokemonName} fallback`}
+            alt={`${pokemonName || name} fallback`}
             priority
             unoptimized
         />
     )
+
+    if (isLoadingPokemon)
+        return (
+            <S.CardLinkSkeleton
+                as="div"
+                onClick={(event) => event.preventDefault()}
+            >
+                <S.CardBodySkeleton>
+                    <PokemonImageFallback />
+                </S.CardBodySkeleton>
+            </S.CardLinkSkeleton>
+        )
 
     return (
         <S.CardLink
@@ -62,41 +65,33 @@ export const Card = ({ pokemon }: CardProps) => {
             aria-label={pokemonName}
             onClick={setPageScroll}
         >
-            {isLoadingPokemon ? (
-                <S.PokemonLoading>
+            <S.CardBody>
+                {pokemonImage ? (
+                    <S.PokemonImage
+                        src={pokemonImage}
+                        width={156}
+                        height={156}
+                        alt={pokemonName}
+                        imageRendering={
+                            sprite.version === SpriteVersion.pixelated
+                                ? "pixelated"
+                                : "unset"
+                        }
+                        priority
+                        unoptimized
+                    />
+                ) : (
                     <PokemonImageFallback />
-                </S.PokemonLoading>
-            ) : (
-                <S.CardBody>
-                    {pokemonImage ? (
-                        <S.PokemonImage
-                            src={pokemonImage}
-                            width={156}
-                            height={156}
-                            alt={pokemonName}
-                            style={{
-                                imageRendering:
-                                    sprite.version === SpriteVersion.pixelated
-                                        ? "pixelated"
-                                        : "unset"
-                            }}
-                            priority
-                            unoptimized
-                        />
-                    ) : (
-                        <PokemonImageFallback />
-                    )}
+                )}
 
-                    <S.CardBottom>
-                        <S.PokemonInfos>
-                            <PokemonNumber number={pokemonNumber} />
-                            <S.PokemonName>{pokemonName}</S.PokemonName>
-                        </S.PokemonInfos>
-
-                        <RowTypes types={pokemonData?.types} />
-                    </S.CardBottom>
-                </S.CardBody>
-            )}
+                <S.CardBottom>
+                    <S.PokemonInfos>
+                        <PokemonNumber number={pokemonNumber} />
+                        <S.PokemonName>{pokemonName}</S.PokemonName>
+                    </S.PokemonInfos>
+                    <RowTypes types={pokemon?.types} />
+                </S.CardBottom>
+            </S.CardBody>
         </S.CardLink>
     )
 }

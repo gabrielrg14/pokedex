@@ -1,7 +1,6 @@
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import Image from "next/image"
 import { IPokemonWithSpecies } from "interfaces"
 import {
     PokemonNumber,
@@ -92,22 +91,21 @@ export const PokemonTemplate = ({
 
                             <S.ImageWrapper>
                                 {pokemonImage ? (
-                                    <Image
+                                    <S.PokemonImage
                                         src={pokemonImage}
                                         width={256}
                                         height={256}
                                         alt={pokemonName}
-                                        style={{
-                                            imageRendering:
-                                                sprite.version ===
-                                                SpriteVersion.pixelated
-                                                    ? "pixelated"
-                                                    : "unset"
-                                        }}
+                                        imageRendering={
+                                            sprite.version ===
+                                            SpriteVersion.pixelated
+                                                ? "pixelated"
+                                                : "unset"
+                                        }
                                         priority
                                     />
                                 ) : (
-                                    <Image
+                                    <S.PokemonImage
                                         src="/images/types/all.svg"
                                         width={228}
                                         height={228}
@@ -156,7 +154,7 @@ export const PokemonTemplate = ({
 
                             <S.PokemonStats>
                                 <S.DataTitle>Stats</S.DataTitle>
-                                {pokemonData?.stats.map((item, index) => (
+                                {pokemonData?.stats?.map((item, index) => (
                                     <S.Stat key={index}>
                                         <S.StatInfo>
                                             <span>

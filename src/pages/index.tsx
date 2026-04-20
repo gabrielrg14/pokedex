@@ -2,7 +2,7 @@ import { GetStaticProps } from "next"
 import { useState, useRef, useCallback, useEffect } from "react"
 
 import { IPokemon, IType } from "interfaces"
-import { PokedexService } from "services"
+import { pokedexService } from "services"
 import { HomeTemplate } from "templates"
 import { useListFilterStore } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
@@ -12,7 +12,7 @@ type HomeProps = {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const types = await PokedexService.getAllTypes()
+    const types = await pokedexService.getAllTypes()
 
     return {
         props: { types }
@@ -33,16 +33,15 @@ const Home = ({ types }: HomeProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const getInitialPokemonPagination = useCallback(async (limit: number) => {
-        await PokedexService.getPokemonsWithPagination(limit)
+        await pokedexService
+            .getPokemonsWithPagination(limit)
             .then((data) => setPokemonList(data))
             .finally(() => setIsLoading(false))
     }, [])
 
     const getNextPokemonPagination = useCallback(async (limit: number) => {
-        await PokedexService.getPokemonsWithPagination(
-            POKEMON_PAGINATION_LIMIT,
-            limit
-        )
+        await pokedexService
+            .getPokemonsWithPagination(POKEMON_PAGINATION_LIMIT, limit)
             .then((data) => {
                 setPokemonList((prevPokemonList) => [
                     ...prevPokemonList,
@@ -54,14 +53,16 @@ const Home = ({ types }: HomeProps) => {
 
     const getPokemonByQuery = useCallback(async (search: string) => {
         prevSearchRef.current = search
-        await PokedexService.getPokemonByQuery(search)
+        await pokedexService
+            .getPokemonByQuery(search)
             .then((data) => setPokemonList([data]))
             .catch(() => setPokemonList([]))
             .finally(() => setIsLoading(false))
     }, [])
 
     const getPokemonsByType = useCallback(async (type: string) => {
-        await PokedexService.getPokemonsByType(type)
+        await pokedexService
+            .getPokemonsByType(type)
             .then((data) => setPokemonList(data))
             .finally(() => setIsLoading(false))
     }, [])

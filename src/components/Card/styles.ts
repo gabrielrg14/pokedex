@@ -2,6 +2,10 @@ import styled from "styled-components"
 import Link from "next/link"
 import Image from "next/image"
 
+type PokemonImageProps = {
+    imageRendering?: string
+}
+
 export const CardLink = styled(Link)`
     padding: var(--default-size);
     background-color: var(--light-color);
@@ -28,12 +32,9 @@ export const CardBody = styled.div`
     animation: fade-in 0.5s ease-in-out;
 `
 
-export const PokemonLoading = styled(CardBody)`
-    height: 288px;
-`
-
-export const PokemonImage = styled(Image)`
+export const PokemonImage = styled(Image)<PokemonImageProps>`
     flex: 1;
+    image-rendering: ${(props) => props.imageRendering || "unset"};
 `
 
 export const CardBottom = styled.div`
@@ -49,4 +50,12 @@ export const PokemonName = styled.h2`
     color: var(--dark-color);
     font-size: 2rem;
     margin: 0;
+`
+
+export const CardLinkSkeleton = styled(CardLink)`
+    cursor: progress;
+`
+
+export const CardBodySkeleton = styled(CardBody)`
+    height: 288px;
 `

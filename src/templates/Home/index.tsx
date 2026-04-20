@@ -136,7 +136,7 @@ export const HomeTemplate = ({
                                 <S.PokemonList>
                                     {pokemons.map((pokemon, index) => (
                                         <S.PokemonItem key={index}>
-                                            <Card pokemon={pokemon} />
+                                            <Card name={pokemon.name} />
                                         </S.PokemonItem>
                                     ))}
                                 </S.PokemonList>

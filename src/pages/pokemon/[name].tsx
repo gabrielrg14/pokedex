@@ -4,13 +4,13 @@ import { useCallback, useEffect, useMemo } from "react"
 import { useRouter } from "next/router"
 import { IPokemon, IPokemonWithSpecies } from "interfaces"
 import { Loading } from "components"
-import { PokedexService } from "services"
+import { pokedexService } from "services"
 import { PokemonTemplate } from "templates"
 import { formatName, getColorsByType } from "utils"
 import { SpriteVersion, useSpriteMenuStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const pokemons = await PokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
+    const pokemons = await pokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
 
     const pathsByName = pokemons.map((pokemon: IPokemon) => {
         return {
@@ -32,12 +32,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     try {
-        const pokemonData = await PokedexService.getPokemonByQuery(
+        const pokemonData = await pokedexService.getPokemonByQuery(
             params?.name as string
         )
 
-        const pokemonSpecies = await PokedexService.getPokemonSpeciesByUrl(
-            pokemonData.species.url
+        if (!params?.name || !pokemonData) return { notFound: true }
+
+        const pokemonSpecies = await pokedexService.getPokemonSpeciesByName(
+            pokemonData?.species?.name
         )
 
         const pokemon = { ...pokemonSpecies, ...pokemonData }
@@ -59,8 +61,11 @@ const PokemonPage = ({ pokemon }: PokemonPageProps) => {
     const router = useRouter()
     const { sprite } = useSpriteMenuStore()
 
-    const pokemonName = formatName(pokemon?.name)
-    const pokemonNumber = pokemon?.id
+    const pokemonName = useMemo(
+        () => formatName(pokemon?.name),
+        [pokemon?.name]
+    )
+    const pokemonNumber = useMemo(() => pokemon?.id, [pokemon?.id])
     const pokemonCry = useMemo(() => {
         if (!sprite.loading)
             return sprite.version === SpriteVersion.pixelated &&

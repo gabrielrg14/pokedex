@@ -1,6 +1,11 @@
 import styled from "styled-components"
+import Image from "next/image"
 import { Container } from "components"
 import { mediaQueries as media } from "utils"
+
+type PokemonImageProps = {
+    imageRendering?: string
+}
 
 export const Background = styled("div")`
     height: 100%;
@@ -81,6 +86,10 @@ export const PokemonId = styled.h3`
 
 export const ImageWrapper = styled.div`
     text-align: center;
+`
+
+export const PokemonImage = styled(Image)<PokemonImageProps>`
+    image-rendering: ${(props) => props.imageRendering || "unset"};
 `
 
 export const PokemonData = styled.div`

@@ -49,15 +49,15 @@ describe("Filter Pokémon list", () => {
         cy.validatePokemonPage("Nidoking", "#0034", ["Poison", "Ground"])
     })
 
-    it("filter by type 'fire', find 'charizard' and navigate to its page, go back to the filtered list, find 'skeledirge' and navigate to its page", () => {
-        cy.intercept("GET", "**/pokemon/charizard").as("getCharizard")
+    it("filter by type 'fire', find 'talonflame' and navigate to its page, go back to the filtered list, find 'skeledirge' and navigate to its page", () => {
+        cy.intercept("GET", "**/pokemon/talonflame").as("getTalonflame")
         cy.intercept("GET", "**/pokemon/skeledirge").as("getSkeledirge")
 
         cy.contains("main section ul li button", "Fire").click()
-        cy.wait("@getCharizard")
+        cy.wait("@getTalonflame")
 
-        cy.navigateToPokemonPage("Charizard")
-        cy.validatePokemonPage("Charizard", "#0006", ["Fire", "Flying"])
+        cy.navigateToPokemonPage("Talonflame")
+        cy.validatePokemonPage("Talonflame", "#0663", ["Fire", "Flying"])
 
         cy.get("header nav img[alt='Pokédex logo']")
             .should("be.visible")

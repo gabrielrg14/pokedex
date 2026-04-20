@@ -1,36 +1,59 @@
-import { render, screen, waitFor, fireEvent } from "@testing-library/react"
-import { pokemonMocks } from "test/mocks"
 import {
-    useSpriteMenuStore,
-    SpriteVersion,
-    SpriteType,
-    SpritePosition,
-    useListFilterStore
-} from "store"
+    render,
+    screen,
+    waitFor,
+    renderHook,
+    act
+} from "@testing-library/react"
+import { pokemonMocks } from "test/mocks"
+import { useSpriteMenuStore, SpriteVersion } from "store"
+import {
+    QueryClient,
+    QueryClientProvider,
+    useQuery
+} from "@tanstack/react-query"
+import { pokedexService } from "services"
 
 import { Card } from "."
 
 describe("<Card />", () => {
-    beforeEach(() => {
-        useSpriteMenuStore.setState({
-            sprite: {
-                loading: false,
-                version: SpriteVersion.official,
-                position: SpritePosition.front,
-                type: SpriteType.default,
-                isMenuOpen: false
+    const QueryClientWrapper = ({
+        children
+    }: {
+        children: React.ReactNode
+    }) => {
+        const queryClient = new QueryClient()
+        return (
+            <QueryClientProvider client={queryClient}>
+                {children}
+            </QueryClientProvider>
+        )
+    }
+
+    const renderQueryHook = (name: string) =>
+        renderHook(
+            () =>
+                useQuery({
+                    queryKey: ["getPokemon", name],
+                    queryFn: () => pokedexService.getPokemonByQuery(name)
+                }),
+            {
+                wrapper: QueryClientWrapper
             }
-        })
-    })
+        )
+
+    const renderSpriteStoreHook = () => renderHook(() => useSpriteMenuStore())
 
     it("should render pokemon link with the correct attributes", async () => {
-        render(<Card pokemon={pokemonMocks.venusaur} />)
-
-        await waitFor(() =>
-            expect(
-                screen.getByRole("img", { name: /venusaur/i })
-            ).toBeInTheDocument()
+        render(
+            <QueryClientWrapper>
+                <Card name={pokemonMocks.venusaur.name} />
+            </QueryClientWrapper>
         )
+
+        const { result } = renderQueryHook(pokemonMocks.venusaur.name)
+
+        await waitFor(() => expect(result.current.isLoading).toBe(false))
 
         const link = screen.getByRole("link", { name: /venusaur/i })
         expect(link).toBeInTheDocument()
@@ -39,107 +62,97 @@ describe("<Card />", () => {
     })
 
     it("should render the fallback image during loading and then pokemon image when available", async () => {
-        render(<Card pokemon={pokemonMocks.venusaur} />)
+        render(
+            <QueryClientWrapper>
+                <Card name={pokemonMocks.venusaur.name} />
+            </QueryClientWrapper>
+        )
+
+        const { result } = renderQueryHook(pokemonMocks.venusaur.name)
+
+        await waitFor(() => expect(result.current.isLoading).toBe(true))
 
         const fallback = screen.getByRole("img", { name: /venusaur fallback/i })
         expect(fallback).toBeInTheDocument()
 
-        await waitFor(() =>
-            expect(
-                screen.getByRole("img", { name: /venusaur/i })
-            ).toBeInTheDocument()
-        )
+        await waitFor(() => expect(result.current.isLoading).toBe(false))
+
+        expect(
+            screen.getByRole("img", { name: /venusaur/i })
+        ).toBeInTheDocument()
     })
 
-    it("should render the fallback image when the pokemon has no sprite available", async () => {
-        const noImagePokemon = {
-            ...pokemonMocks.venusaur,
-            sprites: {
-                front_default: "",
-                front_shiny: "",
-                other: {
-                    "official-artwork": { front_default: "", front_shiny: "" }
-                }
-            }
-        }
+    it("should render image with unset imageRendering when sprite version is not pixelated", async () => {
+        render(
+            <QueryClientWrapper>
+                <Card name={pokemonMocks.charizard.name} />
+            </QueryClientWrapper>
+        )
 
-        render(<Card pokemon={noImagePokemon} />)
+        const { result } = renderQueryHook(pokemonMocks.venusaur.name)
 
-        await waitFor(() =>
-            expect(
-                screen.getByRole("img", { name: /venusaur fallback/i })
-            ).toBeInTheDocument()
+        await waitFor(() => expect(result.current.isLoading).toBe(false))
+
+        expect(screen.getByRole("img", { name: /charizard/i })).toHaveStyle(
+            "image-rendering: unset"
         )
     })
 
     it("should render image with pixelated imageRendering when the sprite version is pixelated", async () => {
-        useSpriteMenuStore.setState({
-            sprite: {
-                loading: false,
-                version: SpriteVersion.pixelated,
-                position: SpritePosition.front,
-                type: SpriteType.default,
-                isMenuOpen: false
-            }
-        })
-
-        render(<Card pokemon={pokemonMocks.charizard} />)
-
-        await waitFor(() =>
-            expect(
-                screen.getByRole("img", { name: /charizard/i })
-            ).toBeInTheDocument()
+        render(
+            <QueryClientWrapper>
+                <Card name={pokemonMocks.charizard.name} />
+            </QueryClientWrapper>
         )
 
-        expect(screen.getByRole("img", { name: /charizard/i })).toHaveStyle({
-            imageRendering: "pixelated"
-        })
+        const { result: useQueryResult } = renderQueryHook(
+            pokemonMocks.venusaur.name
+        )
+
+        await waitFor(() =>
+            expect(useQueryResult.current.isLoading).toBe(false)
+        )
+
+        const { result: useSpriteResult } = renderSpriteStoreHook()
+
+        act(() => useSpriteResult.current.toggleSpriteVersion())
+
+        await waitFor(() =>
+            expect(useSpriteResult.current.sprite.version).toBe(
+                SpriteVersion.pixelated
+            )
+        )
+
+        expect(screen.getByRole("img", { name: /charizard/i })).toHaveStyle(
+            "image-rendering: pixelated"
+        )
     })
 
-    it("should render image with unset imageRendering when sprite version is not pixelated", async () => {
-        useSpriteMenuStore.setState({
-            sprite: {
-                loading: false,
-                version: SpriteVersion.official,
-                position: SpritePosition.front,
-                type: SpriteType.default,
-                isMenuOpen: false
-            }
-        })
-
-        render(<Card pokemon={pokemonMocks.charizard} />)
-
-        await waitFor(() =>
-            expect(
-                screen.getByRole("img", { name: /charizard/i })
-            ).toBeInTheDocument()
+    it("should render the fallback image when the sprite is loading", async () => {
+        render(
+            <QueryClientWrapper>
+                <Card name={pokemonMocks.venusaur.name} />
+            </QueryClientWrapper>
         )
 
-        expect(screen.getByRole("img", { name: /charizard/i })).toHaveStyle({
-            imageRendering: "unset"
-        })
-    })
-
-    it("should call setPageScroll when clicking on the card and update scroll property of listFilter store", async () => {
-        Object.defineProperty(window, "pageYOffset", {
-            value: 420
-        })
-
-        useListFilterStore.setState({
-            filter: { ...useListFilterStore.getState().filter, scroll: 0 }
-        })
-
-        render(<Card pokemon={pokemonMocks.blastoise} />)
-
-        await waitFor(() =>
-            expect(
-                screen.getByRole("img", { name: /blastoise/i })
-            ).toBeInTheDocument()
+        const { result: useQueryResult } = renderQueryHook(
+            pokemonMocks.venusaur.name
         )
 
-        const cardLink = screen.getByRole("link", { name: /blastoise/i })
-        fireEvent.click(cardLink)
+        await waitFor(() =>
+            expect(useQueryResult.current.isLoading).toBe(false)
+        )
 
-        expect(useListFilterStore.getState().filter.scroll).toBe(420)
+        const { result: useSpriteResult } = renderSpriteStoreHook()
+
+        act(() => useSpriteResult.current.setLoadingSprite(true))
+
+        await waitFor(() =>
+            expect(useSpriteResult.current.sprite.loading).toBe(true)
+        )
+
+        expect(
+            screen.getByRole("img", { name: /venusaur fallback/i })
+        ).toBeInTheDocument()
     })
 })
