@@ -25,10 +25,10 @@ export const AboutTemplate = () => {
                     <S.Description>
                         This project was developed with the aim of putting into
                         practice the knowledge acquired in Next.js, TypeScript,
-                        Styled Components, Zustand, Jest, React Testing Library,
-                        Mock Service Worker, Cypress and Docker through a fun
-                        theme that is one of the creator&apos;s passions:
-                        Pokémon!
+                        Styled Components, Zustand, React Query, Jest, React
+                        Testing Library, Mock Service Worker, Cypress and Docker
+                        through a fun theme that is one of the creator&apos;s
+                        passions: Pokémon!
                     </S.Description>
 
                     <S.Description>

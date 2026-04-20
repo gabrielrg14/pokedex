@@ -10,12 +10,12 @@ const config: DefaultSeoProps = {
         },
         {
             rel: "shortcut icon",
-            href: "images/icon/icon-512.png",
+            href: "/images/icon/icon-512.png",
             sizes: "512x512"
         },
         {
             rel: "apple-touch-icon",
-            href: "images/icon/icon-512.png",
+            href: "/images/icon/icon-512.png",
             sizes: "512x512"
         },
         {

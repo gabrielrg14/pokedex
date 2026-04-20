@@ -5,9 +5,11 @@ import { POKEMON_PAGINATION_LIMIT } from "common"
 const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
     const search = query?.replace(/ /g, "-").toLowerCase()
 
-    const { data: pokemon } = await api.get<IPokemon>(
+    const { data: pokemon, status } = await api.get<IPokemon>(
         `/pokemon/${search ?? ""}`
     )
+
+    if (status !== 200) throw new Error("Pokemon not found")
 
     // Removes abilities that have the same name
     const abilityNames = pokemon.abilities.map((item) => item.ability.name)
