@@ -4,8 +4,8 @@ import * as S from "./styles"
 import { PokemonNumber, RowTypes } from "components"
 import { formatName } from "utils"
 import { SpriteVersion, useListFilterStore, useSpriteMenuStore } from "store"
-import { pokedexService } from "services"
 import { useQuery } from "@tanstack/react-query"
+import { pokedexService } from "services"
 
 type CardProps = {
     name: string

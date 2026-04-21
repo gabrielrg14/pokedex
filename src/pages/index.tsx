@@ -1,10 +1,11 @@
 import { GetStaticProps } from "next"
-import { useState, useRef, useCallback, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 
 import { IPokemon, IType } from "interfaces"
-import { pokedexService } from "services"
 import { HomeTemplate } from "templates"
 import { useListFilterStore } from "store"
+import { useQuery } from "@tanstack/react-query"
+import { pokedexService } from "services"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
 type HomeProps = {
@@ -30,75 +31,77 @@ const Home = ({ types }: HomeProps) => {
 
     const prevSearchRef = useRef("")
     const [pokemonList, setPokemonList] = useState<IPokemon[]>([])
-    const [isLoading, setIsLoading] = useState<boolean>(true)
 
-    const getInitialPokemonPagination = useCallback(async (limit: number) => {
-        await pokedexService
-            .getPokemonsWithPagination(limit)
-            .then((data) => setPokemonList(data))
-            .finally(() => setIsLoading(false))
-    }, [])
+    const { data: pokemonByPagination, isLoading: isLoadingByPagination } =
+        useQuery({
+            queryKey: ["getPokemonByPagination", filter.limit],
+            queryFn: () =>
+                pokedexService.getPokemonWithPagination(filter.limit),
+            enabled: filter.search === "" && filter.type === "all"
+        })
 
-    const getNextPokemonPagination = useCallback(async (limit: number) => {
-        await pokedexService
-            .getPokemonsWithPagination(POKEMON_PAGINATION_LIMIT, limit)
-            .then((data) => {
-                setPokemonList((prevPokemonList) => [
-                    ...prevPokemonList,
-                    ...data
-                ])
-            })
-            .finally(() => setIsLoading(false))
-    }, [])
+    const { data: pokemonByType, isLoading: isLoadingByType } = useQuery({
+        queryKey: ["getPokemonByType", filter.type],
+        queryFn: () => pokedexService.getPokemonByType(filter.type),
+        enabled: filter.type !== "all"
+    })
 
-    const getPokemonByQuery = useCallback(async (search: string) => {
-        prevSearchRef.current = search
-        await pokedexService
-            .getPokemonByQuery(search)
-            .then((data) => setPokemonList([data]))
-            .catch(() => setPokemonList([]))
-            .finally(() => setIsLoading(false))
-    }, [])
+    const { data: pokemonBySearch, isLoading: isLoadingBySearch } = useQuery({
+        queryKey: ["getPokemon", filter.search],
+        queryFn: () => pokedexService.getPokemonByQuery(filter.search),
+        enabled: filter.search !== ""
+    })
 
-    const getPokemonsByType = useCallback(async (type: string) => {
-        await pokedexService
-            .getPokemonsByType(type)
-            .then((data) => setPokemonList(data))
-            .finally(() => setIsLoading(false))
-    }, [])
+    const isLoading = useMemo(
+        () =>
+            filter.loading ||
+            isLoadingByPagination ||
+            isLoadingByType ||
+            isLoadingBySearch,
+        [
+            filter.loading,
+            isLoadingByPagination,
+            isLoadingByType,
+            isLoadingBySearch
+        ]
+    )
 
     useEffect(() => {
-        if (!filter.loading) {
-            setIsLoading(true)
-            if (filter.search === "" && filter.type === "all")
-                getInitialPokemonPagination(filter.limit)
-            else if (filter.type !== "all") getPokemonsByType(filter.type)
-            else if (filter.search !== "") getPokemonByQuery(filter.search)
-            else getNextPokemonPagination(filter.limit)
-        }
+        if (isLoading) return
+
+        let pokemonList: IPokemon[] = []
+        if (filter.search === "" && filter.type === "all")
+            pokemonList = pokemonByPagination || []
+        else if (filter.type !== "all") pokemonList = pokemonByType || []
+        else if (filter.search !== "")
+            pokemonList = pokemonBySearch ? [pokemonBySearch] : []
+        else pokemonList = pokemonByPagination || []
+        setPokemonList(pokemonList)
     }, [
-        filter,
-        getInitialPokemonPagination,
-        getPokemonsByType,
-        getPokemonByQuery,
-        getNextPokemonPagination
+        isLoading,
+        filter.search,
+        filter.type,
+        pokemonByPagination,
+        pokemonByType,
+        pokemonBySearch
     ])
 
     const searchPokemon = (search: string) => {
-        setSearchFilter(search)
-        setTypeFilter("all")
+        prevSearchRef.current = search
         setScrollFilter(125) // scroll to pokemon search
+        setTypeFilter("all")
+        setSearchFilter(search)
     }
 
     const filterByType = (type: string) => {
-        setTypeFilter(type)
-        setSearchFilter("")
         setScrollFilter(125) // scroll to pokemon count
+        setSearchFilter("")
+        setTypeFilter(type)
     }
 
     const nextPokemonPagination = (limit: number) => {
-        setLimitFilter(limit + POKEMON_PAGINATION_LIMIT)
         setScrollFilter(window.pageYOffset + 780) // scroll to next pokemon pagination
+        setLimitFilter(limit + POKEMON_PAGINATION_LIMIT)
     }
 
     useEffect(() =>

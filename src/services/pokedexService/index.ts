@@ -35,7 +35,7 @@ const getPokemonSpeciesByName = async (
     return pokemonSpecies
 }
 
-const getPokemonsWithPagination = async (
+const getPokemonWithPagination = async (
     limit: number = POKEMON_PAGINATION_LIMIT,
     offset?: number
 ): Promise<IPokemon[]> => {
@@ -44,6 +44,16 @@ const getPokemonsWithPagination = async (
     )
 
     return data.results
+}
+
+const getPokemonByType = async (type: string): Promise<IPokemon[]> => {
+    const { data } = await api.get(`/type/${type}`)
+
+    const pokemonsByType = data.pokemon.map(
+        (item: { pokemon: IPokemon }) => item.pokemon
+    )
+
+    return pokemonsByType
 }
 
 const getAllTypes = async (): Promise<IType[]> => {
@@ -60,20 +70,10 @@ const getAllTypes = async (): Promise<IType[]> => {
     return typesFiltered
 }
 
-const getPokemonsByType = async (type: string): Promise<IPokemon[]> => {
-    const { data } = await api.get(`/type/${type}`)
-
-    const pokemonsByType = data.pokemon.map(
-        (item: { pokemon: IPokemon }) => item.pokemon
-    )
-
-    return pokemonsByType
-}
-
 export const pokedexService = {
     getPokemonByQuery,
     getPokemonSpeciesByName,
-    getPokemonsWithPagination,
-    getAllTypes,
-    getPokemonsByType
+    getPokemonWithPagination,
+    getPokemonByType,
+    getAllTypes
 }

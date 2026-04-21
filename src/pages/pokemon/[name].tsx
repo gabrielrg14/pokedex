@@ -10,7 +10,7 @@ import { formatName, getColorsByType } from "utils"
 import { SpriteVersion, useSpriteMenuStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const pokemons = await pokedexService.getPokemonsWithPagination(3000) // Pre-render all Pokémons
+    const pokemons = await pokedexService.getPokemonWithPagination(3000) // Pre-render all Pokémons
 
     const pathsByName = pokemons.map((pokemon: IPokemon) => {
         return {
@@ -26,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: [...pathsByName, ...pathsByNumbers],
-        fallback: true
+        fallback: "blocking"
     }
 }
 

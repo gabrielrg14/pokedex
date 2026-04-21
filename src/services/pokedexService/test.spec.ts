@@ -24,7 +24,7 @@ describe("pokedexService", () => {
         })
     })
 
-    describe("getPokemonSpeciesByUrl", () => {
+    describe("getPokemonSpeciesByName", () => {
         it("should throw an error when name does not exist", async () => {
             await expect(
                 pokedexService.getPokemonSpeciesByName("not-a-pokemon")
@@ -47,10 +47,10 @@ describe("pokedexService", () => {
         )
     })
 
-    describe("getPokemonsWithPagination", () => {
+    describe("getPokemonWithPagination", () => {
         it("should return the pokemon list", async () => {
             const pokemonList =
-                await pokedexService.getPokemonsWithPagination(12)
+                await pokedexService.getPokemonWithPagination(12)
             expect(pokemonList).toStrictEqual(pokemonMocks.list)
         })
 
@@ -58,7 +58,25 @@ describe("pokedexService", () => {
             "should return %s data in the list",
             async (name, pokemon) => {
                 const pokemonList =
-                    await pokedexService.getPokemonsWithPagination(12)
+                    await pokedexService.getPokemonWithPagination(12)
+                expect(pokemonList).toContainEqual(pokemon)
+            }
+        )
+    })
+
+    describe("getPokemonByType", () => {
+        it("should throw an error when the searched type does not exist", async () => {
+            await expect(
+                pokedexService.getPokemonByType("not-a-type")
+            ).rejects.toThrow()
+        })
+
+        it.each(typeMocks.pokemonsByTypeArray)(
+            "should return a list of pokemons from type %s",
+            async (name, pokemon) => {
+                const pokemonList = await pokedexService.getPokemonByType(
+                    name as string
+                )
                 expect(pokemonList).toContainEqual(pokemon)
             }
         )
@@ -78,24 +96,6 @@ describe("pokedexService", () => {
             async (name, type) => {
                 const types = await pokedexService.getAllTypes()
                 expect(types).toContainEqual(type)
-            }
-        )
-    })
-
-    describe("getPokemonsByType", () => {
-        it("should throw an error when the searched type does not exist", async () => {
-            await expect(
-                pokedexService.getPokemonsByType("not-a-type")
-            ).rejects.toThrow()
-        })
-
-        it.each(typeMocks.pokemonsByTypeArray)(
-            "should return a list of pokemons from type %s",
-            async (name, pokemon) => {
-                const pokemonList = await pokedexService.getPokemonsByType(
-                    name as string
-                )
-                expect(pokemonList).toContainEqual(pokemon)
             }
         )
     })
