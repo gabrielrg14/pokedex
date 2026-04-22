@@ -1,32 +1,33 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useCallback, useEffect, useMemo } from "react"
 
-import { useRouter } from "next/router"
-import { IPokemon, IPokemonWithSpecies } from "interfaces"
-import { Loading } from "components"
+import { IPokemonWithSpecies } from "interfaces"
 import { pokedexService } from "services"
 import { PokemonTemplate } from "templates"
 import { formatName, getColorsByType } from "utils"
 import { SpriteVersion, useSpriteMenuStore } from "store"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const pokemons = await pokedexService.getPokemonWithPagination(3000) // Pre-render all Pokémons
+    const pokemons = await pokedexService.getPokemonWithPagination(10000) // Pre-render all Pokémons
 
-    const pathsByName = pokemons.map((pokemon: IPokemon) => {
+    const pathsByName = pokemons.map(({ name }) => {
         return {
-            params: { name: pokemon.name }
+            params: { name }
         }
     })
 
-    const pathsByNumbers = pokemons.map((pokemon: IPokemon) => {
-        return {
-            params: { name: String(pokemon.id) }
-        }
-    })
+    const pathsByNumber = await Promise.all(
+        pokemons.map(async ({ name }) => {
+            const pokemon = await pokedexService.getPokemonByQuery(name)
+            return {
+                params: { name: String(pokemon.id) }
+            }
+        })
+    )
 
     return {
-        paths: [...pathsByName, ...pathsByNumbers],
-        fallback: "blocking"
+        paths: [...pathsByName, ...pathsByNumber],
+        fallback: false
     }
 }
 
@@ -58,7 +59,6 @@ type PokemonPageProps = {
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {
-    const router = useRouter()
     const { sprite } = useSpriteMenuStore()
 
     const pokemonName = useMemo(
@@ -95,8 +95,6 @@ const PokemonPage = ({ pokemon }: PokemonPageProps) => {
     useEffect(() => {
         playPokemonCry()
     }, [playPokemonCry])
-
-    if (router && router.isFallback) return <Loading />
 
     let background = getColorsByType(
         pokemon?.types?.[0]?.type?.name
