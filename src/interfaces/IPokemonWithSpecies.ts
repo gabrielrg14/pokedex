@@ -8,6 +8,11 @@ export interface IGenera {
     }
 }
 
+export interface IShape {
+    name: string
+    url: string
+}
+
 export interface IHabitat {
     name: string
     url: string
@@ -15,6 +20,7 @@ export interface IHabitat {
 
 export interface IPokemonSpecies {
     genera?: IGenera[]
+    shape?: IShape
     habitat?: IHabitat
 }
 

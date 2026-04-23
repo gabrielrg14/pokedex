@@ -118,14 +118,26 @@ export const PokemonTemplate = ({
                             <RowTypes types={pokemonData?.types} />
 
                             <S.PokemonData>
-                                <S.Data>
-                                    <S.DataTitle>Height</S.DataTitle>
-                                    <p>{pokemonData?.height / 10}m</p>
-                                </S.Data>
-                                <S.Data>
-                                    <S.DataTitle>Weight</S.DataTitle>
-                                    <p>{pokemonData?.weight / 10}kg</p>
-                                </S.Data>
+                                {pokemonData?.height && (
+                                    <S.Data>
+                                        <S.DataTitle>Height</S.DataTitle>
+                                        <p>{pokemonData.height / 10}m</p>
+                                    </S.Data>
+                                )}
+                                {pokemonData?.weight && (
+                                    <S.Data>
+                                        <S.DataTitle>Weight</S.DataTitle>
+                                        <p>{pokemonData.weight / 10}kg</p>
+                                    </S.Data>
+                                )}
+                                {pokemonData?.shape && (
+                                    <S.Data>
+                                        <S.DataTitle>Shape</S.DataTitle>
+                                        <p>
+                                            {formatName(pokemonData.shape.name)}
+                                        </p>
+                                    </S.Data>
+                                )}
                                 {pokemonData?.habitat && (
                                     <S.Data>
                                         <S.DataTitle>Habitat</S.DataTitle>

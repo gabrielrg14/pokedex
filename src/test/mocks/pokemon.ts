@@ -116,6 +116,10 @@ const venusaurSpecies: IPokemonSpecies = {
             }
         }
     ],
+    shape: {
+        name: "quadruped",
+        url: "https://pokeapi.co/api/v2/pokemon-shape/8/"
+    },
     habitat: {
         name: "grassland",
         url: "https://pokeapi.co/api/v2/pokemon-habitat/3/"
@@ -238,6 +242,10 @@ const charizardSpecies: IPokemonSpecies = {
             }
         }
     ],
+    shape: {
+        name: "upright",
+        url: "https://pokeapi.co/api/v2/pokemon-shape/6/"
+    },
     habitat: {
         name: "mountain",
         url: "https://pokeapi.co/api/v2/pokemon-habitat/4/"
@@ -354,6 +362,10 @@ const blastoiseSpecies: IPokemonSpecies = {
             }
         }
     ],
+    shape: {
+        name: "upright",
+        url: "https://pokeapi.co/api/v2/pokemon-shape/6/"
+    },
     habitat: {
         name: "waters-edge",
         url: "https://pokeapi.co/api/v2/pokemon-habitat/9/"

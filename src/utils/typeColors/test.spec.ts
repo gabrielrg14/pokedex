@@ -2,7 +2,7 @@ import { typeMocks } from "test/mocks"
 
 import { getColorsByType } from "."
 
-describe("pokemonType", () => {
+describe("typeColors", () => {
     describe("getColorsByType", () => {
         it("should return the correct normal type colors", () => {
             const props = getColorsByType(typeMocks.types.normal.name)
