@@ -8,7 +8,7 @@ import {
     SpriteFloatingMenu,
     StatBar
 } from "components"
-import { formatName } from "utils"
+import { formatName, getGenerationRegion } from "utils"
 import { Sprite, SpriteVersion } from "store"
 import { VolumeUp } from "styled-icons/material-outlined"
 
@@ -128,6 +128,21 @@ export const PokemonTemplate = ({
                                     <S.Data>
                                         <S.DataTitle>Weight</S.DataTitle>
                                         <p>{pokemonData.weight / 10}kg</p>
+                                    </S.Data>
+                                )}
+                                {pokemonData?.generation && (
+                                    <S.Data>
+                                        <S.DataTitle>
+                                            Gen{" "}
+                                            {pokemonData.generation.name
+                                                .split("-")[1]
+                                                .toUpperCase()}
+                                        </S.DataTitle>
+                                        <p>
+                                            {getGenerationRegion(
+                                                pokemonData.generation.name
+                                            )}
+                                        </p>
                                     </S.Data>
                                 )}
                                 {pokemonData?.shape && (

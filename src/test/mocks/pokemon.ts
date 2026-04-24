@@ -116,6 +116,10 @@ const venusaurSpecies: IPokemonSpecies = {
             }
         }
     ],
+    generation: {
+        name: "generation-i",
+        url: "https://pokeapi.co/api/v2/generation/1/"
+    },
     shape: {
         name: "quadruped",
         url: "https://pokeapi.co/api/v2/pokemon-shape/8/"
@@ -242,6 +246,10 @@ const charizardSpecies: IPokemonSpecies = {
             }
         }
     ],
+    generation: {
+        name: "generation-i",
+        url: "https://pokeapi.co/api/v2/generation/1/"
+    },
     shape: {
         name: "upright",
         url: "https://pokeapi.co/api/v2/pokemon-shape/6/"
@@ -362,6 +370,10 @@ const blastoiseSpecies: IPokemonSpecies = {
             }
         }
     ],
+    generation: {
+        name: "generation-i",
+        url: "https://pokeapi.co/api/v2/generation/1/"
+    },
     shape: {
         name: "upright",
         url: "https://pokeapi.co/api/v2/pokemon-shape/6/"
