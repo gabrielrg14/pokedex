@@ -60,21 +60,21 @@ export const handlers = [
         return HttpResponse.json(null, { status: 404 })
     }),
 
-    http.get(`${API_URL}/type/${typeMocks.types.grass.name}`, () => {
+    http.get(`${API_URL}/type/${typeMocks.grass.name}`, () => {
         return HttpResponse.json(
             { pokemon: [{ pokemon: pokemonMocks.venusaur }] },
             { status: 200 }
         )
     }),
 
-    http.get(`${API_URL}/type/${typeMocks.types.fire.name}`, () => {
+    http.get(`${API_URL}/type/${typeMocks.fire.name}`, () => {
         return HttpResponse.json(
             { pokemon: [{ pokemon: pokemonMocks.charizard }] },
             { status: 200 }
         )
     }),
 
-    http.get(`${API_URL}/type/${typeMocks.types.water.name}`, () => {
+    http.get(`${API_URL}/type/${typeMocks.water.name}`, () => {
         return HttpResponse.json(
             { pokemon: [{ pokemon: pokemonMocks.blastoise }] },
             { status: 200 }

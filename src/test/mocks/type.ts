@@ -118,8 +118,8 @@ const types = {
 }
 
 export const typeMocks = {
-    types,
     typeAll,
+    ...types,
     list: Object.values(types),
     arrayList: Object.values(types).map((type) => [type.name, type]),
     pokemonsByTypeArray: [

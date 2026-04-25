@@ -4,10 +4,14 @@ import { getGenerationRegion } from "."
 
 describe("generations", () => {
     describe("getGenerationRegion", () => {
-        it.each(generationMocks.generationArrayList)(
-            "should return the region for %s",
-            async (name, generation) => {
-                expect(getGenerationRegion(name)).toBe(generation)
+        it("should return 'New' as region fallback when generation does not exist", () => {
+            expect(getGenerationRegion("generation-x")).toBe("New")
+        })
+
+        it.each(generationMocks.generationRegionArrayList)(
+            "should return the %s region",
+            async (generation, region) => {
+                expect(getGenerationRegion(generation)).toBe(region)
             }
         )
     })

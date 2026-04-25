@@ -384,19 +384,26 @@ const blastoiseSpecies: IPokemonSpecies = {
     }
 }
 
-export const pokemonMocks = {
+const pokemons = {
     venusaur,
-    venusaurSpecies,
     charizard,
+    blastoise
+}
+
+const pokemonSpecies = {
+    venusaurSpecies,
     charizardSpecies,
-    blastoise,
-    blastoiseSpecies,
-    list: [venusaur, charizard, blastoise],
-    pokemonArrayList: [
-        [venusaur.name, venusaur],
-        [charizard.name, charizard],
-        [blastoise.name, blastoise]
-    ],
+    blastoiseSpecies
+}
+
+export const pokemonMocks = {
+    ...pokemons,
+    ...pokemonSpecies,
+    list: Object.values(pokemons),
+    pokemonArrayList: Object.values(pokemons).map((pokemon) => [
+        pokemon.name,
+        pokemon
+    ]),
     pokemonSpeciesArrayList: [
         [venusaur.species.name, venusaurSpecies],
         [charizard.species.name, charizardSpecies],

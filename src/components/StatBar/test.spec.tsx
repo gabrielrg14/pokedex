@@ -6,11 +6,7 @@ import { StatBar } from "."
 describe("<StatBar />", () => {
     it("should render StatBar with parent-bar and child-bar divs", () => {
         render(
-            <StatBar
-                type={typeMocks.types.normal.name}
-                stat="hp"
-                baseStat={255}
-            />
+            <StatBar type={typeMocks.normal.name} stat="hp" baseStat={255} />
         )
 
         expect(screen.getByTestId(/parent-bar/i)).toBeInTheDocument()
@@ -18,13 +14,7 @@ describe("<StatBar />", () => {
     })
 
     it("should render the hp status child-bar of a flying type with correct background-color and width", async () => {
-        render(
-            <StatBar
-                type={typeMocks.types.flying.name}
-                stat="hp"
-                baseStat={95}
-            />
-        )
+        render(<StatBar type={typeMocks.flying.name} stat="hp" baseStat={95} />)
 
         expect(screen.getByTestId(/child-bar/i)).toHaveStyle({
             "background-color": "#92AADE",
@@ -35,7 +25,7 @@ describe("<StatBar />", () => {
     it("should render the attack status child-bar of a psychic type with correct background-color and width", () => {
         render(
             <StatBar
-                type={typeMocks.types.psychic.name}
+                type={typeMocks.psychic.name}
                 stat="attack"
                 baseStat={50}
             />
@@ -49,11 +39,7 @@ describe("<StatBar />", () => {
 
     it("should render the defense status child-bar of a bug type with correct background-color and width", () => {
         render(
-            <StatBar
-                type={typeMocks.types.bug.name}
-                stat="defense"
-                baseStat={230}
-            />
+            <StatBar type={typeMocks.bug.name} stat="defense" baseStat={230} />
         )
 
         expect(screen.getByTestId(/child-bar/i)).toHaveStyle({
@@ -65,7 +51,7 @@ describe("<StatBar />", () => {
     it("should render the special-attack status child-bar of a rock type with correct background-color and width", () => {
         render(
             <StatBar
-                type={typeMocks.types.rock.name}
+                type={typeMocks.rock.name}
                 stat="special-attack"
                 baseStat={95}
             />
@@ -80,7 +66,7 @@ describe("<StatBar />", () => {
     it("should render the special-defense status child-bar of a ghost type with correct background-color and width", () => {
         render(
             <StatBar
-                type={typeMocks.types.ghost.name}
+                type={typeMocks.ghost.name}
                 stat="special-defense"
                 baseStat={75}
             />
@@ -94,11 +80,7 @@ describe("<StatBar />", () => {
 
     it("should render the speed status child-bar of a dragon type with correct background-color and width", () => {
         render(
-            <StatBar
-                type={typeMocks.types.dragon.name}
-                stat="speed"
-                baseStat={80}
-            />
+            <StatBar type={typeMocks.dragon.name} stat="speed" baseStat={80} />
         )
 
         expect(screen.getByTestId(/child-bar/i)).toHaveStyle({

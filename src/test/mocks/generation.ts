@@ -44,7 +44,7 @@ const gen_ix: IGeneration = {
     url: "https://pokeapi.co/api/v2/generation/9/"
 }
 
-export const generationMocks = {
+const generations = {
     gen_i,
     gen_ii,
     gen_iii,
@@ -53,19 +53,13 @@ export const generationMocks = {
     gen_vi,
     gen_vii,
     gen_viii,
-    gen_ix,
-    list: [
-        gen_i,
-        gen_ii,
-        gen_iii,
-        gen_iv,
-        gen_v,
-        gen_vi,
-        gen_vii,
-        gen_viii,
-        gen_ix
-    ],
-    generationArrayList: [
+    gen_ix
+}
+
+export const generationMocks = {
+    generations,
+    list: Object.values(generations),
+    generationRegionArrayList: [
         [gen_i.name, "Kanto"],
         [gen_ii.name, "Johto"],
         [gen_iii.name, "Hoenn"],
