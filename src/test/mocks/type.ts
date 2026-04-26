@@ -1,124 +1,162 @@
-import { IType } from "interfaces"
+import { Type } from "interfaces"
 import { pokemonMocks } from "./pokemon"
 
-const typeAll: IType = {
-    name: "all",
-    url: ""
+const typeAll: Type = {
+    type: {
+        name: "all",
+        url: ""
+    }
 }
 
-const normal: IType = {
-    name: "normal",
-    url: "https://pokeapi.co/api/v2/type/1/"
+const normal: Type = {
+    type: {
+        name: "normal",
+        url: "https://pokeapi.co/api/v2/type/1/"
+    }
 }
 
-const fighting: IType = {
-    name: "fighting",
-    url: "https://pokeapi.co/api/v2/type/2/"
+const fighting: Type = {
+    type: {
+        name: "fighting",
+        url: "https://pokeapi.co/api/v2/type/2/"
+    }
 }
 
-const flying: IType = {
-    name: "flying",
-    url: "https://pokeapi.co/api/v2/type/3/"
+const flying: Type = {
+    type: {
+        name: "flying",
+        url: "https://pokeapi.co/api/v2/type/3/"
+    }
 }
 
-const poison: IType = {
-    name: "poison",
-    url: "https://pokeapi.co/api/v2/type/4/"
+const poison: Type = {
+    type: {
+        name: "poison",
+        url: "https://pokeapi.co/api/v2/type/4/"
+    }
 }
 
-const ground: IType = {
-    name: "ground",
-    url: "https://pokeapi.co/api/v2/type/5/"
+const ground: Type = {
+    type: {
+        name: "ground",
+        url: "https://pokeapi.co/api/v2/type/5/"
+    }
 }
 
-const rock: IType = {
-    name: "rock",
-    url: "https://pokeapi.co/api/v2/type/6/"
+const rock: Type = {
+    type: {
+        name: "rock",
+        url: "https://pokeapi.co/api/v2/type/6/"
+    }
 }
 
-const bug: IType = {
-    name: "bug",
-    url: "https://pokeapi.co/api/v2/type/7/"
+const bug: Type = {
+    type: {
+        name: "bug",
+        url: "https://pokeapi.co/api/v2/type/7/"
+    }
 }
 
-const ghost: IType = {
-    name: "ghost",
-    url: "https://pokeapi.co/api/v2/type/8/"
+const ghost: Type = {
+    type: {
+        name: "ghost",
+        url: "https://pokeapi.co/api/v2/type/8/"
+    }
 }
 
-const steel: IType = {
-    name: "steel",
-    url: "https://pokeapi.co/api/v2/type/9/"
+const steel: Type = {
+    type: {
+        name: "steel",
+        url: "https://pokeapi.co/api/v2/type/9/"
+    }
 }
 
-const fire: IType = {
-    name: "fire",
-    url: "https://pokeapi.co/api/v2/type/10/"
+const fire: Type = {
+    type: {
+        name: "fire",
+        url: "https://pokeapi.co/api/v2/type/10/"
+    }
 }
 
-const water: IType = {
-    name: "water",
-    url: "https://pokeapi.co/api/v2/type/11/"
+const water: Type = {
+    type: {
+        name: "water",
+        url: "https://pokeapi.co/api/v2/type/11/"
+    }
 }
 
-const grass: IType = {
-    name: "grass",
-    url: "https://pokeapi.co/api/v2/type/12/"
+const grass: Type = {
+    type: {
+        name: "grass",
+        url: "https://pokeapi.co/api/v2/type/12/"
+    }
 }
 
-const electric: IType = {
-    name: "electric",
-    url: "https://pokeapi.co/api/v2/type/13/"
+const electric: Type = {
+    type: {
+        name: "electric",
+        url: "https://pokeapi.co/api/v2/type/13/"
+    }
 }
 
-const psychic: IType = {
-    name: "psychic",
-    url: "https://pokeapi.co/api/v2/type/14/"
+const psychic: Type = {
+    type: {
+        name: "psychic",
+        url: "https://pokeapi.co/api/v2/type/14/"
+    }
 }
 
-const ice: IType = {
-    name: "ice",
-    url: "https://pokeapi.co/api/v2/type/15/"
+const ice: Type = {
+    type: {
+        name: "ice",
+        url: "https://pokeapi.co/api/v2/type/15/"
+    }
 }
 
-const dragon: IType = {
-    name: "dragon",
-    url: "https://pokeapi.co/api/v2/type/16/"
+const dragon: Type = {
+    type: {
+        name: "dragon",
+        url: "https://pokeapi.co/api/v2/type/16/"
+    }
 }
 
-const dark: IType = {
-    name: "dark",
-    url: "https://pokeapi.co/api/v2/type/17/"
+const dark: Type = {
+    type: {
+        name: "dark",
+        url: "https://pokeapi.co/api/v2/type/17/"
+    }
 }
 
-const fairy: IType = {
-    name: "fairy",
-    url: "https://pokeapi.co/api/v2/type/18/"
+const fairy: Type = {
+    type: {
+        name: "fairy",
+        url: "https://pokeapi.co/api/v2/type/18/"
+    }
 }
 
 const types = {
-    normal,
-    fighting,
-    flying,
-    poison,
-    ground,
-    rock,
-    bug,
-    ghost,
-    steel,
-    fire,
-    water,
-    grass,
-    electric,
-    psychic,
-    ice,
-    dragon,
-    dark,
-    fairy
+    normal: normal.type,
+    fighting: fighting.type,
+    flying: flying.type,
+    poison: poison.type,
+    ground: ground.type,
+    rock: rock.type,
+    bug: bug.type,
+    ghost: ghost.type,
+    steel: steel.type,
+    fire: fire.type,
+    water: water.type,
+    grass: grass.type,
+    electric: electric.type,
+    psychic: psychic.type,
+    ice: ice.type,
+    dragon: dragon.type,
+    dark: dark.type,
+    fairy: fairy.type
 }
 
 export const typeMocks = {
-    typeAll,
+    typeAll: typeAll.type,
     ...types,
     list: Object.values(types),
     arrayList: Object.values(types).map((type) => [type.name, type]),

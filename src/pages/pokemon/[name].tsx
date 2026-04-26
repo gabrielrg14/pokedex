@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useCallback, useEffect, useMemo } from "react"
 
-import { IPokemonWithSpecies } from "interfaces"
+import { PokemonWithSpecies } from "interfaces"
 import { pokedexService } from "services"
 import { PokemonTemplate } from "templates"
 import { formatName, getColorsByType } from "utils"
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 type PokemonPageProps = {
-    pokemon: IPokemonWithSpecies
+    pokemon: PokemonWithSpecies
 }
 
 const PokemonPage = ({ pokemon }: PokemonPageProps) => {

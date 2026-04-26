@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import { IPokemonWithSpecies } from "interfaces"
+import { PokemonWithSpecies } from "interfaces"
 import {
     PokemonNumber,
     RowTypes,
@@ -17,7 +17,7 @@ type PokemonTemplateProps = {
     pokemonNumber: number
     pokemonCry?: string
     pokemonImage?: string
-    pokemonData: IPokemonWithSpecies
+    pokemonData: PokemonWithSpecies
     playPokemonCry: () => void
     background: string
     sprite: Sprite

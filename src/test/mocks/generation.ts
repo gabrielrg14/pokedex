@@ -1,45 +1,45 @@
-import { IGeneration } from "interfaces"
+import { Generation } from "interfaces"
 
-const gen_i: IGeneration = {
+const gen_i: Generation = {
     name: "generation-i",
     url: "https://pokeapi.co/api/v2/generation/1/"
 }
 
-const gen_ii: IGeneration = {
+const gen_ii: Generation = {
     name: "generation-ii",
     url: "https://pokeapi.co/api/v2/generation/2/"
 }
 
-const gen_iii: IGeneration = {
+const gen_iii: Generation = {
     name: "generation-iii",
     url: "https://pokeapi.co/api/v2/generation/3/"
 }
 
-const gen_iv: IGeneration = {
+const gen_iv: Generation = {
     name: "generation-iv",
     url: "https://pokeapi.co/api/v2/generation/4/"
 }
-const gen_v: IGeneration = {
+const gen_v: Generation = {
     name: "generation-v",
     url: "https://pokeapi.co/api/v2/generation/5/"
 }
 
-const gen_vi: IGeneration = {
+const gen_vi: Generation = {
     name: "generation-vi",
     url: "https://pokeapi.co/api/v2/generation/6/"
 }
 
-const gen_vii: IGeneration = {
+const gen_vii: Generation = {
     name: "generation-vii",
     url: "https://pokeapi.co/api/v2/generation/7/"
 }
 
-const gen_viii: IGeneration = {
+const gen_viii: Generation = {
     name: "generation-viii",
     url: "https://pokeapi.co/api/v2/generation/8/"
 }
 
-const gen_ix: IGeneration = {
+const gen_ix: Generation = {
     name: "generation-ix",
     url: "https://pokeapi.co/api/v2/generation/9/"
 }

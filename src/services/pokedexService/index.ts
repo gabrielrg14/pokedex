@@ -1,70 +1,81 @@
-import { IPokemon, IPokemonSpecies, IType } from "interfaces"
+import {
+    Pagination,
+    Pokemon,
+    PokemonSpecies,
+    Resource,
+    TypeResource
+} from "interfaces"
 import { api } from "providers"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
-const getPokemonByQuery = async (query?: string): Promise<IPokemon> => {
+const getPokemonByQuery = async (query?: string): Promise<Pokemon> => {
     const search = query?.replace(/ /g, "-").toLowerCase()
 
-    const { data: pokemon, status } = await api.get<IPokemon>(
+    const { data: pokemonData, status } = await api.get<Pokemon>(
         `/pokemon/${search ?? ""}`
     )
 
-    if (status !== 200) throw new Error("Pokemon not found")
+    if (!pokemonData || status !== 200) throw new Error("Pokémon not found")
 
     // Removes abilities that have the same name
-    const abilityNames = pokemon.abilities.map((item) => item.ability.name)
+    const abilityNames = pokemonData.abilities.map((item) => item.ability.name)
     const abilitiesFiltered = abilityNames.filter(
         (item, index) => abilityNames.indexOf(item) === index
     )
-    pokemon.abilities = pokemon.abilities.filter(
+    pokemonData.abilities = pokemonData.abilities.filter(
         (item, index) => abilitiesFiltered.indexOf(item.ability.name) === index
     )
 
-    return pokemon
+    return pokemonData
 }
 
 const getPokemonSpeciesByName = async (
     name?: string
-): Promise<IPokemonSpecies | null> => {
+): Promise<PokemonSpecies> => {
     if (!name) return {}
 
-    const { data: pokemonSpecies } = await api.get<IPokemonSpecies>(
+    const { data: speciesData, status } = await api.get<PokemonSpecies>(
         `/pokemon-species/${name}`
     )
 
-    return pokemonSpecies
+    if (!speciesData || status !== 200)
+        throw new Error("Pokémon Species not found")
+
+    return speciesData
 }
 
 const getPokemonWithPagination = async (
     limit: number = POKEMON_PAGINATION_LIMIT,
     offset?: number
-): Promise<IPokemon[]> => {
-    const { data } = await api.get(
+): Promise<Resource[]> => {
+    const { data: pagination } = await api.get<Pagination>(
         `/pokemon?limit=${limit}${offset ? `&offset=${offset}` : ""}`
     )
 
-    return data.results
+    return pagination.results
 }
 
-const getPokemonByType = async (type: string): Promise<IPokemon[]> => {
-    const { data } = await api.get(`/type/${type}`)
-
-    const pokemonsByType = data.pokemon.map(
-        (item: { pokemon: IPokemon }) => item.pokemon
+const getPokemonByType = async (type: string): Promise<Resource[]> => {
+    const { data: typeData, status } = await api.get<TypeResource>(
+        `/type/${type}`
     )
+
+    if (!typeData || status !== 200) throw new Error("Type not found")
+
+    const pokemonsByType = typeData.pokemon.map((item) => item.pokemon)
 
     return pokemonsByType
 }
 
-const getAllTypes = async (): Promise<IType[]> => {
-    const { data } = await api.get("/type")
+const getAllTypes = async (): Promise<Resource[]> => {
+    const { data: pagination } = await api.get<Pagination>("/type")
 
-    data.results.unshift({ name: "all", url: "" }) // Adds type "all" to be one of the filterable options
+    pagination.results.unshift({ name: "all", url: "" }) // Add type "all" to be one of the filterable options
 
     // Remove types that do not have pokémon coming from the API
     const typesToRemove = ["unknown", "stellar"]
-    const typesFiltered = data.results.filter(
-        (type: IType) => !typesToRemove.includes(type.name)
+    const typesFiltered = pagination.results.filter(
+        (type) => !typesToRemove.includes(type.name)
     )
 
     return typesFiltered

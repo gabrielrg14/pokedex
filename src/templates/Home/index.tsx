@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
 import Image from "next/image"
-import { IPokemon, IType } from "interfaces"
+import { Resource } from "interfaces"
 import { Card, Button, SpriteFloatingMenu } from "components"
 import { formatName, getColorsByType } from "utils"
 import { Filter } from "store"
@@ -12,8 +12,8 @@ import { POKEMON_PAGINATION_LIMIT } from "common"
 import { Search } from "styled-icons/material-outlined"
 
 type HomeTemplateProps = {
-    pokemons: IPokemon[]
-    types: IType[]
+    pokemons: Resource[]
+    types: Resource[]
     isLoading: boolean
     filter: Filter
     prevSearchRef: MutableRefObject<string>

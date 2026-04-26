@@ -1,6 +1,6 @@
-import { IPokemon, IPokemonSpecies } from "interfaces"
+import { Pokemon, PokemonSpecies } from "interfaces"
 
-const venusaur: IPokemon = {
+const venusaur: Pokemon = {
     id: 3,
     name: "venusaur",
     url: "https://pokeapi.co/api/v2/pokemon/3/",
@@ -106,7 +106,7 @@ const venusaur: IPokemon = {
     }
 }
 
-const venusaurSpecies: IPokemonSpecies = {
+const venusaurSpecies: PokemonSpecies = {
     genera: [
         {
             genus: "Seed Pokémon",
@@ -130,7 +130,7 @@ const venusaurSpecies: IPokemonSpecies = {
     }
 }
 
-const charizard: IPokemon = {
+const charizard: Pokemon = {
     id: 6,
     name: "charizard",
     url: "https://pokeapi.co/api/v2/pokemon/6/",
@@ -236,7 +236,7 @@ const charizard: IPokemon = {
     }
 }
 
-const charizardSpecies: IPokemonSpecies = {
+const charizardSpecies: PokemonSpecies = {
     genera: [
         {
             genus: "Flame Pokémon",
@@ -260,7 +260,7 @@ const charizardSpecies: IPokemonSpecies = {
     }
 }
 
-const blastoise: IPokemon = {
+const blastoise: Pokemon = {
     id: 9,
     name: "blastoise",
     url: "https://pokeapi.co/api/v2/pokemon/9/",
@@ -360,7 +360,7 @@ const blastoise: IPokemon = {
     }
 }
 
-const blastoiseSpecies: IPokemonSpecies = {
+const blastoiseSpecies: PokemonSpecies = {
     genera: [
         {
             genus: "Shellfish Pokémon",

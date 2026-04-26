@@ -1,60 +1,48 @@
-export interface ISprite {
+import { Resource } from "."
+
+export interface Sprite {
     front_default: string
     front_shiny: string
     back_default?: string
     back_shiny?: string
 }
 
-export interface ISprites extends ISprite {
+export interface Sprites extends Sprite {
     other: {
-        "official-artwork": ISprite
+        "official-artwork": Sprite
     }
 }
 
-export interface ISpecies {
-    name: string
-    url: string
-}
+export interface Species extends Resource {}
 
-export interface ICry {
+export interface Cries {
     latest: string
     legacy?: string
 }
 
-export interface IType {
-    name: string
-    url: string
+export interface Type {
+    type: Resource
 }
 
-export interface IPokemonType {
-    type: IType
+export interface Ability {
+    ability: Resource
 }
 
-export interface IAbility {
-    ability: {
-        name: string
-        url: string
-    }
-}
-
-export interface IStat {
+export interface Stat {
     base_stat: number
-    stat: {
-        name: string
-        url: string
-    }
+    stat: Resource
 }
 
-export interface IPokemon {
+export interface Pokemon {
     id: number
     name: string
     url: string
-    sprites: ISprites
-    species: ISpecies
-    cries: ICry
+    sprites: Sprites
+    species: Species
+    cries: Cries
     height: number
     weight: number
-    types: IPokemonType[]
-    abilities: IAbility[]
-    stats: IStat[]
+    types: Type[]
+    abilities: Ability[]
+    stats: Stat[]
 }

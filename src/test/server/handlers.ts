@@ -14,7 +14,7 @@ export const handlers = [
         return HttpResponse.json(null, { status: 404 })
     }),
 
-    http.get(`${API_URL}/pokemon-species/not-a-pokemon`, () => {
+    http.get(`${API_URL}/pokemon-species/not-a-species`, () => {
         return HttpResponse.json(null, { status: 404 })
     }),
 

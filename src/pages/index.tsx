@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next"
 import { useState, useRef, useEffect, useMemo } from "react"
 
-import { IPokemon, IType } from "interfaces"
+import { Resource } from "interfaces"
 import { HomeTemplate } from "templates"
 import { useListFilterStore } from "store"
 import { useQuery } from "@tanstack/react-query"
@@ -9,7 +9,7 @@ import { pokedexService } from "services"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
 type HomeProps = {
-    types: IType[]
+    types: Resource[]
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -30,7 +30,7 @@ const Home = ({ types }: HomeProps) => {
     } = useListFilterStore()
 
     const prevSearchRef = useRef("")
-    const [pokemonList, setPokemonList] = useState<IPokemon[]>([])
+    const [pokemonList, setPokemonList] = useState<Resource[]>([])
 
     const { data: pokemonByPagination, isLoading: isLoadingByPagination } =
         useQuery({
@@ -69,14 +69,14 @@ const Home = ({ types }: HomeProps) => {
     useEffect(() => {
         if (isLoading) return
 
-        let pokemonList: IPokemon[] = []
+        let pokemonList
         if (filter.search === "" && filter.type === "all")
-            pokemonList = pokemonByPagination || []
-        else if (filter.type !== "all") pokemonList = pokemonByType || []
+            pokemonList = pokemonByPagination
+        else if (filter.type !== "all") pokemonList = pokemonByType
         else if (filter.search !== "")
             pokemonList = pokemonBySearch ? [pokemonBySearch] : []
-        else pokemonList = pokemonByPagination || []
-        setPokemonList(pokemonList)
+        else pokemonList = pokemonByPagination
+        setPokemonList(pokemonList || [])
     }, [
         isLoading,
         filter.search,
