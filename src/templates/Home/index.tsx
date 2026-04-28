@@ -5,7 +5,7 @@ import { NextSeo } from "next-seo"
 import * as S from "./styles"
 import Image from "next/image"
 import { Resource } from "interfaces"
-import { Card, Button, SpriteFloatingMenu } from "components"
+import { Card, Button, SpriteFloatingMenu, SpinnerLoader } from "components"
 import { formatName, getColorsByType } from "utils"
 import { Filter } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
@@ -15,8 +15,10 @@ type HomeTemplateProps = {
     pokemons: Resource[]
     types: Resource[]
     isLoading: boolean
+    isSearchError: boolean
     filter: Filter
     prevSearchRef: MutableRefObject<string>
+    prevTypeRef: MutableRefObject<string>
     searchPokemon: (search: string) => void
     filterByType: (type: string) => void
     nextPokemonPagination: (limit: number) => void
@@ -26,8 +28,10 @@ export const HomeTemplate = ({
     pokemons,
     types,
     isLoading,
+    isSearchError,
     filter,
     prevSearchRef,
+    prevTypeRef,
     searchPokemon,
     filterByType,
     nextPokemonPagination
@@ -78,27 +82,32 @@ export const HomeTemplate = ({
                             type="button"
                             title="Search"
                             onClick={() => searchPokemon(search)}
-                            disabled={search === ""}
+                            disabled={search === "" || isLoading}
                         >
                             <Search size={18} />
                         </S.SearchButton>
                     </S.TopArea>
 
                     <S.PokemonCount>
-                        <Image
-                            src={`/images/types/${typeSelected}.svg`}
-                            width={32}
-                            height={32}
-                            alt={typeSelected}
-                        />
-                        <S.Counter>
-                            {isLoading && typeSelected !== "all"
-                                ? formatName(typeSelected)
-                                : pokemons.length}
-                        </S.Counter>
+                        {isLoading ? (
+                            <SpinnerLoader
+                                size={32}
+                                color="var(--dark-color)"
+                            />
+                        ) : (
+                            <>
+                                <Image
+                                    src={`/images/types/${typeSelected}.svg`}
+                                    width={32}
+                                    height={32}
+                                    alt={typeSelected}
+                                />
+                                <S.Counter>{pokemons.length}</S.Counter>
+                            </>
+                        )}
                     </S.PokemonCount>
 
-                    {((isLoading && search === "") || pokemons.length > 0) && (
+                    {pokemons.length > 0 && (
                         <S.BottomArea>
                             <S.TypeList>
                                 {types.map((type, index) => (
@@ -150,15 +159,23 @@ export const HomeTemplate = ({
                                                     pokemonLimit
                                                 )
                                             }
+                                            disabled={isLoading}
                                         >
-                                            Load more Pokémon
+                                            {isLoading ? (
+                                                <SpinnerLoader
+                                                    size={18}
+                                                    color="var(----light-color)"
+                                                />
+                                            ) : (
+                                                <span>Load more Pokémon</span>
+                                            )}
                                         </Button>
                                     )}
                             </S.PokemonCards>
                         </S.BottomArea>
                     )}
 
-                    {!isLoading && pokemons.length === 0 && (
+                    {!isLoading && isSearchError && (
                         <S.SearchError>
                             <S.TextNotFound>
                                 Pokémon{" "}
@@ -174,7 +191,11 @@ export const HomeTemplate = ({
                                 </small>
                             </S.TextNotFound>
 
-                            <Button onClick={() => searchPokemon("")}>
+                            <Button
+                                onClick={() =>
+                                    filterByType(prevTypeRef.current)
+                                }
+                            >
                                 Back to list
                             </Button>
                         </S.SearchError>

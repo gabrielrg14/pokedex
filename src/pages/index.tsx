@@ -30,6 +30,7 @@ const Home = ({ types }: HomeProps) => {
     } = useListFilterStore()
 
     const prevSearchRef = useRef("")
+    const prevTypeRef = useRef("all")
     const [pokemonList, setPokemonList] = useState<Resource[]>([])
 
     const { data: pokemonByPagination, isLoading: isLoadingByPagination } =
@@ -46,7 +47,11 @@ const Home = ({ types }: HomeProps) => {
         enabled: filter.type !== "all"
     })
 
-    const { data: pokemonBySearch, isLoading: isLoadingBySearch } = useQuery({
+    const {
+        data: pokemonBySearch,
+        isLoading: isLoadingBySearch,
+        isError: isErrorBySearch
+    } = useQuery({
         queryKey: ["getPokemon", filter.search],
         queryFn: () => pokedexService.getPokemonByQuery(filter.search),
         enabled: filter.search !== ""
@@ -72,10 +77,11 @@ const Home = ({ types }: HomeProps) => {
         let pokemonList
         if (filter.search === "" && filter.type === "all")
             pokemonList = pokemonByPagination
-        else if (filter.type !== "all") pokemonList = pokemonByType
         else if (filter.search !== "")
             pokemonList = pokemonBySearch ? [pokemonBySearch] : []
+        else if (filter.type !== "all") pokemonList = pokemonByType
         else pokemonList = pokemonByPagination
+
         setPokemonList(pokemonList || [])
     }, [
         isLoading,
@@ -94,6 +100,7 @@ const Home = ({ types }: HomeProps) => {
     }
 
     const filterByType = (type: string) => {
+        prevTypeRef.current = type
         setScrollFilter(125) // scroll to pokemon count
         setSearchFilter("")
         setTypeFilter(type)
@@ -115,9 +122,11 @@ const Home = ({ types }: HomeProps) => {
         <HomeTemplate
             pokemons={pokemonList}
             types={types}
-            isLoading={isLoading}
             filter={filter}
             prevSearchRef={prevSearchRef}
+            prevTypeRef={prevTypeRef}
+            isLoading={isLoading}
+            isSearchError={isErrorBySearch}
             searchPokemon={searchPokemon}
             filterByType={filterByType}
             nextPokemonPagination={nextPokemonPagination}
