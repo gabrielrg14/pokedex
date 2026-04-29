@@ -1,12 +1,11 @@
 import { GetStaticProps } from "next"
-import { useState, useRef, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo } from "react"
 
 import { Resource } from "interfaces"
 import { HomeTemplate } from "templates"
 import { useListFilterStore } from "store"
 import { useQuery } from "@tanstack/react-query"
 import { pokedexService } from "services"
-import { POKEMON_PAGINATION_LIMIT } from "common"
 
 type HomeProps = {
     types: Resource[]
@@ -21,16 +20,8 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home = ({ types }: HomeProps) => {
-    const {
-        filter,
-        setSearchFilter,
-        setTypeFilter,
-        setLimitFilter,
-        setScrollFilter
-    } = useListFilterStore()
+    const { filter } = useListFilterStore()
 
-    const prevSearchRef = useRef("")
-    const prevTypeRef = useRef("all")
     const [pokemonList, setPokemonList] = useState<Resource[]>([])
 
     const { data: pokemonByPagination, isLoading: isLoadingByPagination } =
@@ -92,44 +83,12 @@ const Home = ({ types }: HomeProps) => {
         pokemonBySearch
     ])
 
-    const searchPokemon = (search: string) => {
-        prevSearchRef.current = search
-        setScrollFilter(125) // scroll to pokemon search
-        setTypeFilter("all")
-        setSearchFilter(search)
-    }
-
-    const filterByType = (type: string) => {
-        prevTypeRef.current = type
-        setScrollFilter(125) // scroll to pokemon count
-        setSearchFilter("")
-        setTypeFilter(type)
-    }
-
-    const nextPokemonPagination = (limit: number) => {
-        setScrollFilter(window.pageYOffset + 780) // scroll to next pokemon pagination
-        setLimitFilter(limit + POKEMON_PAGINATION_LIMIT)
-    }
-
-    useEffect(() =>
-        window.scrollTo({
-            top: filter.scroll,
-            behavior: "smooth"
-        })
-    )
-
     return (
         <HomeTemplate
             pokemons={pokemonList}
             types={types}
-            filter={filter}
-            prevSearchRef={prevSearchRef}
-            prevTypeRef={prevTypeRef}
             isLoading={isLoading}
             isSearchError={isErrorBySearch}
-            searchPokemon={searchPokemon}
-            filterByType={filterByType}
-            nextPokemonPagination={nextPokemonPagination}
         />
     )
 }

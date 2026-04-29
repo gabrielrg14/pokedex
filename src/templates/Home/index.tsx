@@ -1,48 +1,57 @@
-import { MutableRefObject, useEffect, useMemo, useState } from "react"
-
+import { useEffect, useRef } from "react"
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
-import Image from "next/image"
 import { Resource } from "interfaces"
-import { Card, Button, SpriteFloatingMenu, SpinnerLoader } from "components"
-import { formatName, getColorsByType } from "utils"
-import { Filter } from "store"
-import { POKEMON_PAGINATION_LIMIT } from "common"
-import { Search } from "styled-icons/material-outlined"
+import { SpriteFloatingMenu } from "components"
+import {
+    FilterResults,
+    HeroTitle,
+    SearchBar,
+    SearchError,
+    TypeCounter
+} from "./sub-components"
+import { useListFilterStore } from "store"
 
 type HomeTemplateProps = {
     pokemons: Resource[]
     types: Resource[]
     isLoading: boolean
     isSearchError: boolean
-    filter: Filter
-    prevSearchRef: MutableRefObject<string>
-    prevTypeRef: MutableRefObject<string>
-    searchPokemon: (search: string) => void
-    filterByType: (type: string) => void
-    nextPokemonPagination: (limit: number) => void
 }
 
 export const HomeTemplate = ({
     pokemons,
     types,
     isLoading,
-    isSearchError,
-    filter,
-    prevSearchRef,
-    prevTypeRef,
-    searchPokemon,
-    filterByType,
-    nextPokemonPagination
+    isSearchError
 }: HomeTemplateProps) => {
-    const [search, setSearch] = useState(filter.search)
-    const typeSelected = useMemo(() => filter.type, [filter.type])
-    const pokemonLimit = useMemo(() => filter.limit, [filter.limit])
+    const { filter, setSearchFilter, setTypeFilter, setScrollFilter } =
+        useListFilterStore()
 
-    useEffect(() => {
-        setSearch(filter.search)
-    }, [filter.search])
+    const prevSearchRef = useRef("")
+    const prevTypeRef = useRef("all")
+
+    useEffect(() =>
+        window.scrollTo({
+            top: filter.scroll,
+            behavior: "smooth"
+        })
+    )
+
+    const handleSearchPokemon = (search: string) => {
+        prevSearchRef.current = search
+        setScrollFilter(125) // scroll to pokemon search
+        setTypeFilter("all")
+        setSearchFilter(search)
+    }
+
+    const handleFilterByType = (type: string) => {
+        prevTypeRef.current = type
+        setScrollFilter(125) // scroll to pokemon count
+        setSearchFilter("")
+        setTypeFilter(type)
+    }
 
     return (
         <>
@@ -60,146 +69,30 @@ export const HomeTemplate = ({
             />
 
             <S.Content>
-                <S.TitleDiv>
-                    <S.Title>Choose your Pokémon</S.Title>
-                </S.TitleDiv>
+                <HeroTitle />
 
                 <S.Wrapper>
-                    <S.TopArea>
-                        <S.SearchInput
-                            name="search-input"
-                            type="search"
-                            spellCheck={false}
-                            placeholder="Search by name or number"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            onKeyDown={(e) =>
-                                e.key === "Enter" ? searchPokemon(search) : null
-                            }
-                        />
-
-                        <S.SearchButton
-                            type="button"
-                            title="Search"
-                            onClick={() => searchPokemon(search)}
-                            disabled={search === "" || isLoading}
-                        >
-                            <Search size={18} />
-                        </S.SearchButton>
-                    </S.TopArea>
-
-                    <S.PokemonCount>
-                        {isLoading ? (
-                            <SpinnerLoader
-                                size={32}
-                                color="var(--dark-color)"
-                            />
-                        ) : (
-                            <>
-                                <Image
-                                    src={`/images/types/${typeSelected}.svg`}
-                                    width={32}
-                                    height={32}
-                                    alt={typeSelected}
-                                />
-                                <S.Counter>{pokemons.length}</S.Counter>
-                            </>
-                        )}
-                    </S.PokemonCount>
-
-                    {pokemons.length > 0 && (
-                        <S.BottomArea>
-                            <S.TypeList>
-                                {types.map((type, index) => (
-                                    <li key={index}>
-                                        <S.TypeItem
-                                            className={
-                                                typeSelected === type.name
-                                                    ? "selected"
-                                                    : ""
-                                            }
-                                            onClick={() =>
-                                                filterByType(type.name)
-                                            }
-                                        >
-                                            <Image
-                                                src={`/images/types/${type.name}.svg`}
-                                                width={24}
-                                                height={24}
-                                                alt={type.name}
-                                            />
-                                            <S.Type
-                                                typeColor={
-                                                    getColorsByType(type.name)
-                                                        .backgroundColor
-                                                }
-                                            >
-                                                {formatName(type.name)}
-                                            </S.Type>
-                                        </S.TypeItem>
-                                    </li>
-                                ))}
-                            </S.TypeList>
-
-                            <S.PokemonCards>
-                                <S.PokemonList>
-                                    {pokemons.map((pokemon, index) => (
-                                        <S.PokemonItem key={index}>
-                                            <Card name={pokemon.name} />
-                                        </S.PokemonItem>
-                                    ))}
-                                </S.PokemonList>
-
-                                {typeSelected === "all" &&
-                                    pokemons.length >=
-                                        POKEMON_PAGINATION_LIMIT && (
-                                        <Button
-                                            onClick={() =>
-                                                nextPokemonPagination(
-                                                    pokemonLimit
-                                                )
-                                            }
-                                            disabled={isLoading}
-                                        >
-                                            {isLoading ? (
-                                                <SpinnerLoader
-                                                    size={18}
-                                                    color="var(----light-color)"
-                                                />
-                                            ) : (
-                                                <span>Load more Pokémon</span>
-                                            )}
-                                        </Button>
-                                    )}
-                            </S.PokemonCards>
-                        </S.BottomArea>
-                    )}
-
-                    {!isLoading && isSearchError && (
-                        <S.SearchError>
-                            <S.TextNotFound>
-                                Pokémon{" "}
-                                <strong>
-                                    {'"'}
-                                    {prevSearchRef.current}
-                                    {'"'}
-                                </strong>{" "}
-                                not found! <br />
-                                <small>
-                                    Try again by searching for your full name or
-                                    your Pokédex number.
-                                </small>
-                            </S.TextNotFound>
-
-                            <Button
-                                onClick={() =>
-                                    filterByType(prevTypeRef.current)
-                                }
-                            >
-                                Back to list
-                            </Button>
-                        </S.SearchError>
-                    )}
+                    <SearchBar
+                        searchPokemon={handleSearchPokemon}
+                        isLoading={isLoading}
+                    />
+                    <TypeCounter
+                        count={pokemons.length}
+                        isLoading={isLoading}
+                    />
+                    <FilterResults
+                        pokemons={pokemons}
+                        types={types}
+                        filterByType={handleFilterByType}
+                        isLoading={isLoading}
+                    />
+                    <SearchError
+                        isSearchError={isSearchError}
+                        isLoading={isLoading}
+                        prevSearchRef={prevSearchRef}
+                        prevTypeRef={prevTypeRef}
+                        filterByType={handleFilterByType}
+                    />
                 </S.Wrapper>
 
                 <SpriteFloatingMenu />
