@@ -1,38 +1,43 @@
+import { useMemo } from "react"
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
 import { PokemonWithSpecies } from "interfaces"
+import { RowTypes, SpriteFloatingMenu } from "components"
 import {
-    PokemonNumber,
-    RowTypes,
-    SpriteFloatingMenu,
-    StatBar
-} from "components"
-import { formatName, getGenerationRegion } from "utils"
-import { Sprite, SpriteVersion } from "store"
-import { VolumeUp } from "styled-icons/material-outlined"
+    PokemonData,
+    PokemonImage,
+    PokemonInfo,
+    PokemonStats
+} from "./sub-components"
+import { formatName, getColorsByType } from "utils"
 
 type PokemonTemplateProps = {
-    pokemonName: string
-    pokemonNumber: number
-    pokemonCry?: string
-    pokemonImage?: string
     pokemonData: PokemonWithSpecies
-    playPokemonCry: () => void
-    background: string
-    sprite: Sprite
 }
 
-export const PokemonTemplate = ({
-    pokemonName,
-    pokemonNumber,
-    pokemonCry,
-    pokemonImage,
-    pokemonData,
-    playPokemonCry,
-    background,
-    sprite
-}: PokemonTemplateProps) => {
+export const PokemonTemplate = ({ pokemonData }: PokemonTemplateProps) => {
+    const pokemonName = useMemo(
+        () => formatName(pokemonData?.name),
+        [pokemonData?.name]
+    )
+    const pokemonNumber = useMemo(() => pokemonData?.id, [pokemonData?.id])
+    const pokemonBackground = useMemo(() => {
+        let background = getColorsByType(
+            pokemonData?.types?.[0]?.type?.name
+        )?.background
+
+        if (pokemonData?.types?.length >= 2) {
+            // Pokémon with 2 or more types
+            background = `linear-gradient(
+                        to right,
+                        ${getColorsByType(pokemonData.types[0].type.name).backgroundColor} 50%,
+                        ${getColorsByType(pokemonData.types[1].type.name).backgroundColor} 50%
+                    )`
+        }
+        return background
+    }, [pokemonData])
+
     return (
         <>
             <NextSeo
@@ -47,159 +52,34 @@ export const PokemonTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/pokemon/${pokemonData?.name}`}
             />
 
-            <audio
-                id={`pokemon-cry-${pokemonNumber}`}
-                src={pokemonCry}
-                autoPlay
-            />
-
-            <S.Background style={{ background }}>
+            <S.Background style={{ background: pokemonBackground }}>
                 <S.Wrapper>
                     <S.Content>
-                        <S.PokemonCard>
-                            <S.PokemonInfo>
-                                <S.PokemonTitle>
-                                    <S.PokemonName>{pokemonName}</S.PokemonName>
-                                    <S.CryButton
-                                        type="button"
-                                        title={`${pokemonName} cry`}
-                                        onClick={() => playPokemonCry()}
-                                    >
-                                        <VolumeUp
-                                            size={24}
-                                            color="var(--dark-color)"
-                                        />
-                                    </S.CryButton>
-                                </S.PokemonTitle>
-
-                                {pokemonData?.genera && (
-                                    <S.PokemonGenera>
-                                        {formatName(
-                                            pokemonData.genera.find(
-                                                (genera) =>
-                                                    genera.language.name ===
-                                                    "en"
-                                            )?.genus
-                                        )}
-                                    </S.PokemonGenera>
-                                )}
-
-                                <S.PokemonId>
-                                    <PokemonNumber number={pokemonNumber} />
-                                </S.PokemonId>
-                            </S.PokemonInfo>
-
-                            <S.ImageWrapper>
-                                {pokemonImage ? (
-                                    <S.PokemonImage
-                                        src={pokemonImage}
-                                        width={256}
-                                        height={256}
-                                        alt={pokemonName}
-                                        imageRendering={
-                                            sprite.version ===
-                                            SpriteVersion.pixelated
-                                                ? "pixelated"
-                                                : "unset"
-                                        }
-                                        priority
-                                    />
-                                ) : (
-                                    <S.PokemonImage
-                                        src="/images/types/all.svg"
-                                        width={228}
-                                        height={228}
-                                        alt={`${pokemonName} fallback`}
-                                        priority
-                                    />
-                                )}
-                            </S.ImageWrapper>
-
+                        <S.Card>
+                            <PokemonInfo
+                                name={pokemonName}
+                                number={pokemonNumber}
+                                cries={pokemonData?.cries}
+                                genera={pokemonData?.genera}
+                            />
+                            <PokemonImage
+                                name={pokemonName}
+                                sprites={pokemonData?.sprites}
+                            />
                             <RowTypes types={pokemonData?.types} />
-
-                            <S.PokemonData>
-                                {pokemonData?.height && (
-                                    <S.Data>
-                                        <S.DataTitle>Height</S.DataTitle>
-                                        <p>{pokemonData.height / 10}m</p>
-                                    </S.Data>
-                                )}
-                                {pokemonData?.weight && (
-                                    <S.Data>
-                                        <S.DataTitle>Weight</S.DataTitle>
-                                        <p>{pokemonData.weight / 10}kg</p>
-                                    </S.Data>
-                                )}
-                                {pokemonData?.generation && (
-                                    <S.Data>
-                                        <S.DataTitle>
-                                            Gen{" "}
-                                            {pokemonData.generation.name
-                                                .split("-")[1]
-                                                .toUpperCase()}
-                                        </S.DataTitle>
-                                        <p>
-                                            {getGenerationRegion(
-                                                pokemonData.generation.name
-                                            )}
-                                        </p>
-                                    </S.Data>
-                                )}
-                                {pokemonData?.shape && (
-                                    <S.Data>
-                                        <S.DataTitle>Shape</S.DataTitle>
-                                        <p>
-                                            {formatName(pokemonData.shape.name)}
-                                        </p>
-                                    </S.Data>
-                                )}
-                                {pokemonData?.habitat && (
-                                    <S.Data>
-                                        <S.DataTitle>Habitat</S.DataTitle>
-                                        <p>
-                                            {formatName(
-                                                pokemonData.habitat.name
-                                            )}
-                                        </p>
-                                    </S.Data>
-                                )}
-                                {pokemonData?.abilities?.length > 0 && (
-                                    <S.Data>
-                                        <S.DataTitle>Abilities</S.DataTitle>
-                                        {pokemonData.abilities.map(
-                                            (item, index) => (
-                                                <p key={index}>
-                                                    {formatName(
-                                                        item.ability.name
-                                                    )}
-                                                </p>
-                                            )
-                                        )}
-                                    </S.Data>
-                                )}
-                            </S.PokemonData>
-
-                            <S.PokemonStats>
-                                <S.DataTitle>Stats</S.DataTitle>
-                                {pokemonData?.stats?.map((item, index) => (
-                                    <S.Stat key={index}>
-                                        <S.StatInfo>
-                                            <span>
-                                                {formatName(item.stat.name)}
-                                            </span>
-                                            <span>{item.base_stat}</span>
-                                        </S.StatInfo>
-                                        <StatBar
-                                            type={
-                                                pokemonData?.types[0].type.name
-                                            }
-                                            stat={item.stat.name}
-                                            baseStat={item.base_stat}
-                                        />
-                                    </S.Stat>
-                                ))}
-                            </S.PokemonStats>
-                        </S.PokemonCard>
+                            <PokemonData
+                                height={pokemonData?.height}
+                                weight={pokemonData?.weight}
+                                generation={pokemonData?.generation}
+                                shape={pokemonData?.shape}
+                                habitat={pokemonData?.habitat}
+                                abilities={pokemonData?.abilities}
+                            />
+                            <PokemonStats
+                                stats={pokemonData?.stats}
+                                types={pokemonData?.types}
+                            />
+                        </S.Card>
 
                         <SpriteFloatingMenu />
                     </S.Content>

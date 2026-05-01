@@ -21,7 +21,7 @@ Cypress.Commands.add(
 )
 
 Cypress.Commands.add("validatePokemonCry", (number: string) => {
-    cy.get(`audio[id='pokemon-cry-${number}']`).as("pokemonCry").should("exist")
+    cy.get(`audio[id='cry-${number}']`).as("pokemonCry").should("exist")
     cy.get("@pokemonCry").should((cries) => {
         const pokemonCry = cries[0] as HTMLAudioElement
         const cryWasPlayed =
