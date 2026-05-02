@@ -18,10 +18,9 @@ export const AboutTemplate = () => {
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/about`}
             />
 
-            <S.Wrapper>
-                <S.Content>
+            <S.Container>
+                <S.Section>
                     <S.Title>About the Pokédex</S.Title>
-
                     <S.Description>
                         This project was developed with the aim of putting into
                         practice the knowledge acquired in Next.js, TypeScript,
@@ -30,13 +29,11 @@ export const AboutTemplate = () => {
                         through a fun theme that is one of the creator&apos;s
                         passions: Pokémon!
                     </S.Description>
-
                     <S.Description>
                         Over time, the Pokédex will receive updates that will
                         implement improvements in the search filters and display
                         of Pokémon information.
                     </S.Description>
-
                     <S.AboutImage
                         src="/images/about.png"
                         width={250}
@@ -44,8 +41,8 @@ export const AboutTemplate = () => {
                         alt="Pokémon thinking"
                         priority
                     />
-                </S.Content>
-            </S.Wrapper>
+                </S.Section>
+            </S.Container>
         </>
     )
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Container } from "components"
+import { Container as ContainerComponent } from "components"
 import { mediaQueries as media } from "utils"
 
 export const Background = styled("div")`
@@ -7,11 +7,11 @@ export const Background = styled("div")`
     padding: var(--default-size) 0;
 `
 
-export const Wrapper = styled(Container)`
+export const Container = styled(ContainerComponent)`
     height: 100%;
 `
 
-export const Content = styled.section`
+export const Section = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;

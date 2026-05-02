@@ -53,8 +53,8 @@ export const PokemonTemplate = ({ pokemonData }: PokemonTemplateProps) => {
             />
 
             <S.Background style={{ background: pokemonBackground }}>
-                <S.Wrapper>
-                    <S.Content>
+                <S.Container>
+                    <S.Section>
                         <S.Card>
                             <PokemonInfo
                                 name={pokemonName}
@@ -82,8 +82,8 @@ export const PokemonTemplate = ({ pokemonData }: PokemonTemplateProps) => {
                         </S.Card>
 
                         <SpriteFloatingMenu />
-                    </S.Content>
-                </S.Wrapper>
+                    </S.Section>
+                </S.Container>
             </S.Background>
         </>
     )

@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import Link from "next/link"
 import Image from "next/image"
-import { Container } from "components"
+import { Container as ContainerComponent } from "components"
 
-export const Wrapper = styled(Container)``
+export const Container = styled(ContainerComponent)``
 
-export const Content = styled.section`
+export const Section = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;

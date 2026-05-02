@@ -9,8 +9,8 @@ export const PageNotFoundTemplate = () => {
         <>
             <NextSeo title="404 | Page not found" />
 
-            <S.Wrapper>
-                <S.Content>
+            <S.Container>
+                <S.Section>
                     <S.CardLink href="/pokemon/psyduck" aria-label="Psyduck">
                         <S.CardBody>
                             <S.PsyduckImage
@@ -44,8 +44,8 @@ export const PageNotFoundTemplate = () => {
                     <Link href="/" aria-label="Go to Home">
                         <Button>Go to Home</Button>
                     </Link>
-                </S.Content>
-            </S.Wrapper>
+                </S.Section>
+            </S.Container>
         </>
     )
 }

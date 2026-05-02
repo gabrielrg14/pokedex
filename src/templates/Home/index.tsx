@@ -68,10 +68,10 @@ export const HomeTemplate = ({
                 canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/`}
             />
 
-            <S.Content>
+            <S.Section>
                 <HeroTitle />
 
-                <S.Wrapper>
+                <S.Container>
                     <SearchBar
                         searchPokemon={handleSearchPokemon}
                         isLoading={isLoading}
@@ -93,10 +93,10 @@ export const HomeTemplate = ({
                         prevTypeRef={prevTypeRef}
                         filterByType={handleFilterByType}
                     />
-                </S.Wrapper>
+                </S.Container>
 
                 <SpriteFloatingMenu />
-            </S.Content>
+            </S.Section>
         </>
     )
 }
