@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo"
 
 import * as S from "./styles"
+import { AboutImage, AboutTitle, Paragraph } from "./sub-components"
 
 export const AboutTemplate = () => {
     return (
@@ -20,27 +21,21 @@ export const AboutTemplate = () => {
 
             <S.Container>
                 <S.Section>
-                    <S.Title>About the Pokédex</S.Title>
-                    <S.Description>
-                        This project was developed with the aim of putting into
+                    <AboutTitle />
+                    <Paragraph
+                        text="This project was developed with the aim of putting into
                         practice the knowledge acquired in Next.js, TypeScript,
                         Styled Components, Zustand, React Query, Jest, React
                         Testing Library, Mock Service Worker, Cypress and Docker
-                        through a fun theme that is one of the creator&apos;s
-                        passions: Pokémon!
-                    </S.Description>
-                    <S.Description>
-                        Over time, the Pokédex will receive updates that will
-                        implement improvements in the search filters and display
-                        of Pokémon information.
-                    </S.Description>
-                    <S.AboutImage
-                        src="/images/about.png"
-                        width={250}
-                        height={200}
-                        alt="Pokémon thinking"
-                        priority
+                        through a fun theme that is one of the creator's
+                        passions: Pokémon!"
                     />
+                    <Paragraph
+                        text="Over time, the Pokédex will receive updates that will
+                        implement improvements in the search filters and display
+                        of Pokémon information."
+                    />
+                    <AboutImage />
                 </S.Section>
             </S.Container>
         </>
