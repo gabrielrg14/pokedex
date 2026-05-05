@@ -1,4 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react"
+import {
+    render,
+    screen,
+    fireEvent,
+    renderHook,
+    act
+} from "@testing-library/react"
 
 import {
     SpritePosition,
@@ -50,11 +56,13 @@ describe("<SpriteFloatingMenu />", () => {
     it("should toggle menu open and when main button is clicked", () => {
         render(<SpriteFloatingMenu />)
 
-        expect(useSpriteMenuStore.getState().sprite.isMenuOpen).toBe(false)
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        expect(result.current.sprite.isMenuOpen).toBe(false)
 
         openSpriteFloatingMenu()
 
-        expect(useSpriteMenuStore.getState().sprite.isMenuOpen).toBe(true)
+        expect(result.current.sprite.isMenuOpen).toBe(true)
     })
 
     it("should toggle button title when main button is clicked", () => {
@@ -96,9 +104,9 @@ describe("<SpriteFloatingMenu />", () => {
     it("should toggle sprite version when sprite button is clicked", () => {
         render(<SpriteFloatingMenu />)
 
-        expect(useSpriteMenuStore.getState().sprite.version).toBe(
-            SpriteVersion.official
-        )
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        expect(result.current.sprite.version).toBe(SpriteVersion.official)
 
         openSpriteFloatingMenu()
 
@@ -107,24 +115,19 @@ describe("<SpriteFloatingMenu />", () => {
         })
         fireEvent.click(spriteButton)
 
-        expect(useSpriteMenuStore.getState().sprite.version).toBe(
-            SpriteVersion.pixelated
-        )
+        expect(result.current.sprite.version).toBe(SpriteVersion.pixelated)
     })
 
     it("should toggle sprite position when rotation button is clicked and version is pixelated", () => {
-        useSpriteMenuStore.setState({
-            sprite: {
-                ...useSpriteMenuStore.getState().sprite,
-                version: SpriteVersion.pixelated
-            }
-        })
-
         render(<SpriteFloatingMenu />)
 
-        expect(useSpriteMenuStore.getState().sprite.position).toBe(
-            SpritePosition.front
-        )
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        act(() => {
+            result.current.toggleSpriteVersion()
+        })
+
+        expect(result.current.sprite.position).toBe(SpritePosition.front)
 
         openSpriteFloatingMenu()
 
@@ -133,23 +136,19 @@ describe("<SpriteFloatingMenu />", () => {
         })
         fireEvent.click(rotationButton)
 
-        expect(useSpriteMenuStore.getState().sprite.position).toBe(
-            SpritePosition.back
-        )
+        expect(result.current.sprite.position).toBe(SpritePosition.back)
 
         fireEvent.click(rotationButton)
 
-        expect(useSpriteMenuStore.getState().sprite.position).toBe(
-            SpritePosition.front
-        )
+        expect(result.current.sprite.position).toBe(SpritePosition.front)
     })
 
     it("should not toggle sprite position when rotation button is clicked and version is official", () => {
         render(<SpriteFloatingMenu />)
 
-        expect(useSpriteMenuStore.getState().sprite.position).toBe(
-            SpritePosition.front
-        )
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        expect(result.current.sprite.position).toBe(SpritePosition.front)
 
         openSpriteFloatingMenu()
 
@@ -158,17 +157,15 @@ describe("<SpriteFloatingMenu />", () => {
         })
         fireEvent.click(rotationButton)
 
-        expect(useSpriteMenuStore.getState().sprite.position).toBe(
-            SpritePosition.front
-        )
+        expect(result.current.sprite.position).toBe(SpritePosition.front)
     })
 
     it("should toggle sprite type when shiny button is clicked", () => {
         render(<SpriteFloatingMenu />)
 
-        expect(useSpriteMenuStore.getState().sprite.type).toBe(
-            SpriteType.default
-        )
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        expect(result.current.sprite.type).toBe(SpriteType.default)
 
         openSpriteFloatingMenu()
 
@@ -177,7 +174,7 @@ describe("<SpriteFloatingMenu />", () => {
         })
         fireEvent.click(shinyButton)
 
-        expect(useSpriteMenuStore.getState().sprite.type).toBe(SpriteType.shiny)
+        expect(result.current.sprite.type).toBe(SpriteType.shiny)
     })
 })
 
