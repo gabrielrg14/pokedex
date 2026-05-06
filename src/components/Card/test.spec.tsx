@@ -42,8 +42,6 @@ describe("<Card />", () => {
             }
         )
 
-    const renderSpriteStoreHook = () => renderHook(() => useSpriteMenuStore())
-
     it("should render pokemon link with the correct attributes", async () => {
         render(
             <QueryClientWrapper>
@@ -113,7 +111,9 @@ describe("<Card />", () => {
             expect(useQueryResult.current.isLoading).toBe(false)
         )
 
-        const { result: useSpriteResult } = renderSpriteStoreHook()
+        const { result: useSpriteResult } = renderHook(() =>
+            useSpriteMenuStore()
+        )
 
         act(() => useSpriteResult.current.toggleSpriteVersion())
 
@@ -143,7 +143,9 @@ describe("<Card />", () => {
             expect(useQueryResult.current.isLoading).toBe(false)
         )
 
-        const { result: useSpriteResult } = renderSpriteStoreHook()
+        const { result: useSpriteResult } = renderHook(() =>
+            useSpriteMenuStore()
+        )
 
         act(() => useSpriteResult.current.setLoadingSprite(true))
 

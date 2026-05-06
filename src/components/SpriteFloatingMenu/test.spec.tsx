@@ -5,7 +5,6 @@ import {
     renderHook,
     act
 } from "@testing-library/react"
-
 import {
     SpritePosition,
     SpriteType,
@@ -17,15 +16,15 @@ import { SpriteFloatingMenu } from "."
 
 describe("<SpriteFloatingMenu />", () => {
     beforeEach(() => {
-        useSpriteMenuStore.setState({
-            sprite: {
-                loading: false,
-                isMenuOpen: false,
-                version: SpriteVersion.official,
-                position: SpritePosition.front,
-                type: SpriteType.default
-            }
-        })
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        result.current.sprite = {
+            loading: false,
+            isMenuOpen: false,
+            version: SpriteVersion.official,
+            position: SpritePosition.front,
+            type: SpriteType.default
+        }
     })
 
     it("should render the main button", () => {
