@@ -22,13 +22,14 @@ export const SearchBar = ({ searchPokemon, isLoading }: SearchBarProps) => {
         <S.Wrapper>
             <SearchInput
                 search={search}
+                isLoading={isLoading}
                 setSearch={setSearch}
                 searchPokemon={searchPokemon}
             />
             <SearchButton
                 search={search}
-                searchPokemon={searchPokemon}
                 isLoading={isLoading}
+                searchPokemon={searchPokemon}
             />
         </S.Wrapper>
     )

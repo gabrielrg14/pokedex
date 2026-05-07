@@ -3,14 +3,14 @@ import { Search } from "styled-icons/material-outlined"
 
 type SearchButtonProps = {
     search: string
-    searchPokemon: (search: string) => void
     isLoading: boolean
+    searchPokemon: (search: string) => void
 }
 
 export const SearchButton = ({
     search,
-    searchPokemon,
-    isLoading
+    isLoading,
+    searchPokemon
 }: SearchButtonProps) => {
     return (
         <S.Button

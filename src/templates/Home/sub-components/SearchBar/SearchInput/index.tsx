@@ -2,12 +2,14 @@ import * as S from "./styles"
 
 type SearchInputProps = {
     search: string
+    isLoading: boolean
     setSearch: (search: string) => void
     searchPokemon: (search: string) => void
 }
 
 export const SearchInput = ({
     search,
+    isLoading,
     setSearch,
     searchPokemon
 }: SearchInputProps) => {
@@ -18,9 +20,12 @@ export const SearchInput = ({
             spellCheck={false}
             placeholder="Search by name or number"
             value={search}
+            disabled={isLoading}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) =>
-                e.key === "Enter" ? searchPokemon(search) : null
+                search !== "" && e.key === "Enter"
+                    ? searchPokemon(search)
+                    : null
             }
         />
     )

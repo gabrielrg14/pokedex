@@ -16,7 +16,7 @@ export const SearchError = ({
     prevTypeRef,
     filterByType
 }: SearchErrorProps) => {
-    if (isLoading || !isSearchError) return null
+    if (!isSearchError || isLoading) return null
 
     return (
         <S.Wrapper>
