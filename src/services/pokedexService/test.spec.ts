@@ -23,6 +23,15 @@ describe("pokedexService", () => {
                 ]
             })
         })
+
+        it.each(pokemonMocks.pokemonArrayList)(
+            "should return %s data",
+            async (name, pokemon) => {
+                expect(
+                    await pokedexService.getPokemonByQuery(name as string)
+                ).toStrictEqual(pokemon)
+            }
+        )
     })
 
     describe("getPokemonSpeciesByName", () => {
