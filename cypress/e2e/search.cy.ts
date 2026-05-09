@@ -1,6 +1,6 @@
 /// <reference types="../support/commands.d.ts" />
 
-describe("Search for Pokémon", () => {
+describe("Search for pokemon", () => {
     beforeEach(() => {
         cy.intercept("GET", "**/pokemon/butterfree").as("getButterfree")
 
@@ -8,12 +8,12 @@ describe("Search for Pokémon", () => {
         cy.wait("@getButterfree")
     })
 
-    it("search for Pokémon 'butterfree' in the initial list", () => {
+    it("search for pokemon 'butterfree' in the initial list", () => {
         cy.navigateToPokemonPage("Butterfree")
         cy.validatePokemonPage("Butterfree", "#0012", ["Bug", "Flying"])
     })
 
-    it("search for Pokémon 'pikachu' using pagination", () => {
+    it("search for pokemon 'pikachu' using pagination", () => {
         cy.intercept("GET", "**/pokemon/arbok").as("getArbok")
         cy.intercept("GET", "**/pokemon/pikachu").as("getPikachu")
 
@@ -29,19 +29,19 @@ describe("Search for Pokémon", () => {
         cy.validatePokemonPage("Pikachu", "#0025", ["Electric"])
     })
 
-    it("search for Pokémon 'sceptile' using search", () => {
+    it("search for pokemon 'sceptile' using search", () => {
         cy.searchForPokemon("sceptile")
         cy.navigateToPokemonPage("Sceptile")
         cy.validatePokemonPage("Sceptile", "#0254", ["Grass"])
     })
 
-    it("search for Pokémon '115' using search", () => {
+    it("search for pokemon '115' using search", () => {
         cy.searchForPokemon("115")
         cy.navigateToPokemonPage("Kangaskhan")
         cy.validatePokemonPage("Kangaskhan", "#0115", ["Normal"])
     })
 
-    it("search for Pokémon 'kyurem' using filter by type 'ice'", () => {
+    it("search for pokemon 'kyurem' using filter by type 'ice'", () => {
         cy.intercept("GET", "**/pokemon/kyurem").as("getKyurem")
 
         cy.contains("main section ul li button", "Ice").click()
@@ -51,7 +51,7 @@ describe("Search for Pokémon", () => {
         cy.validatePokemonPage("Kyurem", "#0646", ["Dragon", "Ice"])
     })
 
-    it("search for the non-existent Pokémon 'test' using the search and return to the list", () => {
+    it("search for the non-existent pokemon 'test' using the search and return to the list", () => {
         cy.searchForPokemon("test")
 
         cy.contains("main section p", 'Pokémon "test" not found!').should(

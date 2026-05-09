@@ -6,7 +6,12 @@ import {
     act
 } from "@testing-library/react"
 import { pokemonMocks } from "test/mocks"
-import { useSpriteMenuStore, SpriteVersion } from "store"
+import {
+    SpritePosition,
+    SpriteType,
+    SpriteVersion,
+    useSpriteMenuStore
+} from "store"
 import {
     QueryClient,
     QueryClientProvider,
@@ -16,20 +21,16 @@ import { pokedexService } from "services"
 
 import { Card } from "."
 
-describe("<Card />", () => {
-    const QueryClientWrapper = ({
-        children
-    }: {
-        children: React.ReactNode
-    }) => {
-        const queryClient = new QueryClient()
-        return (
-            <QueryClientProvider client={queryClient}>
-                {children}
-            </QueryClientProvider>
-        )
-    }
+const QueryClientWrapper = ({ children }: { children: React.ReactNode }) => {
+    const queryClient = new QueryClient()
+    return (
+        <QueryClientProvider client={queryClient}>
+            {children}
+        </QueryClientProvider>
+    )
+}
 
+describe("<Card />", () => {
     const renderQueryHook = (name: string) =>
         renderHook(
             () =>
@@ -41,6 +42,18 @@ describe("<Card />", () => {
                 wrapper: QueryClientWrapper
             }
         )
+
+    beforeEach(() => {
+        const { result } = renderHook(() => useSpriteMenuStore())
+
+        result.current.sprite = {
+            loading: false,
+            isMenuOpen: false,
+            version: SpriteVersion.official,
+            position: SpritePosition.front,
+            type: SpriteType.default
+        }
+    })
 
     it("should render pokemon link with the correct attributes", async () => {
         render(

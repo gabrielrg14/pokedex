@@ -7,7 +7,7 @@ type MenuOpenProp = {
     isOpen: boolean
 }
 
-export const FloatingMenu = styled("div")`
+export const Wrapper = styled("div")`
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;

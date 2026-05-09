@@ -3,7 +3,7 @@
 import { pokemonMocks } from "test/mocks"
 import { formatName } from "utils"
 
-describe("Pokémon sprite", () => {
+describe("Pokemon sprite", () => {
     const venusaurName = pokemonMocks.venusaur.name
     const venusaurNameFormatted = formatName(venusaurName)
     const venusaurSprites = pokemonMocks.venusaur.sprites

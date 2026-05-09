@@ -1,5 +1,5 @@
 export const formatName = (name: string = "") => {
-    // Removes hyphen from pokémon name and puts a blank in its place
+    // Removes hyphen from pokemon name and puts a blank in its place
     return (
         name
             .replace("special-", "Sp. ")

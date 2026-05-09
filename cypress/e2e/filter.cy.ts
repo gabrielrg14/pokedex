@@ -1,6 +1,6 @@
 /// <reference types="../support/commands.d.ts" />
 
-describe("Filter Pokémon list", () => {
+describe("Filter pokemon list", () => {
     beforeEach(() => {
         cy.intercept("GET", "**/pokemon/butterfree").as("getButterfree")
 

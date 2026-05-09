@@ -28,7 +28,7 @@ export const PokemonTemplate = ({ pokemonData }: PokemonTemplateProps) => {
         )?.background
 
         if (pokemonData?.types?.length >= 2) {
-            // Pokémon with 2 or more types
+            // pokemon with 2 or more types
             background = `linear-gradient(
                         to right,
                         ${getColorsByType(pokemonData.types[0].type.name).backgroundColor} 50%,

@@ -72,7 +72,7 @@ const getAllTypes = async (): Promise<Resource[]> => {
 
     pagination.results.unshift({ name: "all", url: "" }) // Add type "all" to be one of the filterable options
 
-    // Remove types that do not have pokémon coming from the API
+    // Remove types that do not have pokemon coming from the API
     const typesToRemove = ["unknown", "stellar"]
     const typesFiltered = pagination.results.filter(
         (type) => !typesToRemove.includes(type.name)

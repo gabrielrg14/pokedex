@@ -30,7 +30,7 @@ export const SpriteFloatingMenu = () => {
     }, [sprite])
 
     return (
-        <S.FloatingMenu>
+        <S.Wrapper>
             <S.MainButton
                 title={sprite.isMenuOpen ? "Close menu" : "Open menu"}
                 onClick={() => toggleMenuOpen()}
@@ -102,6 +102,6 @@ export const SpriteFloatingMenu = () => {
                     className={sprite.type === SpriteType.shiny ? "active" : ""}
                 />
             </S.MenuButton>
-        </S.FloatingMenu>
+        </S.Wrapper>
     )
 }

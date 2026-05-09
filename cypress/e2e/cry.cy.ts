@@ -1,18 +1,18 @@
 /// <reference types="../support/commands.d.ts" />
 
-describe("Pokémon cry", () => {
+describe("Pokemon cry", () => {
     beforeEach(() => {
         cy.intercept("GET", "**/cries/pokemon/latest/**").as("getLatestCry")
     })
 
-    it("play the Pokémon cry when accessing the page", () => {
+    it("play the pokemon cry when accessing the page", () => {
         cy.visit("/pokemon/lapras")
         cy.wait("@getLatestCry")
 
         cy.validatePokemonCry("131")
     })
 
-    it("play the Pokémon cry by clicking the button", () => {
+    it("play the pokemon cry by clicking the button", () => {
         cy.visit("/pokemon/ditto")
         cy.wait("@getLatestCry")
 
@@ -21,7 +21,7 @@ describe("Pokémon cry", () => {
         cy.validatePokemonCry("132")
     })
 
-    it("play the Pokémon cry when changing sprite", () => {
+    it("play the pokemon cry when changing sprite", () => {
         cy.intercept("GET", "**/cries/pokemon/legacy/**").as("getLegacyCry")
 
         cy.visit("/pokemon/eevee")

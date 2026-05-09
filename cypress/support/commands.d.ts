@@ -3,22 +3,22 @@
 declare namespace Cypress {
     interface Chainable {
         /**
-         * Navigate to a Pokémon page.
+         * Navigate to a pokemon page.
          *
-         * @param name string - The name of the Pokémon page you want to navigate to
+         * @param name string - The name of the pokemon page you want to navigate to
          *
-         * @example cy.navigateToPokemonPage("Pikachu") // Navigate to the provided Pokémon page
+         * @example cy.navigateToPokemonPage("Pikachu") // Navigate to the provided pokemon page
          */
         navigateToPokemonPage(
             name: string
         ): Cypress.Chainable<JQuery<HTMLAnchorElement>>
 
         /**
-         * Validates a Pokémon's data on its Pokémon page.
+         * Validates a pokemon's data on its pokemon page.
          *
-         * @param name string - The name of the Pokémon you want to validate
-         * @param number string - The number of the Pokémon you want to validate
-         * @param types string[] - The types of the Pokémon you want to validate
+         * @param name string - The name of the pokemon you want to validate
+         * @param number string - The number of the pokemon you want to validate
+         * @param types string[] - The types of the pokemon you want to validate
          *
          * @example cy.validatePokemonPage("Venusaur", "#0003", ["grass", "poison"])
          * @example cy.validatePokemonPage("Pikachu", "#0025", ["electric"])
@@ -30,18 +30,18 @@ declare namespace Cypress {
         ): void | Cypress.Chainable<null>
 
         /**
-         * Validates if a Pokémon's cry was played.
+         * Validates if a pokemon's cry was played.
          *
-         * @param number string - The number of the Pokémon you want to validate
+         * @param number string - The number of the pokemon you want to validate
          *
          * @example cy.validatePokemonCry("132")
          */
         validatePokemonCry(number: string): void | Cypress.Chainable<null>
 
         /**
-         * Search for a Pokémon in the search input.
+         * Search for a pokemon in the search input.
          *
-         * @param query string - The query for the Pokémon you want to search for
+         * @param query string - The query for the pokemon you want to search for
          *
          * @example cy.searchForPokemon("pikachu") // Type in the search field and click the button to search
          */

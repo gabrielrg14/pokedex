@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import { PokemonNumber } from "."
 
 describe("<PokemonNumber />", () => {
-    it("should render the pokémon number with #", () => {
+    it("should render the pokemon number with #", () => {
         render(<PokemonNumber number={3} />)
 
         const number3 = screen.getByText(/3/i)
