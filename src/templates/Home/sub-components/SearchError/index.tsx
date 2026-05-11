@@ -1,7 +1,7 @@
 import * as S from "./styles"
 import { Button } from "components"
 
-type SearchErrorProps = {
+export type SearchErrorProps = {
     isSearchError: boolean
     isLoading: boolean
     prevSearchRef: React.MutableRefObject<string>

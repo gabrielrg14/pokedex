@@ -1,6 +1,6 @@
 import * as S from "./styles"
 
-type SearchInputProps = {
+export type SearchInputProps = {
     search: string
     isLoading: boolean
     setSearch: (search: string) => void

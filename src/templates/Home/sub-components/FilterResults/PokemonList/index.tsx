@@ -3,7 +3,7 @@ import { Resource } from "interfaces"
 import { Card } from "components"
 import { PaginationButton } from "./PaginationButton"
 
-type PokemonListProps = {
+export type PokemonListProps = {
     pokemons: Resource[]
     isLoading: boolean
 }

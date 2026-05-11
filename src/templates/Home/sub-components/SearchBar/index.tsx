@@ -5,7 +5,7 @@ import { SearchInput } from "./SearchInput"
 import { SearchButton } from "./SearchButton"
 import { useListFilterStore } from "store"
 
-type SearchBarProps = {
+export type SearchBarProps = {
     searchPokemon: (search: string) => void
     isLoading: boolean
 }

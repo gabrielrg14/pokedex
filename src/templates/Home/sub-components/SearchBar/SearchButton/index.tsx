@@ -1,7 +1,7 @@
 import * as S from "./styles"
 import { Search } from "styled-icons/material-outlined"
 
-type SearchButtonProps = {
+export type SearchButtonProps = {
     search: string
     isLoading: boolean
     searchPokemon: (search: string) => void

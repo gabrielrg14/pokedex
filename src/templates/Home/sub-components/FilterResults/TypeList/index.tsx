@@ -4,7 +4,7 @@ import { Resource } from "interfaces"
 import { useListFilterStore } from "store"
 import { formatName, getColorsByType } from "utils"
 
-type TypeListProps = {
+export type TypeListProps = {
     types: Resource[]
     filterByType: (type: string) => void
 }

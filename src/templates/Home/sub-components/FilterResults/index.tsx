@@ -3,7 +3,7 @@ import { Resource } from "interfaces"
 import { TypeList } from "./TypeList"
 import { PokemonList } from "./PokemonList"
 
-type FilterResultsProps = {
+export type FilterResultsProps = {
     pokemons: Resource[]
     types: Resource[]
     filterByType: (type: string) => void

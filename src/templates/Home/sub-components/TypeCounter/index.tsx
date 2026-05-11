@@ -3,7 +3,7 @@ import Image from "next/image"
 import { SpinnerLoader } from "components"
 import { useListFilterStore } from "store"
 
-type TypeCounterProps = {
+export type TypeCounterProps = {
     count: number
     isLoading: boolean
 }

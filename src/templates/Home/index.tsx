@@ -13,7 +13,7 @@ import {
 } from "./sub-components"
 import { useListFilterStore } from "store"
 
-type HomeTemplateProps = {
+export type HomeTemplateProps = {
     pokemons: Resource[]
     types: Resource[]
     isLoading: boolean

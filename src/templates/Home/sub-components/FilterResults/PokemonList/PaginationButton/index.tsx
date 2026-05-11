@@ -2,7 +2,7 @@ import { Button, SpinnerLoader } from "components"
 import { useListFilterStore } from "store"
 import { POKEMON_PAGINATION_LIMIT } from "common"
 
-interface PaginationButtonProps {
+export type PaginationButtonProps = {
     pokemonCount: number
     isLoading: boolean
 }
