@@ -19,7 +19,7 @@ export const PokemonInfo = ({
 }: PokemonInfoProps) => {
     return (
         <S.Wrapper>
-            <Title name={name} number={number} cries={cries} />
+            <Title name={name} cries={cries} />
             <Genera genera={genera} />
             <Number number={number} />
         </S.Wrapper>

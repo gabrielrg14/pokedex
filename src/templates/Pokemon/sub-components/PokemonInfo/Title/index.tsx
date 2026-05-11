@@ -4,15 +4,14 @@ import { CryButton } from "./CryButton"
 
 type TitleProps = {
     name: string
-    number: number
     cries: Cries
 }
 
-export const Title = ({ name, number, cries }: TitleProps) => {
+export const Title = ({ name, cries }: TitleProps) => {
     return (
         <S.Wrapper>
             <S.Name>{name}</S.Name>
-            <CryButton name={name} number={number} cries={cries} />
+            <CryButton name={name} cries={cries} />
         </S.Wrapper>
     )
 }

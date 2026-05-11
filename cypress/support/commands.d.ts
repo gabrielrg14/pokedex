@@ -32,11 +32,11 @@ declare namespace Cypress {
         /**
          * Validates if a pokemon's cry was played.
          *
-         * @param number string - The number of the pokemon you want to validate
+         * @param name string - The name of the pokemon you want to validate
          *
-         * @example cy.validatePokemonCry("132")
+         * @example cy.validatePokemonCry("Ditto")
          */
-        validatePokemonCry(number: string): void | Cypress.Chainable<null>
+        validatePokemonCry(name: string): void | Cypress.Chainable<null>
 
         /**
          * Search for a pokemon in the search input.

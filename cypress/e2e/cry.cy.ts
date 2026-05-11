@@ -9,7 +9,7 @@ describe("Pokemon cry", () => {
         cy.visit("/pokemon/lapras")
         cy.wait("@getLatestCry")
 
-        cy.validatePokemonCry("131")
+        cy.validatePokemonCry("Lapras")
     })
 
     it("play the pokemon cry by clicking the button", () => {
@@ -18,7 +18,7 @@ describe("Pokemon cry", () => {
 
         cy.get("main section button[title='Ditto cry']").click()
 
-        cy.validatePokemonCry("132")
+        cy.validatePokemonCry("Ditto")
     })
 
     it("play the pokemon cry when changing sprite", () => {
@@ -31,6 +31,6 @@ describe("Pokemon cry", () => {
         cy.get("main section button[title='Toggle sprite']").click()
 
         cy.wait("@getLegacyCry")
-        cy.validatePokemonCry("133")
+        cy.validatePokemonCry("Eevee")
     })
 })

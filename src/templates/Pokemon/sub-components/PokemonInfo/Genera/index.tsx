@@ -7,7 +7,7 @@ type GeneraProps = {
 }
 
 export const Genera = ({ genera }: GeneraProps) => {
-    if (!genera) return null
+    if (!genera || !genera.length) return null
 
     return (
         <S.Genera>

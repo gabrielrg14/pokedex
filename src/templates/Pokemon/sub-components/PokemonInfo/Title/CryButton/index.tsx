@@ -7,11 +7,10 @@ import { VolumeUp } from "styled-icons/material-outlined"
 
 type CryButtonProps = {
     name: string
-    number: number
     cries: Cries
 }
 
-export const CryButton = ({ name, number, cries }: CryButtonProps) => {
+export const CryButton = ({ name, cries }: CryButtonProps) => {
     const { sprite } = useSpriteMenuStore()
 
     const crySrc = useMemo(() => {
@@ -23,14 +22,14 @@ export const CryButton = ({ name, number, cries }: CryButtonProps) => {
 
     const playCry = useCallback(() => {
         const cryAudioElement = document.getElementById(
-            `cry-${number}`
+            `${name}-cry`
         ) as HTMLAudioElement
 
         if (cryAudioElement) {
             cryAudioElement.volume = 0.05
             cryAudioElement.load()
         }
-    }, [number])
+    }, [name])
 
     useEffect(() => {
         playCry()
@@ -38,7 +37,7 @@ export const CryButton = ({ name, number, cries }: CryButtonProps) => {
 
     return (
         <>
-            <audio id={`cry-${number}`} src={crySrc} autoPlay />
+            <audio id={`${name}-cry`} src={crySrc} autoPlay />
             <S.CryButton
                 type="button"
                 title={`${name} cry`}
