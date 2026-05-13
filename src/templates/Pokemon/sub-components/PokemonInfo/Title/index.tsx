@@ -2,7 +2,7 @@ import * as S from "./styles"
 import { Cries } from "interfaces"
 import { CryButton } from "./CryButton"
 
-type TitleProps = {
+export type TitleProps = {
     name: string
     cries: Cries
 }

@@ -4,7 +4,7 @@ import * as S from "./styles"
 import { Sprites } from "interfaces"
 import { SpriteVersion, useSpriteMenuStore } from "store"
 
-type PokemonImageProps = {
+export type PokemonImageProps = {
     name: string
     sprites: Sprites
 }

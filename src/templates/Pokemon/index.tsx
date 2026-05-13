@@ -12,7 +12,7 @@ import {
 } from "./sub-components"
 import { formatName, getColorsByType } from "utils"
 
-type PokemonTemplateProps = {
+export type PokemonTemplateProps = {
     pokemonData: PokemonWithSpecies
 }
 

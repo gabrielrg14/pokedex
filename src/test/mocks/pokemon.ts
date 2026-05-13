@@ -109,6 +109,20 @@ const venusaur: Pokemon = {
 const venusaurSpecies: PokemonSpecies = {
     genera: [
         {
+            genus: "Pokémon Semilla",
+            language: {
+                name: "es",
+                url: "https://pokeapi.co/api/v2/language/7/"
+            }
+        },
+        {
+            genus: "Pokémon Seme",
+            language: {
+                name: "it",
+                url: "https://pokeapi.co/api/v2/language/8/"
+            }
+        },
+        {
             genus: "Seed Pokémon",
             language: {
                 name: "en",
@@ -239,6 +253,20 @@ const charizard: Pokemon = {
 const charizardSpecies: PokemonSpecies = {
     genera: [
         {
+            genus: "Pokémon Llama",
+            language: {
+                name: "es",
+                url: "https://pokeapi.co/api/v2/language/7/"
+            }
+        },
+        {
+            genus: "Pokémon Fiamma",
+            language: {
+                name: "it",
+                url: "https://pokeapi.co/api/v2/language/8/"
+            }
+        },
+        {
             genus: "Flame Pokémon",
             language: {
                 name: "en",
@@ -362,6 +390,20 @@ const blastoise: Pokemon = {
 
 const blastoiseSpecies: PokemonSpecies = {
     genera: [
+        {
+            genus: "Pokémon Armazón",
+            language: {
+                name: "es",
+                url: "https://pokeapi.co/api/v2/language/7/"
+            }
+        },
+        {
+            genus: "Pokémon Crostaceo",
+            language: {
+                name: "it",
+                url: "https://pokeapi.co/api/v2/language/8/"
+            }
+        },
         {
             genus: "Shellfish Pokémon",
             language: {

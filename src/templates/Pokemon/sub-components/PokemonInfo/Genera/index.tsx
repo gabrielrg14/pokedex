@@ -2,7 +2,7 @@ import * as S from "./styles"
 import { Genera as IGenera } from "interfaces"
 import { formatName } from "utils"
 
-type GeneraProps = {
+export type GeneraProps = {
     genera?: IGenera[]
 }
 

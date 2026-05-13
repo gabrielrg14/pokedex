@@ -5,7 +5,7 @@ import { Cries } from "interfaces"
 import { SpriteVersion, useSpriteMenuStore } from "store"
 import { VolumeUp } from "styled-icons/material-outlined"
 
-type CryButtonProps = {
+export type CryButtonProps = {
     name: string
     cries: Cries
 }

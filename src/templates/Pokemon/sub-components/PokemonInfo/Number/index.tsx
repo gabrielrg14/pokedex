@@ -1,7 +1,7 @@
 import * as S from "./styles"
 import { PokemonNumber } from "components"
 
-type NumberProps = {
+export type NumberProps = {
     number: number
 }
 

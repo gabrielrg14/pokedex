@@ -3,7 +3,7 @@ import { Stat, Type } from "interfaces"
 import { StatBar } from "components"
 import { formatName } from "utils"
 
-type PokemonStatsProps = {
+export type PokemonStatsProps = {
     stats: Stat[]
     types: Type[]
 }

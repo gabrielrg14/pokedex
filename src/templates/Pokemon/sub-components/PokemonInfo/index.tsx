@@ -4,7 +4,7 @@ import { Title } from "./Title"
 import { Genera } from "./Genera"
 import { Number } from "./Number"
 
-type PokemonInfoProps = {
+export type PokemonInfoProps = {
     name: string
     number: number
     cries: Cries
