@@ -20,9 +20,10 @@ describe("<Number />", () => {
         expect(screen.getByText("9")).toBeInTheDocument()
     })
 
-    it("should render PokemonNumber component", () => {
+    it("should render PokemonNumber component with number 9", () => {
         render(<Number {...defaultProps} />)
 
         expect(screen.getByTestId("pokemon-number")).toBeInTheDocument()
+        expect(screen.getByTestId("pokemon-number")).toHaveTextContent("9")
     })
 })

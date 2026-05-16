@@ -4,6 +4,10 @@ import { typeMocks } from "test/mocks"
 
 import { TypeCounter, TypeCounterProps } from "."
 
+jest.mock("components/SpinnerLoader", () => ({
+    SpinnerLoader: () => <svg data-testid="spinner-loader" />
+}))
+
 describe("<TypeCounter />", () => {
     const defaultProps: TypeCounterProps = {
         count: 10,
@@ -19,19 +23,15 @@ describe("<TypeCounter />", () => {
     })
 
     it("should render spinner loader when isLoading is true", () => {
-        const { container } = render(
-            <TypeCounter {...defaultProps} isLoading={true} />
-        )
+        render(<TypeCounter {...defaultProps} isLoading={true} />)
 
-        const spinnerLoader = container.querySelector("svg")
-        expect(spinnerLoader).toBeInTheDocument()
+        expect(screen.getByTestId("spinner-loader")).toBeInTheDocument()
     })
 
     it("should not render spinner loader when isLoading is false", () => {
-        const { container } = render(<TypeCounter {...defaultProps} />)
+        render(<TypeCounter {...defaultProps} />)
 
-        const spinnerLoader = container.querySelector("svg")
-        expect(spinnerLoader).not.toBeInTheDocument()
+        expect(screen.queryByTestId("spinner-loader")).not.toBeInTheDocument()
     })
 
     it("should render type image and counter when isLoading is false", () => {
